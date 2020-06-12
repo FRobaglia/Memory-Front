@@ -6,6 +6,7 @@ function Login() {
     <div>
       <p>ceci est le login</p>
       <Link to='/'>Go back Home</Link>
+      <Link to='/register'>S'inscrire</Link>
     </div>
   )
 }
