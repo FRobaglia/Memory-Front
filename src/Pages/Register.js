@@ -9,12 +9,34 @@ function Register() {
   const [ password, setPassword ] = useState('')
   const [ confirmPassword, setConfirmPassword ] = useState('')
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (emailValidator(email)) {
+      // axios.post
+      console.log(`
+        Firstname: ${firstname}
+        Lastname: ${lastname}
+        Email: ${email}
+        Password: ${password}
+        ConfirmPassword: ${confirmPassword}
+      `);
+    } else {
+      console.log("Veuillez saisir un e-mail valide.");
+    }
+    
+  }
+
+  const emailValidator = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
 
   return (
     <div>
       <p>ceci est le register</p>
 
-      <form>
+      <form action="/register" method="post" onSubmit={handleSubmit}>
         <label>Nom</label>
         <input type="text" name="lastname" value={lastname} onChange={e => setLastname(e.target.value)} required/>
         <label>Prénom</label>
