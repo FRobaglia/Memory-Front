@@ -39,6 +39,7 @@ function Login() {
         <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <input type="submit" value="Me connecter" />
         <Link to='/'>Go back Home</Link>
+        <Link to='/register'>S'inscrire</Link>
       </form>
   )
 }
