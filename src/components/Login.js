@@ -15,6 +15,7 @@ function Login() {
       password: password
     }).then(response => {
       const tokenObject = response.data
+      AuthService.setTokens(tokenObject)
       saveSession()
     }).catch(err => {
       console.error(err)
@@ -23,7 +24,6 @@ function Login() {
 
   function saveSession() {
     axios.get(`${process.env.REACT_APP_API_BASE_URL}api/account`).then(response => {
-      AuthService.setTokens(tokenObject)
       console.log(response.data)
     }).catch(err => {
       console.error(err)
