@@ -1,6 +1,5 @@
 import React, { useState }from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import AuthService from '../services/AuthService.js'
 
 function Login() {
@@ -38,8 +37,6 @@ function Login() {
         <label>Mot de passe</label>
         <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <input type="submit" value="Me connecter" />
-        <Link to='/'>Go back Home</Link>
-        <Link to='/register'>S'inscrire</Link>
       </form>
   )
 }
