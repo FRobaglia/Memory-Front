@@ -1,4 +1,4 @@
-import React, { useState }from 'react'
+import React, { useState, useEffect }from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import AuthService from '../services/AuthService.js'
@@ -7,6 +7,11 @@ function Login() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  useEffect(() => {
+    // Auto Login
+    AuthService.getAccessToken() !== null ? saveSession() : console.log("Aucun token d'accès trouvé, pas d'autologin possible.")
+  }, []);
 
   function handleLogin(event) {
     event.preventDefault()
@@ -25,6 +30,7 @@ function Login() {
 
   function saveSession() {
     axios.get(`${process.env.REACT_APP_API_BASE_URL}api/account`).then(response => {
+      console.log("Données de l'utilisateur récupérées, prêt à login !")
       console.log(response.data)
     }).catch(err => {
       console.error(err)

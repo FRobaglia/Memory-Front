@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import Routes from './Pages/Routes'
-import Login from './components/Login';
+import AuthService from './services/AuthService'
+
+AuthService.init()
 
 function App() {
   return (
