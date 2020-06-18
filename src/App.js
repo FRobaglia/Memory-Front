@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Routes from './Pages/Routes'
-import Login from './components/Login';
+import Routes from './Pages/Routes';
+import UserService from './services/UserService';
 
 function App() {
+
+  const [ isLoggedIn, setIsLoggedIn ] = useState('not logged in');
+
   return (
     <div className="App">
-      <Routes/>
+      <Routes isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     </div>
   );
 }

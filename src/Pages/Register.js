@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useForm from '../utils/useForm';
 import validateAuth from '../utils/validateAuth';
 
-function Register2() {
+function Register() {
   // Custom hook useForm
   const [ values, handleChange ] = useForm();
   const [ errorMessage, setErrorMessage ] = useState({})
@@ -71,4 +71,4 @@ function Register2() {
   )
 }
 
-export default Register2
+export default Register
