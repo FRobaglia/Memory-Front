@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import Routes from './Pages/Routes';
+import Routes from './Pages/Routes'
+import AuthService from './services/AuthService'
 import UserService from './services/UserService';
+
+AuthService.init()
 
 function App() {
 

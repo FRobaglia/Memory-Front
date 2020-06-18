@@ -1,6 +1,10 @@
 import axios from 'axios'
 
 class AuthService {
+  static init() {
+    this.setInterceptors()
+  }
+  
   static setInterceptors() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.getAccessToken()}`
   }
