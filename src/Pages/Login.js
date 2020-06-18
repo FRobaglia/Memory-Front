@@ -11,7 +11,7 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
 
   useEffect(() => {
     // Auto Login
-    AuthService.getAccessToken() !== null ? saveSession() : console.log("Aucun token d'accès trouvé, pas d'autologin possible.")
+    AuthService.getAccessToken() !== null ? getUserInfo() : console.log("Aucun token d'accès trouvé, pas d'autologin possible.")
   }, []);
 
   function handleLogin(event) {
