@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext }from 'react'
-import { Redirect } from "react-router-dom";
-import { Link } from 'react-router-dom'
+import { Redirect, Link } from "react-router-dom";
 import AuthService from '../services/AuthService.js'
 import { UserContext } from './../UserContext'
 
-function Login() {
+
+
+function Login({ isLoggedIn, setIsLoggedIn }) {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -38,6 +39,8 @@ function Login() {
   }
 
   return (
+    <div>
+      <h1>Status: {isLoggedIn}</h1>
       <form onSubmit={handleLogin}>
         <label>Adresse e-mail</label>
         <input type="mail" name="email" placeholder="test@example.com" value={email} onChange={e => setEmail(e.target.value)}/>
@@ -47,7 +50,12 @@ function Login() {
         <Link to='/'>Home</Link>
         <Link to='/register'>S'inscrire</Link>
         <Redirect to={redirect} />
+
       </form>
+      //<button onClick={() => {AuthService.clearTokens(); setIsLoggedIn('not logged in')}}>logout</button>
+    </div>
+      
+
   )
 }
 

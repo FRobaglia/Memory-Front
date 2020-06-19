@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
+//import Profile from './Profile';
 import Register from './Register'
 import { UserContext } from './../UserContext'
 
@@ -16,6 +17,15 @@ function Routes() {
         <Route path='/login' exact component={Login}/>
         <Route path='/register' exact component={Register}/>
       </UserContext.Provider>
+    /** thomas
+        <Route
+          exact
+          path='/profile'
+          render={props => (
+            <Profile {...props} isLoggedIn={isLoggedIn}/>
+          )}
+        />
+    **/
     </Switch>
   )
 }
