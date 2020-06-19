@@ -4,7 +4,7 @@ import Routes from './Pages/Routes'
 import AuthService from './services/AuthService'
 import UserService from './services/UserService';
 
-AuthService.init()
+AuthService.setInterceptors()
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Routes isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

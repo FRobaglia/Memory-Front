@@ -1,35 +1,31 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
-import Register from './Register';
-import Profile from './Profile';
+//import Profile from './Profile';
+import Register from './Register'
+import { UserContext } from './../UserContext'
 
-function Routes({isLoggedIn, setIsLoggedIn}) {
+function Routes() {
+  const [user, setUser] = useState(null)
+  const value = useMemo(() => ({user, setUser}), [user, setUser])
+
   return (
     <Switch>
-      <Route
-        exact
-        path='/'
-        render={props => (
-          <Home {...props} isLoggedIn={isLoggedIn}/>
-        )}
-      />
-      <Route
-        exact
-        path='/login'
-        render={props => (
-          <Login {...props} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>  
-        )}
-      />
-      <Route path='/register' exact component={Register}/>
-      <Route
-        exact
-        path='/profile'
-        render={props => (
-          <Profile {...props} isLoggedIn={isLoggedIn}/>
-        )}
-      />
+      <UserContext.Provider value={value}>
+        <Route path='/' exact component={Home}/>
+        <Route path='/login' exact component={Login}/>
+        <Route path='/register' exact component={Register}/>
+      </UserContext.Provider>
+    /** thomas
+        <Route
+          exact
+          path='/profile'
+          render={props => (
+            <Profile {...props} isLoggedIn={isLoggedIn}/>
+          )}
+        />
+    **/
     </Switch>
   )
 }

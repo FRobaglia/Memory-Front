@@ -1,41 +1,40 @@
-import React, { useState, useEffect }from 'react'
-import axios from 'axios';
-import AuthService from '../services/AuthService.js';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext }from 'react'
+import { Redirect, Link } from "react-router-dom";
+import AuthService from '../services/AuthService.js'
+import { UserContext } from './../UserContext'
+
+
 
 function Login({ isLoggedIn, setIsLoggedIn }) {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const history = useHistory();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [redirect, setRedirect] = useState("/login")
+  const {user, setUser} = useContext(UserContext)
 
   useEffect(() => {
-    // Auto Login
-    AuthService.getAccessToken() !== null ? getUserInfo() : console.log("Aucun token d'accès trouvé, pas d'autologin possible.")
-  }, []);
+    // if (user !== null) {
+    //   return setRedirect("/")
+    // }
+    if (AuthService.getRefreshToken() !== null) {
+      AuthService.refreshTokens()
+      persistSession()
+    } else {
+      console.log("Aucun refresh token trouvé, pas d'autologin possible.")
+    }
+  }, [])
 
-  function handleLogin(event) {
-    event.preventDefault();
-
-    axios.post(`${process.env.REACT_APP_API_BASE_URL}api/login_check`, {
-      username: email,
-      password: password
-    }).then(response => {
-      const tokenObject = response.data;
-      setIsLoggedIn('Logged in');
-      AuthService.setTokens(tokenObject);
-      getUserInfo();
-      history.push('/');
-    }).catch(err => {
-      console.error(err);
-    })
+  const handleLogin = (event) => {
+    event.preventDefault() // Empêcher le refresh de la page lors de l'envoi du formulaire
+    AuthService.requestTokens(email, password) // Faire la requête API pour récupérer les JWT token avec les identifiants soumis
+    persistSession()
   }
-  
-  function getUserInfo() {
-    return axios.get(`${process.env.REACT_APP_API_BASE_URL}api/account`).then(response => {
-      console.log(response.data)
-    }).catch(err => {
-      console.error(err)
+
+  const persistSession = () => {
+    AuthService.requestUserData().then(user => {
+      setUser(user)
+      console.log(`L'utilisateur ${user.firstName} ${user.lastName} est connecté.`)
+      return setRedirect("/")
     })
   }
 
@@ -48,11 +47,12 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
         <label>Mot de passe</label>
         <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <input type="submit" value="Me connecter" />
+        <Link to='/'>Home</Link>
+        <Link to='/register'>S'inscrire</Link>
+        <Redirect to={redirect} />
+
       </form>
-      <Link to='/'>Home</Link>
-      <Link to='/register'>Register</Link>
-      <button onClick={() => getUserInfo()}>get session info</button>
-      <button onClick={() => {AuthService.clearTokens(); setIsLoggedIn('not logged in')}}>logout</button>
+      //<button onClick={() => {AuthService.clearTokens(); setIsLoggedIn('not logged in')}}>logout</button>
     </div>
       
 
