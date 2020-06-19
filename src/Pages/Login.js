@@ -33,7 +33,8 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
   const persistSession = () => {
     AuthService.requestUserData().then(user => {
       setUser(user)
-      console.log(`L'utilisateur ${user.firstName} ${user.lastName} est connecté.`)
+      // console.log(`L'utilisateur ${user.firstName} ${user.lastName} est connecté.`)
+      console.log(`L'utilisateur est connecté.`)
       return setRedirect("/")
     })
   }
@@ -52,7 +53,7 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
         <Redirect to={redirect} />
 
       </form>
-      //<button onClick={() => {AuthService.clearTokens(); setIsLoggedIn('not logged in')}}>logout</button>
+      {/* <button onClick={() => {AuthService.clearTokens(); setIsLoggedIn('not logged in')}}>logout</button> */}
     </div>
       
 

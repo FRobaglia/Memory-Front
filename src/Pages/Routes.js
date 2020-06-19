@@ -17,15 +17,15 @@ function Routes() {
         <Route path='/login' exact component={Login}/>
         <Route path='/register' exact component={Register}/>
       </UserContext.Provider>
-    /** thomas
-        <Route
+   
+        {/* <Route
           exact
           path='/profile'
           render={props => (
             <Profile {...props} isLoggedIn={isLoggedIn}/>
           )}
-        />
-    **/
+        /> */}
+    
     </Switch>
   )
 }
