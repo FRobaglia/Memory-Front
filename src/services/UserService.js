@@ -2,16 +2,27 @@ import axios from 'axios';
 
 class UserService {
 
-  static getUserInfo() {
-    return axios.get(`${process.env.REACT_APP_API_BASE_URL}api/account`).then(response => {
-      console.log(response.data)
-    }).catch(err => {
-      console.error(err)
-    })
+  static async getUserInfo() {
+    return await axios.get(`${process.env.REACT_APP_API_BASE_URL}api/account`)
   }
 
-  static getUserSpaces() {
-    return axios.get(`${process.env.REACT_APP_API_BASE_URL}api/user/spaces`)
+  static async getUserSpaces() {
+    return await axios.get(`${process.env.REACT_APP_API_BASE_URL}api/user/spaces`)
+  }
+
+  static async createNewSpace(lastName, firstName, description, dateBirth, dateDeath) {
+    return await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/space/new`, {
+      lastName,
+      firstName,
+      description,
+      dateBirth,
+      dateDeath,
+    }).then(response => {
+      console.log(response.data)
+      console.log("nouvel espace creer")
+    }).catch(err => {
+      console.log(err)
+    })
   }
 }
 

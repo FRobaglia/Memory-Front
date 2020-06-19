@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserService from '../services/UserService';
+import { Link } from 'react-router-dom';
 
 
 function Profile({isLoggedIn}) {
-  
-  const currentUserInfo = UserService.getUserInfo();
-  const currentUserSpaces = UserService.getUserSpaces();
-  console.log(currentUserInfo)
-  console.log(currentUserSpaces)
 
+  const [userInfos, setUserInfos] = useState([])
+  
+  useEffect(() => {
+    UserService.getUserInfo()
+    .then(response => setUserInfos(response.data))
+  }, [])
 
   return(
     <div>
-      <h1>{isLoggedIn}</h1>
-      <h2>{currentUserInfo.firstName}</h2>
+      <h2>{userInfos.firstName} {userInfos.lastName}</h2>
+      <Link to='/spaces'><button>Mes espaces</button></Link>
     </div>
   )
 }
