@@ -11,14 +11,11 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (Object.keys(validateAuth(values)).length === 0 ) 
-    {
-      createAccount();
-      // console.log("Compte créé");
-    }
-    else 
-    {
+ 
+    if (Object.keys(validateAuth(values)).length === 0) {
+      setErrorMessage({})
+      createAccount()
+    } else {
       setErrorMessage(validateAuth(values))
     }
   }
@@ -39,7 +36,15 @@ function Register() {
       console.log('res', response)
       console.log('res data', response.data)
     }).catch(err => {
-      console.log(err)
+      console.log(err);
+      if (err.response.status === 401) {
+        // Vider l'objet errorMessage
+        for (let key in errorMessage) {
+            delete errorMessage[key];
+        }
+        errorMessage.err401 = "Un compte a déjà été créer avec cette adresse email";
+        setErrorMessage(errorMessage)
+      }
     })
   }
 
@@ -54,6 +59,8 @@ function Register() {
         <input type="text" name="firstname" value={values.firstname || ""} onChange={handleChange}/>
         <label>Email</label>
         <input type="email" name="email" value={values.email || ""} onChange={handleChange} placeholder="test@example.com"/>
+
+        { errorMessage &&  <p>{errorMessage.err401}</p>}
         { errorMessage &&  <p>{errorMessage.email}</p>}
        
         <label>Mot de passe</label>
