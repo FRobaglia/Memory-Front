@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../services/UserService';
 import useForm from '../utils/useForm';
+import SpaceList from '../Components/Molecules/SpaceList';
 
 function Spaces() {
 
@@ -12,15 +13,9 @@ function Spaces() {
     .then(response => setUserSpaces(response.data.spaces))
   }, [userSpaces])
 
-  console.log(userSpaces)
-
   function createSpace(event){
     event.preventDefault();
     UserService.createNewSpace(values.lastName, values.firstName, values.description, values.dateBirth, values.dateDeath)
-  }
-
-  function formatDate(date) {
-    return new Date(date).toLocaleDateString('fr-FR');
   }
 
   return(
@@ -38,13 +33,7 @@ function Spaces() {
           <textarea name="description" id="" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
           <button type="submit">Creer un memory</button>
       </form>
-      {userSpaces.map(memory =>
-      <div key={memory.space.id}>
-        <h1>{memory.space.firstName} {memory.space.lastName}</h1>
-        <h2>Ne le: {formatDate(memory.space.dateBirth)}, Mort le: {formatDate(memory.space.dateDeath)}</h2>
-        <p>{memory.space.description}</p>
-      </div>
-      )}
+      {userSpaces.map(memory => <SpaceList key={memory.space.id} memory={memory}></SpaceList>)}
     </div>
   )
 }
