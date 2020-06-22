@@ -10,17 +10,13 @@ function Spaces() {
   useEffect(() => {
     UserService.getUserSpaces()
     .then(response => setUserSpaces(response.data.spaces))
-  }, [])
+  }, [userSpaces])
 
   console.log(userSpaces)
 
   function createSpace(event){
     event.preventDefault();
     UserService.createNewSpace(values.lastName, values.firstName, values.description, values.dateBirth, values.dateDeath)
-
-    // Ajouter le nouvel au State mais erreur "memory is undefined" POURQUOI ?
-    // const memory = event.target.value;
-    // setUserSpaces(userSpaces => [...userSpaces, memory]);
   }
 
   function formatDate(date) {
