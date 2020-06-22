@@ -3,7 +3,7 @@ import UserService from '../services/UserService';
 import useForm from '../utils/useForm';
 import SpaceList from '../Components/Molecules/SpaceList';
 
-function Spaces() {
+function SpacesListPage() {
 
   const [ values, handleChange ] = useForm();
   const [ userSpaces, setUserSpaces ] = useState([])
@@ -38,4 +38,4 @@ function Spaces() {
   )
 }
 
-export default Spaces;
+export default SpacesListPage;

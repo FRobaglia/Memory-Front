@@ -15,10 +15,10 @@ function Home() {
 
   return (
     <div>
+      <h1>Homepage</h1>
       <p>{user ? `Bonjour, ${user.firstName}` : ""}</p>
       <Link to='/login'><button>Log in</button></Link>
       <Link to='/register'><button>Register</button></Link>
-      <Link to='/profile'><button>Profil</button></Link>
       <Link to='/spaces'><button>Mes espaces</button></Link>
       <button onClick={() => {AuthService.clearTokens()}}>logout</button>
       <Redirect to={redirect} />

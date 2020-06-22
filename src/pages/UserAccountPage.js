@@ -3,7 +3,12 @@ import UserService from '../services/UserService';
 import { Link } from 'react-router-dom';
 
 
-function Profile({isLoggedIn}) {
+function UserAccountPage() {
+  
+  const currentUserInfo = UserService.getUserInfo();
+  const currentUserSpaces = UserService.getUserSpaces();
+  console.log(currentUserInfo)
+  console.log(currentUserSpaces)
 
   const [userInfos, setUserInfos] = useState([])
   
@@ -14,10 +19,9 @@ function Profile({isLoggedIn}) {
 
   return(
     <div>
-      <h2>{userInfos.firstName} {userInfos.lastName}</h2>
-      <Link to='/spaces'><button>Mes espaces</button></Link>
+      <h2>{currentUserInfo.firstName}</h2>
     </div>
   )
 }
 
-export default Profile
+export default UserAccountPage
