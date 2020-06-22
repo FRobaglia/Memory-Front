@@ -2,7 +2,7 @@ import React from 'react';
 import UserService from '../services/UserService';
 
 
-function Profile({isLoggedIn}) {
+function UserAccountPage() {
   
   const currentUserInfo = UserService.getUserInfo();
   const currentUserSpaces = UserService.getUserSpaces();
@@ -12,10 +12,9 @@ function Profile({isLoggedIn}) {
 
   return(
     <div>
-      <h1>{isLoggedIn}</h1>
       <h2>{currentUserInfo.firstName}</h2>
     </div>
   )
 }
 
-export default Profile
+export default UserAccountPage

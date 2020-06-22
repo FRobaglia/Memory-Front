@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Home from './Home';
-import Login from './Login';
-//import Profile from './Profile';
-import Register from './Register'
-import { UserContext } from './../UserContext'
+import HomePage from './HomePage';
+import LoginPage from './LoginPage';
+import UserAccountPage from './UserAccountPage';
+import RegisterPage from './RegisterPage'
+import { UserContext } from '../context/UserContext'
 
 function Routes() {
   const [user, setUser] = useState(null)
@@ -13,19 +13,11 @@ function Routes() {
   return (
     <Switch>
       <UserContext.Provider value={value}>
-        <Route path='/' exact component={Home}/>
-        <Route path='/login' exact component={Login}/>
-        <Route path='/register' exact component={Register}/>
+        <Route path='/' exact component={HomePage}/>
+        <Route path='/login' exact component={LoginPage}/>
+        <Route path='/register' exact component={RegisterPage}/>
+        <Route path='/account' exact component={UserAccountPage}/>
       </UserContext.Provider>
-   
-        {/* <Route
-          exact
-          path='/profile'
-          render={props => (
-            <Profile {...props} isLoggedIn={isLoggedIn}/>
-          )}
-        /> */}
-    
     </Switch>
   )
 }

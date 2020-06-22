@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import useForm from '../utils/useForm';
-import validateAuth from '../utils/validateAuth';
+import useForm from './../../../utils/useForm';
+import validateAuth from './../../../utils/validateAuth';
 
-function Register() {
+function RegisterForm() {
   // Custom hook useForm
   const [ values, handleChange ] = useForm();
   const [ errorMessage, setErrorMessage ] = useState({})
@@ -78,4 +78,4 @@ function Register() {
   )
 }
 
-export default Register
+export default RegisterForm
