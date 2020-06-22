@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { UserContext } from './../UserContext';
+import { UserContext } from './../context/UserContext';
 import AuthService from '../services/AuthService';
 
 function Home() {
