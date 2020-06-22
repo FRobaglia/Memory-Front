@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { UserContext } from './../UserContext'
+import { UserContext } from '../context/UserContext'
 
 function Home() {
   const [redirect, setRedirect] = useState("/")
@@ -14,6 +14,7 @@ function Home() {
 
   return (
     <div>
+      <h1>Homepage</h1>
       <p>{user ? `Bonjour, ${user.firstName}` : ""}</p>
       <Link to='/login'><button>Log in</button></Link>
       <Link to='/register'><button>Register</button></Link>
