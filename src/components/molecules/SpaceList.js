@@ -1,10 +1,7 @@
 import React from 'react';
+import formatDate from './../../utils/date';
 
 function SpaceList({memory}) {
-
-  function formatDate(date) {
-    return new Date(date).toLocaleDateString('fr-FR');
-  }
   
   return (
     <div>
