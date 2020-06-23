@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import useForm from './../../../utils/useForm';
 import validateAuth from './../../../utils/validateAuth';
+import SessionService from './../../../services/SessionService'
 import { UserContext } from './../../../context/UserContext'
 
 function RegisterForm() {
@@ -18,38 +18,10 @@ function RegisterForm() {
  
     if (Object.keys(validateAuth(values)).length === 0) {
       setErrorMessage({})
-      createAccount()
+      SessionService.createAccount(values.firstname, values.lastname, values.email, values.password, values.confirmPassword, errorMessage, setErrorMessage)
     } else {
       setErrorMessage(validateAuth(values))
     }
-  }
-
-  // Post request to create an account
-  async function createAccount () {
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/user/new`,
-      {
-        passwords: {
-          initial: values.password,
-          final: values.confirmPassword,
-        },
-        lastName: values.lastname,
-        firstName: values.firstname,
-        email: values.email
-      }
-    ).then(response => {
-      console.log('res', response)
-      console.log('res data', response.data)
-    }).catch(err => {
-      console.log(err);
-      if (err.response.status === 401) {
-        // Vider l'objet errorMessage
-        for (let key in errorMessage) {
-            delete errorMessage[key];
-        }
-        errorMessage.err401 = "Un compte a déjà été créer avec cette adresse email";
-        setErrorMessage(errorMessage)
-      }
-    })
   }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link, Redirect } from "react-router-dom";
-import AuthService from './../../../services/AuthService'
+import SessionService from './../../../services/SessionService'
 import { UserContext } from './../../../context/UserContext'
 import useForm from './../../../utils/useForm'
 import Loading from '../loading/Loading'
@@ -24,8 +24,8 @@ function LoginForm({location}) {
   }
     
   async function persistSession() {
-    await AuthService.requestTokens(values.email, values.password)
-    setUser(await AuthService.fetchUserData())
+    await SessionService.requestTokens(values.email, values.password)
+    setUser(await SessionService.fetchUserData())
     setIsLoading(false) // fin du loading
   }
 
@@ -33,9 +33,9 @@ function LoginForm({location}) {
     <div>
       <form onSubmit={handleLogin}>
         <label>Adresse e-mail</label>
-        <input type="mail" name="email" placeholder="test@example.com" value={values.email} onChange={handleChange}/>
+        <input type="mail" name="email" placeholder="test@example.com" value={values.email || ''} onChange={handleChange}/>
         <label>Mot de passe</label>
-        <input type="password" name="password" value={values.password} onChange={handleChange}/>
+        <input type="password" name="password" value={values.password || ''} onChange={handleChange}/>
         <input type="submit" value="Me connecter" />
         <Link to='/'>Home</Link>
         <Link to='/register'>S'inscrire</Link>

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import AuthService from './AuthService'
+import SessionService from './SessionService'
 
 class AxiosService {
   static setInterceptors() {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${AuthService.getAccessToken()}`
+    axios.defaults.headers.common['Authorization'] = `Bearer ${SessionService.getAccessToken()}`
   }
 }
 
