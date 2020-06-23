@@ -3,6 +3,9 @@ import StorageService from './StorageService'
 import AxiosService from './AxiosService'
 
 export default class SessionService {
+/**
+ * Login - JWT 
+ */
 
   static async requestTokens(email, password) {
     try {
@@ -64,8 +67,11 @@ export default class SessionService {
   static clearTokens() {
     StorageService.deleteStorageItem('JWT', 'JWT_REFRESH')
   }
-
-  static async createAccount(firstname, lastname, email, password,confirmPassword, errorMessage, setErrorMessage) {
+  
+/**
+ * Create a new user account
+ */
+static async createAccount(firstname, lastname, email, password,confirmPassword, errorMessage, setErrorMessage) {
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/user/new`,
       {
