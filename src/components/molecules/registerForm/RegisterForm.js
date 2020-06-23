@@ -24,34 +24,6 @@ function RegisterForm() {
     }
   }
 
-  // Post request to create an account
-  async function createAccount () {
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/user/new`,
-      {
-        passwords: {
-          initial: values.password,
-          final: values.confirmPassword,
-        },
-        lastName: values.lastname,
-        firstName: values.firstname,
-        email: values.email
-      }
-    ).then(response => {
-      console.log('res', response)
-      console.log('res data', response.data)
-    }).catch(err => {
-      console.log(err);
-      if (err.response.status === 401) {
-        // Vider l'objet errorMessage
-        for (let key in errorMessage) {
-            delete errorMessage[key];
-        }
-        errorMessage.err401 = "Un compte a déjà été créer avec cette adresse email";
-        setErrorMessage(errorMessage)
-      }
-    })
-  }
-
   return (
     <div>
       <p>ceci est le register 2 : Se créer un compte utilisateur</p>
