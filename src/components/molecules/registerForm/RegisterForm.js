@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import useForm from './../../../utils/useForm';
 import validateAuth from './../../../utils/validateAuth';
+import { UserContext } from './../../../context/UserContext'
 
 function RegisterForm() {
   // Custom hook useForm
   const [ values, handleChange ] = useForm();
   const [ errorMessage, setErrorMessage ] = useState({})
+  const {user} = useContext(UserContext)
+
+  if (user) return <Redirect to="/" /> // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter)
 
   const handleSubmit = (event) => {
     event.preventDefault();
