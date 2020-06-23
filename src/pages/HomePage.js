@@ -15,6 +15,7 @@ function Home() {
       <button onClick={() => {
         AuthService.clearTokens()
         setUser(null)}}>logout</button>
+      <Link to='/spaces'><button>Mes espaces</button></Link>
     </div>
   )
 }

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserService from '../services/UserService';
+import { Link } from 'react-router-dom';
 
 
 function UserAccountPage() {
@@ -9,6 +10,12 @@ function UserAccountPage() {
   console.log(currentUserInfo)
   console.log(currentUserSpaces)
 
+  const [userInfos, setUserInfos] = useState([])
+  
+  useEffect(() => {
+    UserService.getUserInfo()
+    .then(response => setUserInfos(response.data))
+  }, [])
 
   return(
     <div>
