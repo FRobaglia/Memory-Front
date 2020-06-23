@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios';
 
 function Upload() {
 
@@ -9,18 +10,31 @@ function Upload() {
   }, [selectedFiles])
 
   const handleChange = (event) => {
-    setSelectedFiles(event.target.files)
+    // console.log('handleChange', event.target.files)
+    setSelectedFiles(event.target.files[0])
   }
 
-  const handleUploadClick = () => {
-    // envoyer le(s) fichier(s) à l'API en POST
-    // axios.post(`${process.env.REACT_APP_API_BASE_URL}api/upload`
+  const handleUploadClick = async () => {
+    try {
+      console.log('handleUploadClick', selectedFiles)
+
+      const data = new FormData();
+
+      data.append('file', selectedFiles);
+      data.append('test', 'value');
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}post/upload`,
+        data)
+      console.log(response)
+
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
-    <form className="upload"> 
+    <form className="upload">
       <input type="file" name="file" multiple onChange={handleChange}/>
-      {selectedFiles ? <button type="button" onClick={handleUploadClick}>Upload</button>: ''}
+      {selectedFiles ? <button type="button" onClick={handleUploadClick}>Upload</button> : ''}
     </form>
   )
 }
