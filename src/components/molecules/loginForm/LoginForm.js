@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, Redirect } from "react-router-dom";
-import AuthService from './../../../services/AuthService'
+import SessionService from './../../../services/SessionService'
 import { UserContext } from './../../../context/UserContext'
 import useForm from './../../../utils/useForm'
 
@@ -17,8 +17,8 @@ function LoginForm() {
   }
     
   async function persistSession() {
-    await AuthService.requestTokens(values.email, values.password)
-    setUser(await AuthService.fetchUserData())
+    await SessionService.requestTokens(values.email, values.password)
+    setUser(await SessionService.fetchUserData())
   }
 
   return (

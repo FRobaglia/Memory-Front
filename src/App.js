@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import Routes from './pages/routes/Routes'
 import { UserContext } from './context/UserContext'
-import AuthService from './services/AuthService';
+import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
 
 AxiosService.setInterceptors()
@@ -14,12 +14,12 @@ function App() {
   const value = useMemo(() => ({user, setUser}), [user, setUser])
 
   useEffect(() => {
-    if (AuthService.getRefreshToken() !== null) {
+    if (SessionService.getRefreshToken() !== null) {
       setIsLoading(true)
 
       async function persistSession() {
-        await AuthService.refreshTokens()
-        setUser(await AuthService.fetchUserData())
+        await SessionService.refreshTokens()
+        setUser(await SessionService.fetchUserData())
         setIsLoading(false)
       }
 

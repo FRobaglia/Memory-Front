@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import useForm from './../../../utils/useForm';
 import validateAuth from './../../../utils/validateAuth';
+import SessionService from './../../../services/SessionService'
 import { UserContext } from './../../../context/UserContext'
 
 function RegisterForm() {
@@ -18,7 +19,7 @@ function RegisterForm() {
  
     if (Object.keys(validateAuth(values)).length === 0) {
       setErrorMessage({})
-      createAccount()
+      SessionService.createAccount(values.firstname, values.lastname, values.email, values.password, values.confirmPassword, errorMessage, setErrorMessage)
     } else {
       setErrorMessage(validateAuth(values))
     }
