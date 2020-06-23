@@ -32,10 +32,10 @@ function LoginForm({location}) {
   return (
     <div>
       <form onSubmit={handleLogin}>
-        <label>Adresse e-mail</label>
-        <input type="mail" name="email" placeholder="test@example.com" value={values.email || ''} onChange={handleChange}/>
-        <label>Mot de passe</label>
-        <input type="password" name="password" value={values.password || ''} onChange={handleChange}/>
+        <label htmlFor="email">Adresse e-mail</label>
+        <input type="email" name="email" id="email" placeholder="test@example.com" value={values.email || ''} onChange={handleChange}/>
+        <label htmlFor="password">Mot de passe</label>
+        <input type="password" name="password" id="password" value={values.password || ''} onChange={handleChange}/>
         <input type="submit" value="Me connecter" />
         <Link to='/'>Home</Link>
         <Link to='/register'>S'inscrire</Link>

@@ -29,21 +29,21 @@ function RegisterForm() {
       <p>ceci est le register 2 : Se créer un compte utilisateur</p>
 
       <form action="/register" method="post" onSubmit={handleSubmit}>
-        <label>Nom</label>
-        <input type="text" name="lastname" value={values.lastname || ""} onChange={handleChange}/>
-        <label>Prénom</label>
-        <input type="text" name="firstname" value={values.firstname || ""} onChange={handleChange}/>
-        <label>Email</label>
-        <input type="email" name="email" value={values.email || ""} onChange={handleChange} placeholder="test@example.com"/>
+        <label htmlFor="lastname">Nom</label>
+        <input type="text" name="lastname" id="lastname" value={values.lastname || ""} onChange={handleChange}/>
+        <label htmlFor="firstname">Prénom</label>
+        <input type="text" name="firstname" id="firstname" value={values.firstname || ""} onChange={handleChange}/>
+        <label htmlFor="email">Email</label>
+        <input type="email" name="email" id="email" value={values.email || ""} onChange={handleChange} placeholder="test@example.com"/>
 
         { errorMessage &&  <p>{errorMessage.err401}</p>}
         { errorMessage &&  <p>{errorMessage.email}</p>}
        
-        <label>Mot de passe</label>
-        <input type="password" name="password" value={values.password || ""} onChange={handleChange}/>
+        <label htmlFor="password">Mot de passe</label>
+        <input type="password" name="password" id="password" value={values.password || ""} onChange={handleChange}/>
         { errorMessage &&  <p>{errorMessage.password}</p>}
-        <label>Confirmer le mot de passe</label>
-        <input type="password" name="confirmPassword" value={values.confirmPassword || ""} onChange={handleChange}/>
+        <label htmlFor="confirmpassword">Confirmer le mot de passe</label>
+        <input type="password" name="confirmPassword" id="confirmpassword" value={values.confirmPassword || ""} onChange={handleChange}/>
         { errorMessage &&  <p>{errorMessage.confirmPassword}</p>}
         <button type="submit">S'inscrire</button>
       </form>

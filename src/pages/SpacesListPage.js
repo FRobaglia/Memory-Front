@@ -21,16 +21,16 @@ function SpacesListPage() {
   return(
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
-          <label>Nom</label>
-          <input type="text" name="lastName" value={values.lastName || ""} onChange={handleChange}/>
-          <label>Prénom</label>
-          <input type="text" name="firstName" value={values.firstName || ""} onChange={handleChange}/>
-          <label>Date de naissance</label>
-          <input type="date" name="dateBirth" value={values.dateBirth || ""} onChange={handleChange}/>
-          <label>Date de deces</label>
-          <input type="date" name="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
+          <label htmlFor="lastName">Nom</label>
+          <input type="text" name="lastName" id="lastName" value={values.lastName || ""} onChange={handleChange}/>
+          <label htmlFor="firstName">Prénom</label>
+          <input type="text" name="firstName" id="firstName" value={values.firstName || ""} onChange={handleChange}/>
+          <label htmlFor="dateBirth">Date de naissance</label>
+          <input type="date" name="dateBirth" id="dateBirth" value={values.dateBirth || ""} onChange={handleChange}/>
+          <label htmlFor="dateDeath">Date de deces</label>
+          <input type="date" name="dateDeath" id="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
           <label htmlFor="description">Qui etait ce ?</label>
-          <textarea name="description" id="" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
+          <textarea name="description" id="description" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
           <button type="submit">Creer un memory</button>
       </form>
       {userSpaces.map(memory => <SpaceList key={memory.space.id} memory={memory}></SpaceList>)}
