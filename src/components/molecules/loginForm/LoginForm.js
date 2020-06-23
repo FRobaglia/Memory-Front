@@ -1,24 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, Redirect } from "react-router-dom";
 import SessionService from './../../../services/SessionService'
 import { UserContext } from './../../../context/UserContext'
 import useForm from './../../../utils/useForm'
+import Loading from '../loading/Loading'
 
-function LoginForm() {
+function LoginForm({location}) {
 
   const [ values, handleChange ] = useForm();
   const {user, setUser} = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
 
-  if (user) return <Redirect to="/" /> // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter)
+  if (isLoading) return <Loading />
+  
+  const redirectAfterLogin = location.state ? location.state.from.pathname : '/' // si l'utilisateur a été redirigé vers login en essaynt d'accéder à une RestrictedRoute, on la garde en mémoire pour le rediriger après le login. Sinon, on le redirgie vers la home après le login.
+  
+  if (user) return <Redirect to={redirectAfterLogin} /> // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter), on le redirige donc vers la page depuis laquelle il a essayé d'accéder à Login
 
   const handleLogin = (event) => {
     event.preventDefault() // Empêcher le refresh de la page lors de l'envoi du formulaire
+    setIsLoading(true) // début du loading
     persistSession()
   }
     
   async function persistSession() {
     await SessionService.requestTokens(values.email, values.password)
     setUser(await SessionService.fetchUserData())
+    setIsLoading(false) // fin du loading
   }
 
   return (

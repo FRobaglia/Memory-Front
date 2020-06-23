@@ -4,32 +4,31 @@ import Routes from './pages/routes/Routes'
 import { UserContext } from './context/UserContext'
 import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
+import Loading from './components/molecules/loading/Loading'
 
 AxiosService.setInterceptors()
 
 function App() {
 
   const [user, setUser] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const value = useMemo(() => ({user, setUser}), [user, setUser])
 
   useEffect(() => {
     if (SessionService.getRefreshToken() !== null) {
-      setIsLoading(true)
-
       async function persistSession() {
         await SessionService.refreshTokens()
         setUser(await SessionService.fetchUserData())
         setIsLoading(false)
       }
-
       persistSession()
     } else {
       console.log("Aucun refresh token trouvé, pas d'autologin possible.")
+      setIsLoading(false)
     }
   }, [])
 
-  if (isLoading) return 'Fetching user data... (ici, on devrait render un component Loading)'
+  if (isLoading) return <Loading />
 
   return (
     <div className="App">
