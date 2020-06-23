@@ -1,16 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext'
+import AuthService from './../services/AuthService'
 
 function Home() {
-  const [redirect, setRedirect] = useState("/")
   const {user, setUser} = useContext(UserContext)
-
-  useEffect(() => {
-    if (user === null) {
-      return setRedirect("/login")
-    }
-  }, [])
 
   return (
     <div>
@@ -18,7 +12,9 @@ function Home() {
       <p>{user ? `Bonjour, ${user.firstName}` : ""}</p>
       <Link to='/login'><button>Log in</button></Link>
       <Link to='/register'><button>Register</button></Link>
-      <Redirect to={redirect} />
+      <button onClick={() => {
+        AuthService.clearTokens()
+        setUser(null)}}>logout</button>
     </div>
   )
 }
