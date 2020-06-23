@@ -25,9 +25,9 @@ function LoginForm() {
     <div>
       <form onSubmit={handleLogin}>
         <label>Adresse e-mail</label>
-        <input type="mail" name="email" placeholder="test@example.com" value={values.email} onChange={handleChange}/>
+        <input type="mail" name="email" placeholder="test@example.com" value={values.email || ''} onChange={handleChange}/>
         <label>Mot de passe</label>
-        <input type="password" name="password" value={values.password} onChange={handleChange}/>
+        <input type="password" name="password" value={values.password || ''} onChange={handleChange}/>
         <input type="submit" value="Me connecter" />
         <Link to='/'>Home</Link>
         <Link to='/register'>S'inscrire</Link>

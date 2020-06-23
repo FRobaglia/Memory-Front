@@ -1,12 +1,11 @@
 import React from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import RestrictedRoute from './RestrictedRoute'
-import HomePage from './HomePage'
-import LoginPage from './LoginPage'
-import UserAccountPage from './UserAccountPage'
-import RegisterPage from './RegisterPage'
-import SpacesListPage from './SpacesListPage'
-import { UserContext } from '../context/UserContext'
+import HomePage from '../HomePage'
+import LoginPage from '../LoginPage'
+import UserAccountPage from '../UserAccountPage'
+import RegisterPage from '../RegisterPage'
+import SpacesListPage from '../SpacesListPage'
 
 function Routes() {
   return (
