@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import useForm from './../../../utils/useForm';
 import validateAuth from './../../../utils/validateAuth';

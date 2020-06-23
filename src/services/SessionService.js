@@ -2,7 +2,7 @@ import axios from 'axios'
 import StorageService from './StorageService'
 import AxiosService from './AxiosService'
 
-export default class SessionService {
+export default class SessionService { 
 /**
  * Login - JWT 
  */
@@ -71,7 +71,7 @@ export default class SessionService {
 /**
  * Create a new user account
  */
-static async createAccount(firstname, lastname, email, password,confirmPassword, errorMessage, setErrorMessage) {
+  static async createAccount(firstname, lastname, email, password,confirmPassword, errorMessage, setErrorMessage) {
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/user/new`,
       {
