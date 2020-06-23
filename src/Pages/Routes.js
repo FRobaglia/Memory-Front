@@ -5,6 +5,7 @@ import LoginPage from './LoginPage';
 import UserAccountPage from './UserAccountPage';
 import RegisterPage from './RegisterPage'
 import { UserContext } from '../context/UserContext'
+import SpacesListPage from './SpacesListPage';
 
 function Routes() {
   const [user, setUser] = useState(null)
@@ -17,6 +18,7 @@ function Routes() {
         <Route path='/login' exact component={LoginPage}/>
         <Route path='/register' exact component={RegisterPage}/>
         <Route path='/account' exact component={UserAccountPage}/>
+        <Route path='/spaces' exact component={SpacesListPage}/>
       </UserContext.Provider>
     </Switch>
   )
