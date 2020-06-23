@@ -6,6 +6,7 @@ import LoginPage from './LoginPage'
 import UserAccountPage from './UserAccountPage'
 import RegisterPage from './RegisterPage'
 import SpacesListPage from './SpacesListPage'
+import NotFoundPage from './NotFoundPage'
 import { UserContext } from '../context/UserContext'
 
 function Routes() {
@@ -16,6 +17,7 @@ function Routes() {
       <Route path='/register' exact component={RegisterPage}/>
       <RestrictedRoute path='/account' exact component={UserAccountPage}/>
       <RestrictedRoute path='/spaces' exact component={SpacesListPage}/>
+      <Route component={NotFoundPage} /> {/* PageNotFound / 404 */}
     </Switch>
   )
 }
