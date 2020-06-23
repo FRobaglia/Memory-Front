@@ -39,7 +39,7 @@ function SpacesListPage() {
           <input type="date" name="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
           { errorMessage &&  <p>{errorMessage}</p>}
           <label htmlFor="description">Qui etait ce ?</label>
-          <textarea name="description" id="" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
+          <textarea name="description" id="description" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
           <button type="submit">Creer un memory</button>
       </form>
       {userSpaces.map(memory => <SpaceList key={memory.space.id} memory={memory}></SpaceList>)}

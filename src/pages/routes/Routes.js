@@ -11,7 +11,7 @@ import NotFoundPage from '../NotFoundPage'
 function Routes() {
   return (
     <Switch>
-      <RestrictedRoute path='/' exact component={HomePage}/>
+      <Route path='/' exact component={HomePage}/>
       <Route path='/login' exact component={LoginPage}/>
       <Route path='/register' exact component={RegisterPage}/>
       <RestrictedRoute path='/account' exact component={UserAccountPage}/>
