@@ -33,8 +33,6 @@ function LoginForm() {
         <Link to='/register'>S'inscrire</Link>
       </form>
     </div>
-      
-
   )
 }
 

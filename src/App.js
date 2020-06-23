@@ -10,12 +10,11 @@ AxiosService.setInterceptors()
 function App() {
 
   const [user, setUser] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const value = useMemo(() => ({user, setUser}), [user, setUser])
 
   useEffect(() => {
     if (AuthService.getRefreshToken() !== null) {
-      setIsLoading(true)
 
       async function persistSession() {
         await AuthService.refreshTokens()
@@ -26,6 +25,7 @@ function App() {
       persistSession()
     } else {
       console.log("Aucun refresh token trouvé, pas d'autologin possible.")
+      setIsLoading(false)
     }
   }, [])
 
