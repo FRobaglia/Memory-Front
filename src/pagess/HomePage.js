@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext'
-import AuthService from './../services/AuthService'
+import AuthService from '../services/AuthService'
 
 function Home() {
   const {user, setUser} = useContext(UserContext)

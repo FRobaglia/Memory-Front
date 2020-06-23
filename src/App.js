@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
-import Routes from './pages/Routes'
+import Routes from './pagess/Routes'
 import { UserContext } from './context/UserContext'
 import AuthService from './services/AuthService';
 import AxiosService from './services/AxiosService';

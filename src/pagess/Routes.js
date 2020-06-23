@@ -11,13 +11,11 @@ import { UserContext } from '../context/UserContext'
 function Routes() {
   return (
     <Switch>
-      <UserContext.Provider value={value}>
-        <RestrictedRoute path='/' exact component={HomePage}/>
-        <Route path='/login' exact component={LoginPage}/>
-        <Route path='/register' exact component={RegisterPage}/>
-        <RestrictedRoute path='/account' exact component={UserAccountPage}/>
-        <RestrictedRoute path='/spaces' exact component={SpacesListPage}/>
-      </UserContext.Provider>
+      <RestrictedRoute path='/' exact component={HomePage}/>
+      <Route path='/login' exact component={LoginPage}/>
+      <Route path='/register' exact component={RegisterPage}/>
+      <RestrictedRoute path='/account' exact component={UserAccountPage}/>
+      <RestrictedRoute path='/spaces' exact component={SpacesListPage}/>
     </Switch>
   )
 }
