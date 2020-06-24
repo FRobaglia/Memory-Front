@@ -5,6 +5,7 @@ import { UserContext } from './context/UserContext'
 import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
 import Loading from './components/molecules/loading/Loading'
+import 'moment/locale/fr';
 
 AxiosService.setInterceptors()
 

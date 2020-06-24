@@ -2,33 +2,42 @@ import React, { useState, useEffect } from 'react';
 import UserService from '../services/UserService';
 import useForm from '../utils/useForm';
 import SpaceList from '../components/molecules/spaceList/SpaceList';
+import moment from 'moment';
 
 function SpacesListPage() {
 
   const [ values, handleChange ] = useForm();
-  const [ userSpaces, setUserSpaces ] = useState([])
+  const [ userSpaces, setUserSpaces ] = useState([]);
+  const [ errorMessage, setErrorMessage ] = useState();
 
   useEffect(() => {
     UserService.getUserSpaces()
     .then(response => setUserSpaces(response.data.spaces))
-  }, [userSpaces])
+  }, [])
 
   function createSpace(event){
     event.preventDefault();
-    UserService.createNewSpace(values.lastName, values.firstName, values.description, values.dateBirth, values.dateDeath)
+    if(moment(values.dateBirth).isBefore(values.dateDeath)){
+      setErrorMessage()
+      UserService.createNewSpace(values.lastName, values.firstName, values.description, moment(values.dateBirth), moment(values.dateDeath))
+    }
+    else {
+      setErrorMessage('La date de naissance ne peut pas etre avant la date décès');
+    }
   }
 
   return(
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
-          <label htmlFor="lastName">Nom</label>
-          <input type="text" name="lastName" id="lastName" value={values.lastName || ""} onChange={handleChange}/>
-          <label htmlFor="firstName">Prénom</label>
-          <input type="text" name="firstName" id="firstName" value={values.firstName || ""} onChange={handleChange}/>
-          <label htmlFor="dateBirth">Date de naissance</label>
-          <input type="date" name="dateBirth" id="dateBirth" value={values.dateBirth || ""} onChange={handleChange}/>
-          <label htmlFor="dateDeath">Date de deces</label>
-          <input type="date" name="dateDeath" id="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
+          <label>Nom</label>
+          <input type="text" name="lastName" value={values.lastName || ""} onChange={handleChange}/>
+          <label>Prénom</label>
+          <input type="text" name="firstName" value={values.firstName || ""} onChange={handleChange}/>
+          <label>Date de naissance</label>
+          <input type="date" name="dateBirth" value={values.dateBirth || ""} onChange={handleChange}/>
+          <label>Date de deces</label>
+          <input type="date" name="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
+          { errorMessage &&  <p>{errorMessage}</p>}
           <label htmlFor="description">Qui etait ce ?</label>
           <textarea name="description" id="description" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
           <button type="submit">Creer un memory</button>
