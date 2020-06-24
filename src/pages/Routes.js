@@ -7,8 +7,6 @@ import UserAccountPage from './UserAccountPage'
 import RegisterPage from './RegisterPage'
 import SpacesListPage from './SpacesListPage'
 import NotFoundPage from './NotFoundPage'
-import Upload from '../components/molecules/upload/Upload'
-import { UserContext } from '../context/UserContext'
 
 function Routes() {
   return (
@@ -16,7 +14,6 @@ function Routes() {
       <RestrictedRoute path='/' exact component={HomePage}/>
       <Route path='/login' exact component={LoginPage}/>
       <Route path='/register' exact component={RegisterPage}/>
-      <Route path='/upload' exact component={Upload}/>
       <RestrictedRoute path='/account' exact component={UserAccountPage}/>
       <RestrictedRoute path='/spaces' exact component={SpacesListPage}/>
       <Route component={NotFoundPage} /> {/* PageNotFound / 404 */}

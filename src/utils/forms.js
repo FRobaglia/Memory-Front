@@ -7,9 +7,15 @@ export const useForm = () => {
   const handleChange = e => {
     // Need to persist the event
     e.persist();
-    if (e.target.files) {
-      console.log(fileObjectToArray(e.target.files))
-      setState(state => ({...state, [e.target.name]: fileObjectToArray(e.target.files) }))
+    if (e.target.type === 'file') {
+      // Dans le cas où l'input est un input d'importation de fichiers et pas du simple texte, on gère un peu différemment
+      if (e.target.name === 'image') {
+        // Ici c'est un champ générique qui accepte une ou plusieurs images, on les mets dans un tableau
+        setState(state => ({...state, [e.target.name]: Object.values(e.target.files) }))
+      } else {
+        // Ici c'est un champ comme la preuve d'acte de décès, pas besoin de le mettre dans un tableau car il n'y en aura jamais plusieurs
+        setState(state => ({...state, [e.target.name]: e.target.files[0] }))
+      }
     } else {
       setState(state => ({...state, [e.target.name]: e.target.value }))
     }
@@ -19,10 +25,19 @@ export const useForm = () => {
 }
 
 export const toFormData = (values) => {
-  console.log(values)
-}
-
-const fileObjectToArray = (fileObject) => {
-  const files = Object.values(fileObject).length > 1 ? Object.values(fileObject) : fileObject[0]
-  return files
+  const data = new FormData()
+  Object.keys(values).forEach(function(value) {
+    const keyName = value
+    const keyValue = values[value]
+    if (keyName === 'image') {
+      // Comme spécifié dans la documentation de l'API, pour les input file générique 'image', on envoie tous les fichiers avec en clé le nom du fichier.
+      keyValue.forEach(file => {
+        data.append(file.name, file)
+      })
+    } else {
+      data.append(keyName, keyValue)
+    }
+  });
+  console.log(...data)
+  return data
 }

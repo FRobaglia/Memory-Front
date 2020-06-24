@@ -6,18 +6,13 @@ class UserService {
     return await axios.get(`${process.env.REACT_APP_API_BASE_URL}api/user/spaces`)
   }
 
-  async createNewSpace(lastName, firstName, description, dateBirth, dateDeath) {
+  static async createNewSpace(data) {
+    // data est une instance de FormData()
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/space/new`, {
-        lastName: lastName,
-        firstName: firstName,
-        description: description,
-        dateBirth: dateBirth,
-        dateDeath: dateDeath,
-      });
-      if(response && response.data) {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/space/new`, data);
+      if (response && response.data) {
         console.log(response.data)
-        console.log("nouvel espace creer")
+        console.log("nouvel espace créé")
       }
     }
     catch(err) {
