@@ -13,12 +13,23 @@ function SpacesListPage() {
   useEffect(() => {
     UserService.getUserSpaces()
     .then(response => setUserSpaces(response.data.spaces))
-  }, [])
+  },[])
+
+  const Space = {
+    space: {
+      lastName: values.lastName,
+      firstName: values.firstName,
+      description: values.description,
+      dateBirth: moment(values.dateBirth),
+      dateDeath: moment(values.dateDeath)
+    }
+  };
 
   function createSpace(event){
     event.preventDefault();
     if(moment(values.dateBirth).isBefore(values.dateDeath)){
       setErrorMessage()
+      setUserSpaces(userSpaces => [...userSpaces, Space]);
       UserService.createNewSpace(values.lastName, values.firstName, values.description, moment(values.dateBirth), moment(values.dateDeath))
     }
     else {
@@ -42,7 +53,7 @@ function SpacesListPage() {
           <textarea name="description" id="description" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
           <button type="submit">Creer un memory</button>
       </form>
-      {userSpaces.map(memory => <SpaceList key={memory.space.id} memory={memory}></SpaceList>)}
+      {userSpaces.map((memory, index) => <SpaceList key={index} memory={memory}></SpaceList>)}
     </div>
   )
 }
