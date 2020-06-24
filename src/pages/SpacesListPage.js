@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../services/UserService';
-import useForm from '../utils/useForm';
+import {useForm} from '../utils/forms';
 import SpaceList from '../components/molecules/SpaceList/SpaceList';
 
 function SpacesListPage() {

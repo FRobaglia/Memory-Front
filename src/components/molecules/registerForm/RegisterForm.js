@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import useForm from './../../../utils/useForm';
+import {useForm} from '../../../utils/forms';
 import validateAuth from './../../../utils/validateAuth';
 import { UserContext } from './../../../context/UserContext'
 

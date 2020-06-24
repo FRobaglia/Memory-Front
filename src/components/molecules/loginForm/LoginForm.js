@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link, Redirect } from "react-router-dom";
 import AuthService from './../../../services/AuthService'
 import { UserContext } from './../../../context/UserContext'
-import useForm from './../../../utils/useForm'
+import {useForm} from '../../../utils/forms'
 
 function LoginForm() {
 
