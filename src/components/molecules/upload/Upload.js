@@ -10,18 +10,22 @@ function Upload() {
   }, [selectedFiles])
 
   const handleChange = (event) => {
-    // console.log('handleChange', event.target.files)
-    setSelectedFiles(event.target.files[0])
+    setSelectedFiles(event.target.files)
   }
 
   const handleUploadClick = async () => {
     try {
-      console.log('handleUploadClick', selectedFiles)
-
       const data = new FormData();
 
-      data.append('file', selectedFiles);
+      for (const file of selectedFiles) {
+        data.append(file.name, file);
+      }
+
+      /**
+       * Exemple simple value
+       */
       data.append('test', 'value');
+
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}post/upload`,
         data)
       console.log(response)
