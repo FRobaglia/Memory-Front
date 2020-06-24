@@ -1,10 +1,8 @@
-import React from 'react'
-import LoginForm from '../components/molecules/loginForm/LoginForm'
+import React from 'react';
+import LoginForm from '../components/molecules/loginForm/LoginForm';
 
-function LoginPage({location}) {
-  return (
-    <LoginForm location={location} />
-  )
+function LoginPage({ location }) {
+  return <LoginForm location={location} />;
 }
 
-export default LoginPage
+export default LoginPage;
