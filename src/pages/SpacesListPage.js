@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import UserService from '../services/UserService';
+import SpaceService from '../services/SpaceService';
 import { useForm, toFormData } from '../utils/forms';
 import SpaceList from '../components/molecules/spaceList/SpaceList';
 import UploadInput from '../components/atoms/uploadInput/UploadInput';
@@ -12,7 +12,7 @@ function SpacesListPage() {
 
   useEffect(() => {
     async function getSpaces() {
-      setUserSpaces(await UserService.getUserSpaces());
+      setUserSpaces(await SpaceService.getUserSpaces());
     }
     getSpaces();
   }, []);
@@ -22,7 +22,7 @@ function SpacesListPage() {
     if (moment(values.dateBirth).isBefore(values.dateDeath)) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
-      UserService.createNewSpace(data);
+      SpaceService.createNewSpace(data);
       setUserSpaces(() => [...userSpaces, data]);
     } else {
       setErrorMessage(
@@ -96,7 +96,7 @@ function SpacesListPage() {
         <button type="submit">Creer un memory</button>
       </form>
       {userSpaces.map((memory, index) => (
-        <SpaceList key={index} memory={memory} />
+        <SpaceList key={index} memory={memory.space} />
       ))}
     </div>
   );
