@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link, Redirect } from "react-router-dom";
 import SessionService from './../../../services/SessionService'
 import { UserContext } from './../../../context/UserContext'
-import useForm from './../../../utils/useForm'
+import { useForm } from '../../../utils/forms'
 import Loading from '../loading/Loading'
 
 function LoginForm({location}) {
@@ -41,8 +41,6 @@ function LoginForm({location}) {
         <Link to='/register'>S'inscrire</Link>
       </form>
     </div>
-      
-
   )
 }
 
