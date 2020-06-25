@@ -24,7 +24,6 @@ function SpacesListPage() {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       UserService.createNewSpace(data);
-      setUserSpaces(() => [...userSpaces, data]);
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
@@ -98,10 +97,22 @@ function SpacesListPage() {
             onChange={handleChange}
           />
         </label>
+        <label htmlFor="relationDefunctText">
+          Je suis son/sa...
+          <textarea
+            name="relationDefunctText"
+            id="relationDefunctText"
+            placeholder="ami depuis 20 ans / petit-fils / voisine..."
+            cols="30"
+            rows="10"
+            value={values.relationDefunctText || ''}
+            onChange={handleChange}
+          />
+        </label>
         <button type="submit">Creer un espace</button>
       </form>
       {userSpaces.map((space) => (
-        <SpaceCard key={space.id} space={space} />
+        <SpaceCard key={space.space.id} space={space} />
       ))}
     </div>
   );

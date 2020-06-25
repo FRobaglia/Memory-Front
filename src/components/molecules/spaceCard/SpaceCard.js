@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 function SpaceCard({ space }) {
+  console.log(space);
   return (
     <div>
       <img
