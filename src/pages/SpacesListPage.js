@@ -17,23 +17,13 @@ function SpacesListPage() {
     getSpaces();
   }, []);
 
-  const Space = {
-    space: {
-      lastName: values.lastName,
-      firstName: values.firstName,
-      description: values.description,
-      dateBirth: moment(values.dateBirth),
-      dateDeath: moment(values.dateDeath),
-    },
-  };
-
   function createSpace(event) {
     event.preventDefault();
     if (moment(values.dateBirth).isBefore(values.dateDeath)) {
       setErrorMessage();
-      setUserSpaces(() => [...userSpaces, Space]);
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       UserService.createNewSpace(data);
+      setUserSpaces(() => [...userSpaces, data]);
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
