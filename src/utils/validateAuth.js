@@ -11,17 +11,17 @@ const validateAuth = (values) => {
     errors.email = 'Invalide email adresse';
   }
   // Password Errors
-  if (!values.password) {
-    errors.password = 'Veuillez entrer un mot de passe';
-  } else if (!passwordTest.test(values.password)) {
-    errors.password =
+  if (!values.passwordInitial) {
+    errors.passwordInitial = 'Veuillez entrer un mot de passe';
+  } else if (!passwordTest.test(values.passwordInitial)) {
+    errors.passwordInitial =
       'Le mot de passe doit contenir au moins 6 lettre, une minuscule, une majuscule et un nombre';
   }
   // Check password = confirmPassword
-  if (!values.confirmPassword) {
-    errors.confirmPassword = 'Veuillez confirmer le mot de passe';
-  } else if (values.password !== values.confirmPassword) {
-    errors.confirmPassword =
+  if (!values.passwordFinal) {
+    errors.passwordFinal = 'Veuillez confirmer le mot de passe';
+  } else if (values.passwordInitial !== values.passwordFinal) {
+    errors.passwordFinal =
       'Les mots de passe que vous avez entrés ne sont pas identiques';
   }
   return errors;
