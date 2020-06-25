@@ -1,10 +1,9 @@
 import React from 'react'
 import LoginForm from '../components/molecules/loginForm/LoginForm'
 
-function LoginPage() {
-
+function LoginPage({location}) {
   return (
-    <LoginForm />
+    <LoginForm location={location} />
   )
 }
 

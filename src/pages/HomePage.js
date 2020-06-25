@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext'
-import AuthService from '../services/AuthService'
+import SessionService from '../services/SessionService'
 
 function Home() {
   const {user, setUser} = useContext(UserContext)
@@ -13,7 +13,7 @@ function Home() {
       <Link to='/login'><button>Log in</button></Link>
       <Link to='/register'><button>Register</button></Link>
       <button onClick={() => {
-        AuthService.clearTokens()
+        SessionService.clearTokens()
         setUser(null)}}>logout</button>
       <Link to='/spaces'><button>Mes espaces</button></Link>
     </div>

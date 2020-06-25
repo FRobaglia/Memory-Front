@@ -2,7 +2,10 @@ import axios from 'axios'
 import StorageService from './StorageService'
 import AxiosService from './AxiosService'
 
-export default class AuthService {
+export default class SessionService { 
+/**
+ * Login - JWT 
+ */
 
   static async requestTokens(email, password) {
     try {
@@ -11,7 +14,7 @@ export default class AuthService {
         password: password
       });
       if (response && response.data) {
-        AuthService.setTokens(response.data)
+        SessionService.setTokens(response.data)
       }
     } catch (err) {
       console.error(`requestTokens : ${err}`)
@@ -36,7 +39,7 @@ export default class AuthService {
         refresh_token: this.getRefreshToken()
       });
       if (response && response.data) {
-        AuthService.setTokens(response.data)
+        SessionService.setTokens(response.data)
       }
     } catch (err) {
       console.error(`refreshTokens : ${err}`)
@@ -63,5 +66,38 @@ export default class AuthService {
 
   static clearTokens() {
     StorageService.deleteStorageItem('JWT', 'JWT_REFRESH')
+  }
+  
+/**
+ * Create a new user account
+ */
+  static async createAccount(firstname, lastname, email, password,confirmPassword, errorMessage, setErrorMessage) {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}api/user/new`,
+      {
+        passwords: {
+          initial: password,
+          final: confirmPassword,
+        },
+        lastName: lastname,
+        firstName: firstname,
+        email: email
+      });
+      if(response && response.data) {
+        console.log(response.data)
+        console.log("nouvel espace creer")
+      }
+    } catch (err) {
+      console.log(err);
+      if (err.response.status === 401) {
+        // Vider l'objet errorMessage
+        for (let key in errorMessage) {
+            delete errorMessage[key];
+        }
+        errorMessage.err401 = "Un compte a déjà été créer avec cette adresse email";
+        setErrorMessage(errorMessage)
+      }
+      
+    }
   }
 }

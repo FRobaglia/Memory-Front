@@ -4,7 +4,7 @@
 
 import React, { useContext } from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../../context/UserContext'
 
 const RestrictedRoute = ({ component: Component, ...rest }) => {
 
@@ -18,7 +18,7 @@ const RestrictedRoute = ({ component: Component, ...rest }) => {
         isLoggedIn ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+          <Redirect to={{ pathname: `/login`, state: { from: props.location } }} />
         )
       }
     />

@@ -3,21 +3,40 @@ import UserService from '../services/UserService';
 import {useForm, toFormData} from '../utils/forms';
 import SpaceList from '../components/molecules/spaceList/SpaceList';
 import UploadInput from '../components/atoms/uploadInput/UploadInput';
+import moment from 'moment';
 
 function SpacesListPage() {
 
   const [ values, handleChange ] = useForm();
-  const [ userSpaces, setUserSpaces ] = useState([])
+  const [ userSpaces, setUserSpaces ] = useState([]);
+  const [ errorMessage, setErrorMessage ] = useState();
 
   useEffect(() => {
     UserService.getUserSpaces()
     .then(response => setUserSpaces(response.data.spaces))
-  }, [userSpaces])
+  },[])
+
+  const Space = {
+    space: {
+      lastName: values.lastName,
+      firstName: values.firstName,
+      description: values.description,
+      dateBirth: moment(values.dateBirth),
+      dateDeath: moment(values.dateDeath)
+    }
+  };
 
   function createSpace(event){
     event.preventDefault();
-    const data = toFormData(values) // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
-    UserService.createNewSpace(data)
+    if(moment(values.dateBirth).isBefore(values.dateDeath)){
+      setErrorMessage()
+      setUserSpaces(userSpaces => [...userSpaces, Space]);
+      const data = toFormData(values) // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
+      UserService.createNewSpace(data)
+    }
+    else {
+      setErrorMessage('La date de naissance ne peut pas etre avant la date décès');
+    }
   }
 
   return(
@@ -35,9 +54,12 @@ function SpacesListPage() {
           <input type="date" name="dateBirth" value={values.dateBirth || ""} onChange={handleChange}/>
           <label>Date de deces</label>
           <input type="date" name="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
+          { errorMessage &&  <p>{errorMessage}</p>}
+          <label htmlFor="description">Qui etait ce ?</label>
+          <textarea name="description" id="description" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
           <button type="submit">Creer un memory</button>
       </form>
-      {userSpaces.map(memory => <SpaceList key={memory.space.id} memory={memory}></SpaceList>)}
+      {userSpaces.map((memory, index) => <SpaceList key={index} memory={memory}></SpaceList>)}
     </div>
   )
 }

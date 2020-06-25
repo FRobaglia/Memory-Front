@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
-import Routes from './pages/Routes'
+import Routes from './pages/routes/Routes'
 import { UserContext } from './context/UserContext'
-import AuthService from './services/AuthService';
+import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
+import Loading from './components/molecules/loading/Loading'
+import 'moment/locale/fr';
 
 AxiosService.setInterceptors()
 
@@ -14,14 +16,12 @@ function App() {
   const value = useMemo(() => ({user, setUser}), [user, setUser])
 
   useEffect(() => {
-    if (AuthService.getRefreshToken() !== null) {
-
+    if (SessionService.getRefreshToken() !== null) {
       async function persistSession() {
-        await AuthService.refreshTokens()
-        setUser(await AuthService.fetchUserData())
+        await SessionService.refreshTokens()
+        setUser(await SessionService.fetchUserData())
         setIsLoading(false)
       }
-
       persistSession()
     } else {
       console.log("Aucun refresh token trouvé, pas d'autologin possible.")
@@ -29,7 +29,7 @@ function App() {
     }
   }, [])
 
-  if (isLoading) return 'Fetching user data... (ici, on devrait render un component Loading)'
+  if (isLoading) return <Loading />
 
   return (
     <div className="App">
