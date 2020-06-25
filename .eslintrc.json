@@ -9,16 +9,19 @@
   },
   "rules": {
     "jsx-a11y/href-no-hash": ["off"],
+    "no-console": "off",
+    "consistent-return": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
+    "react/jsx-props-no-spreading": ["off"],
     "react/no-unescaped-entities": ["off"],
     "max-len": [
       "warn",
       {
-        "code": 80,
+        "code": 280,
         "tabWidth": 2,
-        "comments": 80,
-        "ignoreComments": false,
+        "comments": 280,
+        "ignoreComments": true,
         "ignoreTrailingComments": true,
         "ignoreUrls": true,
         "ignoreStrings": true,

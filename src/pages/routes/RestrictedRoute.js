@@ -8,13 +8,12 @@ import UserContext from '../../context/UserContext';
 
 const RestrictedRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(UserContext);
-  const isLoggedIn = user ? true : false;
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLoggedIn ? (
+        user ? (
           <Component {...props} />
         ) : (
           <Redirect

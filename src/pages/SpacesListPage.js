@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import UserService from '../services/UserService';
 import { useForm, toFormData } from '../utils/forms';
-import SpaceList from '../components/molecules/spaceList/SpaceList';
+import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
 import UploadInput from '../components/atoms/uploadInput/UploadInput';
 
 function SpacesListPage() {
@@ -13,6 +13,7 @@ function SpacesListPage() {
   useEffect(() => {
     async function getSpaces() {
       setUserSpaces(await UserService.getUserSpaces());
+      console.log(await UserService.getUserSpaces());
     }
     getSpaces();
   }, []);
@@ -34,11 +35,15 @@ function SpacesListPage() {
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
-        <UploadInput labelText="Photo du défunt" handleChange={handleChange} />
+        <UploadInput
+          labelText="Photo du défunt"
+          specificFieldName="spaceImage"
+          handleChange={handleChange}
+        />
         <UploadInput
           labelText="Preuve acte de décès au format PDF"
-          specificFieldName="proof"
-          isMultiple={false}
+          specificFieldName="spaceProof"
+          restrictedFileTypes="application/pdf"
           handleChange={handleChange}
         />
         <label htmlFor="lastName">
@@ -93,10 +98,10 @@ function SpacesListPage() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Creer un memory</button>
+        <button type="submit">Creer un espace</button>
       </form>
-      {userSpaces.map((memory, index) => (
-        <SpaceList key={index} memory={memory} />
+      {userSpaces.map((space) => (
+        <SpaceCard key={space.id} space={space} />
       ))}
     </div>
   );

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { useForm } from '../../../utils/forms';
+import { useForm, toFormData } from '../../../utils/forms';
 import validateAuth from '../../../utils/validateAuth';
 import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
+import UploadInput from '../../atoms/uploadInput/UploadInput';
 
 function RegisterForm() {
   // Custom hook useForm
@@ -18,15 +19,8 @@ function RegisterForm() {
 
     if (Object.keys(validateAuth(values)).length === 0) {
       setErrorMessage({});
-      SessionService.createAccount(
-        values.firstname,
-        values.lastname,
-        values.email,
-        values.password,
-        values.confirmPassword,
-        errorMessage,
-        setErrorMessage
-      );
+      const data = toFormData(values);
+      SessionService.createAccount(data, errorMessage, setErrorMessage);
     } else {
       setErrorMessage(validateAuth(values));
     }
@@ -34,26 +28,31 @@ function RegisterForm() {
 
   return (
     <div>
-      <p>ceci est le register 2 : Se créer un compte utilisateur</p>
+      <p>Créer un compte</p>
 
       <form action="/register" method="post" onSubmit={handleSubmit}>
-        <label htmlFor="lastname">
+        <UploadInput
+          labelText="Photo de profil"
+          specificFieldName="userImage"
+          handleChange={handleChange}
+        />
+        <label htmlFor="lastName">
           Nom
           <input
             type="text"
-            name="lastname"
-            id="lastname"
-            value={values.lastname || ''}
+            name="lastName"
+            id="lastName"
+            value={values.lastName || ''}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="firstname">
+        <label htmlFor="firstName">
           Prénom
           <input
             type="text"
-            name="firstname"
-            id="firstname"
-            value={values.firstname || ''}
+            name="firstName"
+            id="firstName"
+            value={values.firstName || ''}
             onChange={handleChange}
           />
         </label>
@@ -71,28 +70,28 @@ function RegisterForm() {
         {errorMessage && <p>{errorMessage.err401}</p>}
         {errorMessage && <p>{errorMessage.email}</p>}
 
-        <label htmlFor="password">
+        <label htmlFor="passwordInitial">
           Mot de passe
           <input
             type="password"
-            name="password"
-            id="password"
-            value={values.password || ''}
+            name="passwordInitial"
+            id="passwordInitial"
+            value={values.passwordInitial || ''}
             onChange={handleChange}
           />
         </label>
-        {errorMessage && <p>{errorMessage.password}</p>}
-        <label htmlFor="confirmpassword">
+        {errorMessage && <p>{errorMessage.passwordInitial}</p>}
+        <label htmlFor="passwordFinal">
           Confirmer le mot de passe
           <input
             type="password"
-            name="confirmPassword"
-            id="confirmpassword"
-            value={values.confirmPassword || ''}
+            name="passwordFinal"
+            id="passwordFinal"
+            value={values.passwordFinal || ''}
             onChange={handleChange}
           />
         </label>
-        {errorMessage && <p>{errorMessage.confirmPassword}</p>}
+        {errorMessage && <p>{errorMessage.passwordFinal}</p>}
         <button type="submit">S'inscrire</button>
       </form>
 
