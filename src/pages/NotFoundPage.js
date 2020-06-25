@@ -1,11 +1,8 @@
-import React from 'react'
-import NotFoundComponent from '../components/molecules/notFoundComponent/NotFoundComponent'
+import React from 'react';
+import NotFoundComponent from '../components/molecules/notFoundComponent/NotFoundComponent';
 
 function NotFoundPage() {
-
-  return (
-    <NotFoundComponent />
-  )
+  return <NotFoundComponent />;
 }
 
-export default NotFoundPage
+export default NotFoundPage;

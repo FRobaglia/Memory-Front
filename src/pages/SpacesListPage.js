@@ -1,67 +1,105 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import UserService from '../services/UserService';
-import {useForm, toFormData} from '../utils/forms';
+import { useForm, toFormData } from '../utils/forms';
 import SpaceList from '../components/molecules/spaceList/SpaceList';
 import UploadInput from '../components/atoms/uploadInput/UploadInput';
-import moment from 'moment';
 
 function SpacesListPage() {
-
-  const [ values, handleChange ] = useForm();
-  const [ userSpaces, setUserSpaces ] = useState([]);
-  const [ errorMessage, setErrorMessage ] = useState();
+  const [values, handleChange] = useForm();
+  const [userSpaces, setUserSpaces] = useState([]);
+  const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
-    UserService.getUserSpaces()
-    .then(response => setUserSpaces(response.data.spaces))
-  },[])
-
-  const Space = {
-    space: {
-      lastName: values.lastName,
-      firstName: values.firstName,
-      description: values.description,
-      dateBirth: moment(values.dateBirth),
-      dateDeath: moment(values.dateDeath)
+    async function getSpaces() {
+      setUserSpaces(await UserService.getUserSpaces());
     }
-  };
+    getSpaces();
+  }, []);
 
-  function createSpace(event){
+  function createSpace(event) {
     event.preventDefault();
-    if(moment(values.dateBirth).isBefore(values.dateDeath)){
-      setErrorMessage()
-      setUserSpaces(userSpaces => [...userSpaces, Space]);
-      const data = toFormData(values) // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
-      UserService.createNewSpace(data)
-    }
-    else {
-      setErrorMessage('La date de naissance ne peut pas etre avant la date décès');
+    if (moment(values.dateBirth).isBefore(values.dateDeath)) {
+      setErrorMessage();
+      const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
+      UserService.createNewSpace(data);
+      setUserSpaces(() => [...userSpaces, data]);
+    } else {
+      setErrorMessage(
+        'La date de naissance ne peut pas etre avant la date décès'
+      );
     }
   }
 
-  return(
+  return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
-          <UploadInput labelText='Photo du défunt' handleChange={handleChange} />
-          <UploadInput labelText='Preuve acte de décès au format PDF' specificFieldName='proof' isMultiple={false} handleChange={handleChange} />
-          <label>Nom</label>
-          <input type="text" name="lastName" value={values.lastName || ""} onChange={handleChange}/>
-          <label>Prénom</label>
-          <input type="text" name="firstName" value={values.firstName || ""} onChange={handleChange}/>
-          <label htmlFor="description">Qui etait ce ?</label>
-          <textarea name="description" id="" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
-          <label>Date de naissance</label>
-          <input type="date" name="dateBirth" value={values.dateBirth || ""} onChange={handleChange}/>
-          <label>Date de deces</label>
-          <input type="date" name="dateDeath" value={values.dateDeath || ""} onChange={handleChange}/>
-          { errorMessage &&  <p>{errorMessage}</p>}
-          <label htmlFor="description">Qui etait ce ?</label>
-          <textarea name="description" id="description" cols="30" rows="10" value={values.description || ""} onChange={handleChange}/>
-          <button type="submit">Creer un memory</button>
+        <UploadInput labelText="Photo du défunt" handleChange={handleChange} />
+        <UploadInput
+          labelText="Preuve acte de décès au format PDF"
+          specificFieldName="proof"
+          isMultiple={false}
+          handleChange={handleChange}
+        />
+        <label htmlFor="lastName">
+          Nom
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            value={values.lastName || ''}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="firstName">
+          Prénom
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            value={values.firstName || ''}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="dateBirth">
+          Date de naissance
+          <input
+            type="date"
+            name="dateBirth"
+            id="dateBirth"
+            value={values.dateBirth || ''}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="dateDeath">
+          Date de deces
+          <input
+            type="date"
+            name="dateDeath"
+            id="dateDeath"
+            value={values.dateDeath || ''}
+            onChange={handleChange}
+          />
+        </label>
+        {errorMessage && <p>{errorMessage}</p>}
+        <label htmlFor="description">
+          Qui etait ce ?
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+            value={values.description || ''}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Creer un memory</button>
       </form>
-      {userSpaces.map((memory, index) => <SpaceList key={index} memory={memory}></SpaceList>)}
+      {userSpaces.map((memory, index) => (
+        <SpaceList key={index} memory={memory} />
+      ))}
     </div>
-  )
+  );
 }
 
 export default SpacesListPage;

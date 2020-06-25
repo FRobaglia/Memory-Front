@@ -2,27 +2,28 @@
 // Si l'utilisateur est connecté : l'utilisateur arrive sur la page demandée
 // Sinon : l'utilisateur est redirigé vers la page de login
 
-import React, { useContext } from 'react'
-import { Redirect, Route } from 'react-router-dom'
-import { UserContext } from '../../context/UserContext'
+import React, { useContext } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import UserContext from '../../context/UserContext';
 
 const RestrictedRoute = ({ component: Component, ...rest }) => {
-
-  const { user } = useContext(UserContext)
-  const isLoggedIn = user ? true : false
+  const { user } = useContext(UserContext);
+  const isLoggedIn = user ? true : false;
 
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         isLoggedIn ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: `/login`, state: { from: props.location } }} />
+          <Redirect
+            to={{ pathname: `/login`, state: { from: props.location } }}
+          />
         )
       }
     />
-  )
-}
+  );
+};
 
-export default RestrictedRoute
+export default RestrictedRoute;
