@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import useForm from '../../../utils/useForm';
+import { useForm } from '../../../utils/forms';
 import validateAuth from '../../../utils/validateAuth';
 import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';

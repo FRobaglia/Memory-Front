@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import UserService from '../services/UserService';
-import useForm from '../utils/useForm';
+import { useForm, toFormData } from '../utils/forms';
 import SpaceList from '../components/molecules/spaceList/SpaceList';
+import UploadInput from '../components/atoms/uploadInput/UploadInput';
 
 function SpacesListPage() {
   const [values, handleChange] = useForm();
@@ -31,13 +32,8 @@ function SpacesListPage() {
     if (moment(values.dateBirth).isBefore(values.dateDeath)) {
       setErrorMessage();
       setUserSpaces(() => [...userSpaces, Space]);
-      UserService.createNewSpace(
-        values.lastName,
-        values.firstName,
-        values.description,
-        moment(values.dateBirth),
-        moment(values.dateDeath)
-      );
+      const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
+      UserService.createNewSpace(data);
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
@@ -48,6 +44,13 @@ function SpacesListPage() {
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
+        <UploadInput labelText="Photo du défunt" handleChange={handleChange} />
+        <UploadInput
+          labelText="Preuve acte de décès au format PDF"
+          specificFieldName="proof"
+          isMultiple={false}
+          handleChange={handleChange}
+        />
         <label htmlFor="lastName">
           Nom
           <input
