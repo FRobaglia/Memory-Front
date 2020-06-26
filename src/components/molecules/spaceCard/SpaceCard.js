@@ -4,11 +4,7 @@ import moment from 'moment';
 function SpaceList({ space, backOffice, validateSpace, index }) {
   return (
     <div>
-      <img
-        width="300"
-        src={space.space.image.url}
-        alt={space.space.firstName}
-      />
+      <img width="300" src={space.image.url} alt={space.firstName} />
       <h1>
         {space.firstName} {space.lastName}
       </h1>
