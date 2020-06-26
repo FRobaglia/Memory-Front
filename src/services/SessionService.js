@@ -57,7 +57,7 @@ export default class SessionService {
   static setTokens(tokenObject) {
     StorageService.setStorage('JWT', tokenObject.token);
     StorageService.setStorage('JWT_REFRESH', tokenObject.refresh_token);
-    AxiosService.setInterceptors(); // Les tokens ayant changé, on met à jour le header Authorization dans Axios
+    AxiosService.setInterceptors(this.getAccessToken()); // Les tokens ayant changé, on met à jour le header Authorization dans Axios
   }
 
   static getAccessToken() {
@@ -75,31 +75,15 @@ export default class SessionService {
   /**
    * Create a new user account
    */
-  static async createAccount(
-    firstname,
-    lastname,
-    email,
-    password,
-    confirmPassword,
-    errorMessage,
-    setErrorMessage
-  ) {
+  static async createAccount(data, errorMessage, setErrorMessage) {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}api/user/new`,
-        {
-          passwords: {
-            initial: password,
-            final: confirmPassword,
-          },
-          lastName: lastname,
-          firstName: firstname,
-          email,
-        }
+        data
       );
       if (response && response.data) {
         console.log(response.data);
-        console.log('nouvel espace creer');
+        console.log('nouvel utilisateur créé !');
       }
     } catch (err) {
       console.log(err);

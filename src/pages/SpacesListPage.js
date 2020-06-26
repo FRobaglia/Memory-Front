@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import SpaceService from '../services/SpaceService';
 import { useForm, toFormData } from '../utils/forms';
-import SpaceList from '../components/molecules/spaceList/SpaceList';
+import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
 import UploadInput from '../components/atoms/uploadInput/UploadInput';
 
 function SpacesListPage() {
@@ -13,6 +13,7 @@ function SpacesListPage() {
   useEffect(() => {
     async function getSpaces() {
       setUserSpaces(await SpaceService.getUserSpaces());
+      console.log(await SpaceService.getUserSpaces());
     }
     getSpaces();
   }, []);
@@ -23,7 +24,7 @@ function SpacesListPage() {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       SpaceService.createNewSpace(data);
-      setUserSpaces(() => [...userSpaces, data]);
+      // setUserSpaces(() => [...userSpaces, data]);
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
@@ -34,11 +35,15 @@ function SpacesListPage() {
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
-        <UploadInput labelText="Photo du défunt" handleChange={handleChange} />
+        <UploadInput
+          labelText="Photo du défunt"
+          specificFieldName="spaceImage"
+          handleChange={handleChange}
+        />
         <UploadInput
           labelText="Preuve acte de décès au format PDF"
-          specificFieldName="proof"
-          isMultiple={false}
+          specificFieldName="spaceProof"
+          restrictedFileTypes="application/pdf"
           handleChange={handleChange}
         />
         <label htmlFor="lastName">
@@ -93,10 +98,22 @@ function SpacesListPage() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Creer un memory</button>
+        <label htmlFor="relationDefunctText">
+          Je suis son/sa...
+          <textarea
+            name="relationDefunctText"
+            id="relationDefunctText"
+            placeholder="ami depuis 20 ans / petit-fils / voisine..."
+            cols="30"
+            rows="10"
+            value={values.relationDefunctText || ''}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Creer un espace</button>
       </form>
-      {userSpaces.map((memory, index) => (
-        <SpaceList key={index} memory={memory.space} />
+      {userSpaces.map((space) => (
+        <SpaceCard key={space.space.id} space={space.space} />
       ))}
     </div>
   );

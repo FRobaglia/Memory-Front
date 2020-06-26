@@ -17,7 +17,6 @@ function BackOfficePage() {
 
   function validateSpace(id, index) {
     SpaceService.validateSpace(id);
-    console.log(index);
     unvalidatedSpaces.splice(index, 1);
     setUnvalidatedSpaces([...unvalidatedSpaces]);
   }
