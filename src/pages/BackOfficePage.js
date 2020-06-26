@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../context/UserContext';
 import SpaceService from '../services/SpaceService';
-import SpaceList from '../components/molecules/spaceList/SpaceList';
+import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
 
 function BackOfficePage() {
   const { user, setUser } = useContext(UserContext);
@@ -25,7 +25,7 @@ function BackOfficePage() {
     <div>
       <p>{user.firstName}</p>
       {unvalidatedSpaces.map((memory, index) => (
-        <SpaceList
+        <SpaceCard
           key={memory.id}
           index={index}
           memory={memory}
