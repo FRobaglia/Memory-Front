@@ -7,7 +7,6 @@ class SpaceService {
         `${process.env.REACT_APP_API_BASE_URL}api/user/spaces`
       );
       if (response && response.data) {
-        console.log(response.data.spaces[0].space);
         return response.data.spaces;
       }
     } catch (err) {

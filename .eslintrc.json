@@ -10,6 +10,7 @@
   "rules": {
     "jsx-a11y/href-no-hash": ["off"],
     "consistent-return": "off",
+    "no-use-before-define": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": ["off"],
