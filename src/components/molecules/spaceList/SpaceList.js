@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-function SpaceList({ memory, backOffice, validateSpace }) {
+function SpaceList({ memory, backOffice, validateSpace, index }) {
   return (
     <div>
       <h1>
@@ -13,7 +13,7 @@ function SpaceList({ memory, backOffice, validateSpace }) {
       </h2>
       <p>{memory.description}</p>
       {backOffice ? (
-        <button type="button" onClick={() => validateSpace(memory.id)}>
+        <button type="button" onClick={() => validateSpace(memory.id, index)}>
           Valider l'espace
         </button>
       ) : (

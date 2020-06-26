@@ -15,19 +15,20 @@ function BackOfficePage() {
     getSpaces();
   }, []);
 
-  function validateSpace(id, i) {
+  function validateSpace(id, index) {
     SpaceService.validateSpace(id);
-    const arr = unvalidatedSpaces;
-    arr.splice(i, 1);
-    setUnvalidatedSpaces(arr);
+    console.log(index);
+    unvalidatedSpaces.splice(index, 1);
+    setUnvalidatedSpaces([...unvalidatedSpaces]);
   }
-  // console.log(unvalidatedSpaces);
+
   return (
     <div>
       <p>{user.firstName}</p>
-      {unvalidatedSpaces.map((memory) => (
+      {unvalidatedSpaces.map((memory, index) => (
         <SpaceList
           key={memory.id}
+          index={index}
           memory={memory}
           backOffice={backOffice}
           validateSpace={validateSpace}
