@@ -4,7 +4,7 @@ import SpaceService from '../services/SpaceService';
 import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
 
 function BackOfficePage() {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [unvalidatedSpaces, setUnvalidatedSpaces] = useState([]);
   const backOffice = true;
 

@@ -11,20 +11,20 @@ function SpacesListPage() {
   const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
-    async function getSpaces() {
-      setUserSpaces(await SpaceService.getUserSpaces());
-      console.log(await SpaceService.getUserSpaces());
-    }
     getSpaces();
   }, []);
 
-  function createSpace(event) {
+  async function getSpaces() {
+    setUserSpaces(await SpaceService.getUserSpaces());
+  }
+
+  async function createSpace(event) {
     event.preventDefault();
     if (moment(values.dateBirth).isBefore(values.dateDeath)) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
-      SpaceService.createNewSpace(data);
-      // setUserSpaces(() => [...userSpaces, data]);
+      await SpaceService.createNewSpace(data);
+      getSpaces();
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
@@ -112,9 +112,10 @@ function SpacesListPage() {
         </label>
         <button type="submit">Creer un espace</button>
       </form>
-      {userSpaces.map((space) => (
-        <SpaceCard key={space.space.id} space={space.space} />
-      ))}
+      {userSpaces &&
+        userSpaces.map((space) => (
+          <SpaceCard key={space.space.id} space={space.space} />
+        ))}
     </div>
   );
 }
