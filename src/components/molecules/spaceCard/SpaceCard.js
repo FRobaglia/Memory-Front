@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-function SpaceList({ space, backOffice, validateSpace, index }) {
+function SpaceCard({ space, backOffice, validateSpace, index }) {
   return (
     <div>
       <img width="300" src={space.image.url} alt={space.firstName} />
@@ -24,4 +24,4 @@ function SpaceList({ space, backOffice, validateSpace, index }) {
   );
 }
 
-export default SpaceList;
+export default SpaceCard;
