@@ -28,6 +28,13 @@ function Home() {
       <Link to="/spaces">
         <button type="button">Mes espaces</button>
       </Link>
+      {user && user.roles.includes('ROLE_BACK_MANAGER') ? (
+        <Link to="/admin">
+          <button type="button">Back Office</button>
+        </Link>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

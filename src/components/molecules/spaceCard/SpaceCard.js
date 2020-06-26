@@ -1,23 +1,25 @@
 import React from 'react';
 import moment from 'moment';
 
-function SpaceCard({ space }) {
-  console.log(space);
+function SpaceCard({ space, backOffice, validateSpace, index }) {
   return (
     <div>
-      <img
-        width="300"
-        src={space.space.image.url}
-        alt={space.space.firstName}
-      />
+      <img width="300" src={space.image.url} alt={space.firstName} />
       <h1>
-        {space.space.firstName} {space.space.lastName}
+        {space.firstName} {space.lastName}
       </h1>
       <h2>
-        Né le: {moment(space.space.dateBirth).format('D MMMM YYYY')}, Mort le:{' '}
-        {moment(space.space.dateDeath).format('D MMMM YYYY')}
+        Né le: {moment(space.dateBirth).format('D MMMM YYYY')}, Mort le:{' '}
+        {moment(space.dateDeath).format('D MMMM YYYY')}
       </h2>
-      <p>{space.space.description}</p>
+      <p>{space.description}</p>
+      {backOffice ? (
+        <button type="button" onClick={() => validateSpace(space.id, index)}>
+          Valider l'espace
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

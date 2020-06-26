@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import UserService from '../services/UserService';
+import SpaceService from '../services/SpaceService';
 import { useForm, toFormData } from '../utils/forms';
 import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
 import UploadInput from '../components/atoms/uploadInput/UploadInput';
@@ -12,8 +12,8 @@ function SpacesListPage() {
 
   useEffect(() => {
     async function getSpaces() {
-      setUserSpaces(await UserService.getUserSpaces());
-      console.log(await UserService.getUserSpaces());
+      setUserSpaces(await SpaceService.getUserSpaces());
+      console.log(await SpaceService.getUserSpaces());
     }
     getSpaces();
   }, []);
@@ -23,7 +23,8 @@ function SpacesListPage() {
     if (moment(values.dateBirth).isBefore(values.dateDeath)) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
-      UserService.createNewSpace(data);
+      SpaceService.createNewSpace(data);
+      // setUserSpaces(() => [...userSpaces, data]);
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
@@ -112,7 +113,7 @@ function SpacesListPage() {
         <button type="submit">Creer un espace</button>
       </form>
       {userSpaces.map((space) => (
-        <SpaceCard key={space.space.id} space={space} />
+        <SpaceCard key={space.space.id} space={space.space} />
       ))}
     </div>
   );

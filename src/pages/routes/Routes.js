@@ -7,6 +7,7 @@ import UserAccountPage from '../UserAccountPage';
 import RegisterPage from '../RegisterPage';
 import SpacesListPage from '../SpacesListPage';
 import NotFoundPage from '../NotFoundPage';
+import BackOfficePage from '../BackOfficePage';
 
 function Routes() {
   return (
@@ -16,6 +17,7 @@ function Routes() {
       <Route path="/register" exact component={RegisterPage} />
       <RestrictedRoute path="/account" exact component={UserAccountPage} />
       <RestrictedRoute path="/spaces" exact component={SpacesListPage} />
+      <RestrictedRoute path="/admin" exact component={BackOfficePage} />
       <Route component={NotFoundPage} /> {/* PageNotFound / 404 */}
     </Switch>
   );

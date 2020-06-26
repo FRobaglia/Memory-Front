@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import UserService from '../services/UserService';
+import React, { useContext } from 'react';
+import UserContext from '../context/UserContext';
 
 function UserAccountPage() {
-  const [userInfos, setUserInfos] = useState([]);
-
-  useEffect(() => {
-    UserService.getUserInfo().then((response) => setUserInfos(response.data));
-  }, []);
+  const { user, setUser } = useContext(UserContext);
 
   return (
     <div>
-      <h2>{userInfos.firstName}</h2>
+      <h2>{user.firstName}</h2>
+      <h2>{user.roles}</h2>
     </div>
   );
 }
