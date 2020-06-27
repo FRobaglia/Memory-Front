@@ -56,6 +56,20 @@ class SpaceService {
       console.error(err);
     }
   }
+
+  static async focusSpace(id) {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}`
+      );
+      if (response && response.data) {
+        console.log(response.data);
+        return response.data;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 export default SpaceService;
