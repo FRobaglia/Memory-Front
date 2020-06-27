@@ -28,7 +28,7 @@ function BackOfficePage() {
         <SpaceCard
           key={memory.id}
           index={index}
-          memory={memory}
+          space={memory}
           backOffice={backOffice}
           validateSpace={validateSpace}
         />
