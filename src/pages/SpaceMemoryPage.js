@@ -8,7 +8,7 @@ function SpaceMemoryPage() {
   const [spaceData, setSpaceData] = useState([]);
   const [subscribersData, setSubscribersData] = useState([]);
   const [postsData, setPostsData] = useState([]);
-  const { value, setValue } = useContext(SpaceContext);
+  const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
   const spaceLocation = useLocation();
 
@@ -24,6 +24,7 @@ function SpaceMemoryPage() {
             spaceDataArray.push(element[spaceItem]);
           });
           setSpaceData(spaceDataArray);
+          setValue(element);
         } else {
           // Subscribers infos
           const subscribersArray = [];

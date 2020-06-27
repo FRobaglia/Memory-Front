@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import SpaceContext from '../../../context/SpaceContext';
 
 function SpaceCard({ space, backOffice, validateSpace, index }) {
-  const { setValue } = useContext(SpaceContext);
   const [spaceRoute, setSpaceRoute] = useState();
 
   useEffect(() => {

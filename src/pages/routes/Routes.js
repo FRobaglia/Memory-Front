@@ -14,7 +14,6 @@ import SpaceContext from '../../context/SpaceContext';
 function Routes() {
   const [value, setValue] = useState({});
   const spaceID = useMemo(() => ({ value, setValue }), [value, setValue]);
-  console.log('routes', value);
 
   return (
     <Switch>
