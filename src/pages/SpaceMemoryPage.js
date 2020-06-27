@@ -8,6 +8,7 @@ function SpaceMemoryPage() {
   const [spaceData, setSpaceData] = useState([]);
   const [subscribersData, setSubscribersData] = useState([]);
   const [postsData, setPostsData] = useState([]);
+  const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
   const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
   const spaceLocation = useLocation();
@@ -18,7 +19,7 @@ function SpaceMemoryPage() {
       // console.log(`${key}: ${element}`);
       if (key !== 'posts') {
         if (key === 'space') {
-          // Space infos
+          // Space infos - Object of objects
           const spaceDataArray = [];
           Object.keys(element).map((spaceItem) => {
             spaceDataArray.push(element[spaceItem]);
@@ -26,13 +27,13 @@ function SpaceMemoryPage() {
           setSpaceData(spaceDataArray);
           setValue(element);
         } else {
-          // Subscribers infos
+          // Subscribers infos - Array of object
           const subscribersArray = [];
           element.map((el) => subscribersArray.push(el));
           setSubscribersData(subscribersArray);
         }
       } else {
-        // Posts infos
+        // Posts infos - Array
         const postsArray = [];
         element.map((post) => postsArray.push(post));
         setPostsData(postsArray);
@@ -44,19 +45,29 @@ function SpaceMemoryPage() {
     async function getSpaceMemoryData() {
       const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
       console.log(resultat);
-      handleMemoryData(resultat);
+      if (resultat.status) {
+        console.log(SpaceService.errorMessageSpace(resultat.status));
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
+      } else {
+        handleMemoryData(resultat);
+      }
     }
     getSpaceMemoryData();
   }, []);
 
-  if (spaceData) {
+  if (spaceErrorMessage) {
     return (
       <div>
-        <p>Bienvenu dans l'espace de Madame {spaceData[3]}</p>
+        <p>Pas cool</p>
+        <p>{spaceErrorMessage}</p>
       </div>
     );
   }
-  return <p>Merci de patienter...</p>;
+  return (
+    <div>
+      <p>Bienvenu dans l'espace de Madame {spaceData[3]}</p>
+    </div>
+  );
 }
 
 export default SpaceMemoryPage;
