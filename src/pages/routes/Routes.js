@@ -10,6 +10,7 @@ import SpaceMemoryPage from '../SpaceMemoryPage';
 import NotFoundPage from '../NotFoundPage';
 import BackOfficePage from '../BackOfficePage';
 import SpaceContext from '../../context/SpaceContext';
+import SpaceSettingsPage from '../SpaceSettingsPage';
 
 function Routes() {
   const [value, setValue] = useState({});
@@ -29,6 +30,11 @@ function Routes() {
           component={SpaceMemoryPage}
         />
         <RestrictedRoute path="/admin" exact component={BackOfficePage} />
+        <RestrictedRoute
+          path="/spaces/space/:slug/settings"
+          exact
+          component={SpaceSettingsPage}
+        />
       </SpaceContext.Provider>
       <Route component={NotFoundPage} /> {/* PageNotFound / 404 */}
     </Switch>

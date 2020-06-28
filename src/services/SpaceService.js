@@ -57,6 +57,32 @@ class SpaceService {
     }
   }
 
+  static async deleteSpace(id) {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/delete`
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async editSpace(id) {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/edit`
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   static async focusSpace(id) {
     try {
       const response = await axios.get(

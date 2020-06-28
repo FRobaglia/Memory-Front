@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import SpaceContext from '../context/SpaceContext';
 import SpaceService from '../services/SpaceService';
+import UserContext from '../context/UserContext';
 
 function SpaceMemoryPage() {
   // const [spaceID, setSpaceID] = useState();
@@ -12,6 +13,7 @@ function SpaceMemoryPage() {
   const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
   const spaceLocation = useLocation();
+  const { user } = useContext(UserContext);
 
   function handleMemoryData(obj) {
     const spaceInfos = Object.entries(obj);
@@ -65,7 +67,23 @@ function SpaceMemoryPage() {
   }
   return (
     <div>
-      <p>Bienvenu dans l'espace de Madame {spaceData[3]}</p>
+      <p>
+        Bienvenu dans l'espace de {spaceData[3]}
+        {spaceData[7]}
+        {console.log(spaceData)}
+        {JSON.stringify(spaceData[9]) === JSON.stringify(user) ? (
+          <Link
+            to={{
+              pathname: `/spaces/space/${spaceData[3]}-${spaceData[7]}-${spaceLocation.state.id}/settings`,
+              state: { id: `${spaceLocation.state.id}` },
+            }}
+          >
+            <button type="button">Settings</button>
+          </Link>
+        ) : (
+          ''
+        )}
+      </p>
     </div>
   );
 }
