@@ -4,13 +4,11 @@ import SpaceService from '../services/SpaceService';
 
 function SpaceSettingsPage() {
   const spaceLocation = useLocation();
-  // const [deleteSuccess, setDeleteSuccess] = useState('succes');
+  const [deleteSuccess, setDeleteSuccess] = useState();
   async function deleteSpace(id) {
-    // setDeleteSuccess(await SpaceService.deleteSpace(id));
-    console.log(`espace ${id} supprime`);
-    // if (deleteSuccess === 'succes') return <Redirect to="/" />;
+    setDeleteSuccess(await SpaceService.deleteSpace(id));
   }
-  console.log(spaceLocation);
+  if (deleteSuccess) return <Redirect to="/" />;
   return (
     <div>
       <button type="button" onClick={() => deleteSpace(spaceLocation.state.id)}>
