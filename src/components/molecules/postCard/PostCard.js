@@ -3,7 +3,7 @@ import React from 'react';
 function PostCard(post) {
   return (
     <div>
-      <img src={post.post.img} alt="post img" />
+      {post.post.img && <img src={post.post.img} alt="post img" />}
       <h1>{post.post.title}</h1>
       <p>{post.post.text}</p>
       <div>

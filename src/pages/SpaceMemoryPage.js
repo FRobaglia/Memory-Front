@@ -22,37 +22,18 @@ function SpaceMemoryPage() {
   function handleMemoryData(obj) {
     const spaceInfos = Object.entries(obj);
     spaceInfos.forEach(([key, element]) => {
-      // console.log(`${key}: ${element}`);
-      if (key !== 'posts') {
-        if (key === 'space') {
-          // Space infos - Object of objects
-          // const spaceDataArray = [];
-          // Object.keys(element).map((spaceItem) => {
-          //   spaceDataArray.push(element[spaceItem]);
-          // });
-          // setSpaceData(spaceDataArray);
-          listPosts(element);
+      switch (key) {
+        case 'posts':
+          setPostsData(element);
+          break;
+        case 'subscribers':
+          setSubscribersData(element);
+          break;
+        default:
+          setSpaceData(element);
           setValue(element);
-        } else {
-          // Subscribers infos - Array of object
-          const subscribersArray = [];
-          element.map((el) => subscribersArray.push(el));
-          setSubscribersData(subscribersArray);
-        }
-      } else {
-        // Posts infos - Array
-        const postsArray = [];
-        element.map((post) => postsArray.push(post));
-        setPostsData(postsArray);
       }
     });
-  }
-  function listPosts(element) {
-    const spaceDataArray = [];
-    Object.keys(element).map((spaceItem) => {
-      spaceDataArray.push(element[spaceItem]);
-    });
-    setSpaceData(spaceDataArray);
   }
 
   useEffect(() => {
@@ -84,17 +65,17 @@ function SpaceMemoryPage() {
       </div>
     );
   }
-  console.log(postsData);
+
   return (
     <div>
       <p>
-        Bienvenu dans l'espace de {spaceData[3]}
-        {spaceData[7]}
+        Bienvenu dans l'espace de {spaceData.firstName} {spaceData.lastName}
+        {console.log(postsData)}
       </p>
-      {JSON.stringify(spaceData[9]) === JSON.stringify(user) ? (
+      {JSON.stringify(spaceData.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/spaces/space/${spaceData[3]}-${spaceData[7]}-${spaceLocation.state.id}/settings`,
+            pathname: `/spaces/space/${spaceData.firstName}-${spaceData.lastName}-${spaceLocation.state.id}/settings`,
             state: { id: `${spaceLocation.state.id}` },
           }}
         >

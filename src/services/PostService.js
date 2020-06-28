@@ -10,6 +10,7 @@ class PostService {
       if (response && response.data) {
         console.log(response.data);
         console.log('nouveau post créé');
+        return response.data;
       }
     } catch (err) {
       console.error(err);
