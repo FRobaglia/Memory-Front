@@ -9,7 +9,7 @@ function SpaceCard({ space, backOffice, validateSpace, index }) {
     setSpaceRoute(() =>
       backOffice
         ? '/admin'
-        : `/spaces/space/${space.firstName}-${space.lastName}-${space.id}`
+        : `/space/${space.firstName}-${space.lastName}-${space.id}`
     );
   }, []);
 
