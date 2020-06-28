@@ -5,7 +5,7 @@ import SpaceService from '../services/SpaceService';
 import UserContext from '../context/UserContext';
 import { useForm, toFormData } from '../utils/forms';
 import PostService from '../services/PostService';
-import PostCard from '../components/molecules/postCard/PostCard';
+import PostCard from '../components/molecules/space/posts/postCard/PostCard';
 
 function SpaceMemoryPage() {
   // const [spaceID, setSpaceID] = useState();

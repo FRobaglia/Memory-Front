@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import SessionService from '../../../services/SessionService';
-import UserContext from '../../../context/UserContext';
-import { useForm } from '../../../utils/forms';
-import Loading from '../loading/Loading';
+import SessionService from '../../../../services/SessionService';
+import UserContext from '../../../../context/UserContext';
+import { useForm } from '../../../../utils/forms';
+import Loading from '../../utilsTemplates/loading/Loading';
 
 function LoginForm({ location }) {
   const [values, handleChange] = useForm();

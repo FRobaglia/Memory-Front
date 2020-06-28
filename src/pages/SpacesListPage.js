@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import SpaceService from '../services/SpaceService';
 import { useForm, toFormData } from '../utils/forms';
-import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
-import UploadInput from '../components/atoms/uploadInput/UploadInput';
+import SpaceCard from '../components/molecules/space/spaceCard/SpaceCard';
+import UploadInput from '../components/atoms/UploadInput';
 
 function SpacesListPage() {
   const [values, handleChange] = useForm();
