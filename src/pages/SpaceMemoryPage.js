@@ -23,6 +23,7 @@ function SpaceMemoryPage() {
   }, []);
 
   async function getSpaceMemoryData() {
+    // const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
     const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
     console.log(resultat);
     if (resultat.status) {
@@ -31,6 +32,7 @@ function SpaceMemoryPage() {
     } else {
       setSpaceData(resultat);
       setSpace(resultat.space);
+      setValue(resultat);
     }
   }
 
@@ -55,15 +57,16 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
         {console.log(spaceData.posts)}
+        {console.log(space.firstName)}
       </p>
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${spaceData.firstName}-${spaceData.lastName}-${spaceLocation.state.id}/settings/general`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${spaceLocation.state.id}/settings/general`,
             state: { id: `${spaceLocation.state.id}` },
           }}
         >
-          <button type="button">Settings</button>
+          Settings
         </Link>
       ) : (
         ''

@@ -35,7 +35,7 @@ function Routes() {
           exact
           component={SpaceSettingsPage}
         />
-        <RestrictedRoute path="/space/:slug/settings/invite" />
+        {/* <RestrictedRoute path="/space/:slug/settings/invite" /> */}
       </SpaceContext.Provider>
       <Route component={NotFoundPage} /> {/* PageNotFound / 404 */}
     </Switch>
