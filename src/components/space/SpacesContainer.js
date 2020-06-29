@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import SpaceService from '../services/SpaceService';
-import { useForm, toFormData } from '../utils/forms';
-import SpaceCard from '../components/molecules/spaceCard/SpaceCard';
-import UploadInput from '../components/atoms/uploadInput/UploadInput';
+import SpaceService from '../../services/SpaceService';
+import { useForm, toFormData } from '../../utils/forms';
+import SpaceCard from './spaceCard/SpaceCard';
+import UploadInput from '../UploadInput';
 
-function SpacesListPage() {
+function SpacesContainer() {
   const [values, handleChange] = useForm();
   const [userSpaces, setUserSpaces] = useState([]);
   const [errorMessage, setErrorMessage] = useState();
@@ -120,4 +120,4 @@ function SpacesListPage() {
   );
 }
 
-export default SpacesListPage;
+export default SpacesContainer;
