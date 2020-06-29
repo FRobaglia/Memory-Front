@@ -4,7 +4,6 @@ import UploadInput from '../../../UploadInput';
 import { useForm, toFormData } from '../../../../utils/forms';
 import CommentService from '../../../../services/CommentService';
 import PostService from '../../../../services/PostService';
-import SpaceService from '../../../../services/SpaceService';
 
 function PostCard({ post, index, deletePost }) {
   const { user } = useContext(UserContext);
@@ -34,7 +33,16 @@ function PostCard({ post, index, deletePost }) {
       {post.img && <img src={post.img} alt="post img" />}
       <h1>{post.title || 'souvenir sans titre'}</h1>
       <p>{post.text}</p>
-
+      {post.images &&
+        post.images.map((image) => (
+          <img
+            src={image.url}
+            alt="post img"
+            style={{ width: '40px' }}
+            {...{ height: '40px' }}
+          />
+        ))}
+      {post.link && <a href={post.link}>Lien</a>}
       <div>
         <p style={{ display: 'inline-block' }}>
           Ecrit par {post.createdBy.firstName} {post.createdBy.lastName}
