@@ -19,25 +19,26 @@ function SpaceMemoryPage() {
   const [values, handleChange] = useForm();
 
   useEffect(() => {
-    async function getSpaceMemoryData() {
-      const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
-      console.log(resultat);
-      if (resultat.status) {
-        console.log(SpaceService.errorMessageSpace(resultat.status));
-        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
-      } else {
-        setSpaceData(resultat);
-        setSpace(resultat.space);
-      }
-    }
     getSpaceMemoryData();
   }, []);
+
+  async function getSpaceMemoryData() {
+    const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
+    console.log(resultat);
+    if (resultat.status) {
+      console.log(SpaceService.errorMessageSpace(resultat.status));
+      setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
+    } else {
+      setSpaceData(resultat);
+      setSpace(resultat.space);
+    }
+  }
 
   async function createPost(event) {
     event.preventDefault();
     const data = toFormData(values);
     await PostService.createPost(spaceLocation.state.id, data);
-    // listPosts();
+    getSpaceMemoryData();
   }
 
   if (spaceErrorMessage) {
