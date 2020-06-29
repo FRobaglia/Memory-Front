@@ -25,13 +25,17 @@ function SpaceMemoryPage() {
     link: false,
   });
   const [imageFile, setImageFile] = useState([]);
+  const [postValues, handlePostChange] = useForm();
+  const spaceId = window.location.href.substring(
+    window.location.href.lastIndexOf('-') + 1
+  );
 
   useEffect(() => {
     getSpaceMemoryData();
   }, []);
 
   async function getSpaceMemoryData() {
-    const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
+    const resultat = await SpaceService.focusSpace(spaceId);
     console.log(resultat);
     if (resultat.status) {
       console.log(SpaceService.errorMessageSpace(resultat.status));
@@ -44,8 +48,8 @@ function SpaceMemoryPage() {
 
   async function createPost(event) {
     event.preventDefault();
-    const data = toFormData(values);
-    await PostService.createPost(spaceLocation.state.id, data);
+    const data = toFormData(postValues);
+    await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
   }
 
@@ -82,11 +86,12 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
       </p>
+      {console.log(space.createdBy)}
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceLocation.state.id}/settings`,
-            state: { id: `${spaceLocation.state.id}` },
+            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings`,
+            state: { id: `${spaceId}` },
           }}
         >
           <button type="button">Settings</button>
@@ -102,8 +107,8 @@ function SpaceMemoryPage() {
               name="title"
               id="title"
               placeholder="titre du souvenir"
-              value={values.title || ''}
-              onChange={handleChange}
+              value={postValues.title || ''}
+              onChange={handlePostChange}
             />
           </label>
         )}
@@ -114,8 +119,8 @@ function SpaceMemoryPage() {
             cols="30"
             rows="5"
             placeholder="ecrit un souvenir"
-            value={values.text || ''}
-            onChange={handleChange}
+            value={postValues.text || ''}
+            onChange={handlePostChange}
             required
           />
         </label>
@@ -135,22 +140,22 @@ function SpaceMemoryPage() {
               id="link"
               name="link"
               placeholder="lien"
-              value={values.link || ''}
-              onChange={handleChange}
+              value={postValues.link || ''}
+              onChange={handlePostChange}
             />
           </label>
         )}
         {showPostFields.image && (
           <UploadInput
             labelText="Photo souvenir"
-            handleChange={(handleChange, imagePreview)}
+            handleChange={(handlePostChange, imagePreview)}
           />
         )}
         {showPostFields.video && (
           <UploadInput
             labelText="Video souvenir"
             specificFieldName="postVideo"
-            handleChange={handleChange}
+            handleChange={handlePostChange}
           />
         )}
         <button
