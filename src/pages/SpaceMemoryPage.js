@@ -41,6 +41,12 @@ function SpaceMemoryPage() {
     getSpaceMemoryData();
   }
 
+  async function deletePost(id, index) {
+    await PostService.deletePost(id);
+    // postsData.splice(index, 1);
+    // setPostsData([...postsData]);
+  }
+
   if (spaceErrorMessage) {
     return (
       <div>
@@ -81,7 +87,14 @@ function SpaceMemoryPage() {
         <button type="submit">poster un souvenir</button>
       </form>
       {spaceData.posts &&
-        spaceData.posts.map((post) => <PostCard key={post.id} post={post} />)}
+        spaceData.posts.map((post, index) => (
+          <PostCard
+            key={post.id}
+            post={post}
+            index={index}
+            deletePost={deletePost}
+          />
+        ))}
     </div>
   );
 }
