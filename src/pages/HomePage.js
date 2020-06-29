@@ -25,7 +25,7 @@ function Home() {
       >
         logout
       </button>
-      <Link to="/spaces">
+      <Link to="/account">
         <button type="button">Mes espaces</button>
       </Link>
       {user && user.roles.includes('ROLE_BACK_MANAGER') ? (

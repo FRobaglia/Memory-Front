@@ -1,26 +1,28 @@
 import React, { useState, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useForm, toFormData } from '../../../utils/forms';
 import validateAuth from '../../../utils/validateAuth';
 import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
-import UploadInput from '../../atoms/uploadInput/UploadInput';
+import UploadInput from '../../UploadInput';
 
 function RegisterForm() {
   // Custom hook useForm
   const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState({});
   const { user } = useContext(UserContext);
+  const history = useHistory();
 
   if (user) return <Redirect to="/" />; // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (Object.keys(validateAuth(values)).length === 0) {
       setErrorMessage({});
       const data = toFormData(values);
-      SessionService.createAccount(data, errorMessage, setErrorMessage);
+      await SessionService.createAccount(data, errorMessage, setErrorMessage);
+      history.push('/account');
     } else {
       setErrorMessage(validateAuth(values));
     }

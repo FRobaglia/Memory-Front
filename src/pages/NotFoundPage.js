@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFoundComponent from '../components/molecules/notFoundComponent/NotFoundComponent';
+import NotFoundComponent from '../components/utilsTemplates/notFoundComponent/NotFoundComponent';
 
 function NotFoundPage() {
   return <NotFoundComponent />;

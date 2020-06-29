@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from '../components/molecules/loginForm/LoginForm';
+import LoginForm from '../components/auth/loginForm/LoginForm';
 
 function LoginPage({ location }) {
   return <LoginForm location={location} />;
