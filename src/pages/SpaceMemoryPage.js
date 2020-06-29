@@ -59,7 +59,7 @@ function SpaceMemoryPage() {
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceLocation.state.id}/settings`,
+            pathname: `/space/${spaceData.firstName}-${spaceData.lastName}-${spaceLocation.state.id}/settings/general`,
             state: { id: `${spaceLocation.state.id}` },
           }}
         >

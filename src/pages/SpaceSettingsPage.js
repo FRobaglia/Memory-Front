@@ -11,6 +11,7 @@ function SpaceSettingsPage() {
   if (deleteSuccess) return <Redirect to="/" />;
   return (
     <div>
+      <h1>Générales</h1>
       <button type="button" onClick={() => deleteSpace(spaceLocation.state.id)}>
         Supprimer l'espace
       </button>
