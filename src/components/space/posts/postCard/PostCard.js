@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import UserContext from '../../../../context/UserContext';
 import UploadInput from '../../../UploadInput';
 import { useForm, toFormData } from '../../../../utils/forms';
 import CommentService from '../../../../services/CommentService';
 import PostService from '../../../../services/PostService';
+import SpaceService from '../../../../services/SpaceService';
 
 function PostCard({ post, index, deletePost }) {
   const { user } = useContext(UserContext);
@@ -18,6 +19,10 @@ function PostCard({ post, index, deletePost }) {
     refreshComments();
   }
 
+  async function deleteComment(id) {
+    await CommentService.deleteComment(id);
+  }
+
   async function refreshComments() {
     const refreshedPost = await PostService.getPost(post.id);
     if (refreshedPost && refreshedPost.comments)
@@ -25,7 +30,7 @@ function PostCard({ post, index, deletePost }) {
   }
 
   return (
-    <div>
+    <div style={{ border: '1px solid black' }}>
       {post.img && <img src={post.img} alt="post img" />}
       <h1>{post.title || 'souvenir sans titre'}</h1>
       <p>{post.text}</p>
@@ -59,6 +64,18 @@ function PostCard({ post, index, deletePost }) {
           <em>
             écrit par {comment.createdBy.firstName} {comment.createdBy.lastName}
           </em>
+          {comment.createdBy.id === user.id ? (
+            <button
+              type="button"
+              onClick={() => {
+                deleteComment(comment.id);
+              }}
+            >
+              Supprimer mon commentaire
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       ))}
       {showCommentInput && (
