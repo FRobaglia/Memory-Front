@@ -16,7 +16,7 @@ function SpaceMemoryPage() {
   // useLocation récupère la data passée dans le Link
   const spaceLocation = useLocation();
   const { user } = useContext(UserContext);
-  const [values, handleChange] = useForm();
+  const [postValues, handlePostChange] = useForm();
 
   useEffect(() => {
     getSpaceMemoryData();
@@ -36,7 +36,7 @@ function SpaceMemoryPage() {
 
   async function createPost(event) {
     event.preventDefault();
-    const data = toFormData(values);
+    const data = toFormData(postValues);
     await PostService.createPost(spaceLocation.state.id, data);
     getSpaceMemoryData();
   }
@@ -60,7 +60,6 @@ function SpaceMemoryPage() {
     <div>
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
-        {console.log(spaceData.posts)}
       </p>
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
@@ -80,8 +79,8 @@ function SpaceMemoryPage() {
             type="textarea"
             name="text"
             id="content"
-            value={values.text || ''}
-            onChange={handleChange}
+            value={postValues.text || ''}
+            onChange={handlePostChange}
           />
         </label>
         <button type="submit">poster un souvenir</button>
