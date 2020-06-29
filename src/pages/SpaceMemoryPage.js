@@ -14,16 +14,19 @@ function SpaceMemoryPage() {
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
   const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
-  const spaceLocation = useLocation();
   const { user } = useContext(UserContext);
   const [postValues, handlePostChange] = useForm();
+
+  const spaceId = window.location.href.substring(
+    window.location.href.lastIndexOf('-') + 1
+  );
 
   useEffect(() => {
     getSpaceMemoryData();
   }, []);
 
   async function getSpaceMemoryData() {
-    const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
+    const resultat = await SpaceService.focusSpace(spaceId);
     console.log(resultat);
     if (resultat.status) {
       console.log(SpaceService.errorMessageSpace(resultat.status));
@@ -37,7 +40,7 @@ function SpaceMemoryPage() {
   async function createPost(event) {
     event.preventDefault();
     const data = toFormData(postValues);
-    await PostService.createPost(spaceLocation.state.id, data);
+    await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
   }
 
@@ -64,8 +67,8 @@ function SpaceMemoryPage() {
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceLocation.state.id}/settings`,
-            state: { id: `${spaceLocation.state.id}` },
+            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings`,
+            state: { id: `${spaceId}` },
           }}
         >
           <button type="button">Settings</button>
