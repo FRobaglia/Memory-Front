@@ -9,32 +9,14 @@ import PostCard from '../components/space/posts/postCard/PostCard';
 
 function SpaceMemoryPage() {
   // const [spaceID, setSpaceID] = useState();
-  const [spaceData, setSpaceData] = useState([]);
-  const [subscribersData, setSubscribersData] = useState([]);
-  const [postsData, setPostsData] = useState([]);
+  const [spaceData, setSpaceData] = useState({});
+  const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
   const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
   const spaceLocation = useLocation();
   const { user } = useContext(UserContext);
   const [values, handleChange] = useForm();
-
-  function handleMemoryData(obj) {
-    const spaceInfos = Object.entries(obj);
-    spaceInfos.forEach(([key, element]) => {
-      switch (key) {
-        case 'posts':
-          setPostsData(element);
-          break;
-        case 'subscribers':
-          setSubscribersData(element);
-          break;
-        default:
-          setSpaceData(element);
-          setValue(element);
-      }
-    });
-  }
 
   useEffect(() => {
     async function getSpaceMemoryData() {
@@ -44,7 +26,8 @@ function SpaceMemoryPage() {
         console.log(SpaceService.errorMessageSpace(resultat.status));
         setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
       } else {
-        handleMemoryData(resultat);
+        setSpaceData(resultat);
+        setSpace(resultat.space);
       }
     }
     getSpaceMemoryData();
@@ -69,13 +52,13 @@ function SpaceMemoryPage() {
   return (
     <div>
       <p>
-        Bienvenu dans l'espace de {spaceData.firstName} {spaceData.lastName}
-        {console.log(postsData)}
+        Bienvenu dans l'espace de {space.firstName} {space.lastName}
+        {console.log(spaceData.posts)}
       </p>
-      {JSON.stringify(spaceData.createdBy) === JSON.stringify(user) ? (
+      {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${spaceData.firstName}-${spaceData.lastName}-${spaceLocation.state.id}/settings`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${spaceLocation.state.id}/settings`,
             state: { id: `${spaceLocation.state.id}` },
           }}
         >
@@ -96,8 +79,8 @@ function SpaceMemoryPage() {
         </label>
         <button type="submit">poster un souvenir</button>
       </form>
-      {postsData &&
-        postsData.map((post) => <PostCard key={post.id} post={post} />)}
+      {spaceData.posts &&
+        spaceData.posts.map((post) => <PostCard key={post.id} post={post} />)}
     </div>
   );
 }
