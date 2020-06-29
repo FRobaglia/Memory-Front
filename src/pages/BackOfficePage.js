@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../context/UserContext';
 import SpaceService from '../services/SpaceService';
-import SpaceCard from '../components/molecules/space/spaceCard/SpaceCard';
+import SpaceCard from '../components/space/spaceCard/SpaceCard';
 
 function BackOfficePage() {
   const { user } = useContext(UserContext);

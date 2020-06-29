@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import { useForm, toFormData } from '../../../../utils/forms';
-import validateAuth from '../../../../utils/validateAuth';
-import SessionService from '../../../../services/SessionService';
-import UserContext from '../../../../context/UserContext';
-import UploadInput from '../../../atoms/UploadInput';
+import { useForm, toFormData } from '../../../utils/forms';
+import validateAuth from '../../../utils/validateAuth';
+import SessionService from '../../../services/SessionService';
+import UserContext from '../../../context/UserContext';
+import UploadInput from '../../UploadInput';
 
 function RegisterForm() {
   // Custom hook useForm

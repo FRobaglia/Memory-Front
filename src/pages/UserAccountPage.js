@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import UserContext from '../context/UserContext';
-import SpacesContainer from '../components/molecules/space/SpacesContainer';
+import SpacesContainer from '../components/space/SpacesContainer';
 
 function UserAccountPage() {
   const { user } = useContext(UserContext);

@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterForm from '../components/molecules/auth/registerForm/RegisterForm';
+import RegisterForm from '../components/auth/registerForm/RegisterForm';
 
 function RegisterPage() {
   return <RegisterForm />;
