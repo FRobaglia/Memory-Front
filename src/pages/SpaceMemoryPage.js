@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import SpaceContext from '../context/SpaceContext';
 import SpaceService from '../services/SpaceService';
+import StorageService from '../services/StorageService';
 import UserContext from '../context/UserContext';
 import { useForm, toFormData } from '../utils/forms';
 import PostService from '../services/PostService';
@@ -34,6 +35,8 @@ function SpaceMemoryPage() {
     } else {
       setSpaceData(resultat);
       setSpace(resultat.space);
+      setValue(resultat);
+      StorageService.setObjectStorage('spaceInfos', resultat);
     }
   }
 
@@ -67,7 +70,7 @@ function SpaceMemoryPage() {
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings/general`,
             state: { id: `${spaceId}` },
           }}
         >

@@ -1,41 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
-import SpaceService from '../services/SpaceService';
+import { useLocation } from 'react-router-dom';
+import SpaceService from '../../services/SpaceService';
+import spaceID from '../../utils/getSpaceID';
 
-function SpaceSettingsPage() {
-  const spaceLocation = useLocation();
-  const [deleteSuccess, setDeleteSuccess] = useState();
+function SpaceSettingsReqAccess() {
+  // const spaceLocation = useLocation();
   const [waitingSubscribers, setWaitingSubscribers] = useState(
     "Chargement des utilisateurs ayant fait une demande d'accès..."
   );
+  console.log(spaceID);
 
   useEffect(() => {
     getWaitingSubscribers();
   }, []);
 
-  async function deleteSpace(id) {
-    setDeleteSuccess(await SpaceService.deleteSpace(id));
-  }
-
   async function getWaitingSubscribers() {
-    const subscribers = await SpaceService.getWaitingSubscribers(
-      spaceLocation.state.id
-    );
+    const subscribers = await SpaceService.getWaitingSubscribers(spaceID);
     setWaitingSubscribers(subscribers);
   }
 
   async function validateSubscriber(subscriberId) {
-    await SpaceService.validateSubscriber(spaceLocation.state.id, subscriberId);
+    await SpaceService.validateSubscriber(spaceID, subscriberId);
   }
 
   async function unvalidateSubscriber(subscriberId) {
-    await SpaceService.unvalidateSubscriber(
-      spaceLocation.state.id,
-      subscriberId
-    );
+    await SpaceService.unvalidateSubscriber(spaceID, subscriberId);
   }
 
-  if (deleteSuccess) return <Redirect to="/" />;
   return (
     <div>
       <div>
@@ -62,17 +53,8 @@ function SpaceSettingsPage() {
             : waitingSubscribers}
         </ul>
       </div>
-
-      <div>
-        <button
-          type="button"
-          onClick={() => deleteSpace(spaceLocation.state.id)}
-        >
-          Supprimer l'espace
-        </button>
-      </div>
     </div>
   );
 }
 
-export default SpaceSettingsPage;
+export default SpaceSettingsReqAccess;

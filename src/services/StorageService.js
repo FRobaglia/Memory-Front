@@ -10,12 +10,31 @@ export default class StorageService {
     }
   }
 
+  // Pour save un objet
+  static setObjectStorage(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   /**
    * La fonction permet de récupérer une clé dans le local storage de l'application.
    */
   static getStorage(key) {
     try {
       const res = localStorage.getItem(key);
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Pour récupérer un object
+  static getObjectStorage(key) {
+    try {
+      const res = JSON.parse(localStorage.getItem(key));
       return res;
     } catch (err) {
       console.error(err);

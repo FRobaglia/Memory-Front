@@ -138,6 +138,16 @@ class SpaceService {
     }
   }
 
+  static spaceInfosFromStorage(data, infos) {
+    let spaceInfos = {};
+    Object.keys(data).map((key) => {
+      if (key === infos) {
+        spaceInfos = data[key];
+      }
+    });
+    return spaceInfos;
+  }
+
   static errorMessageSpace(status) {
     let message = '';
     switch (status) {
