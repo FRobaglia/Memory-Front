@@ -20,7 +20,7 @@ class PostService {
   static async deletePost(id) {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_BASE_URL}/api/post/${id}/delete`
+        `${process.env.REACT_APP_API_BASE_URL}api/post/${id}/delete`
       );
       if (response) {
         console.log(response.data);

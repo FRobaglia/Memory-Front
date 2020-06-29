@@ -59,8 +59,8 @@ function SpaceMemoryPage() {
 
   async function deletePost(id, index) {
     await PostService.deletePost(id);
-    // postsData.splice(index, 1);
-    // setPostsData([...postsData]);
+    postsData.splice(index, 1);
+    setPostsData([...postsData]);
   }
 
   if (spaceErrorMessage) {
