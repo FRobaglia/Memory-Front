@@ -6,7 +6,6 @@ import SpaceCard from '../components/space/spaceCard/SpaceCard';
 function BackOfficePage() {
   const { user } = useContext(UserContext);
   const [unvalidatedSpaces, setUnvalidatedSpaces] = useState([]);
-  const backOffice = true;
 
   useEffect(() => {
     async function getSpaces() {
@@ -24,12 +23,12 @@ function BackOfficePage() {
   return (
     <div>
       <p>{user.firstName}</p>
-      {unvalidatedSpaces.map((memory, index) => (
+      {unvalidatedSpaces.map((space, index) => (
         <SpaceCard
-          key={memory.id}
+          key={space.id}
           index={index}
-          space={memory}
-          backOffice={backOffice}
+          space={space}
+          backOffice
           validateSpace={validateSpace}
         />
       ))}

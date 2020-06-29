@@ -43,6 +43,47 @@ class SpaceService {
     }
   }
 
+  static async getWaitingSubscribers(id) {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/subscribers/waiting`
+      );
+      if (response) {
+        if (response.data.subscribers.length === 0)
+          return "Aucun utilisateur en attente d'accès";
+        return response.data.subscribers;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async validateSubscriber(spaceId, subscriberId) {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/subscriber/${subscriberId}/validate`
+      );
+      if (response) {
+        console.log(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async unvalidateSubscriber(spaceId, subscriberId) {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/subscriber/${subscriberId}/unvalidate`
+      );
+      if (response) {
+        console.log(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   static async validateSpace(id) {
     try {
       const response = await axios.put(
