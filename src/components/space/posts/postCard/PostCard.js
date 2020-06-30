@@ -20,6 +20,7 @@ function PostCard({ post, index, deletePost }) {
 
   async function deleteComment(id) {
     await CommentService.deleteComment(id);
+    refreshComments();
   }
 
   async function refreshComments() {
@@ -31,16 +32,11 @@ function PostCard({ post, index, deletePost }) {
   return (
     <div style={{ border: '1px solid black' }}>
       {post.img && <img src={post.img} alt="post img" />}
-      <h1>{post.title || 'souvenir sans titre'}</h1>
+      <h1>{post.title}</h1>
       <p>{post.text}</p>
       {post.images &&
         post.images.map((image) => (
-          <img
-            src={image.url}
-            alt="post img"
-            style={{ width: '40px' }}
-            {...{ height: '40px' }}
-          />
+          <img src={image.url} alt="post img" width="40px" height="40px" />
         ))}
       {post.link && <a href={post.link}>Lien</a>}
       <div>

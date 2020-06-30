@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import SpaceContext from '../context/SpaceContext';
+import { Link } from 'react-router-dom';
 import SpaceService from '../services/SpaceService';
 import UserContext from '../context/UserContext';
 import { useForm, toFormData } from '../utils/forms';
@@ -13,18 +12,15 @@ function SpaceMemoryPage() {
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
-  const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
-  const spaceLocation = useLocation();
   const { user } = useContext(UserContext);
-  const [values, handleChange] = useForm();
   const [showPostFields, setShowPostFields] = useState({
     title: false,
     image: false,
     video: false,
     link: false,
   });
-  const [imageFile, setImageFile] = useState([]);
+  const [image, setImage] = useState([]);
   const [postValues, handlePostChange] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
@@ -59,19 +55,20 @@ function SpaceMemoryPage() {
   }
 
   function imagePreview(e) {
+    // const array = [];
     if (e.target.files.length) {
       for (let i = 0; i < e.target.files.length; i += 1) {
-        setImageFile([
-          ...imageFile,
-          {
-            preview: URL.createObjectURL(e.target.files[i]),
-            raw: e.target.files[i],
-          },
-        ]);
+        image.push(URL.createObjectURL(e.target.files[i]));
+        setImage(image);
       }
     }
   }
 
+  function deleteImagePreview(index) {
+    image.splice(index, 1);
+    setImage([...image]);
+  }
+  console.log(image);
   if (spaceErrorMessage) {
     return (
       <div>
@@ -86,7 +83,6 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
       </p>
-      {console.log(space.createdBy)}
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
@@ -124,15 +120,29 @@ function SpaceMemoryPage() {
             required
           />
         </label>
-        {imageFile.map((image) => (
-          <img
-            src={image.preview}
-            key={image.preview}
-            alt="postsimag"
-            width="100"
-            height="100"
-          />
-        ))}
+        <div>
+          {image.map((imageUrl, e, index) => (
+            <div>
+              <img
+                src={imageUrl}
+                key={imageUrl}
+                alt="postsimag"
+                width="100"
+                height="100"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  handlePostChange(e);
+                  deleteImagePreview(index);
+                }}
+              >
+                supprimer photo
+              </button>
+            </div>
+          ))}
+        </div>
+
         {showPostFields.link && (
           <label htmlFor="link">
             <input
@@ -148,7 +158,11 @@ function SpaceMemoryPage() {
         {showPostFields.image && (
           <UploadInput
             labelText="Photo souvenir"
-            handleChange={(handlePostChange, imagePreview)}
+            handleChange={(e) => {
+              handlePostChange(e);
+              imagePreview(e);
+            }}
+            isMultiple
           />
         )}
         {showPostFields.video && (
@@ -182,6 +196,7 @@ function SpaceMemoryPage() {
         </button>
         <button
           type="button"
+          style={{ display: showPostFields.image ? 'none' : 'inline-block' }}
           onClick={() =>
             setShowPostFields(() => {
               return { ...showPostFields, image: true };
@@ -192,6 +207,7 @@ function SpaceMemoryPage() {
         </button>
         <button
           type="button"
+          style={{ display: showPostFields.video ? 'none' : 'inline-block' }}
           onClick={() =>
             setShowPostFields(() => {
               return { ...showPostFields, video: true };
@@ -201,7 +217,6 @@ function SpaceMemoryPage() {
           Ajouter une video
         </button>
         <button type="submit">poster un souvenir</button>
-        <div>{console.log(imageFile)}</div>
       </form>
       {spaceData.posts &&
         spaceData.posts.map((post, index) => (
