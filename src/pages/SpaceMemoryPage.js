@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import SpaceContext from '../context/SpaceContext';
 import SpaceService from '../services/SpaceService';
 import UserContext from '../context/UserContext';
 import { useForm, toFormData } from '../utils/forms';
@@ -22,7 +21,6 @@ function SpaceMemoryPage() {
     link: false,
   });
   const [image, setImage] = useState([]);
-  const [imageFile, setImageFile] = useState([]);
   const [postValues, handlePostChange] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
@@ -46,9 +44,7 @@ function SpaceMemoryPage() {
 
   async function createPost(event) {
     event.preventDefault();
-    image.map((imageInfo) => setImageFile(imageInfo.raw));
-    const postValuesAndImages = { ...postValues, imageFile };
-    const data = toFormData(postValuesAndImages);
+    const data = toFormData(postValues);
     await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
   }
@@ -59,24 +55,15 @@ function SpaceMemoryPage() {
   }
 
   function imagePreview(e) {
+    const array = [];
     if (e.target.files.length) {
       for (let i = 0; i < e.target.files.length; i += 1) {
-        setImage([
-          ...image,
-          {
-            preview: URL.createObjectURL(e.target.files[i]),
-            raw: e.target.files[i],
-          },
-        ]);
-        // setImageFile([
-        //   ...imageFile,
-        //   { [e.target.files[i].name]: e.target.files[i] },
-        //   // [e.target.files[i].name]: e.target.files[i],
-        // ]);
+        array.push(URL.createObjectURL(e.target.files[i]));
+        setImage(array);
       }
     }
   }
-
+  console.log(image);
   if (spaceErrorMessage) {
     return (
       <div>
@@ -91,7 +78,6 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
       </p>
-      {image.map((imageInfo) => console.log(imageInfo.raw))}
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
@@ -131,8 +117,8 @@ function SpaceMemoryPage() {
         </label>
         {image.map((imageUrl) => (
           <img
-            src={imageUrl.preview}
-            key={imageUrl.preview}
+            src={imageUrl}
+            key={imageUrl}
             alt="postsimag"
             width="100"
             height="100"
@@ -153,8 +139,11 @@ function SpaceMemoryPage() {
         {showPostFields.image && (
           <UploadInput
             labelText="Photo souvenir"
-            specificFieldName="postImage"
-            handleChange={(handlePostChange, imagePreview)}
+            handleChange={(e) => {
+              handlePostChange(e);
+              imagePreview(e);
+            }}
+            isMultiple
           />
         )}
         {showPostFields.video && (
