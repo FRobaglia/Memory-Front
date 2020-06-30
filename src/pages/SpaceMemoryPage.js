@@ -55,13 +55,18 @@ function SpaceMemoryPage() {
   }
 
   function imagePreview(e) {
-    const array = [];
+    // const array = [];
     if (e.target.files.length) {
       for (let i = 0; i < e.target.files.length; i += 1) {
-        array.push(URL.createObjectURL(e.target.files[i]));
-        setImage(array);
+        image.push(URL.createObjectURL(e.target.files[i]));
+        setImage(image);
       }
     }
+  }
+
+  function deleteImagePreview(index) {
+    image.splice(index, 1);
+    setImage(image);
   }
   console.log(image);
   if (spaceErrorMessage) {
@@ -115,15 +120,23 @@ function SpaceMemoryPage() {
             required
           />
         </label>
-        {image.map((imageUrl) => (
-          <img
-            src={imageUrl}
-            key={imageUrl}
-            alt="postsimag"
-            width="100"
-            height="100"
-          />
-        ))}
+        <div>
+          {image.map((imageUrl, index) => (
+            <div>
+              <img
+                src={imageUrl}
+                key={imageUrl}
+                alt="postsimag"
+                width="100"
+                height="100"
+              />
+              <button type="button" onClick={() => deleteImagePreview(index)}>
+                supprimer photo
+              </button>
+            </div>
+          ))}
+        </div>
+
         {showPostFields.link && (
           <label htmlFor="link">
             <input
@@ -177,6 +190,7 @@ function SpaceMemoryPage() {
         </button>
         <button
           type="button"
+          style={{ display: showPostFields.image ? 'none' : 'inline-block' }}
           onClick={() =>
             setShowPostFields(() => {
               return { ...showPostFields, image: true };
@@ -187,6 +201,7 @@ function SpaceMemoryPage() {
         </button>
         <button
           type="button"
+          style={{ display: showPostFields.video ? 'none' : 'inline-block' }}
           onClick={() =>
             setShowPostFields(() => {
               return { ...showPostFields, video: true };
