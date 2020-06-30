@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SpaceContext from '../context/SpaceContext';
 import SpaceService from '../services/SpaceService';
 import UserContext from '../context/UserContext';
@@ -13,17 +13,15 @@ function SpaceMemoryPage() {
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
-  const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
-  const spaceLocation = useLocation();
   const { user } = useContext(UserContext);
-  const [values, handleChange] = useForm();
   const [showPostFields, setShowPostFields] = useState({
     title: false,
     image: false,
     video: false,
     link: false,
   });
+  const [image, setImage] = useState([]);
   const [imageFile, setImageFile] = useState([]);
   const [postValues, handlePostChange] = useForm();
   const spaceId = window.location.href.substring(
@@ -48,7 +46,9 @@ function SpaceMemoryPage() {
 
   async function createPost(event) {
     event.preventDefault();
-    const data = toFormData(postValues);
+    image.map((imageInfo) => setImageFile(imageInfo.raw));
+    const postValuesAndImages = { ...postValues, imageFile };
+    const data = toFormData(postValuesAndImages);
     await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
   }
@@ -61,13 +61,18 @@ function SpaceMemoryPage() {
   function imagePreview(e) {
     if (e.target.files.length) {
       for (let i = 0; i < e.target.files.length; i += 1) {
-        setImageFile([
-          ...imageFile,
+        setImage([
+          ...image,
           {
             preview: URL.createObjectURL(e.target.files[i]),
             raw: e.target.files[i],
           },
         ]);
+        // setImageFile([
+        //   ...imageFile,
+        //   { [e.target.files[i].name]: e.target.files[i] },
+        //   // [e.target.files[i].name]: e.target.files[i],
+        // ]);
       }
     }
   }
@@ -86,7 +91,7 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
       </p>
-      {console.log(space.createdBy)}
+      {image.map((imageInfo) => console.log(imageInfo.raw))}
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
@@ -124,10 +129,10 @@ function SpaceMemoryPage() {
             required
           />
         </label>
-        {imageFile.map((image) => (
+        {image.map((imageUrl) => (
           <img
-            src={image.preview}
-            key={image.preview}
+            src={imageUrl.preview}
+            key={imageUrl.preview}
             alt="postsimag"
             width="100"
             height="100"
@@ -148,6 +153,7 @@ function SpaceMemoryPage() {
         {showPostFields.image && (
           <UploadInput
             labelText="Photo souvenir"
+            specificFieldName="postImage"
             handleChange={(handlePostChange, imagePreview)}
           />
         )}
@@ -201,7 +207,6 @@ function SpaceMemoryPage() {
           Ajouter une video
         </button>
         <button type="submit">poster un souvenir</button>
-        <div>{console.log(imageFile)}</div>
       </form>
       {spaceData.posts &&
         spaceData.posts.map((post, index) => (
