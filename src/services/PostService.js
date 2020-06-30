@@ -16,6 +16,33 @@ class PostService {
       console.error(err);
     }
   }
+
+  static async getPost(id) {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}api/post/${id}`
+      );
+      if (response && response.data) {
+        console.log(response.data);
+        return response.data;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async deletePost(id) {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_BASE_URL}api/post/${id}/delete`
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default PostService;

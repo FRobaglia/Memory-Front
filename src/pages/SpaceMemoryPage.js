@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import SpaceContext from '../context/SpaceContext';
 import SpaceService from '../services/SpaceService';
+import StorageService from '../services/StorageService';
 import UserContext from '../context/UserContext';
 import { useForm, toFormData } from '../utils/forms';
 import PostService from '../services/PostService';
@@ -14,17 +15,19 @@ function SpaceMemoryPage() {
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
   const { setValue } = useContext(SpaceContext);
   // useLocation récupère la data passée dans le Link
-  const spaceLocation = useLocation();
   const { user } = useContext(UserContext);
-  const [values, handleChange] = useForm();
+  const [postValues, handlePostChange] = useForm();
+
+  const spaceId = window.location.href.substring(
+    window.location.href.lastIndexOf('-') + 1
+  );
 
   useEffect(() => {
     getSpaceMemoryData();
   }, []);
 
   async function getSpaceMemoryData() {
-    // const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
-    const resultat = await SpaceService.focusSpace(spaceLocation.state.id);
+    const resultat = await SpaceService.focusSpace(spaceId);
     console.log(resultat);
     if (resultat.status) {
       console.log(SpaceService.errorMessageSpace(resultat.status));
@@ -33,14 +36,21 @@ function SpaceMemoryPage() {
       setSpaceData(resultat);
       setSpace(resultat.space);
       setValue(resultat);
+      StorageService.setObjectStorage('spaceInfos', resultat);
     }
   }
 
   async function createPost(event) {
     event.preventDefault();
-    const data = toFormData(values);
-    await PostService.createPost(spaceLocation.state.id, data);
+    const data = toFormData(postValues);
+    await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
+  }
+
+  async function deletePost(id, index) {
+    await PostService.deletePost(id);
+    // postsData.splice(index, 1);
+    // setPostsData([...postsData]);
   }
 
   if (spaceErrorMessage) {
@@ -56,14 +66,12 @@ function SpaceMemoryPage() {
     <div>
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
-        {console.log(spaceData.posts)}
-        {console.log(space.firstName)}
       </p>
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceLocation.state.id}/settings/general`,
-            state: { id: `${spaceLocation.state.id}` },
+            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings/general`,
+            state: { id: `${spaceId}` },
           }}
         >
           Settings
@@ -77,14 +85,21 @@ function SpaceMemoryPage() {
             type="textarea"
             name="text"
             id="content"
-            value={values.text || ''}
-            onChange={handleChange}
+            value={postValues.text || ''}
+            onChange={handlePostChange}
           />
         </label>
         <button type="submit">poster un souvenir</button>
       </form>
       {spaceData.posts &&
-        spaceData.posts.map((post) => <PostCard key={post.id} post={post} />)}
+        spaceData.posts.map((post, index) => (
+          <PostCard
+            key={post.id}
+            post={post}
+            index={index}
+            deletePost={deletePost}
+          />
+        ))}
     </div>
   );
 }
