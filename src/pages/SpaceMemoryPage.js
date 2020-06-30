@@ -66,7 +66,7 @@ function SpaceMemoryPage() {
 
   function deleteImagePreview(index) {
     image.splice(index, 1);
-    setImage(image);
+    setImage([...image]);
   }
   console.log(image);
   if (spaceErrorMessage) {
@@ -121,7 +121,7 @@ function SpaceMemoryPage() {
           />
         </label>
         <div>
-          {image.map((imageUrl, index) => (
+          {image.map((imageUrl, e, index) => (
             <div>
               <img
                 src={imageUrl}
@@ -130,7 +130,13 @@ function SpaceMemoryPage() {
                 width="100"
                 height="100"
               />
-              <button type="button" onClick={() => deleteImagePreview(index)}>
+              <button
+                type="button"
+                onClick={() => {
+                  handlePostChange(e);
+                  deleteImagePreview(index);
+                }}
+              >
                 supprimer photo
               </button>
             </div>
