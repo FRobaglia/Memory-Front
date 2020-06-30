@@ -25,8 +25,10 @@ function PostCard({ post, index, deletePost }) {
 
   async function refreshComments() {
     const refreshedPost = await PostService.getPost(post.id);
-    if (refreshedPost && refreshedPost.comments)
-      setComments(refreshedPost.comments);
+    if (refreshedPost.post) {
+      setComments(refreshedPost.post.comments);
+      setShowCommentInput(false);
+    }
   }
 
   return (
