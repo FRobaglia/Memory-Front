@@ -4,7 +4,7 @@ import UploadInput from '../../../UploadInput';
 import { useForm, toFormData } from '../../../../utils/forms';
 import CommentService from '../../../../services/CommentService';
 import PostService from '../../../../services/PostService';
-import SpaceService from '../../../../services/SpaceService';
+// import SpaceService from '../../../../services/SpaceService';
 
 function PostCard({ post, index, deletePost }) {
   const { user } = useContext(UserContext);

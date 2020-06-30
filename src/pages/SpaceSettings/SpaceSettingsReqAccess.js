@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
-import spaceID from '../../utils/getSpaceID';
+// import spaceID from '../../utils/getSpaceID';
 
-function SpaceSettingsReqAccess() {
+function SpaceSettingsReqAccess({ space }) {
   // const spaceLocation = useLocation();
+  // const [spaceID, setSpaceID] = useState(space.id);
+  // const spaceID = space.id;
   const [waitingSubscribers, setWaitingSubscribers] = useState(
     "Chargement des utilisateurs ayant fait une demande d'accès..."
   );
-  console.log(spaceID);
+  // console.log(spaceID);
+  // console.log('Req', space.id);
 
   useEffect(() => {
-    getWaitingSubscribers();
+    // setSpaceID(space.id);
+    // const spaceID = space.id;
+    getWaitingSubscribersList();
   }, []);
 
-  async function getWaitingSubscribers() {
-    const subscribers = await SpaceService.getWaitingSubscribers(spaceID);
+  async function getWaitingSubscribersList() {
+    const subscribers = await SpaceService.getWaitingSubscribers(space);
     setWaitingSubscribers(subscribers);
   }
 
   async function validateSubscriber(subscriberId) {
-    await SpaceService.validateSubscriber(spaceID, subscriberId);
+    await SpaceService.validateSubscriber(space, subscriberId);
   }
 
   async function unvalidateSubscriber(subscriberId) {
-    await SpaceService.unvalidateSubscriber(spaceID, subscriberId);
+    await SpaceService.unvalidateSubscriber(space, subscriberId);
   }
 
   return (
