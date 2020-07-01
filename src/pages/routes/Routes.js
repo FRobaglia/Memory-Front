@@ -2,15 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import RestrictedRoute from './RestrictedRoute';
 import HomePage from '../HomePage';
-import LoginPage from '../LoginPage';
+import LoginPage from '../authPages/LoginPage';
 import UserAccountPage from '../UserAccountPage';
-import RegisterPage from '../RegisterPage';
+import RegisterPage from '../authPages/RegisterPage';
 // import SpacesListPage from '../SpacesListPage';
-import SpaceMemoryPage from '../SpaceMemoryPage';
+import SpaceMemoryPage from '../spacePages/SpaceMemoryPage';
 import NotFoundPage from '../NotFoundPage';
 import BackOfficePage from '../BackOfficePage';
 import SpaceContext from '../../context/SpaceContext';
-import SpaceSettingsPage from '../SpaceSettingsPage';
+import SpaceSettingsPage from '../spacePages/SpaceSettingsPage';
 
 function Routes() {
   const [value, setValue] = useState({});
@@ -31,7 +31,7 @@ function Routes() {
         />
         <RestrictedRoute path="/admin" exact component={BackOfficePage} />
         <RestrictedRoute
-          path="/space/:slug/settings"
+          path="/space/:slug/settings/:slug"
           exact
           component={SpaceSettingsPage}
         />
