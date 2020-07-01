@@ -4,6 +4,7 @@ import SpacesContainer from '../components/space/SpacesContainer';
 import TabNav from '../components/TabNav/TabNav';
 import TabNavButton from '../components/TabNav/TabNavButton';
 import UserInvitationContainer from '../components/space/UserInvitationsContainer';
+import RequestAccessContainer from '../components/space/RequestAccessContainer';
 
 function UserAccountPage() {
   const { user } = useContext(UserContext);
@@ -28,7 +29,7 @@ function UserAccountPage() {
       />
       {spacesTab && <SpacesContainer />}
       {invitationsTab && <UserInvitationContainer />}
-      {accessTab && <h1>Demandes d'access</h1>}
+      {accessTab && <RequestAccessContainer />}
     </div>
   );
 }
