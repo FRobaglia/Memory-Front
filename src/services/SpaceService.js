@@ -12,7 +12,7 @@ class SpaceService {
         } else if (parameter === 'invitations') {
           response = response.data.invitations;
         } else if (parameter === 'requestAccess') {
-          const spacesRequestAccess = response.data;
+          const { spacesRequestAccess } = response.data;
           const spacesRequestSort = [];
           spacesRequestAccess.forEach((request) => {
             if (!spacesRequestSort.find((x) => x.id === request.space.id)) {
@@ -30,9 +30,7 @@ class SpaceService {
 
             spacesRequestSort[index].users.push(request.user);
           });
-
-          response = response.data.spaces;
-          console.log(response);
+          response = spacesRequestSort;
         }
         return response;
       }
