@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
-import SpaceSettingsContainer from '../../components/settings/SpaceSettings/SpaceSettingsContainer';
-import NavSettings from '../../components/nav/NavSettings';
-import SpaceService from '../../services/SpaceService';
+// import moment from 'moment';
+// import { useLocation, Redirect } from 'react-router-dom';
+// import SpaceService from '../../services/SpaceService';
+import StorageService from '../../services/StorageService';
+// import spaceID from '../../utils/getSpaceID';
+import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
+import SpaceSettingsInvitations from '../../components/settings/spaceSettings/SpaceSettingsInvitations';
+import SpaceSettingsReqAccess from '../../components/settings/spaceSettings/SpaceSettingsReqAccess';
 
 function SpaceSettingsPage() {
-  const spaceLocation = useLocation();
-  const [spaceData, setSpaceData] = useState({});
-  const [deleteSuccess, setDeleteSuccess] = useState();
-
-  async function deleteSpace(id) {
-    setDeleteSuccess(await SpaceService.deleteSpace(id));
-  }
+  const [space, setSpace] = useState({});
 
   useEffect(() => {
-    SpaceService.focusSpace(spaceLocation.state.id).then((response) =>
-      setSpaceData(response)
-    );
+    const result = StorageService.getObjectStorage('spaceInfos');
+    setSpace(result);
   }, []);
-
-  if (deleteSuccess) return <Redirect to="/" />;
 
   return (
     <div>
-      <NavSettings space={spaceData} />
-      {console.log(spaceLocation.state.id)}
-      {console.log(spaceData)}
-      <h1>Générales</h1>
-      <button type="button" onClick={() => deleteSpace(spaceLocation.state.id)}>
-        Supprimer l'espace
-      </button>
-      <SpaceSettingsContainer space={spaceData} />
+      {space && (
+        <>
+          {console.log('plug', space.id)}
+          <SpaceSettingsGeneral space={space} />
+          <SpaceSettingsInvitations space={space} />
+          <SpaceSettingsReqAccess space={space} />
+        </>
+      )}
     </div>
   );
 }

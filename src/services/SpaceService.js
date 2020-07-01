@@ -143,7 +143,7 @@ class SpaceService {
       const response = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}api/space/${id}`
       );
-      if (response && response.data) {
+      if (response) {
         console.log('RUZE', response.data);
         return response.data;
       }
@@ -152,15 +152,15 @@ class SpaceService {
     }
   }
 
-  static spaceInfosFromStorage(data, infos) {
-    let spaceInfos = {};
-    Object.keys(data).map((key) => {
-      if (key === infos) {
-        spaceInfos = data[key];
-      }
-    });
-    return spaceInfos;
-  }
+  // static spaceInfosFromStorage(data, infos) {
+  //   let spaceInfos = {};
+  //   Object.keys(data).map((key) => {
+  //     if (key === infos) {
+  //       spaceInfos = data[key];
+  //     }
+  //   });
+  //   return spaceInfos;
+  // }
 
   static errorMessageSpace(status) {
     let message = '';

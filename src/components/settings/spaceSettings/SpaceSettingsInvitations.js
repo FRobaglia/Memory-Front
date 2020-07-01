@@ -1,6 +1,6 @@
 import React from 'react';
-import { useForm, toFormData } from '../../utils/forms';
-import SpaceService from '../../services/SpaceService';
+import { useForm, toFormData } from '../../../utils/forms';
+import SpaceService from '../../../services/SpaceService';
 
 function SpaceSettingsInvitations({ space }) {
   const [values, handleChange] = useForm();

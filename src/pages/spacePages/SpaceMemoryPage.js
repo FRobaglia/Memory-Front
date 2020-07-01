@@ -2,18 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
+// import SpaceContext from '../../context/SpaceContext';
 import { useForm, toFormData } from '../../utils/forms';
 import PostService from '../../services/PostService';
 import PostCard from '../../components/space/posts/postCard/PostCard';
 import UploadInput from '../../components/UploadInput';
+import StorageService from '../../services/StorageService';
 
 function SpaceMemoryPage() {
   // const [spaceID, setSpaceID] = useState();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
-  // useLocation récupère la data passée dans le Link
   const { user } = useContext(UserContext);
+  // const { value, setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
     title: false,
     image: false,
@@ -22,6 +24,7 @@ function SpaceMemoryPage() {
   });
   const [image, setImage] = useState([]);
   const [postValues, handlePostChange] = useForm();
+
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
   );
@@ -32,7 +35,6 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
-    console.log(resultat);
     if (resultat.status) {
       console.log(SpaceService.errorMessageSpace(resultat.status));
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
@@ -86,9 +88,10 @@ function SpaceMemoryPage() {
       {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/general`,
             state: { id: `${spaceId}` },
           }}
+          onClick={StorageService.setObjectStorage('spaceInfos', space)}
         >
           <button type="button">Settings</button>
         </Link>
