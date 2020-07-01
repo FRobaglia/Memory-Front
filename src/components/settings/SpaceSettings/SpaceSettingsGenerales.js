@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import SpaceService from '../../../services/SpaceService';
+import SpaceContext from '../../../context/SpaceContext';
 
-function SpaceSettingsGenerales({ space }) {
+function SpaceSettingsGenerales() {
   // const spaceLocation = useLocation();
-  console.log('fromGeneral', space);
+  const { value } = useContext(SpaceContext);
+
+  // console.log('fromGeneral', space);
   const [deleteSuccess, setDeleteSuccess] = useState();
 
   async function deleteSpace(id) {
@@ -15,15 +18,15 @@ function SpaceSettingsGenerales({ space }) {
   return (
     <div>
       <h1>
-        tok {space.firstName} {space.lastName}
+        tok {value.firstName} {value.lastName}
       </h1>
       <p>
-        {moment(space.dateBirth).format('D MMMM YYYY')} -
-        {moment(space.dateDeath).format('D MMMM YYYY')}
+        {moment(value.dateBirth).format('D MMMM YYYY')} -
+        {moment(value.dateDeath).format('D MMMM YYYY')}
       </p>
 
       <div>
-        <button type="button" onClick={() => deleteSpace(space.id)}>
+        <button type="button" onClick={() => deleteSpace(value.id)}>
           Supprimer l'espace
         </button>
       </div>

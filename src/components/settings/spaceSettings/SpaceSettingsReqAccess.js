@@ -8,7 +8,6 @@ function SpaceSettingsReqAccess() {
   );
 
   useEffect(() => {
-    console.log('pepe');
     getWaitingSubscribersList();
   }, []);
 

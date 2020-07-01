@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 // import moment from 'moment';
 // import { useLocation, Redirect } from 'react-router-dom';
-// import SpaceService from '../../services/SpaceService';
-import StorageService from '../../services/StorageService';
-// import spaceID from '../../utils/getSpaceID';
+import SpaceContext from '../../context/SpaceContext';
+import SpaceService from '../../services/SpaceService';
+// import StorageService from '../../services/StorageService';
+import spaceId from '../../utils/getSpaceID';
 import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
 import SpaceSettingsInvitations from '../../components/settings/spaceSettings/SpaceSettingsInvitations';
 import SpaceSettingsReqAccess from '../../components/settings/spaceSettings/SpaceSettingsReqAccess';
 
 function SpaceSettingsPage() {
-  const [space, setSpace] = useState({});
+  const { value, setValue } = useContext(SpaceContext);
 
   useEffect(() => {
-    const result = StorageService.getObjectStorage('spaceInfos');
-    setSpace(result);
+    getFocusedSpace();
   }, []);
+
+  async function getFocusedSpace() {
+    const result = await SpaceService.focusSpace(spaceId);
+    setValue(result.space);
+  }
 
   return (
     <div>
-      {space && (
+      {value && (
         <>
-          {console.log('plug', space.id)}
-          <SpaceSettingsGeneral space={space} />
-          <SpaceSettingsInvitations space={space} />
-          <SpaceSettingsReqAccess space={space} />
+          <SpaceSettingsGeneral />
+          <SpaceSettingsInvitations />
+          <SpaceSettingsReqAccess />
         </>
       )}
     </div>

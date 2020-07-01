@@ -1,15 +1,16 @@
 import React from 'react';
 import { useForm, toFormData } from '../../../utils/forms';
+import spaceId from '../../../utils/getSpaceID';
 import SpaceService from '../../../services/SpaceService';
 
-function SpaceSettingsInvitations({ space }) {
+function SpaceSettingsInvitations() {
   const [values, handleChange] = useForm();
 
   async function sendInvitation(e) {
     e.preventDefault();
     console.log(values);
     const data = toFormData(values);
-    await SpaceService.createInvitation(space.id, data);
+    await SpaceService.createInvitation(spaceId, data);
   }
 
   return (
