@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
-import SpaceService from '../services/SpaceService';
-import SpaceSettingsContainer from '../components/settings/SpaceSettings/SpaceSettingsContainer';
-import NavSettings from '../components/nav/NavSettings';
+import SpaceSettingsContainer from '../../components/settings/SpaceSettings/SpaceSettingsContainer';
+import NavSettings from '../../components/nav/NavSettings';
+import SpaceService from '../../services/SpaceService';
 
 function SpaceSettingsPage() {
   const spaceLocation = useLocation();

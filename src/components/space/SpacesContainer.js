@@ -31,7 +31,6 @@ function SpacesContainer() {
       );
     }
   }
-
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
