@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
-// import SpaceContext from '../../context/SpaceContext';
+import SpaceContext from '../../context/SpaceContext';
 import { useForm, toFormData } from '../../utils/forms';
 import PostService from '../../services/PostService';
 import PostCard from '../../components/space/posts/postCard/PostCard';
@@ -15,7 +15,7 @@ function SpaceMemoryPage() {
   const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
   const { user } = useContext(UserContext);
-  // const { value, setValue } = useContext(SpaceContext);
+  const { setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
     title: false,
     image: false,
@@ -41,6 +41,7 @@ function SpaceMemoryPage() {
     } else {
       setSpaceData(resultat);
       setSpace(resultat.space);
+      setValue(resultat.space);
     }
   }
 

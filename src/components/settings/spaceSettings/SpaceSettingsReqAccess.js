@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import SpaceService from '../../../services/SpaceService';
-import spaceId from '../../../utils/getSpaceID';
 
 function SpaceSettingsReqAccess() {
   const [waitingSubscribers, setWaitingSubscribers] = useState(
     "Chargement des utilisateurs ayant fait une demande d'accès..."
   );
+  const spaceId = window.location.href
+    .split('/')[4]
+    .substring(window.location.href.split('/')[4].lastIndexOf('-') + 1);
 
   useEffect(() => {
     getWaitingSubscribersList();
