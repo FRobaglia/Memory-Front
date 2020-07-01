@@ -36,7 +36,7 @@ export const useForm = () => {
     }));
   };
 
-  return [state, setState, handleChange, delteFiles];
+  return [state, handleChange, delteFiles];
 };
 
 export const toFormData = (values) => {

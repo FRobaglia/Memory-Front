@@ -13,7 +13,7 @@ function RequestAccessContainer() {
   }
   return (
     <div>
-      <h1>Invitations</h1>
+      <h1>Demande D'access</h1>
       {requestAccess &&
         requestAccess.map((space) => (
           <SpaceCard key={space.space.id} space={space.space} />

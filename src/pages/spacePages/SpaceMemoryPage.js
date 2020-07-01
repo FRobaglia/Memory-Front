@@ -22,7 +22,7 @@ function SpaceMemoryPage() {
     video: false,
     link: false,
   });
-  const [postValues, setPostValues, handlePostChange, deleteFile] = useForm();
+  const [postValues, handlePostChange, deleteFile] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
   );
@@ -45,7 +45,7 @@ function SpaceMemoryPage() {
 
   async function createPost(event) {
     event.preventDefault();
-    setPostValues({ imagesFiles: [] });
+    // setPostValues({ imagesFiles: [] });
     const data = toFormData(postValues);
     await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
