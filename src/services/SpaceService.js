@@ -84,6 +84,20 @@ class SpaceService {
     }
   }
 
+  static async createInvitation(spaceId, data) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/invitation`,
+        data
+      );
+      if (response) {
+        console.log(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   static async validateSpace(id) {
     try {
       const response = await axios.put(
@@ -129,7 +143,7 @@ class SpaceService {
       const response = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}api/space/${id}`
       );
-      if (response && response.data) {
+      if (response) {
         console.log('RUZE', response.data);
         return response.data;
       }
