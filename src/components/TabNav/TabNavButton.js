@@ -18,10 +18,6 @@ function TabNavButton({
   const [button, setButton] = useState({
     tabIsChecked: '',
     tabLabel: '',
-    // firstTab,
-    // secondTab,
-    // thirdTab,
-    // fourthTab,
   });
   const buttonArray = [];
 
@@ -41,7 +37,7 @@ function TabNavButton({
     }
   }
   function createButton() {
-    for (let i = 1; i < tabNumber; i += 1) {
+    for (let i = 0; i < tabNumber; i += 1) {
       // switch (i) {
       //   case i === 1:
       //     setButton({
@@ -73,7 +69,7 @@ function TabNavButton({
       //       tabLabel: firstTabLabel,
       //     });
       // }
-      buttonArray.push({ ...button, button });
+      buttonArray.push({ ...button });
     }
   }
 
@@ -88,7 +84,7 @@ function TabNavButton({
               type="button"
               id={buttonInfos.tabLabel}
               checked={buttonInfos.tabIsChecked}
-              onClick={tabExist}
+              onChange={tabExist}
             />
             <label htmlFor={buttonInfos.tabLabel}>{buttonInfos.tabLabel}</label>
           </div>

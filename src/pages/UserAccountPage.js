@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../context/UserContext';
 import SpacesContainer from '../components/space/SpacesContainer';
+import TabNav from '../components/TabNav/TabNav';
 import TabNavButton from '../components/TabNav/TabNavButton';
 import UserInvitationContainer from '../components/space/UserInvitationsContainer';
 
@@ -16,7 +17,7 @@ function UserAccountPage() {
         <h2>{user.firstName}</h2>
         <h2>{user.roles}</h2>
       </div>
-      <TabNavButton
+      <TabNav
         firstTabLabel="Espaces"
         setFirstTab={setSpacesTab}
         secondTabLabel="invitations"

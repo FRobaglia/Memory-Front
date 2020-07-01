@@ -11,6 +11,28 @@ class SpaceService {
           response = response.data.spaces;
         } else if (parameter === 'invitations') {
           response = response.data.invitations;
+        } else if (parameter === 'requestAccess') {
+          const spacesRequestAccess = response.data;
+          const spacesRequestSort = [];
+          spacesRequestAccess.forEach((request) => {
+            if (!spacesRequestSort.find((x) => x.id === request.space.id)) {
+              request.space.users = [];
+              spacesRequestSort.push(request.space);
+            }
+            const index = spacesRequestSort.findIndex(
+              (x) => x.id === request.space.id
+            );
+
+            request.user.relation = {
+              text: request.relationDefunct,
+              dateCreation: request.dateCreation,
+            };
+
+            spacesRequestSort[index].users.push(request.user);
+          });
+
+          response = response.data.spaces;
+          console.log(response);
         }
         return response;
       }
@@ -135,7 +157,6 @@ class SpaceService {
         `${process.env.REACT_APP_API_BASE_URL}api/space/${id}`
       );
       if (response && response.data) {
-        console.log('RUZE', response.data);
         return response.data;
       }
     } catch (err) {

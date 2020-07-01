@@ -9,7 +9,7 @@ function UserInvitationContainer() {
     getInvitations();
   }, []);
   async function getInvitations() {
-    setUserInvitations(await SpaceService.getUserSpaces('invitations'));
+    setUserInvitations(await SpaceService.getUserSpaces('requestAccess'));
   }
   return (
     <div>

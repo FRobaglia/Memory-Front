@@ -20,8 +20,7 @@ function SpaceMemoryPage() {
     video: false,
     link: false,
   });
-  const [image, setImage] = useState([]);
-  const [postValues, handlePostChange] = useForm();
+  const [postValues, setPostValues, handlePostChange, deleteFile] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
   );
@@ -44,6 +43,7 @@ function SpaceMemoryPage() {
 
   async function createPost(event) {
     event.preventDefault();
+    setPostValues({ imagesFiles: [] });
     const data = toFormData(postValues);
     await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
@@ -54,21 +54,6 @@ function SpaceMemoryPage() {
     getSpaceMemoryData();
   }
 
-  function imagePreview(e) {
-    // const array = [];
-    if (e.target.files.length) {
-      for (let i = 0; i < e.target.files.length; i += 1) {
-        image.push(URL.createObjectURL(e.target.files[i]));
-        setImage(image);
-      }
-    }
-  }
-
-  function deleteImagePreview(index) {
-    image.splice(index, 1);
-    setImage([...image]);
-  }
-  console.log(image);
   if (spaceErrorMessage) {
     return (
       <div>
@@ -119,11 +104,10 @@ function SpaceMemoryPage() {
           />
         </label>
         <div>
-          {image.map((imageUrl, e, index) => (
-            <div>
+          {postValues.imagesFiles.map((image, index) => (
+            <div key={image.name}>
               <img
-                src={imageUrl}
-                key={imageUrl}
+                src={URL.createObjectURL(image)}
                 alt="postsimag"
                 width="100"
                 height="100"
@@ -131,8 +115,7 @@ function SpaceMemoryPage() {
               <button
                 type="button"
                 onClick={() => {
-                  handlePostChange(e);
-                  deleteImagePreview(index);
+                  deleteFile(index);
                 }}
               >
                 supprimer photo
@@ -158,7 +141,6 @@ function SpaceMemoryPage() {
             labelText="Photo souvenir"
             handleChange={(e) => {
               handlePostChange(e);
-              imagePreview(e);
             }}
             isMultiple
           />

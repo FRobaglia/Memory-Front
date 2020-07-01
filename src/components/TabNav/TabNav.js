@@ -1,19 +1,19 @@
 import React from 'react';
 
 function TabNav({
-  firstTabName,
+  firstTabLabel,
   setFirstTab,
-  secondTabName,
+  secondTabLabel,
   setSecondTab,
-  thirdTabName,
+  thirdTabLabel,
   setThirdTab,
-  fourthTabName,
+  fourthTabLabel,
   setFourthTab,
 }) {
   return (
     <div>
       <div>
-        {fourthTabName ? (
+        {fourthTabLabel ? (
           <button
             type="button"
             onClick={() => {
@@ -23,7 +23,7 @@ function TabNav({
               setFourthTab(false);
             }}
           >
-            {firstTabName}
+            {firstTabLabel}
           </button>
         ) : (
           <button
@@ -34,7 +34,7 @@ function TabNav({
               setThirdTab(false);
             }}
           >
-            {firstTabName}
+            {firstTabLabel}
           </button>
         )}
         <button
@@ -43,10 +43,9 @@ function TabNav({
             setFirstTab(false);
             setSecondTab(true);
             setThirdTab(false);
-            setFourthTab(false);
           }}
         >
-          {secondTabName}
+          {secondTabLabel}
         </button>
         <button
           type="button"
@@ -54,12 +53,11 @@ function TabNav({
             setFirstTab(false);
             setSecondTab(false);
             setThirdTab(true);
-            setFourthTab(false);
           }}
         >
-          {thirdTabName}
+          {thirdTabLabel}
         </button>
-        {fourthTabName && (
+        {fourthTabLabel && (
           <button
             type="button"
             onClick={() => {
@@ -69,7 +67,7 @@ function TabNav({
               setFourthTab(true);
             }}
           >
-            {fourthTabName}
+            {fourthTabLabel}
           </button>
         )}
       </div>
