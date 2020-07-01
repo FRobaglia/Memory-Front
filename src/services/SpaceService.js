@@ -1,13 +1,38 @@
 import axios from 'axios';
 
 class SpaceService {
-  static async getUserSpaces() {
+  static async getUserSpaces(parameter) {
     try {
-      const response = await axios.get(
+      let response = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}api/user/spaces`
       );
       if (response && response.data) {
-        return response.data.spaces;
+        if (parameter === 'spaces') {
+          response = response.data.spaces;
+        } else if (parameter === 'invitations') {
+          response = response.data.invitations;
+        } else if (parameter === 'requestAccess') {
+          const { spacesRequestAccess } = response.data;
+          const spacesRequestSort = [];
+          spacesRequestAccess.forEach((request) => {
+            if (!spacesRequestSort.find((x) => x.id === request.space.id)) {
+              request.space.users = [];
+              spacesRequestSort.push(request.space);
+            }
+            const index = spacesRequestSort.findIndex(
+              (x) => x.id === request.space.id
+            );
+
+            request.user.relation = {
+              text: request.relationDefunct,
+              dateCreation: request.dateCreation,
+            };
+
+            spacesRequestSort[index].users.push(request.user);
+          });
+          response = spacesRequestSort;
+        }
+        return response;
       }
     } catch (err) {
       console.error(err);
@@ -143,8 +168,7 @@ class SpaceService {
       const response = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}api/space/${id}`
       );
-      if (response) {
-        console.log('RUZE', response.data);
+      if (response && response.data) {
         return response.data;
       }
     } catch (err) {
