@@ -1,13 +1,18 @@
 import axios from 'axios';
 
 class SpaceService {
-  static async getUserSpaces() {
+  static async getUserSpaces(parameter) {
     try {
-      const response = await axios.get(
+      let response = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}api/user/spaces`
       );
       if (response && response.data) {
-        return response.data.spaces;
+        if (parameter === 'spaces') {
+          response = response.data.spaces;
+        } else if (parameter === 'invitations') {
+          response = response.data.invitations;
+        }
+        return response;
       }
     } catch (err) {
       console.error(err);

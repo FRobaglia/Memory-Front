@@ -83,7 +83,7 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
       </p>
-      {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
+      {JSON.stringify(space.createdBy) === JSON.stringify(user) && (
         <Link
           to={{
             pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings`,
@@ -92,8 +92,6 @@ function SpaceMemoryPage() {
         >
           <button type="button">Settings</button>
         </Link>
-      ) : (
-        ''
       )}
       <form action="/" method="post" onSubmit={createPost}>
         {showPostFields.title && (
