@@ -1,10 +1,13 @@
 import React from 'react';
 import { useForm, toFormData } from '../../../utils/forms';
-import spaceId from '../../../utils/getSpaceID';
 import SpaceService from '../../../services/SpaceService';
 
 function SpaceSettingsInvitations() {
   const [values, handleChange] = useForm();
+
+  const spaceId = window.location.href
+    .split('/')[4]
+    .substring(window.location.href.split('/')[4].lastIndexOf('-') + 1);
 
   async function sendInvitation(e) {
     e.preventDefault();
