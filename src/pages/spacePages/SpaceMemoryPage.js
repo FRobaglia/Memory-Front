@@ -9,10 +9,12 @@ import PostCard from '../../components/space/posts/postCard/PostCard';
 import UploadInput from '../../components/UploadInput';
 
 function SpaceMemoryPage() {
+  const [requestAccessValues, handlerequestAccessChange] = useForm();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
   const [isUserNotSubscribed, setIsUserNotSubscribed] = useState();
+  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState();
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
@@ -57,6 +59,14 @@ function SpaceMemoryPage() {
     getSpaceMemoryData();
   }
 
+  async function sendRequestAccess(event) {
+    event.preventDefault();
+    const result = await SpaceService.subcribeToSpace(spaceId);
+    if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
+      setUserAlreadyRequestAccess(true);
+    }
+  }
+
   if (spaceErrorMessage || isUserNotSubscribed) {
     return (
       <div>
@@ -72,7 +82,22 @@ function SpaceMemoryPage() {
               Tu n'es pas membre de cet espace. Pour cela, une demande d'accès
               est nécessaire
             </p>
-            <button type="submit">Demander l'accès à cet espace</button>
+            <form method="post" onSubmit={sendRequestAccess}>
+              <label htmlFor="requestAccess">
+                Relation avec le/la défunt
+                <input
+                  type="text"
+                  name="relationDefunctText"
+                  id="relationDefunctText"
+                  value={requestAccessValues.relationDefunctText || ''}
+                  onChange={handlerequestAccessChange}
+                />
+              </label>
+              <button type="submit">Demander l'accès à cet espace</button>
+            </form>
+            {isUserAlreadyRequestAccess && (
+              <p>Vous avez déjà fait la demande pour accéder à cet espace</p>
+            )}
           </>
         )}
       </div>

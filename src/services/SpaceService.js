@@ -204,6 +204,23 @@ class SpaceService {
     }
     return message;
   }
+
+  static async subcribeToSpace(id) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/subscribe`
+      );
+      if (response && response.data) {
+        console.log(response.data);
+        return response.data;
+      }
+    } catch (err) {
+      console.error('testSub', err);
+      if (err.response.status === 401) {
+        return 'USER_ALREADY_REQUEST_SUBSCRIPTION';
+      }
+    }
+  }
 }
 
 export default SpaceService;
