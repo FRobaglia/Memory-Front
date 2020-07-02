@@ -17,19 +17,24 @@ function SpaceSettingsGenerales() {
   if (deleteSuccess) return <Redirect to="/" />;
   return (
     <div>
-      <h1>
-        tok {value.firstName} {value.lastName}
-      </h1>
-      <p>
-        {moment(value.dateBirth).format('D MMMM YYYY')} -
-        {moment(value.dateDeath).format('D MMMM YYYY')}
-      </p>
+      {console.log('geez', value.space)}
+      {value.space && (
+        <>
+          <h1>
+            tok {value.space.firstName} {value.space.lastName}
+          </h1>
+          <p>
+            {moment(value.space.dateBirth).format('D MMMM YYYY')} -
+            {moment(value.space.dateDeath).format('D MMMM YYYY')}
+          </p>
 
-      <div>
-        <button type="button" onClick={() => deleteSpace(value.id)}>
-          Supprimer l'espace
-        </button>
-      </div>
+          <div>
+            <button type="button" onClick={() => deleteSpace(value.space.id)}>
+              Supprimer l'espace
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

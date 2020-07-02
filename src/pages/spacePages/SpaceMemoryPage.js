@@ -61,7 +61,8 @@ function SpaceMemoryPage() {
 
   async function sendRequestAccess(event) {
     event.preventDefault();
-    const result = await SpaceService.subcribeToSpace(spaceId);
+    const data = toFormData(requestAccessValues);
+    const result = await SpaceService.subcribeToSpace(spaceId, data);
     if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
       setUserAlreadyRequestAccess(true);
     }
