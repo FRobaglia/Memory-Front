@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-function SpaceCard({ space, backOffice, validateSpace, index }) {
+function SpaceCard({ space, backOffice, validateSpace, index, role }) {
   const [spaceRoute, setSpaceRoute] = useState();
 
   useEffect(() => {
@@ -30,14 +30,22 @@ function SpaceCard({ space, backOffice, validateSpace, index }) {
           {moment(space.dateDeath).format('D MMMM YYYY')}
         </h2>
         <p>{space.description}</p>
-        {backOffice ? (
+        {backOffice && (
           <button type="button" onClick={() => validateSpace(space.id, index)}>
             Valider l'espace
           </button>
-        ) : (
-          ''
         )}
       </Link>
+      {role === 'ACCESS_USER_MANAGER' && (
+        <Link
+          to={{
+            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings`,
+            state: { id: `${space.id}` },
+          }}
+        >
+          <button type="button">Settings</button>
+        </Link>
+      )}
     </div>
   );
 }

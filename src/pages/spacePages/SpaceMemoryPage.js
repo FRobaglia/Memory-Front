@@ -2,26 +2,28 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
+import SpaceContext from '../../context/SpaceContext';
 import { useForm, toFormData } from '../../utils/forms';
 import PostService from '../../services/PostService';
 import PostCard from '../../components/space/posts/postCard/PostCard';
 import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
 
 function SpaceMemoryPage() {
-  // const [spaceID, setSpaceID] = useState();
+  const [requestAccessValues, handlerequestAccessChange] = useForm();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
-  // useLocation récupère la data passée dans le Link
+  const [isUserNotSubscribed, setIsUserNotSubscribed] = useState();
+  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState();
   const { user } = useContext(UserContext);
+  const { setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
     title: false,
     image: false,
     video: false,
     link: false,
   });
-  const [image, setImage] = useState([]);
-  const [postValues, handlePostChange] = useForm();
+  const [postValues, handlePostChange, deleteFile] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
   );
@@ -32,18 +34,21 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
-    console.log(resultat);
-    if (resultat.status) {
-      console.log(SpaceService.errorMessageSpace(resultat.status));
+    if (resultat === 'USER_NOT_SUBSCRIBED') {
+      // Gestion error 401 lorsque l'user n'est pas inscrit à cet espace
+      setIsUserNotSubscribed(true);
+    } else if (resultat.status) {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
     } else {
       setSpaceData(resultat);
       setSpace(resultat.space);
+      setValue(resultat.space);
     }
   }
 
   async function createPost(event) {
     event.preventDefault();
+    // setPostValues({ imagesFiles: [] });
     const data = toFormData(postValues);
     await PostService.createPost(spaceId, data);
     getSpaceMemoryData();
@@ -54,26 +59,47 @@ function SpaceMemoryPage() {
     getSpaceMemoryData();
   }
 
-  function imagePreview(e) {
-    // const array = [];
-    if (e.target.files.length) {
-      for (let i = 0; i < e.target.files.length; i += 1) {
-        image.push(URL.createObjectURL(e.target.files[i]));
-        setImage(image);
-      }
+  async function sendRequestAccess(event) {
+    event.preventDefault();
+    const result = await SpaceService.subcribeToSpace(spaceId);
+    if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
+      setUserAlreadyRequestAccess(true);
     }
   }
 
-  function deleteImagePreview(index) {
-    image.splice(index, 1);
-    setImage([...image]);
-  }
-  console.log(image);
-  if (spaceErrorMessage) {
+  if (spaceErrorMessage || isUserNotSubscribed) {
     return (
       <div>
-        <p>Pas cool</p>
-        <p>{spaceErrorMessage}</p>
+        {spaceErrorMessage && (
+          <>
+            <p>Pas cool</p>
+            <p>{spaceErrorMessage}</p>
+          </>
+        )}
+        {isUserNotSubscribed && (
+          <>
+            <p>
+              Tu n'es pas membre de cet espace. Pour cela, une demande d'accès
+              est nécessaire
+            </p>
+            <form method="post" onSubmit={sendRequestAccess}>
+              <label htmlFor="requestAccess">
+                Relation avec le/la défunt
+                <input
+                  type="text"
+                  name="relationDefunctText"
+                  id="relationDefunctText"
+                  value={requestAccessValues.relationDefunctText || ''}
+                  onChange={handlerequestAccessChange}
+                />
+              </label>
+              <button type="submit">Demander l'accès à cet espace</button>
+            </form>
+            {isUserAlreadyRequestAccess && (
+              <p>Vous avez déjà fait la demande pour accéder à cet espace</p>
+            )}
+          </>
+        )}
       </div>
     );
   }
@@ -83,17 +109,15 @@ function SpaceMemoryPage() {
       <p>
         Bienvenu dans l'espace de {space.firstName} {space.lastName}
       </p>
-      {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
+      {JSON.stringify(space.createdBy) === JSON.stringify(user) && (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${spaceId}/settings`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/general`,
             state: { id: `${spaceId}` },
           }}
         >
           <button type="button">Settings</button>
         </Link>
-      ) : (
-        ''
       )}
       <form action="/" method="post" onSubmit={createPost}>
         {showPostFields.title && (
@@ -121,11 +145,10 @@ function SpaceMemoryPage() {
           />
         </label>
         <div>
-          {image.map((imageUrl, e, index) => (
-            <div>
+          {postValues.imagesFiles.map((image, index) => (
+            <div key={image.name}>
               <img
-                src={imageUrl}
-                key={imageUrl}
+                src={URL.createObjectURL(image)}
                 alt="postsimag"
                 width="100"
                 height="100"
@@ -133,8 +156,7 @@ function SpaceMemoryPage() {
               <button
                 type="button"
                 onClick={() => {
-                  handlePostChange(e);
-                  deleteImagePreview(index);
+                  deleteFile(index);
                 }}
               >
                 supprimer photo
@@ -160,7 +182,6 @@ function SpaceMemoryPage() {
             labelText="Photo souvenir"
             handleChange={(e) => {
               handlePostChange(e);
-              imagePreview(e);
             }}
             isMultiple
           />

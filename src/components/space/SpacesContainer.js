@@ -15,7 +15,7 @@ function SpacesContainer() {
   }, []);
 
   async function getSpaces() {
-    setUserSpaces(await SpaceService.getUserSpaces());
+    setUserSpaces(await SpaceService.getUserSpaces('spaces'));
   }
 
   async function createSpace(event) {
@@ -31,6 +31,7 @@ function SpacesContainer() {
       );
     }
   }
+  // console.log(userSpaces);
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
@@ -113,7 +114,11 @@ function SpacesContainer() {
       </form>
       {userSpaces &&
         userSpaces.map((space) => (
-          <SpaceCard key={space.space.id} space={space.space} />
+          <SpaceCard
+            key={space.space.id}
+            space={space.space}
+            role={space.role.role}
+          />
         ))}
     </div>
   );
