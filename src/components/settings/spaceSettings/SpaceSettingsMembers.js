@@ -9,8 +9,8 @@ function SpaceSettingsMembers() {
       <h1>Hello les membres</h1>
       {value.subscribers && value.subscribers.map((el) => console.log(el.user))}
       {value.subscribers &&
-        value.subscribers.map((subscriber, index) => (
-          <div key={index}>
+        value.subscribers.map((subscriber) => (
+          <div key={subscriber.user.id}>
             <h3>
               <img
                 src={subscriber.user.image.url}
