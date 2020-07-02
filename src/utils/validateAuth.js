@@ -2,7 +2,7 @@ const validateAuth = (values) => {
   // Email must have "@"" and "."
   const emailTest = /\S+@\S+\.\S+/;
   // Password security test
-  const passwordTest = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const passwordTest = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z-!?§@à#$%^&=+_:;,()"èé*]{6,}$/;
   const errors = {};
   // Email Errors
   if (!values.email) {
