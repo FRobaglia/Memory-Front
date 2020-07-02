@@ -2,16 +2,20 @@ import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../context/UserContext';
 import SpaceService from '../services/SpaceService';
 import SpaceCard from '../components/space/spaceCard/SpaceCard';
+import Forbidden from '../components/utilsTemplates/forbidden/Forbidden';
 
 function BackOfficePage() {
   const { user } = useContext(UserContext);
   const [unvalidatedSpaces, setUnvalidatedSpaces] = useState([]);
+  const isAdmin = user.roles.includes('ROLE_BACK_MANAGER');
 
   useEffect(() => {
     async function getSpaces() {
       setUnvalidatedSpaces(await SpaceService.getUnvalidatedSpaces());
     }
-    getSpaces();
+    if (isAdmin) {
+      getSpaces();
+    }
   }, []);
 
   function validateSpace(id, index) {
@@ -19,6 +23,11 @@ function BackOfficePage() {
     unvalidatedSpaces.splice(index, 1);
     setUnvalidatedSpaces([...unvalidatedSpaces]);
   }
+
+  if (!isAdmin)
+    return (
+      <Forbidden message="Vous n'avez PAS LE DROIT d'être ici, partez immédiatement !!!!!!! :(" />
+    );
 
   return (
     <div>
