@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../../../../context/UserContext';
-import UploadInput from '../../../UploadInput';
+import UploadInput from '../../../utilsTemplates/UploadInput/UploadInput';
 import { useForm, toFormData } from '../../../../utils/forms';
 import CommentService from '../../../../services/CommentService';
 import PostService from '../../../../services/PostService';

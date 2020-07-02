@@ -2,9 +2,9 @@ import React, { useEffect, useContext } from 'react';
 // import { useLocation, Redirect } from 'react-router-dom';
 import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
-import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
-import SpaceSettingsInvitations from '../../components/settings/spaceSettings/SpaceSettingsInvitations';
-import SpaceSettingsReqAccess from '../../components/settings/spaceSettings/SpaceSettingsReqAccess';
+import SpaceSettingsGeneral from '../../components/settings/SpaceSettings/SpaceSettingsGenerales';
+import SpaceSettingsInvitations from '../../components/settings/SpaceSettings/SpaceSettingsInvitations';
+import SpaceSettingsReqAccess from '../../components/settings/SpaceSettings/SpaceSettingsReqAccess';
 
 function SpaceSettingsPage() {
   const { value, setValue } = useContext(SpaceContext);

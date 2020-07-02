@@ -3,7 +3,7 @@ import moment from 'moment';
 import SpaceService from '../../services/SpaceService';
 import { useForm, toFormData } from '../../utils/forms';
 import SpaceCard from './spaceCard/SpaceCard';
-import UploadInput from '../UploadInput';
+import UploadInput from '../utilsTemplates/UploadInput/UploadInput';
 
 function SpacesContainer() {
   const [values, handleChange] = useForm();
