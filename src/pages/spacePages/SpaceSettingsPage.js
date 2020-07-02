@@ -4,6 +4,7 @@ import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
 import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
 import SpaceSettingsInvitations from '../../components/settings/spaceSettings/SpaceSettingsInvitations';
+import SpaceSettingsMembers from '../../components/settings/spaceSettings/SpaceSettingsMembers';
 import SpaceSettingsReqAccess from '../../components/settings/spaceSettings/SpaceSettingsReqAccess';
 
 function SpaceSettingsPage() {
@@ -19,7 +20,7 @@ function SpaceSettingsPage() {
 
   async function getFocusedSpace() {
     const result = await SpaceService.focusSpace(spaceId);
-    setValue(result.space);
+    setValue(result);
   }
 
   return (
@@ -28,6 +29,7 @@ function SpaceSettingsPage() {
         <>
           <SpaceSettingsGeneral />
           <SpaceSettingsInvitations />
+          <SpaceSettingsMembers />
           <SpaceSettingsReqAccess />
         </>
       )}
