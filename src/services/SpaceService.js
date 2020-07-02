@@ -195,7 +195,7 @@ class SpaceService {
           "Votre demande d'accès est en cours de traitement par le manager de l'espace";
         break;
       case 'SPACE_INVITATION_WAITING':
-        message = "Vous n'avez pas demander l'accès à cet espace de mémoire";
+        message = "Merci de d'indiquer la relation  avec le/la défunt(e)";
         break;
       default:
         message =
@@ -204,13 +204,14 @@ class SpaceService {
     return message;
   }
 
-  static async subcribeToSpace(id) {
+  static async subcribeToSpace(id, data) {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/subscribe`
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/subscribe`,
+        data
       );
       if (response && response.data) {
-        console.log(response.data);
+        console.log('sub SS', response.data);
         return response.data;
       }
     } catch (err) {

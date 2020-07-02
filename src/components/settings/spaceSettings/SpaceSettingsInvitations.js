@@ -18,6 +18,7 @@ function SpaceSettingsInvitations() {
 
   return (
     <div>
+      <h1>Invitations</h1>
       <form method="post" onSubmit={sendInvitation}>
         <label htmlFor="textInvitation">
           Texte d'invitation
