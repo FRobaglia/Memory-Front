@@ -39,7 +39,7 @@ function SpaceCard({ space, backOffice, validateSpace, index, role }) {
       {role === 'ACCESS_USER_MANAGER' && (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/general`,
             state: { id: `${space.id}` },
           }}
         >

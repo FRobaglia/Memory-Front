@@ -12,9 +12,11 @@ function SpaceMemoryPage() {
   const [requestAccessValues, handlerequestAccessChange] = useForm();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
+  const [showSubscribeButton, setShowSubscribeButton] = useState(false);
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
-  const [isUserNotSubscribed, setIsUserNotSubscribed] = useState();
-  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState();
+  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState(
+    false
+  );
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
@@ -34,15 +36,30 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
-    if (resultat === 'USER_NOT_SUBSCRIBED') {
-      // Gestion error 401 lorsque l'user n'est pas inscrit à cet espace
-      setIsUserNotSubscribed(true);
-    } else if (resultat.status) {
+    console.log('zaz', resultat);
+
+    if (resultat.status === 'SPACE_NOT_VALIDATED') {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
-    } else {
-      setSpaceData(resultat);
-      setSpace(resultat.space);
-      setValue(resultat.space);
+    }
+
+    switch (resultat) {
+      case 'SPACE_NOT_SUBSCRIBED':
+        setShowSubscribeButton(true);
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
+        break;
+      case 'SPACE_SUBSCRIBED_WAITING':
+        setShowSubscribeButton(true);
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
+        break;
+      case 'SPACE_INVITATION_WAITING':
+        setShowSubscribeButton(true);
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
+        break;
+      default:
+        setSpaceData(resultat);
+        setSpace(resultat.space);
+        setValue(resultat.space);
+        break;
     }
   }
 
@@ -63,43 +80,43 @@ function SpaceMemoryPage() {
     event.preventDefault();
     const data = toFormData(requestAccessValues);
     const result = await SpaceService.subcribeToSpace(spaceId, data);
+    console.log('rt', result);
     if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
       setUserAlreadyRequestAccess(true);
     }
   }
 
-  if (spaceErrorMessage || isUserNotSubscribed) {
+  if (spaceErrorMessage && !showSubscribeButton) {
     return (
       <div>
-        {spaceErrorMessage && (
-          <>
-            <p>Pas cool</p>
-            <p>{spaceErrorMessage}</p>
-          </>
-        )}
-        {isUserNotSubscribed && (
-          <>
-            <p>
-              Tu n'es pas membre de cet espace. Pour cela, une demande d'accès
-              est nécessaire
-            </p>
-            <form method="post" onSubmit={sendRequestAccess}>
-              <label htmlFor="requestAccess">
-                Relation avec le/la défunt
-                <input
-                  type="text"
-                  name="relationDefunctText"
-                  id="relationDefunctText"
-                  value={requestAccessValues.relationDefunctText || ''}
-                  onChange={handlerequestAccessChange}
-                />
-              </label>
-              <button type="submit">Demander l'accès à cet espace</button>
-            </form>
-            {isUserAlreadyRequestAccess && (
-              <p>Vous avez déjà fait la demande pour accéder à cet espace</p>
-            )}
-          </>
+        <p>Pas cool</p>
+        <p>{spaceErrorMessage}</p>
+      </div>
+    );
+  }
+  if (spaceErrorMessage && showSubscribeButton) {
+    return (
+      <div>
+        <p>{spaceErrorMessage}</p>
+        <form method="post" onSubmit={sendRequestAccess}>
+          <label htmlFor="requestAccess">
+            Relation avec le/la défunt
+            <input
+              type="text"
+              name="relationDefunctText"
+              id="relationDefunctText"
+              value={requestAccessValues.relationDefunctText || ''}
+              onChange={handlerequestAccessChange}
+            />
+          </label>
+          <button type="submit">Demander l'accès à cet espace</button>
+        </form>
+        {console.log('iss', isUserAlreadyRequestAccess)}
+        {isUserAlreadyRequestAccess && (
+          <p>
+            Vous avez déjà fait la demande pour accéder à cet espace. L'espace
+            sera accessible une fois votre demande acceptée.
+          </p>
         )}
       </div>
     );
