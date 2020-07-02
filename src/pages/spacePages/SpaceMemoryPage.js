@@ -12,11 +12,16 @@ function SpaceMemoryPage() {
   const [requestAccessValues, handlerequestAccessChange] = useForm();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
-  const [showSubscribeButton, setShowSubscribeButton] = useState(false);
+  const [showInvitedUserButton, setInvitedUserButton] = useState();
+  const [showSubscriberButton, setSubscriberButton] = useState();
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
+  const [messageButton, setMessageButton] = useState(
+    "Demander l'accès a cet espace"
+  );
   const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState(
     false
   );
+  const [subscribeMessage, setSubscribeMessage] = useState('');
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
@@ -36,23 +41,23 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
-    console.log('zaz', resultat);
-
+    // to refactor with elsif
     if (resultat.status === 'SPACE_NOT_VALIDATED') {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
     }
-
     switch (resultat) {
       case 'SPACE_NOT_SUBSCRIBED':
-        setShowSubscribeButton(true);
+        setInvitedUserButton(false);
+        setSubscriberButton(true);
         setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
         break;
       case 'SPACE_SUBSCRIBED_WAITING':
-        setShowSubscribeButton(true);
         setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
         break;
       case 'SPACE_INVITATION_WAITING':
-        setShowSubscribeButton(true);
+        setMessageButton("Accéder à l'espace");
+        setInvitedUserButton(true);
+        setSubscriberButton(false);
         setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
         break;
       default:
@@ -83,18 +88,23 @@ function SpaceMemoryPage() {
     console.log('rt', result);
     if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
       setUserAlreadyRequestAccess(true);
+      setSubscribeMessage('');
+    } else {
+      setSubscribeMessage('Votre demande a bien été envoyé');
     }
   }
 
-  if (spaceErrorMessage && !showSubscribeButton) {
+  // Unenable space memory
+  if (spaceErrorMessage && !showInvitedUserButton && !showSubscriberButton) {
     return (
       <div>
         <p>Pas cool</p>
         <p>{spaceErrorMessage}</p>
+        <Link to="/account">Mon compte personnel</Link>
       </div>
     );
   }
-  if (spaceErrorMessage && showSubscribeButton) {
+  if ((spaceErrorMessage && showInvitedUserButton) || showSubscriberButton) {
     return (
       <div>
         <p>{spaceErrorMessage}</p>
@@ -109,9 +119,26 @@ function SpaceMemoryPage() {
               onChange={handlerequestAccessChange}
             />
           </label>
-          <button type="submit">Demander l'accès à cet espace</button>
+          {showSubscriberButton && ( // SUBSCRIBER BUTTON
+            <>
+              <button type="submit">{messageButton}</button>
+              {subscribeMessage && <p>{subscribeMessage}</p>}
+              <Link to="/account">Mon compte personnel</Link>
+            </>
+          )}
+          {showInvitedUserButton && ( // INVITED BUTTON
+            <button
+              type="submit"
+              onClick={() =>
+                setTimeout(() => {
+                  window.location.reload(false);
+                }, 2000)
+              }
+            >
+              {messageButton}
+            </button>
+          )}
         </form>
-        {console.log('iss', isUserAlreadyRequestAccess)}
         {isUserAlreadyRequestAccess && (
           <p>
             Vous avez déjà fait la demande pour accéder à cet espace. L'espace
@@ -121,7 +148,7 @@ function SpaceMemoryPage() {
       </div>
     );
   }
-
+  // Space memory fetch
   return (
     <div>
       <p>
