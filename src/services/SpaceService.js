@@ -172,18 +172,24 @@ class SpaceService {
         return response.data;
       }
     } catch (err) {
-      console.error('ERR', err);
+      console.error('ERROR from focusSpaced', err);
+      if (err.response.status === 401) {
+        return 'USER_NOT_SUBSCRIBED';
+      }
     }
   }
 
   static errorMessageSpace(status) {
     let message = '';
+    // const state = {};
     switch (status) {
       case 'SPACE_NOT_VALIDATED':
         message = "Votre espace n'a pas encore été validé par MEMORY";
         break;
       case 'SPACE_NOT_SUBSCRIBED':
-        message = "Vous n'êtes pas membre de cet espace de mémoire";
+        // state.isUserNotSubscribed = true;
+        message =
+          "Vous n'êtes pas membre de cet espace de mémoire. Faîtes une demande d'accès";
         break;
       case 'SPACE_SUBSCRIBED_WAITING':
         message =
@@ -197,6 +203,23 @@ class SpaceService {
           'Vous rencontrer un problème pour accéder à cet espace? Contactez MEMORY';
     }
     return message;
+  }
+
+  static async subcribeToSpace(id) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/subscribe`
+      );
+      if (response && response.data) {
+        console.log(response.data);
+        return response.data;
+      }
+    } catch (err) {
+      console.error('testSub', err);
+      if (err.response.status === 401) {
+        return 'USER_ALREADY_REQUEST_SUBSCRIPTION';
+      }
+    }
   }
 }
 
