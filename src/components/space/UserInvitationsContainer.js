@@ -9,15 +9,17 @@ function UserInvitationContainer() {
     getInvitations();
   }, []);
   async function getInvitations() {
-    setUserInvitations(await SpaceService.getUserSpaces('requestAccess'));
+    const data = await SpaceService.getUserSpaces();
+    setUserInvitations(data.invitations);
   }
   return (
     <div>
       <h1>Invitations</h1>
       {userInvitation &&
-        userInvitation.map((space) => (
-          <SpaceCard key={space.space.id} space={space.space} />
-        ))}
+        userInvitation.map(
+          (space) => <SpaceCard key={space.id} space={space.space} />
+          /* console.log(space) */
+        )}
     </div>
   );
 }

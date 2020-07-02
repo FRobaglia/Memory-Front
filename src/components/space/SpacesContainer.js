@@ -15,7 +15,8 @@ function SpacesContainer() {
   }, []);
 
   async function getSpaces() {
-    setUserSpaces(await SpaceService.getUserSpaces('spaces'));
+    const data = await SpaceService.getUserSpaces();
+    setUserSpaces(data.spaces);
   }
 
   async function createSpace(event) {
@@ -31,7 +32,6 @@ function SpacesContainer() {
       );
     }
   }
-  // console.log(userSpaces);
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>

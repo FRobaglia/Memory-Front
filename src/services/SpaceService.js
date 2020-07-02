@@ -7,11 +7,7 @@ class SpaceService {
         `${process.env.REACT_APP_API_BASE_URL}api/user/spaces`
       );
       if (response && response.data) {
-        if (parameter === 'spaces') {
-          response = response.data.spaces;
-        } else if (parameter === 'invitations') {
-          response = response.data.invitations;
-        } else if (parameter === 'requestAccess') {
+        if (parameter === 'requestAccess') {
           const { spacesRequestAccess } = response.data;
           const spacesRequestSort = [];
           spacesRequestAccess.forEach((request) => {
@@ -31,7 +27,10 @@ class SpaceService {
             spacesRequestSort[index].users.push(request.user);
           });
           response = spacesRequestSort;
+        } else {
+          response = response.data;
         }
+
         return response;
       }
     } catch (err) {
