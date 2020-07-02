@@ -38,7 +38,13 @@ function PostCard({ post, index, deletePost }) {
       <p>{post.text}</p>
       {post.images &&
         post.images.map((image) => (
-          <img src={image.url} alt="post img" width="40px" height="40px" />
+          <img
+            src={image.url}
+            key={image.id}
+            alt="post img"
+            width="40px"
+            height="40px"
+          />
         ))}
       {post.link && <a href={post.link}>Lien</a>}
       <div>
