@@ -6,13 +6,10 @@ function SpaceAddMembers() {
   const spaceUrl = `https://memory-hetic.netlify.app/space/${value.space.firstName}-${value.space.lastName}-${value.space.id}/`;
   const [copySuccess, setCopySuccess] = useState(false);
   const input = useRef();
-  const [buttonValue, setButtonValue] = useState('Copier');
 
   function copyToClipboard() {
-    console.log(input);
     input.current.select();
     document.execCommand('copy');
-    setButtonValue('Copié');
     setCopySuccess(true);
   }
 
@@ -30,7 +27,7 @@ function SpaceAddMembers() {
         data-clipboard={spaceUrl}
       />
       <button type="button" onClick={() => copyToClipboard()}>
-        {buttonValue}
+        Copier
       </button>
       {copySuccess ? <p style={{ color: 'green' }}>Lien copié</p> : null}
     </div>
