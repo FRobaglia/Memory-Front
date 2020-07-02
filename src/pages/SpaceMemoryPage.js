@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import SpaceService from '../../services/SpaceService';
-import UserContext from '../../context/UserContext';
-import { useForm, toFormData } from '../../utils/forms';
-import PostService from '../../services/PostService';
-import PostCard from '../../components/space/posts/postCard/PostCard';
-import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
+import SpaceService from '../services/SpaceService';
+import UserContext from '../context/UserContext';
+import { useForm, toFormData } from '../utils/forms';
+import PostService from '../services/PostService';
+import PostCard from '../components/space/posts/postCard/PostCard';
+import UploadInput from '../components/utilsTemplates/UploadInput/UploadInput';
 
 function SpaceMemoryPage() {
   // const [spaceID, setSpaceID] = useState();

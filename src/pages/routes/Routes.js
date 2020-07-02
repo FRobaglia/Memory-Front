@@ -4,6 +4,7 @@ import RestrictedRoute from './RestrictedRoute';
 import HomePage from '../HomePage';
 import LoginPage from '../authPages/LoginPage';
 import UserAccountPage from '../UserAccountPage';
+import UserModifyPage from '../UserModifyPage';
 import RegisterPage from '../authPages/RegisterPage';
 // import SpacesListPage from '../SpacesListPage';
 import SpaceMemoryPage from '../spacePages/SpaceMemoryPage';
@@ -22,6 +23,11 @@ function Routes() {
       <Route path="/login" exact component={LoginPage} />
       <Route path="/register" exact component={RegisterPage} />
       <RestrictedRoute path="/account" exact component={UserAccountPage} />
+      <RestrictedRoute
+        path="/account/modify"
+        exact
+        component={UserModifyPage}
+      />
       <SpaceContext.Provider value={spaceID}>
         {/* <RestrictedRoute path="/spaces" exact component={SpacesListPage} /> */}
         <RestrictedRoute

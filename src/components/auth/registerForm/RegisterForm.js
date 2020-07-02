@@ -4,7 +4,7 @@ import { useForm, toFormData } from '../../../utils/forms';
 import validateAuth from '../../../utils/validateAuth';
 import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
-import UploadInput from '../../UploadInput';
+import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
 
 function RegisterForm() {
   // Custom hook useForm

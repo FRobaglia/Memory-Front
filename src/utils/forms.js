@@ -43,3 +43,13 @@ export const toFormData = (values) => {
   console.log(...data);
   return data;
 };
+
+export const toURLSearchParams = (values) => {
+  const data = new URLSearchParams();
+  Object.keys(values).forEach((value) => {
+    const keyName = value;
+    const keyValue = values[value];
+    data.append(keyName, keyValue);
+  });
+  return data;
+};
