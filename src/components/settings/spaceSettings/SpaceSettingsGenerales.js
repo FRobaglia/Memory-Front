@@ -9,12 +9,13 @@ function SpaceSettingsGenerales() {
   const { value } = useContext(SpaceContext);
 
   // console.log('fromGeneral', space);
-  const [deleteSuccess, setDeleteSuccess] = useState();
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   async function deleteSpace(id) {
-    setDeleteSuccess(await SpaceService.deleteSpace(id));
+    await SpaceService.deleteSpace(id);
+    setDeleteSuccess(true);
   }
-  if (deleteSuccess) return <Redirect to="/" />;
+  if (deleteSuccess) return <Redirect to="/account" />;
   return (
     <div>
       {console.log('geez', value.space)}
