@@ -16,7 +16,7 @@ function LoginForm({ location }) {
 
   const redirectAfterLogin = location.state
     ? location.state.from.pathname
-    : '/'; // si l'utilisateur a été redirigé vers login en essaynt d'accéder à une RestrictedRoute, on la garde en mémoire pour le rediriger après le login. Sinon, on le redirgie vers la home après le login.
+    : '/account'; // si l'utilisateur a été redirigé vers login en essaynt d'accéder à une RestrictedRoute, on la garde en mémoire pour le rediriger après le login. Sinon, on le redirgie vers la home après le login.
 
   if (user) return <Redirect to={redirectAfterLogin} />; // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter), on le redirige donc vers la page depuis laquelle il a essayé d'accéder à Login
 
