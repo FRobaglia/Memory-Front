@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import SessionService from '../../../services/SessionService';
@@ -68,7 +67,11 @@ function LoginForm({ location }) {
             />
           </div>
 
-          <input type="submit" value="Se connecter" />
+          <input
+            type="submit"
+            className="button button--full--noPadding"
+            value="Se connecter"
+          />
           {/* <Link to="/">Home</Link> */}
         </form>
       </section>

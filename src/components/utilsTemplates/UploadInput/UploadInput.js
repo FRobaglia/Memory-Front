@@ -1,4 +1,5 @@
 import React from 'react';
+import settingIcon from '../../../assets/icons/settings.svg';
 
 function UploadInput({
   labelText,
@@ -6,18 +7,29 @@ function UploadInput({
   isMultiple,
   handleChange,
   restrictedFileTypes,
+  img,
+  imgSelected,
 }) {
   const fieldName = specificFieldName || 'images';
+
   return (
     <div className="upload">
-      <label htmlFor={fieldName}>{labelText} : </label>
+      <label htmlFor={fieldName}>
+        {labelText}
+        {img && (
+          <img src={img} alt="pic" className={imgSelected ? 'selected' : ''} />
+        )}
+        {imgSelected && <img src={settingIcon} alt="pic" />}
+      </label>
       <input
         type="file"
         id={fieldName}
         name={fieldName}
         multiple={isMultiple}
         accept={restrictedFileTypes}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e);
+        }}
       />
     </div>
   );

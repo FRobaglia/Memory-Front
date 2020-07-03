@@ -1,0 +1,20 @@
+@import '../../../styles/layout/_forms';
+@import '../../../styles/layout/_button';
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.upload {
+  label {
+    .selected {
+      display: none;
+    }
+    img {
+      display: block;
+    }
+  }
+  input {
+    display: none;
+  }
+}

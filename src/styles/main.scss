@@ -26,6 +26,13 @@ img {
   width: 100%;
 }
 
+.link {
+  font-size: 10px;
+  margin: 20px 0;
+  align-self: flex-end;
+  color: $color--strong;
+}
+
 .header {
   background-color: $color--light;
   background-repeat: no-repeat;
@@ -34,15 +41,17 @@ img {
     height: 30vh;
   }
   &--sitting {
-    // background-image: url('../images/icons/fille--sitting.svg');
+    background-image: url('../assets/svg/sitting-lady.svg');
     background-position: right bottom 60%;
-    background-size: 45%;
+    background-size: 60%;
     // @include min-sm {
     //   background-size: auto;
     // }
   }
   &--puzzle {
     background-image: url('../assets/svg/puzzle-lady.svg');
+    background-size: 100%;
+    background-position: right top 50%;
   }
 }
 
@@ -56,7 +65,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 30vh;
   overflow: hidden;
   svg {
     height: 90%;
@@ -213,7 +221,7 @@ h2 {
 
 .wrapper--flex {
   display: flex;
-  width: 700vw;
+  width: 100vw;
   align-items: flex-start;
   transition: all 0.3s;
   section {
@@ -263,7 +271,7 @@ h2 {
     }
     &.headline--parameters {
       &:after {
-        background-image: url('../assets//icons/settings.svg');
+        background-image: url('../assets/icons/settings.svg');
       }
     }
     &.headline--membres {

@@ -4,7 +4,7 @@ import LoginForm from '../../components/auth/loginForm/LoginForm';
 function LoginPage({ location }) {
   return (
     <div>
-      <div className="header header--puzzle header__img" />
+      <div className="header header--30vh header--puzzle header__img" />
       <LoginForm location={location} />;
     </div>
   );
