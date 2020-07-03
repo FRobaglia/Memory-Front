@@ -1,0 +1,27 @@
+@import '../config/variables';
+.section__loginForm {
+  background-color: white;
+}
+.input {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  .input__label {
+    position: absolute;
+    font-size: 10px;
+    line-height: 16px;
+    background-color: #fff;
+    top: 0;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    padding: 4px;
+  }
+  .input__field {
+    border: 1px solid $color--light;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
