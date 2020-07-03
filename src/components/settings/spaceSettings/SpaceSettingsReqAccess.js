@@ -1,41 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
-import SpaceService from '../services/SpaceService';
+import SpaceService from '../../../services/SpaceService';
 
-function SpaceSettingsPage() {
-  const spaceLocation = useLocation();
-  const [deleteSuccess, setDeleteSuccess] = useState();
+function SpaceSettingsReqAccess() {
   const [waitingSubscribers, setWaitingSubscribers] = useState(
     "Chargement des utilisateurs ayant fait une demande d'accès..."
   );
+  const spaceId = window.location.href
+    .split('/')[4]
+    .substring(window.location.href.split('/')[4].lastIndexOf('-') + 1);
 
   useEffect(() => {
-    getWaitingSubscribers();
+    getWaitingSubscribersList();
   }, []);
 
-  async function deleteSpace(id) {
-    setDeleteSuccess(await SpaceService.deleteSpace(id));
-  }
-
-  async function getWaitingSubscribers() {
-    const subscribers = await SpaceService.getWaitingSubscribers(
-      spaceLocation.state.id
-    );
+  async function getWaitingSubscribersList() {
+    const subscribers = await SpaceService.getWaitingSubscribers(spaceId);
     setWaitingSubscribers(subscribers);
   }
+  getWaitingSubscribersList();
 
   async function validateSubscriber(subscriberId) {
-    await SpaceService.validateSubscriber(spaceLocation.state.id, subscriberId);
+    await SpaceService.validateSubscriber(spaceId, subscriberId);
   }
 
   async function unvalidateSubscriber(subscriberId) {
-    await SpaceService.unvalidateSubscriber(
-      spaceLocation.state.id,
-      subscriberId
-    );
+    await SpaceService.unvalidateSubscriber(spaceId, subscriberId);
   }
 
-  if (deleteSuccess) return <Redirect to="/" />;
   return (
     <div>
       <div>
@@ -62,17 +53,8 @@ function SpaceSettingsPage() {
             : waitingSubscribers}
         </ul>
       </div>
-
-      <div>
-        <button
-          type="button"
-          onClick={() => deleteSpace(spaceLocation.state.id)}
-        >
-          Supprimer l'espace
-        </button>
-      </div>
     </div>
   );
 }
 
-export default SpaceSettingsPage;
+export default SpaceSettingsReqAccess;

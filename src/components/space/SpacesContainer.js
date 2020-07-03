@@ -3,7 +3,7 @@ import moment from 'moment';
 import SpaceService from '../../services/SpaceService';
 import { useForm, toFormData } from '../../utils/forms';
 import SpaceCard from './spaceCard/SpaceCard';
-import UploadInput from '../UploadInput';
+import UploadInput from '../utilsTemplates/UploadInput/UploadInput';
 
 function SpacesContainer() {
   const [values, handleChange] = useForm();
@@ -15,7 +15,8 @@ function SpacesContainer() {
   }, []);
 
   async function getSpaces() {
-    setUserSpaces(await SpaceService.getUserSpaces());
+    const data = await SpaceService.getUserSpaces();
+    setUserSpaces(data.spaces);
   }
 
   async function createSpace(event) {
@@ -31,7 +32,6 @@ function SpacesContainer() {
       );
     }
   }
-
   return (
     <div>
       <form action="/spaces" method="post" onSubmit={createSpace}>
@@ -114,7 +114,11 @@ function SpacesContainer() {
       </form>
       {userSpaces &&
         userSpaces.map((space) => (
-          <SpaceCard key={space.space.id} space={space.space} />
+          <SpaceCard
+            key={space.space.id}
+            space={space.space}
+            role={space.role.role}
+          />
         ))}
     </div>
   );

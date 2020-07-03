@@ -98,4 +98,49 @@ export default class SessionService {
       }
     }
   }
+
+  static async editUser(data) {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_BASE_URL}api/user/edit`,
+        data
+      );
+      if (response && response.data) {
+        console.log('Informations du profil modifiées');
+        return response.data.account;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async editPassword(data) {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_BASE_URL}api/user/password/new`,
+        data
+      );
+      if (response && response.data) {
+        console.log('Mot de passe modifié');
+        return response.data;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async editUserImage(data) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}api/user/image/new`,
+        data
+      );
+      if (response && response.data) {
+        console.log(response.data);
+        console.log('Image de profil modifiée');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }

@@ -17,6 +17,19 @@ class PostService {
     }
   }
 
+  static async getPost(id) {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}api/post/${id}`
+      );
+      if (response && response.data) {
+        return response.data;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   static async deletePost(id) {
     try {
       const response = await axios.delete(
