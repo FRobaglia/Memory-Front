@@ -121,6 +121,9 @@ class SpaceService {
       }
     } catch (err) {
       console.error(err);
+      if (err.response.status === 401) {
+        return 'ALREADY_INVITED';
+      }
     }
   }
 
@@ -184,7 +187,7 @@ class SpaceService {
     let message = '';
     switch (status) {
       case 'SPACE_NOT_VALIDATED':
-        message = "Votre espace n'a pas encore été validé par MEMORY";
+        message = "Cet espace n'a pas encore été validé par MEMORY";
         break;
       case 'SPACE_NOT_SUBSCRIBED':
         message =
