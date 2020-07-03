@@ -30,7 +30,7 @@ function SpaceMemoryPage() {
     video: false,
     link: false,
   });
-  const [postValues, handlePostChange, deleteFile] = useForm();
+  const [postValues, handlePostChange, deleteFiles] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
   );
@@ -210,7 +210,7 @@ function SpaceMemoryPage() {
               <button
                 type="button"
                 onClick={() => {
-                  deleteFile(index);
+                  deleteFiles(index);
                 }}
               >
                 supprimer photo

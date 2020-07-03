@@ -9,7 +9,7 @@ import './_registerForm.scss';
 
 function RegisterForm() {
   // Custom hook useForm
-  const [values, handleChange, deleteFile] = useForm();
+  const [values, handleChange, deleteFiles] = useForm();
   const [errorMessage, setErrorMessage] = useState({});
   const { user } = useContext(UserContext);
   const history = useHistory();
@@ -59,7 +59,7 @@ function RegisterForm() {
               <button
                 type="button"
                 onClick={() => {
-                  deleteFile(index);
+                  deleteFiles(index);
                 }}
               >
                 supprimer photo
