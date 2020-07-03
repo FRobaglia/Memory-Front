@@ -16,7 +16,6 @@ function SpaceSettingsReqAccess() {
 
   async function getWaitingSubscribers() {
     const subscribers = await SpaceService.getWaitingSubscribers(spaceId);
-    // console.log('sha', subscribers)
     setWaitingSubscribers(subscribers);
   }
 
@@ -33,28 +32,24 @@ function SpaceSettingsReqAccess() {
       <div>
         <h2>Utilisateurs ayant fait une demande d'accès</h2>
         <ul>
-          {console.log('koko', waitingSubscribers)}
           {waitingSubscribers instanceof Array
-            ? waitingSubscribers.map(
-                // (user, index) => console.log('tak', user)
-                (subscriber, index) => (
-                  <li key={index}>
-                    Nom: {subscriber.user.firstName}
-                    <button
-                      onClick={() => validateSubscriber(subscriber.id)}
-                      type="button"
-                    >
-                      Accepter la demande
-                    </button>
-                    <button
-                      onClick={() => unvalidateSubscriber(subscriber.id)}
-                      type="button"
-                    >
-                      Refuser la demande
-                    </button>
-                  </li>
-                )
-              )
+            ? waitingSubscribers.map((subscriber, index) => (
+                <li key={index}>
+                  Nom: {subscriber.user.firstName}
+                  <button
+                    onClick={() => validateSubscriber(subscriber.id)}
+                    type="button"
+                  >
+                    Accepter la demande
+                  </button>
+                  <button
+                    onClick={() => unvalidateSubscriber(subscriber.id)}
+                    type="button"
+                  >
+                    Refuser la demande
+                  </button>
+                </li>
+              ))
             : waitingSubscribers}
         </ul>
       </div>
