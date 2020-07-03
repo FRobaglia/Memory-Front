@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
 import { useForm } from '../../../utils/forms';
 import Loading from '../../utilsTemplates/loading/Loading';
+import './_loginForm.scss';
 
 function LoginForm({ location }) {
   const [values, handleChange] = useForm();
@@ -31,33 +33,45 @@ function LoginForm({ location }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="email">
-          Adresse e-mail
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="test@example.com"
-            value={values.email || ''}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="password">
-          Mot de passe
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={values.password || ''}
-            onChange={handleChange}
-          />
-        </label>
-        <input type="submit" value="Me connecter" />
-        <Link to="/">Home</Link>
-        <Link to="/register">S'inscrire</Link>
-      </form>
+    <div className="wrapper--flex slideContainer">
+      <section className="section">
+        <form onSubmit={handleLogin} className="section__content">
+          <Link to="/register" className="link">
+            Pas encore de compte ?
+          </Link>
+          <h2>Se Connecter:</h2>
+          <div className="input">
+            <label htmlFor="email" className="input__label">
+              Adresse e-mail
+            </label>
+            <input
+              className="input__field"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="test@example.com"
+              value={values.email || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="password" className="input__label">
+              Mot de passe
+            </label>
+            <input
+              className="input__field"
+              type="password"
+              name="password"
+              id="password"
+              value={values.password || ''}
+              onChange={handleChange}
+            />
+          </div>
+
+          <input type="submit" value="Se connecter" />
+          {/* <Link to="/">Home</Link> */}
+        </form>
+      </section>
     </div>
   );
 }
