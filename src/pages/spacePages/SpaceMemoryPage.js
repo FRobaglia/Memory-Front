@@ -12,9 +12,16 @@ function SpaceMemoryPage() {
   const [requestAccessValues, handlerequestAccessChange] = useForm();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
+  const [showInvitedUserButton, setInvitedUserButton] = useState();
+  const [showSubscriberButton, setSubscriberButton] = useState();
   const [spaceErrorMessage, setSpaceErrorMessage] = useState('');
-  const [isUserNotSubscribed, setIsUserNotSubscribed] = useState();
-  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState();
+  const [messageButton, setMessageButton] = useState(
+    "Demander l'accès a cet espace"
+  );
+  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState(
+    false
+  );
+  const [subscribeMessage, setSubscribeMessage] = useState('');
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const [showPostFields, setShowPostFields] = useState({
@@ -34,15 +41,30 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
-    if (resultat === 'USER_NOT_SUBSCRIBED') {
-      // Gestion error 401 lorsque l'user n'est pas inscrit à cet espace
-      setIsUserNotSubscribed(true);
-    } else if (resultat.status) {
+    // to refactor with elsif
+    if (resultat.status === 'SPACE_NOT_VALIDATED') {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
-    } else {
-      setSpaceData(resultat);
-      setSpace(resultat.space);
-      setValue(resultat.space);
+    }
+    switch (resultat) {
+      case 'SPACE_NOT_SUBSCRIBED':
+        setInvitedUserButton(false);
+        setSubscriberButton(true);
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
+        break;
+      case 'SPACE_SUBSCRIBED_WAITING':
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
+        break;
+      case 'SPACE_INVITATION_WAITING':
+        setMessageButton("Accéder à l'espace");
+        setInvitedUserButton(true);
+        setSubscriberButton(false);
+        setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat));
+        break;
+      default:
+        setSpaceData(resultat);
+        setSpace(resultat.space);
+        setValue(resultat.space);
+        break;
     }
   }
 
@@ -63,48 +85,70 @@ function SpaceMemoryPage() {
     event.preventDefault();
     const data = toFormData(requestAccessValues);
     const result = await SpaceService.subcribeToSpace(spaceId, data);
+    console.log('rt', result);
     if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
       setUserAlreadyRequestAccess(true);
+      setSubscribeMessage('');
+    } else {
+      setSubscribeMessage('Votre demande a bien été envoyé');
     }
   }
 
-  if (spaceErrorMessage || isUserNotSubscribed) {
+  // Unenable space memory
+  if (spaceErrorMessage && !showInvitedUserButton && !showSubscriberButton) {
     return (
       <div>
-        {spaceErrorMessage && (
-          <>
-            <p>Pas cool</p>
-            <p>{spaceErrorMessage}</p>
-          </>
-        )}
-        {isUserNotSubscribed && (
-          <>
-            <p>
-              Tu n'es pas membre de cet espace. Pour cela, une demande d'accès
-              est nécessaire
-            </p>
-            <form method="post" onSubmit={sendRequestAccess}>
-              <label htmlFor="requestAccess">
-                Relation avec le/la défunt
-                <input
-                  type="text"
-                  name="relationDefunctText"
-                  id="relationDefunctText"
-                  value={requestAccessValues.relationDefunctText || ''}
-                  onChange={handlerequestAccessChange}
-                />
-              </label>
-              <button type="submit">Demander l'accès à cet espace</button>
-            </form>
-            {isUserAlreadyRequestAccess && (
-              <p>Vous avez déjà fait la demande pour accéder à cet espace</p>
-            )}
-          </>
+        <p>Pas cool</p>
+        <p>{spaceErrorMessage}</p>
+        <Link to="/account">Mon compte personnel</Link>
+      </div>
+    );
+  }
+  if ((spaceErrorMessage && showInvitedUserButton) || showSubscriberButton) {
+    return (
+      <div>
+        <p>{spaceErrorMessage}</p>
+        <form method="post" onSubmit={sendRequestAccess}>
+          <label htmlFor="requestAccess">
+            Relation avec le/la défunt
+            <input
+              type="text"
+              name="relationDefunctText"
+              id="relationDefunctText"
+              value={requestAccessValues.relationDefunctText || ''}
+              onChange={handlerequestAccessChange}
+            />
+          </label>
+          {showSubscriberButton && ( // SUBSCRIBER BUTTON
+            <>
+              <button type="submit">{messageButton}</button>
+              {subscribeMessage && <p>{subscribeMessage}</p>}
+              <Link to="/account">Mon compte personnel</Link>
+            </>
+          )}
+          {showInvitedUserButton && ( // INVITED BUTTON
+            <button
+              type="submit"
+              onClick={() =>
+                setTimeout(() => {
+                  window.location.reload(false);
+                }, 2000)
+              }
+            >
+              {messageButton}
+            </button>
+          )}
+        </form>
+        {isUserAlreadyRequestAccess && (
+          <p>
+            Vous avez déjà fait la demande pour accéder à cet espace. L'espace
+            sera accessible une fois votre demande acceptée.
+          </p>
         )}
       </div>
     );
   }
-
+  // Space memory fetch
   return (
     <div>
       <p>

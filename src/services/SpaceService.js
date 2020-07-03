@@ -173,7 +173,8 @@ class SpaceService {
     } catch (err) {
       console.error('ERROR from focusSpaced', err);
       if (err.response.status === 401) {
-        return 'USER_NOT_SUBSCRIBED';
+        console.log('deg', err.response.data.status);
+        return err.response.data.status;
       }
     }
   }
@@ -188,14 +189,15 @@ class SpaceService {
       case 'SPACE_NOT_SUBSCRIBED':
         // state.isUserNotSubscribed = true;
         message =
-          "Vous n'êtes pas membre de cet espace de mémoire. Faîtes une demande d'accès";
+          "Vous n'êtes pas membre de cet espace de mémoire. Faites une demande d'accès";
         break;
       case 'SPACE_SUBSCRIBED_WAITING':
         message =
           "Votre demande d'accès est en cours de traitement par le manager de l'espace";
         break;
       case 'SPACE_INVITATION_WAITING':
-        message = "Merci de d'indiquer la relation  avec le/la défunt(e)";
+        message =
+          "Vous avez été invité a rejoindre cet espace de recueillement. Merci d'indiquer la relation  avec le/la défunt(e)";
         break;
       default:
         message =

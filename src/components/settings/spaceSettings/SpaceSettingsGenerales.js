@@ -5,9 +5,7 @@ import SpaceService from '../../../services/SpaceService';
 import SpaceContext from '../../../context/SpaceContext';
 
 function SpaceSettingsGenerales() {
-  // const spaceLocation = useLocation();
   const { value } = useContext(SpaceContext);
-
   // console.log('fromGeneral', space);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
