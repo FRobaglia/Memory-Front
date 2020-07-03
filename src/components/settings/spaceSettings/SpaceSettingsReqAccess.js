@@ -34,20 +34,21 @@ function SpaceSettingsReqAccess() {
       <div>
         <h2>Utilisateurs ayant fait une demande d'accès</h2>
         <ul>
+          {console.log('koko', waitingSubscribers)}
           {waitingSubscribers instanceof Array
             ? waitingSubscribers.map(
                 // (user, index) => console.log('tak', user)
                 (user, index) => (
                   <li key={index}>
-                    Nom: {user.user.firstName}
+                    Nom: {user.firstName}
                     <button
-                      onClick={() => validateSubscriber(user.user.id)}
+                      onClick={() => validateSubscriber(user.id)}
                       type="button"
                     >
                       Accepter la demande
                     </button>
                     <button
-                      onClick={() => unvalidateSubscriber(user.user.id)}
+                      onClick={() => unvalidateSubscriber(user.id)}
                       type="button"
                     >
                       Refuser la demande
