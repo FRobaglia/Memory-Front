@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SpaceService from '../../../services/SpaceService';
-// import RequestAccessContainer from '../../space/RequestAccessContainer';
 
 function SpaceSettingsReqAccess() {
   const [waitingSubscribers, setWaitingSubscribers] = useState(
@@ -38,17 +37,17 @@ function SpaceSettingsReqAccess() {
           {waitingSubscribers instanceof Array
             ? waitingSubscribers.map(
                 // (user, index) => console.log('tak', user)
-                (user, index) => (
+                (subscriber, index) => (
                   <li key={index}>
-                    Nom: {user.firstName}
+                    Nom: {subscriber.user.firstName}
                     <button
-                      onClick={() => validateSubscriber(user.id)}
+                      onClick={() => validateSubscriber(subscriber.id)}
                       type="button"
                     >
                       Accepter la demande
                     </button>
                     <button
-                      onClick={() => unvalidateSubscriber(user.id)}
+                      onClick={() => unvalidateSubscriber(subscriber.id)}
                       type="button"
                     >
                       Refuser la demande
