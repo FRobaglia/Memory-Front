@@ -1,0 +1,15 @@
+$color--strong: #423977;
+$color--light: #ede7f2;
+$color--grey: #9c9c9c;
+
+@mixin max-sx {
+  @media (max-width: 750px) {
+    @content;
+  }
+}
+
+@mixin min-sm {
+  @media (min-width: 751px) {
+    @content;
+  }
+}
