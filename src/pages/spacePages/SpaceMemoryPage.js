@@ -105,6 +105,8 @@ function SpaceMemoryPage() {
     );
   }
   if ((spaceErrorMessage && showInvitedUserButton) || showSubscriberButton) {
+    // if (spaceErrorMessage && showSubscriberButton) {
+    // SUBSCRIBERS
     return (
       <div>
         <p>{spaceErrorMessage}</p>
@@ -119,7 +121,7 @@ function SpaceMemoryPage() {
               onChange={handlerequestAccessChange}
             />
           </label>
-          {showSubscriberButton && ( // SUBSCRIBER BUTTON
+          {showSubscriberButton && ( // BUTTON
             <>
               <button type="submit">{messageButton}</button>
               {subscribeMessage && <p>{subscribeMessage}</p>}
@@ -148,6 +150,25 @@ function SpaceMemoryPage() {
       </div>
     );
   }
+  // if (spaceErrorMessage && showInvitedUserButton) {
+  //   // INVITED
+  //   return (
+  //     // INVITED BUTTON
+  //     <>
+  //       <p>{spaceErrorMessage}</p>
+  //       <button
+  //         type="submit"
+  //         onClick={() =>
+  //           setTimeout(() => {
+  //             window.location.reload(false);
+  //           }, 2000)
+  //         }
+  //       >
+  //         {messageButton}
+  //       </button>
+  //     </>
+  //   );
+  // }
   // Space memory fetch
   return (
     <div>

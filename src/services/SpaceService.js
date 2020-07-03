@@ -89,22 +89,25 @@ class SpaceService {
       );
       if (response) {
         console.log(response);
+        console.log('rig', response);
+        console.log('riga', response.data);
       }
     } catch (err) {
-      console.error(err);
+      console.error('WHY4', err);
     }
   }
 
   static async unvalidateSubscriber(spaceId, subscriberId) {
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/subscriber/${subscriberId}/unvalidate`
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/subscriber/${subscriberId}/invalidate`
       );
       if (response) {
-        console.log(response);
+        console.log('rar', response);
+        return response;
       }
     } catch (err) {
-      console.error(err);
+      console.error('RAI', err);
     }
   }
 
@@ -116,6 +119,7 @@ class SpaceService {
       );
       if (response) {
         console.log(response);
+        return response;
       }
     } catch (err) {
       console.error(err);
