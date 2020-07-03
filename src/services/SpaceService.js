@@ -89,11 +89,9 @@ class SpaceService {
       );
       if (response) {
         console.log(response);
-        console.log('rig', response);
-        console.log('riga', response.data);
       }
     } catch (err) {
-      console.error('WHY4', err);
+      console.error(err);
     }
   }
 
@@ -177,7 +175,6 @@ class SpaceService {
     } catch (err) {
       console.error('ERROR from focusSpaced', err);
       if (err.response.status === 401) {
-        console.log('deg', err.response.data.status);
         return err.response.data.status;
       }
     }
@@ -185,13 +182,11 @@ class SpaceService {
 
   static errorMessageSpace(status) {
     let message = '';
-    // const state = {};
     switch (status) {
       case 'SPACE_NOT_VALIDATED':
         message = "Votre espace n'a pas encore été validé par MEMORY";
         break;
       case 'SPACE_NOT_SUBSCRIBED':
-        // state.isUserNotSubscribed = true;
         message =
           "Vous n'êtes pas membre de cet espace de mémoire. Faites une demande d'accès";
         break;
@@ -217,11 +212,9 @@ class SpaceService {
         data
       );
       if (response && response.data) {
-        console.log('sub SS', response.data);
         return response.data;
       }
     } catch (err) {
-      console.error('testSub', err);
       if (err.response.status === 401) {
         return 'USER_ALREADY_REQUEST_SUBSCRIPTION';
       }
