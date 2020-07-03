@@ -6,6 +6,7 @@ import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
 import './_registerForm.scss';
+import labelImage from '../../../assets/img/add-image.png';
 
 function RegisterForm() {
   // Custom hook useForm
@@ -31,7 +32,7 @@ function RegisterForm() {
   };
 
   function hideLabel() {
-    return selected ? setSelected(false) : setSelected(true);
+    setSelected(true);
   }
 
   return (
@@ -47,28 +48,21 @@ function RegisterForm() {
             Déja un compte ?
           </Link>
           <h2>Créer un compte</h2>
-          {values.imagesFiles.map((image, index) => (
-            <div key={image.name}>
+
+          {values.userImage && (
+            <div>
               <img
-                src={URL.createObjectURL(image)}
+                src={URL.createObjectURL(values.userImage)}
                 alt="profilepic"
                 width="100"
                 height="100"
                 className=""
               />
-              <button
-                type="button"
-                onClick={() => {
-                  deleteFiles(index);
-                }}
-              >
-                supprimer photo
-              </button>
             </div>
-          ))}
+          )}
           <UploadInput
-            img="../../../assets/icons/settings.svg"
-            // specificFieldName="userImage"
+            img={labelImage}
+            specificFieldName="userImage"
             handleChange={(e) => {
               handleChange(e);
               hideLabel();
