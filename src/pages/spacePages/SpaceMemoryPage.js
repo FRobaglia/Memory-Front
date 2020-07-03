@@ -41,7 +41,6 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
-    // to refactor with elsif
     if (resultat.status === 'SPACE_NOT_VALIDATED') {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
     }
@@ -105,6 +104,7 @@ function SpaceMemoryPage() {
     );
   }
   if ((spaceErrorMessage && showInvitedUserButton) || showSubscriberButton) {
+    // SUBSCRIBERS
     return (
       <div>
         <p>{spaceErrorMessage}</p>
@@ -119,7 +119,7 @@ function SpaceMemoryPage() {
               onChange={handlerequestAccessChange}
             />
           </label>
-          {showSubscriberButton && ( // SUBSCRIBER BUTTON
+          {showSubscriberButton && ( // BUTTON
             <>
               <button type="submit">{messageButton}</button>
               {subscribeMessage && <p>{subscribeMessage}</p>}
@@ -148,7 +148,7 @@ function SpaceMemoryPage() {
       </div>
     );
   }
-  // Space memory fetch
+
   return (
     <div>
       <p>

@@ -3,7 +3,7 @@ import SpaceContext from '../../../context/SpaceContext';
 
 function SpaceAddMembers() {
   const { value } = useContext(SpaceContext);
-  const spaceUrl = `https://memory-hetic.netlify.app/space/${value.space.firstName}-${value.space.lastName}-${value.space.id}/`;
+  const spaceUrl = `https://memory-hetic.netlify.app/space/${value.space.firstName}-${value.space.lastName}-${value.space.id}`;
   const [copySuccess, setCopySuccess] = useState(false);
   const input = useRef();
 
