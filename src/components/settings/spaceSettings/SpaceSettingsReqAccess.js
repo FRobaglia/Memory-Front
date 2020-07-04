@@ -21,10 +21,12 @@ function SpaceSettingsReqAccess() {
 
   async function validateSubscriber(subscriberId) {
     await SpaceService.validateSubscriber(spaceId, subscriberId);
+    getWaitingSubscribers();
   }
 
   async function unvalidateSubscriber(subscriberId) {
     await SpaceService.unvalidateSubscriber(spaceId, subscriberId);
+    getWaitingSubscribers();
   }
 
   return (
@@ -33,8 +35,8 @@ function SpaceSettingsReqAccess() {
         <h2>Utilisateurs ayant fait une demande d'accès</h2>
         <ul>
           {waitingSubscribers instanceof Array
-            ? waitingSubscribers.map((subscriber, index) => (
-                <li key={index}>
+            ? waitingSubscribers.map((subscriber) => (
+                <li key={subscriber.user.id}>
                   Nom: {subscriber.user.firstName}
                   <button
                     onClick={() => validateSubscriber(subscriber.id)}

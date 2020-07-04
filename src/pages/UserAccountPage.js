@@ -4,7 +4,7 @@ import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 import UserContext from '../context/UserContext';
 import SpacesContainer from '../components/space/SpacesContainer';
 import UserInvitationContainer from '../components/space/UserInvitationsContainer';
-import RequestAccessContainer from '../components/space/RequestAccessContainer';
+import RequestAccessContainer from '../components/utilsTemplates/requestAccessContainer/RequestAccessContainer';
 import SessionService from '../services/SessionService';
 
 function UserAccountPage() {
@@ -64,7 +64,7 @@ function UserAccountPage() {
           <UserInvitationContainer />
         </Panel>
         <Panel>
-          <RequestAccessContainer />
+          <RequestAccessContainer account />
         </Panel>
       </Tabs>
     </div>

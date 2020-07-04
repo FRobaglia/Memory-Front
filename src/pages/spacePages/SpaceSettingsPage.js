@@ -5,7 +5,7 @@ import SpaceService from '../../services/SpaceService';
 import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
 import SpaceSettingsInvitations from '../../components/settings/spaceSettings/SpaceSettingsInvitations';
 import SpaceSettingsMembers from '../../components/settings/spaceSettings/SpaceSettingsMembers';
-import SpaceSettingsReqAccess from '../../components/settings/spaceSettings/SpaceSettingsReqAccess';
+import RequestAccessContainer from '../../components/utilsTemplates/requestAccessContainer/RequestAccessContainer';
 
 function SpaceSettingsPage() {
   const { value, setValue } = useContext(SpaceContext);
@@ -30,7 +30,7 @@ function SpaceSettingsPage() {
           <SpaceSettingsGeneral />
           <SpaceSettingsInvitations />
           <SpaceSettingsMembers />
-          <SpaceSettingsReqAccess />
+          <RequestAccessContainer spaceSettings spaceId={spaceId} />
         </>
       )}
     </div>
