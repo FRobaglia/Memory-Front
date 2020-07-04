@@ -20,6 +20,7 @@ class SpaceService {
             );
 
             request.user.relation = {
+              id_subscriber: request.id,
               text: request.relationDefunct,
               dateCreation: request.dateCreation,
             };
