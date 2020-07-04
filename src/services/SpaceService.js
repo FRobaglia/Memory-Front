@@ -97,14 +97,15 @@ class SpaceService {
 
   static async unvalidateSubscriber(spaceId, subscriberId) {
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/subscriber/${subscriberId}/unvalidate`
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${spaceId}/subscriber/${subscriberId}/invalidate`
       );
       if (response) {
-        console.log(response);
+        console.log('rar', response);
+        return response;
       }
     } catch (err) {
-      console.error(err);
+      console.error('RAI', err);
     }
   }
 
@@ -116,9 +117,13 @@ class SpaceService {
       );
       if (response) {
         console.log(response);
+        return response;
       }
     } catch (err) {
       console.error(err);
+      if (err.response.status === 401) {
+        return 'ALREADY_INVITED';
+      }
     }
   }
 
@@ -173,7 +178,6 @@ class SpaceService {
     } catch (err) {
       console.error('ERROR from focusSpaced', err);
       if (err.response.status === 401) {
-        console.log('deg', err.response.data.status);
         return err.response.data.status;
       }
     }
@@ -181,13 +185,11 @@ class SpaceService {
 
   static errorMessageSpace(status) {
     let message = '';
-    // const state = {};
     switch (status) {
       case 'SPACE_NOT_VALIDATED':
-        message = "Votre espace n'a pas encore été validé par MEMORY";
+        message = "Cet espace n'a pas encore été validé par MEMORY";
         break;
       case 'SPACE_NOT_SUBSCRIBED':
-        // state.isUserNotSubscribed = true;
         message =
           "Vous n'êtes pas membre de cet espace de mémoire. Faites une demande d'accès";
         break;
@@ -213,11 +215,9 @@ class SpaceService {
         data
       );
       if (response && response.data) {
-        console.log('sub SS', response.data);
         return response.data;
       }
     } catch (err) {
-      console.error('testSub', err);
       if (err.response.status === 401) {
         return 'USER_ALREADY_REQUEST_SUBSCRIPTION';
       }
