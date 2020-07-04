@@ -2,16 +2,17 @@
   // max-width: 800px;
   position: fixed;
   width: 100%;
-  margin: 0.5em auto 0;
-  // margin: 0 auto;
+  margin: 0 auto;
+  text-align: center;
 }
 .userAccount__nav {
   display: flex;
   justify-content: space-between;
-
-  text-align: center;
-  padding: 0.2em 1em;
-  // padding: 0 100px; // desktop
+  width: 100%;
+  padding: 0.5em 1em;
+  @media (min-width: 992px) {
+    padding: 0 10%; // desktop
+  }
 }
 
 .userAccount__nav--photo {

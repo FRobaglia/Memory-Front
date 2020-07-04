@@ -2,7 +2,7 @@ import React from 'react';
 
 function UserAccountHeaederBg() {
   return (
-    <div className="header__img">
+    <div className="header__img userAccount__header--image">
       <svg
         width="185"
         height="170"

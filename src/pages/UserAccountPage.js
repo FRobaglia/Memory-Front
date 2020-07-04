@@ -15,7 +15,7 @@ function UserAccountPage() {
   // Changing backgroundcolor navbar
   const listener = document.addEventListener('scroll', () => {
     const scrolled = document.scrollingElement.scrollTop;
-    if (scrolled > 100) {
+    if (scrolled > 120) {
       if (navPosition !== 'violet') {
         setNavPosition('violet');
       }
@@ -26,11 +26,12 @@ function UserAccountPage() {
   useEffect(() => {}, [listener]);
 
   return (
-    <div className="body--espace">
+    <div className="body--espace userAccount__body">
       <nav
         className="userAccount__navContainer header__main"
         style={{
           backgroundColor: navPosition === 'top' ? 'transparent' : '#EDE7F2',
+          transition: '1s ease',
         }}
       >
         <ul className="userAccount__nav">
