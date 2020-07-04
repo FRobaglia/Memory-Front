@@ -1,0 +1,27 @@
+.userAccount__navContainer {
+  // max-width: 800px;
+  position: fixed;
+  width: 100%;
+  margin: 0.5em auto 0;
+  // margin: 0 auto;
+}
+.userAccount__nav {
+  display: flex;
+  justify-content: space-between;
+
+  text-align: center;
+  padding: 0.2em 1em;
+  // padding: 0 100px; // desktop
+}
+
+.userAccount__nav--photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.userAccount__nav--logo {
+  width: 30px;
+  height: 23px;
+  margin-top: 0.2em;
+}
