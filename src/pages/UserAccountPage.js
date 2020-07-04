@@ -5,9 +5,10 @@ import UserContext from '../context/UserContext';
 import SpacesContainer from '../components/space/SpacesContainer';
 import UserInvitationContainer from '../components/space/UserInvitationsContainer';
 import RequestAccessContainer from '../components/space/RequestAccessContainer';
+import SessionService from '../services/SessionService';
 
 function UserAccountPage() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   // const cn = (...args) => args.filter(Boolean).join(' ');
 
@@ -34,6 +35,22 @@ function UserAccountPage() {
           <button type="button">Modifier mon compte</button>
         </Link>
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          SessionService.clearTokens();
+          setUser(null);
+        }}
+      >
+        logout
+      </button>
+      {user && user.roles.includes('ROLE_BACK_MANAGER') ? (
+        <Link to="/admin">
+          <button type="button">Back Office</button>
+        </Link>
+      ) : (
+        ''
+      )}
       <Tabs>
         <div>
           <Tab>Espaces</Tab>
