@@ -21,6 +21,12 @@ export default class SessionService {
       }
     } catch (err) {
       console.error(`requestTokens : ${err}`);
+      if (err.response.status === 401) {
+        return 'INVALID_CREDENTIALS';
+      }
+      if (err.response.status === 400) {
+        return 'NO_VALUES_FIELDS';
+      }
     }
   }
 
