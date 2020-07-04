@@ -6,7 +6,7 @@ function RequestAccessContainer() {
 
   useEffect(() => {
     getInvitations();
-  }, []);
+  }, [requestAccess]);
   async function getInvitations() {
     setRequestAccess(await SpaceService.getUserSpaces('requestAccess'));
   }

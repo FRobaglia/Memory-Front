@@ -37,7 +37,7 @@ function SpaceMemoryPage() {
 
   useEffect(() => {
     getSpaceMemoryData();
-  }, []);
+  }, [spaceData]);
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
@@ -72,12 +72,12 @@ function SpaceMemoryPage() {
     // setPostValues({ imagesFiles: [] });
     const data = toFormData(postValues);
     await PostService.createPost(spaceId, data);
-    getSpaceMemoryData();
+    // getSpaceMemoryData();
   }
 
   async function deletePost(id) {
     await PostService.deletePost(id);
-    getSpaceMemoryData();
+    // getSpaceMemoryData();
   }
 
   async function sendRequestAccess(event) {
