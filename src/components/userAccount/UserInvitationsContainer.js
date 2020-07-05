@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SpaceService from '../../services/SpaceService';
-import SpaceCard from './spaceCard/SpaceCard';
+import SpaceCard from '../space/spaceCard/SpaceCard';
 
 function UserInvitationContainer() {
   const [userInvitation, setUserInvitations] = useState([]);

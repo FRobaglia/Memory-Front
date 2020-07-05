@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
-import SpacesContainer from '../../components/space/SpacesContainer';
-import UserInvitationContainer from '../../components/space/UserInvitationsContainer';
-import RequestAccessContainer from '../../components/space/RequestAccessContainer';
+import SpacesContainer from '../../components/userAccount/SpacesContainer';
+import UserInvitationContainer from '../../components/userAccount/UserInvitationsContainer';
+import RequestAccessContainer from '../../components/userAccount/RequestAccessContainer';
 import UserAccountHeaederBg from '../../components/userAccount/UserAccountHeaederBg';
 import logoPuzzle from '../../assets/icons/logo-puzzle.svg';
 import '../../components/nav/navbar-userAccount.scss';
@@ -16,11 +16,17 @@ function UserAccountPage() {
   const [isTab1Active, setIsTab1Active] = useState(true);
   const [isTab2Active, setIsTab2Active] = useState(false);
   const [isTab3Active, setIsTab3Active] = useState(false);
+  // const [navSliderElement, setNavSliderElement] = useState();
   const tabRef = useRef(null);
+  // const navSliderElementRef = useRef(document.querySelector('.nav--slider'));
+  const navSliderElementRef = useRef();
+  // let listener = null;
 
   // Changing backgroundcolor navbar
   const listener = document.addEventListener('scroll', () => {
+    // window.addEventListener('DOMContentLoaded', () => {
     const navSlider = document.querySelector('.nav--slider');
+    // setNavSliderElement(navSlider)
     const scrolled = document.scrollingElement.scrollTop;
     if (scrolled > 120) {
       if (navPosition !== 'violet') {
@@ -33,6 +39,7 @@ function UserAccountPage() {
       navSlider.style.position = 'relative';
       navSlider.style.top = 'auto';
     }
+    // });
   });
 
   function handleClickNav(id) {
@@ -67,6 +74,26 @@ function UserAccountPage() {
   useEffect(() => {
     tabRef.current.className =
       'nav--slider__element nav--slider__element--active';
+
+    // navSliderElementRef.current = document.querySelector('.nav--slider');
+    console.log(navSliderElementRef.current);
+
+    // listener = document.addEventListener('scroll', () => {
+    //   // window.addEventListener('DOMContentLoaded', () => {
+    //   const scrolled = document.scrollingElement.scrollTop;
+    //   if (scrolled > 120) {
+    //     if (navPosition !== 'violet') {
+    //       setNavPosition('violet');
+    //       navSliderElementRef.current.style.position = 'fixed';
+    //       navSliderElementRef.current.style.top = '65px';
+    //     }
+    //   } else if (navPosition !== 'top') {
+    //     setNavPosition('top');
+    //     navSliderElementRef.current.style.position = 'relative';
+    //     navSliderElementRef.current.style.top = 'auto';
+    //   }
+    //   // });
+    // });
   }, [listener]);
 
   return (
@@ -102,7 +129,10 @@ function UserAccountPage() {
       <UserAccountHeaederBg />
 
       <main className="main--scroll userAccount__main">
-        <nav className="nav--slider userAccount__navSlider">
+        <nav
+          ref={navSliderElementRef}
+          className="nav--slider userAccount__navSlider"
+        >
           <div className="nav--slider__elementGroup">
             <button
               ref={tabRef}
