@@ -35,6 +35,12 @@ function SpacesContainer() {
             role={space.role.role}
           />
         ))}
+      <Link
+        to="/create"
+        className="button button--full button--full--noPadding button--creEspace--top button-link button__link--create"
+      >
+        + Créer un espace
+      </Link>
     </section>
   );
 }
