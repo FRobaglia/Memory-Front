@@ -1,4 +1,14 @@
-@import '../config/variables';
+@import '../../styles//config/variables';
+
+a {
+  text-decoration: none;
+}
+
+.userAccount__main {
+  margin: 0 auto;
+  position: relative;
+}
+
 .wrapper--flex {
   display: flex;
   width: 700vw;
@@ -18,4 +28,10 @@
       align-items: center;
     }
   }
+}
+
+.button-link {
+  border: saddlebrown 2px solid;
+  text-decoration: none;
+  text-align: center;
 }

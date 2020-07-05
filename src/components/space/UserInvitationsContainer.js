@@ -13,14 +13,13 @@ function UserInvitationContainer() {
     setUserInvitations(data.invitations);
   }
   return (
-    <div>
-      <h1>Invitations</h1>
+    <section className="section section--invitationEspace invitationEspace">
+      <h2>Invitations</h2>
       {userInvitation &&
-        userInvitation.map(
-          (space) => <SpaceCard key={space.id} space={space.space} />
-          /* console.log(space) */
-        )}
-    </div>
+        userInvitation.map((space) => (
+          <SpaceCard key={space.id} space={space.space} />
+        ))}
+    </section>
   );
 }
 

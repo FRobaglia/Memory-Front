@@ -1,17 +1,24 @@
+@import '../../styles/config/variables';
+
 .userAccount__navContainer {
   // max-width: 800px;
   position: fixed;
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  z-index: 100;
 }
 .userAccount__nav {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  // width: 100%;
+  max-width: 1140px;
+  margin: 0.2em auto;
+
   padding: 0.5em 1em;
+
   @media (min-width: 992px) {
-    padding: 0 10%; // desktop
+    padding: 0 10%;
   }
 }
 
@@ -25,4 +32,8 @@
   width: 30px;
   height: 23px;
   margin-top: 0.2em;
+}
+
+.userAccount__navSlider {
+  z-index: 100;
 }

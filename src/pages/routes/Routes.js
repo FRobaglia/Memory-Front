@@ -1,18 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import SpaceContext from '../../context/SpaceContext';
 import RestrictedRoute from './RestrictedRoute';
 import HomePage from '../HomePage';
 import LoginPage from '../authPages/LoginPage';
-import UserAccountPage from '../UserAccountPage';
-import UserModifyPage from '../UserModifyPage';
+import UserAccountPage from '../userAccountPages/UserAccountPage';
+import UserModifyPage from '../userAccountPages/UserModifyPage';
 import RegisterPage from '../authPages/RegisterPage';
 // import SpacesListPage from '../SpacesListPage';
 import SpaceMemoryPage from '../spacePages/SpaceMemoryPage';
 import NotFoundPage from '../NotFoundPage';
 import BackOfficePage from '../BackOfficePage';
-import SpaceContext from '../../context/SpaceContext';
 import SpaceSettingsPage from '../spacePages/SpaceSettingsPage';
 import SpaceMembersPage from '../spacePages/SpaceMembersPage';
+import CreateSpace from '../spacePages/CreateSpace';
 
 function Routes() {
   const [value, setValue] = useState({});
@@ -24,6 +25,7 @@ function Routes() {
       <Route path="/login" exact component={LoginPage} />
       <Route path="/register" exact component={RegisterPage} />
       <RestrictedRoute path="/account" exact component={UserAccountPage} />
+      <RestrictedRoute path="/create" exact component={CreateSpace} />
       <RestrictedRoute
         path="/account/modify"
         exact
