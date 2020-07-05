@@ -43,8 +43,8 @@ function LoginForm({ location }) {
   };
 
   return (
-    <div className="wrapper--flex slideContainer">
-      <section className="section">
+    <div className="wrapper--flex">
+      <section>
         <form onSubmit={handleLogin} className="section__content">
           <Link to="/register" className="link">
             Pas encore de compte ?

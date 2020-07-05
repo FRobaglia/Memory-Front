@@ -5,16 +5,18 @@ h2 {
   margin-bottom: 10px;
 }
 
-.upload {
-  label {
-    .selected {
+.regitser {
+  .upload {
+    label {
+      .selected {
+        display: none;
+      }
+      img {
+        display: block;
+      }
+    }
+    input {
       display: none;
     }
-    img {
-      display: block;
-    }
-  }
-  input {
-    display: none;
   }
 }

@@ -1,0 +1,37 @@
+@import '../../../styles/config/variables';
+@import '../../../styles/layout/button';
+
+.step {
+  background-image: url('../../../assets/svg/puzzle-piece-notch-bottom.svg');
+  background-position: center;
+  height: 245px;
+  background-color: $color--light;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  .step--text {
+    color: $color--strong;
+    width: 205px;
+    margin-top: -80px;
+    .step--text--logo {
+      display: block;
+      height: 32px;
+      width: 32px;
+      margin: auto auto 15px;
+    }
+    .step--text--title {
+      text-transform: uppercase;
+      font-family: $roboto-medium;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+}
+.third-step {
+  background-image: url('../../../assets/svg/puzzle-piece-notch-top.svg');
+  background-position: 25%;
+  margin-top: -50px;
+  .step--text {
+    margin-top: 0;
+  }
+}
