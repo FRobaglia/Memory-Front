@@ -170,7 +170,7 @@ function UserAccountPage() {
             </button>
           </div>
         </nav>
-        <div className="wrapper--flex">
+        <div className="wrapper--flex userAccount__wrapper">
           <SpacesContainer />
           <UserInvitationContainer />
           <RequestAccessContainer />
