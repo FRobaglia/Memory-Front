@@ -102,12 +102,6 @@ main {
   }
 }
 
-.body--espace {
-  main {
-    padding: 0;
-  }
-}
-
 .body--simple {
   main {
     padding: 0;
@@ -290,16 +284,6 @@ h2 {
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
-    }
-    &.headline--parameters {
-      &:after {
-        background-image: url('../assets/icons/settings.svg');
-      }
-    }
-    &.headline--membres {
-      &:after {
-        background-image: url('../assets/icons/members.svg');
-      }
     }
     &.headline--compte {
       &:after {

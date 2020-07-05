@@ -5,7 +5,7 @@ import { useForm, toFormData } from '../../../../utils/forms';
 import CommentService from '../../../../services/CommentService';
 import PostService from '../../../../services/PostService';
 
-function PostCard({ post, index, deletePost }) {
+function PostCard({ post, index, deletePost, subscribers }) {
   const { user } = useContext(UserContext);
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState(post.comments);
@@ -32,35 +32,50 @@ function PostCard({ post, index, deletePost }) {
   }
 
   return (
-    <div style={{ border: '1px solid black' }}>
-      {post.img && <img src={post.img} alt="post img" />}
-      <h1>{post.title}</h1>
-      <p>{post.text}</p>
+    <div className="boxPuzzel boxPuzzel__souvenir">
+      <h1 className="souvenir__headline">{post.title}</h1>
+      <p className="souvenir__text">{post.text}</p>
       {post.images &&
         post.images.map((image) => (
           <img
             src={image.url}
             key={image.id}
             alt="post img"
+            className="souvenir__image"
             width="40px"
             height="40px"
           />
         ))}
       {post.link && <a href={post.link}>Lien</a>}
-      <div>
-        <p style={{ display: 'inline-block' }}>
-          Ecrit par {post.createdBy.firstName} {post.createdBy.lastName}
-          &nbsp;&nbsp;
-        </p>
+      <div className="authorBox">
         <img
           src={post.createdBy.image.url}
           width="40px"
           height="40px"
           alt="profile pic of author"
+          className="authorBox__image"
         />
+        <p className="authorBox__name">
+          Ecrit par {post.createdBy.firstName} {post.createdBy.lastName}
+        </p>
+        {subscribers.map(
+          (subscriber) =>
+            JSON.stringify(post.createdBy) ===
+              JSON.stringify(subscriber.user) && (
+              <p className="authorBox__role" key={post.createdBy.id}>
+                {subscriber.relationDefunct}
+              </p>
+            )
+        )}
       </div>
-      <button type="button" onClick={() => setShowCommentInput(true)}>
-        Ajouter un commentaire
+      <button
+        type="button"
+        className="souvenir__commentairLink"
+        onClick={() => setShowCommentInput(true)}
+      >
+        {comments.length >= 1
+          ? `${comments.length} Commentaires`
+          : 'Pas encore de commentaires'}
       </button>
       {user.id === post.createdBy.id ? (
         <button type="button" onClick={() => deletePost(post.id, index)}>

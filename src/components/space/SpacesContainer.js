@@ -12,7 +12,7 @@ function SpacesContainer() {
 
   useEffect(() => {
     getSpaces();
-  }, [userSpaces]);
+  }, []);
 
   async function getSpaces() {
     const data = await SpaceService.getUserSpaces();
@@ -25,6 +25,7 @@ function SpacesContainer() {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       await SpaceService.createNewSpace(data);
+      getSpaces();
     } else {
       setErrorMessage(
         'La date de naissance ne peut pas etre avant la date décès'
