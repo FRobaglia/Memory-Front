@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useHistory } from 'react';
 import { useLocation, Redirect, withRouter, Link } from 'react-router-dom';
 import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
@@ -127,12 +127,14 @@ function SpaceSettingsPage() {
         </div>
       </nav>
       {value && (
-        <>
-          <SpaceSettingsGeneral />
-          <SpaceSettingsInvitations />
-          <SpaceSettingsMembers />
-          <RequestAccessContainer spaceSettings spaceId={spaceId} />
-        </>
+        <main>
+          <div className="wrapper--flex">
+            <SpaceSettingsGeneral />
+            <SpaceSettingsInvitations />
+            <SpaceSettingsMembers />
+            <RequestAccessContainer spaceSettings spaceId={spaceId} />
+          </div>
+        </main>
       )}
     </div>
   );

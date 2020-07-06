@@ -30,7 +30,7 @@ function SpaceSettingsReqAccess() {
   }
 
   return (
-    <div>
+    <section className="section section--invitation members">
       <div>
         <h2>Utilisateurs ayant fait une demande d'accès</h2>
         <ul>
@@ -55,7 +55,7 @@ function SpaceSettingsReqAccess() {
             : waitingSubscribers}
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 

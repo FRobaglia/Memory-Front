@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SpaceService from '../../services/SpaceService';
+import '../../styles/layout/line.scss';
 
 function RequestAccessContainer() {
   const [requestAccess, setRequestAccess] = useState([]);
@@ -24,7 +25,10 @@ function RequestAccessContainer() {
         <h2>Demande d'accès reçues pour :</h2>
         {requestAccess &&
           requestAccess.map((space) => (
-            <div key={space.id}>
+            <div className="line--member line--member--demand" key={space.id}>
+              <div className="line--member__image">
+                <img src={space.image.url} alt={space.firstName} />
+              </div>
               <h3 className="group__Headline__text">
                 l'espace de {space.firstName} {space.lastName}
               </h3>
@@ -52,6 +56,7 @@ function RequestAccessContainer() {
               </div>
             </div>
           ))}
+        {!requestAccess && <p>Aucun utilisateur en attente d'accès</p>}
       </div>
     </section>
   );

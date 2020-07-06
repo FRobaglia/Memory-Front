@@ -37,72 +37,98 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
   }
 
   return (
-    <div>
-      <h1>
-        {account
-          ? "Demandes d'accès aux espaces"
-          : "Demandes d'accès a l'espace"}
-      </h1>
-      {account &&
-        requestAccess &&
-        requestAccess.map((space) => (
-          <div key={space.id}>
-            <h2>
-              Espace de {space.firstName}
-              {space.lastName}
-            </h2>
-            <div>
-              {space.users.map((user) => (
-                <div key={user.id}>
-                  <p>
-                    {user.firstName}
-                    {user.lastName}
-                  </p>
-                  <span>{user.relation.text}</span>
+    <section className="section section--invitation demandAcess">
+      <div className="section__content">
+        <h2>
+          {account
+            ? "Demandes d'accès aux espaces"
+            : "Demandes d'accès a l'espace"}
+        </h2>
+        {account &&
+          requestAccess &&
+          requestAccess.map((space) => (
+            <div className="line--member line--member--demand" key={space.id}>
+              <div className="line--member__image">
+                <img src={space.image.url} alt={space.firstName} />
+              </div>
+              <h2>
+                Espace de {space.firstName}
+                {space.lastName}
+              </h2>
+              <div>
+                {space.users.map((user) => (
+                  <div key={user.id}>
+                    <p>
+                      {user.firstName}
+                      {user.lastName}
+                    </p>
+                    <span>{user.relation.text}</span>
+                    <button
+                      onClick={() =>
+                        validateSubscriber(
+                          space.id,
+                          user.relation.id_subscriber
+                        )
+                      }
+                      type="button"
+                    >
+                      Accepter la demande
+                    </button>
+                    <button
+                      onClick={() =>
+                        unvalidateSubscriber(
+                          space.id,
+                          user.relation.id_subscriber
+                        )
+                      }
+                      type="button"
+                    >
+                      Refuser la demande
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        {spaceSettings &&
+          waitingSubscribers instanceof Array &&
+          waitingSubscribers.map((subscriber) => (
+            <div
+              className="line--member line--member--demand"
+              key={subscriber.user.id}
+            >
+              <div className="line--member__image">
+                <img
+                  src={subscriber.user.image.url}
+                  alt={subscriber.user.firstName}
+                />
+              </div>
+              <div className="line--member__text">
+                <p className="line--member__text__text">
+                  {subscriber.user.firstName} {subscriber.user.lastName}
+                </p>
+                <p className="line--member__text__role">
+                  {subscriber.relationDefunct}
+                </p>
+                <div className="line--member--demand__buttonGroup">
                   <button
-                    onClick={() =>
-                      validateSubscriber(space.id, user.relation.id_subscriber)
-                    }
+                    className="button button--strong button--full  button--inForm line--member__button--accept"
+                    onClick={() => validateSubscriber(spaceId, subscriber.id)}
                     type="button"
                   >
                     Accepter la demande
                   </button>
                   <button
-                    onClick={() =>
-                      unvalidateSubscriber(
-                        space.id,
-                        user.relation.id_subscriber
-                      )
-                    }
-                    type="button"
-                  >
-                    Refuser la demande
-                  </button>
+                    className="button button--delte line--member__delte"
+                    onClick={() => unvalidateSubscriber(spaceId, subscriber.id)}
+                    type="submit"
+                  />
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        ))}
-      {spaceSettings &&
-        waitingSubscribers instanceof Array &&
-        waitingSubscribers.map((subscriber) => (
-          <li key={subscriber.user.id}>
-            Nom: {subscriber.user.firstName}
-            <button
-              onClick={() => validateSubscriber(spaceId, subscriber.id)}
-              type="button"
-            >
-              Accepter la demande
-            </button>
-            <button
-              onClick={() => unvalidateSubscriber(spaceId, subscriber.id)}
-              type="button"
-            >
-              Refuser la demande
-            </button>
-          </li>
-        ))}
-    </div>
+          ))}
+      </div>
+    </section>
   );
 }
 

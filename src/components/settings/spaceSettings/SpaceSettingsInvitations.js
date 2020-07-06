@@ -27,37 +27,52 @@ function SpaceSettingsInvitations() {
   }
 
   return (
-    <div>
-      <h1>Invitations</h1>
-      {/* {console.log('rac', textInvitation)} */}
-      <form method="post" onSubmit={sendInvitation}>
-        <label htmlFor="textInvitation">
-          Texte d'invitation
-          <textarea
-            placeholder="Vous avez récemment appris la disparition de Janine..."
-            required
-            name="textInvitation"
-            id="textInvitation"
-            onChange={handleChange}
-            value={values.textInvitation || textInvitation}
-          />
-        </label>
-        <label htmlFor="email">
-          Adresse e-mail
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="test@example.com"
-            value={values.email || ''}
-            onChange={handleChange}
-          />
-        </label>
-        <input type="submit" value="Inviter à rejoindre l'espace" />
-      </form>
-      {isAlreadyInvited && <p>Ce destinataire a déjà été invité</p>}
-      {successfulInvitation && <p>Invitation envoyé!</p>}
-    </div>
+    <section className="section section--info info">
+      <div className="section__content">
+        <h2>Invitations</h2>
+        <div className="textGroup">
+          <form method="post" onSubmit={sendInvitation}>
+            <h3>Texte d'invitation</h3>
+            <p className="text">
+              Ce texte constituera le message d'invitation reçu par email
+            </p>
+            <div className="input">
+              <label htmlFor="textInvitation" className="input__label">
+                Message d'invitation
+              </label>
+              <textarea
+                className="input__field"
+                placeholder="Vous avez récemment appris la disparition de Janine..."
+                required
+                name="textInvitation"
+                id="textInvitation"
+                onChange={handleChange}
+                value={values.textInvitation || textInvitation}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="email" className="input__label">
+                Adresse e-mail
+              </label>
+              <input
+                className="input__field"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="test@example.com"
+                value={values.email || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <button className="button button--full" type="submit">
+              Inviter à rejoindre l'espace
+            </button>
+          </form>
+        </div>
+        {isAlreadyInvited && <p>Ce destinataire a déjà été invité</p>}
+        {successfulInvitation && <p>Invitation envoyé!</p>}
+      </div>
+    </section>
   );
 }
 
