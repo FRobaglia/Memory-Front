@@ -1,5 +1,5 @@
 import React from 'react';
-import settingIcon from '../../../assets/icons/settings.svg';
+import ModifyIcon from '../../../assets/icons/settings.svg';
 
 function UploadInput({
   labelText,
@@ -19,7 +19,7 @@ function UploadInput({
         {img && (
           <img src={img} alt="pic" className={imgSelected ? 'selected' : ''} />
         )}
-        {imgSelected && <img src={settingIcon} alt="pic" />}
+        {imgSelected && <img src={ModifyIcon} alt="pic" />}
       </label>
       <input
         type="file"
