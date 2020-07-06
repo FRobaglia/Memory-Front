@@ -1,5 +1,5 @@
 import React from 'react';
-import ModifyIcon from '../../../assets/icons/settings.svg';
+import ModifyIcon from '../../../assets/svg/icons/icon-settings.svg';
 
 function UploadInput({
   labelText,

@@ -1,0 +1,42 @@
+@import '../../../styles/config/variables';
+
+.body--loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  top: 35vh;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    background-image: url('../../../assets/svg/puzzelGroup.svg');
+    right: -25%;
+    bottom: -25%;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &:after {
+    transform-origin: left top;
+    @keyframes rotatePuzzel {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    animation: rotatePuzzel 1s linear infinite;
+  }
+}
