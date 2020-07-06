@@ -27,7 +27,7 @@ function SpaceMemoryPage() {
   );
   const [subscribeMessage, setSubscribeMessage] = useState('');
   const { user } = useContext(UserContext);
-  const { value, setValue } = useContext(SpaceContext);
+  const { setValue } = useContext(SpaceContext);
   const [showPostForm, setShowPostForm] = useState({
     allForm: false,
     title: false,

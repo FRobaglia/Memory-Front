@@ -1,13 +1,10 @@
 import React from 'react';
+import './_loading.scss';
 
 function Loading() {
   return (
-    <div>
-      Fetching user data... Ici, peut-être une animation super classe, tout en
-      restant sobre évidemment ?{' '}
-      <span role="img" aria-label="emoji">
-        😎😎😎
-      </span>{' '}
+    <div className="body--loader">
+      <div className="loader" />
     </div>
   );
 }
