@@ -25,8 +25,10 @@ function UserAccountPage() {
   // Changing backgroundcolor navbar
   const listener = document.addEventListener('scroll', () => {
     // window.addEventListener('DOMContentLoaded', () => {
-    const navSlider = document.querySelector('.nav--slider');
+    // const navSlider = document.querySelector('.nav--slider');
+    const navSlider = navSliderElementRef.current;
     // setNavSliderElement(navSlider)
+    if (!navSlider) return false;
     const scrolled = document.scrollingElement.scrollTop;
     if (scrolled > 120) {
       if (navPosition !== 'violet') {
