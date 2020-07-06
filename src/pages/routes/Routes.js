@@ -40,7 +40,7 @@ function Routes() {
         />
         <RestrictedRoute path="/admin" exact component={BackOfficePage} />
         <RestrictedRoute
-          path="/space/:slug/settings/:slug"
+          path="/space/:slug/settings/"
           exact
           component={SpaceSettingsPage}
         />

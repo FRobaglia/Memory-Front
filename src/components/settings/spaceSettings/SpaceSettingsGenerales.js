@@ -16,7 +16,7 @@ function SpaceSettingsGenerales() {
   if (deleteSuccess) return <Redirect to="/account" />;
   return (
     <div>
-      {console.log('geez', value.space)}
+      {/* {console.log('geez', value.space)} */}
       {value.space && (
         <>
           <h1>

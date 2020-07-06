@@ -20,11 +20,10 @@ function SpaceCard({ space, backOffice, validateSpace, index, role }) {
       {role === 'ACCESS_USER_MANAGER' && (
         <Link
           to={{
-            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/general`,
+            pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/`,
             state: { id: `${space.id}` },
           }}
           className="spaceCard__settings--link"
-          target="_blank"
         >
           <p className="spaceCard__settings--status">Manager de l'espace</p>
           <img

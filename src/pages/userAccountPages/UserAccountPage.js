@@ -79,23 +79,6 @@ function UserAccountPage() {
 
     // navSliderElementRef.current = document.querySelector('.nav--slider');
     console.log(navSliderElementRef.current);
-
-    // listener = document.addEventListener('scroll', () => {
-    //   // window.addEventListener('DOMContentLoaded', () => {
-    //   const scrolled = document.scrollingElement.scrollTop;
-    //   if (scrolled > 120) {
-    //     if (navPosition !== 'violet') {
-    //       setNavPosition('violet');
-    //       navSliderElementRef.current.style.position = 'fixed';
-    //       navSliderElementRef.current.style.top = '65px';
-    //     }
-    //   } else if (navPosition !== 'top') {
-    //     setNavPosition('top');
-    //     navSliderElementRef.current.style.position = 'relative';
-    //     navSliderElementRef.current.style.top = 'auto';
-    //   }
-    //   // });
-    // });
   }, [listener]);
 
   return (
