@@ -27,7 +27,7 @@ function SpaceMemoryPage() {
   );
   const [subscribeMessage, setSubscribeMessage] = useState('');
   const { user } = useContext(UserContext);
-  const { setValue } = useContext(SpaceContext);
+  const { value, setValue } = useContext(SpaceContext);
   const [showPostForm, setShowPostForm] = useState({
     allForm: false,
     title: false,
@@ -190,7 +190,7 @@ function SpaceMemoryPage() {
           <Link to="/account">
             <img className="icon-left-corner" src={IconBack} alt="icon back" />
           </Link>
-          {JSON.stringify(space.createdBy) === JSON.stringify(user) ? (
+          {space.createdBy && space.createdBy.id === user.id ? (
             <Link
               to={{
                 pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/general`,
@@ -354,7 +354,6 @@ function SpaceMemoryPage() {
         </button>
         <button type="submit">poster un souvenir</button>
       </form>
-      )
       <main>
         {spaceData.posts &&
           spaceData.posts.map((post, index) => (

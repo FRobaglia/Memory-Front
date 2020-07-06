@@ -43,9 +43,14 @@
   }
 }
 
-.button--delte {
-  // background-image: url('../images/icons/icon--delte.svg');
-  background-repeat: no-repeat;
+.delete-button {
+  border: none;
+  background-color: transparent;
+  &--souvenir {
+    position: absolute;
+    top: 25px;
+    right: 5px;
+  }
 }
 
 .button--full {

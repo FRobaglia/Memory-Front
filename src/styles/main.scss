@@ -155,69 +155,6 @@ h2 {
   }
 }
 
-.box--profilimage {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  position: relative;
-  // position: absolute;
-  // top:-60px;
-  // left:50%;
-  //transform: translateX(-50%) scale(1.1);
-  //z-index: 3;
-  border: solid 4px #423977;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 90%;
-  }
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    // background-image: url('../images/icons/puzzelGroup.svg');
-    right: -20px;
-    bottom: -20px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  &:after {
-    transform-origin: left top;
-    @keyframes rotatePuzzel {
-      0% {
-        transform: rotate(0deg);
-      }
-      80% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    //animation: rotatePuzzel 3s infinite -1.5s;
-  }
-  &:before {
-    bottom: -20px;
-    right: -20px;
-    transform-origin: left top;
-    @keyframes rotatePuzzel {
-      0% {
-        transform: rotate(0deg);
-      }
-      80% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    //animation: rotatePuzzel 3s infinite 0s;
-  }
-}
-
 .scroll--no {
   //overflow-y: hidden;
   max-height: 100vh;

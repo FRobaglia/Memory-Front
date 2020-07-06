@@ -1,13 +1,18 @@
 import React, { useContext, useState } from 'react';
+import AwesomeSlider from 'react-awesome-slider';
 import UserContext from '../../../../context/UserContext';
 import UploadInput from '../../../utilsTemplates/UploadInput/UploadInput';
 import { useForm, toFormData } from '../../../../utils/forms';
 import CommentService from '../../../../services/CommentService';
 import PostService from '../../../../services/PostService';
+import 'react-awesome-slider/dist/styles.css';
+import UploadCommentImage from '../../../../assets/svg/icons/icon-comment-image-upload.svg';
+import ArrowIcon from '../../../../assets/svg/icons/icon-arrow-left.svg';
+import TrashIcon from '../../../../assets/svg/icons/icon-trash.svg';
 
 function PostCard({ post, index, deletePost, subscribers }) {
   const { user } = useContext(UserContext);
-  const [showCommentInput, setShowCommentInput] = useState(false);
+  const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState(post.comments);
   const [values, handleChange] = useForm();
 
@@ -27,36 +32,44 @@ function PostCard({ post, index, deletePost, subscribers }) {
     const refreshedPost = await PostService.getPost(post.id);
     if (refreshedPost.post) {
       setComments(refreshedPost.post.comments);
-      setShowCommentInput(false);
     }
   }
 
   return (
     <div className="boxPuzzel boxPuzzel__souvenir">
+      {user.id === post.createdBy.id && (
+        <button
+          type="button"
+          className="delete-button delete-button--souvenir"
+          onClick={() => deletePost(post.id, index)}
+        >
+          <img src={TrashIcon} alt="" />
+        </button>
+      )}
+      {post.images.length > 1 && (
+        <AwesomeSlider bullets={false} className="souvenir__image">
+          {post.images.map((image) => (
+            <div key={image.id}>
+              <img src={image.url} alt="post img" />
+            </div>
+          ))}
+        </AwesomeSlider>
+      )}
       <h1 className="souvenir__headline">{post.title}</h1>
       <p className="souvenir__text">{post.text}</p>
-      {post.images &&
-        post.images.map((image) => (
-          <img
-            src={image.url}
-            key={image.id}
-            alt="post img"
-            className="souvenir__image"
-            width="40px"
-            height="40px"
-          />
-        ))}
-      {post.link && <a href={post.link}>Lien</a>}
+
+      {post.link && (
+        <a href={post.link} className="button souvenir__button">
+          Lien vers {post.title}
+        </a>
+      )}
       <div className="authorBox">
-        <img
-          src={post.createdBy.image.url}
-          width="40px"
-          height="40px"
-          alt="profile pic of author"
+        <div
           className="authorBox__image"
+          style={{ backgroundImage: `url(${post.createdBy.image.url})` }}
         />
         <p className="authorBox__name">
-          Ecrit par {post.createdBy.firstName} {post.createdBy.lastName}
+          {post.createdBy.firstName} {post.createdBy.lastName}
         </p>
         {subscribers.map(
           (subscriber) =>
@@ -68,63 +81,100 @@ function PostCard({ post, index, deletePost, subscribers }) {
             )
         )}
       </div>
-      <button
-        type="button"
-        className="souvenir__commentairLink"
-        onClick={() => setShowCommentInput(true)}
+      <div
+        className="souvenir__commentaire--Link"
+        onClick={() =>
+          showComments ? setShowComments(false) : setShowComments(true)
+        }
+        role="button"
+        tabIndex="0"
+        onKeyPress={() =>
+          showComments ? setShowComments(false) : setShowComments(true)
+        }
       >
-        {comments.length >= 1
-          ? `${comments.length} Commentaires`
-          : 'Pas encore de commentaires'}
-      </button>
-      {user.id === post.createdBy.id ? (
-        <button type="button" onClick={() => deletePost(post.id, index)}>
-          Supprimer le post
-        </button>
-      ) : (
-        ''
-      )}
-      <h3>Commentaires :</h3>
-      {comments.map((comment) => (
-        <div key={comment.id}>
-          <strong> {comment.text} </strong>
-          <em>
-            écrit par {comment.createdBy.firstName} {comment.createdBy.lastName}
-          </em>
-          {comment.createdBy.id === user.id ? (
-            <button
-              type="button"
-              onClick={() => {
-                deleteComment(comment.id);
+        <p>
+          {comments.length >= 1
+            ? `${comments.length} Commentaires`
+            : 'Pas encore de commentaires'}
+        </p>
+        <img
+          src={ArrowIcon}
+          alt="arrow icon to show comments"
+          style={{ transform: showComments && 'rotate(90deg)' }}
+        />
+      </div>
+
+      {showComments && (
+        <div className="souvenir__commentaire--block">
+          {comments.map((comment) => (
+            <div className="souvenir__commentaire" key={comment.id}>
+              <div
+                className="souvenir__commentaire--author-image"
+                style={{
+                  backgroundImage: `url(${comment.createdBy.image.url})`,
+                }}
+              />
+              <div className="souvenir__commentaire--box">
+                <div className="souvenir__commentaire--head">
+                  <p className="souvenir__commentaire--author">
+                    {comment.createdBy.firstName} {comment.createdBy.lastName}
+                  </p>
+                  {console.log(comment.image)}
+                  {comment.createdBy.id === user.id && (
+                    <button
+                      type="button"
+                      className="delete-button"
+                      onClick={() => {
+                        deleteComment(comment.id);
+                      }}
+                    >
+                      <img src={TrashIcon} alt="" />
+                    </button>
+                  )}
+                </div>
+                <p className="souvenir__commentaire--text">{comment.text} </p>
+                {comment.image && (
+                  <img src={comment.image.url} alt="comment pic" />
+                )}
+              </div>
+            </div>
+          ))}
+          <form
+            className="souvenir__commentaire--form"
+            method="post"
+            onSubmit={addComment}
+          >
+            <UploadInput
+              img={UploadCommentImage}
+              specificFieldName="commentImage"
+              handleChange={(e) => {
+                handleChange(e);
               }}
-            >
-              Supprimer mon commentaire
-            </button>
-          ) : (
-            ''
-          )}
-        </div>
-      ))}
-      {showCommentInput && (
-        <form method="post" onSubmit={addComment}>
-          <UploadInput
-            labelText="Ajouter une image"
-            specificFieldName="commentImage"
-            handleChange={handleChange}
-          />
-          <label htmlFor="text">
-            Texte de mon commentaire :
-            <textarea
-              placeholder="Super photo... !"
-              required
-              name="text"
-              id="text"
-              onChange={handleChange}
-              value={values.text || ''}
             />
-          </label>
-          <input type="submit" value="ajouter mon commentaire" />
-        </form>
+            <div className="image-preview">
+              {values.commentImage && (
+                <img
+                  src={URL.createObjectURL(values.commentImage)}
+                  alt="commentpic"
+                  width="100"
+                  height="100"
+                  className=""
+                />
+              )}
+              <label htmlFor="text">
+                <textarea
+                  placeholder="Super photo... !"
+                  required
+                  name="text"
+                  id="text"
+                  onChange={handleChange}
+                  value={values.text || ''}
+                />
+              </label>
+            </div>
+            <input type="submit" value="" />
+          </form>
+        </div>
       )}
     </div>
   );

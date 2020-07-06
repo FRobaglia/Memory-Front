@@ -1,10 +1,15 @@
 @import '../../styles/config/variables';
 @import '../../styles/layout/button';
+@import '../layout/forms';
 
 .nav--espace {
   display: flex;
   justify-content: space-between;
   padding: 15px 15px 0;
+  position: fixed;
+  z-index: 4;
+  width: 100%;
+  background-color: $color--light;
   .icon-left-corner {
     width: 15px;
   }
@@ -161,13 +166,12 @@
 
 .body--espace {
   background-color: $color--light;
-  margin-bottom: 10vh;
   main {
     // margin-top: 50vh;
     margin-top: 0vh;
     padding: 0;
     @include min-sm {
-      margin-top: 50vh;
+      // margin-top: 50vh;
     }
     z-index: 3;
     position: relative;
@@ -175,23 +179,19 @@
     flex-direction: column;
     align-items: center;
     max-width: 500px;
-  }
-
-  .souvenir__commentairLink {
-    font-weight: 300;
-    font-size: 10px;
-    line-height: 12px;
-    align-self: flex-start;
-    text-align: left;
+    margin: auto;
   }
 }
 
 .authorBox {
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .authorBox__name {
     color: #423977;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 11px;
     line-height: 16px;
   }
   .authorBox__role {
@@ -204,31 +204,28 @@
     height: 40px;
     margin-bottom: 5px;
     border-radius: 50%;
-    overflow: hidden;
+    background-position: center top;
+    background-size: cover;
   }
 }
 
 .boxPuzzel__souvenir {
   // opacity: 0;
-  transform: translateY(-50px);
+  // transform: translateY(-50px);
   transition: all 0.5s;
-  // max-width: 500px;
+  max-width: 500px;
 
   &:first-child {
     margin-top: 0;
   }
   padding-top: 90px;
   &::after {
-    //background-image: url("../images/icons/pizzelBorder--pink--bottom.svg");
     background-image: url('../../assets/svg/white-border.svg');
-    //transform:rotate(180deg);
     background-color: #ede7f2;
   }
   &::before {
     background-image: url('../../assets/svg/pink-border.svg');
-    //transform:rotate(180deg);
-    background-color: #fff;
-    //display: none;
+    // background-color: #fff;
   }
   .souvenir__text {
     font-weight: normal;
@@ -246,13 +243,113 @@
     margin-bottom: 30px;
   }
   .souvenir__image {
-    width: 100%;
     margin-bottom: 30px;
     width: calc(100% + 30px);
-    //left: -15px;
+    max-width: calc(100% + 30px);
     position: relative;
     img {
       width: 100%;
+    }
+  }
+  .souvenir__commentaire--Link {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    p {
+      font-weight: 300;
+      font-size: 10px;
+      line-height: 12px;
+      text-align: left;
+    }
+    img {
+      width: 7px;
+      transform: rotate(-90deg);
+      transition: ease-in-out 0.4s;
+    }
+  }
+  .souvenir__commentaire--block {
+    width: 100%;
+    border-top: 1px solid #b7b5cc;
+  }
+  .souvenir__commentaire {
+    display: flex;
+    margin: 15px 0 0;
+    &:nth-last-child(n-1) {
+      margin-bottom: 15px;
+    }
+    .souvenir__commentaire--text {
+      margin-bottom: 10px;
+    }
+    .souvenir__commentaire--author-image {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      background-position: center top;
+      background-size: cover;
+    }
+    .souvenir__commentaire--box {
+      flex: auto;
+      background-color: #f2f2f0;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: left;
+      font-family: $roboto-light;
+      font-size: 10px;
+      line-height: 12px;
+      color: #000;
+      max-width: 300px;
+
+      .souvenir__commentaire--author {
+        font-family: $roboto-bold;
+      }
+    }
+    .souvenir__commentaire--head {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+  .souvenir__commentaire--form {
+    border-top: 1px solid #b7b5cc;
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+    padding-top: 15px;
+    .image-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 250px;
+      padding: 0 10px;
+      img {
+        margin-bottom: 10px;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .upload {
+      label {
+        width: 30px;
+        height: 20px;
+      }
+    }
+    textarea {
+      width: 250px;
+    }
+    input[type='file'] {
+      display: none;
+    }
+    input[type='submit'] {
+      background-image: url('../../assets/svg/icons/icon-send.svg');
+      background-repeat: no-repeat;
+      background-color: $color--strong;
+      background-position: center;
+      overflow: hidden;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      border: none;
     }
   }
 }
