@@ -35,6 +35,24 @@ function PostCard({ post, index, deletePost, subscribers }) {
     }
   }
 
+  function showPostOnLoad() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0px)';
+          }
+        });
+      },
+      { rootMargin: '0px 0px -30% 0px' }
+    );
+    document.querySelectorAll('.boxPuzzel__souvenir').forEach((souvenir) => {
+      observer.observe(souvenir);
+    });
+  }
+  showPostOnLoad();
+
   return (
     <div className="boxPuzzel boxPuzzel__souvenir">
       {user.id === post.createdBy.id && (

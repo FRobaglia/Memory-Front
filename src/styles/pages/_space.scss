@@ -210,8 +210,8 @@
 }
 
 .boxPuzzel__souvenir {
-  // opacity: 0;
-  // transform: translateY(-50px);
+  opacity: 0;
+  transform: translateY(-50px);
   transition: all 0.5s;
   max-width: 500px;
 
@@ -314,7 +314,6 @@
     border-top: 1px solid #b7b5cc;
     display: flex;
     justify-content: space-between;
-    // align-items: center;
     padding-top: 15px;
     .image-preview {
       display: flex;
