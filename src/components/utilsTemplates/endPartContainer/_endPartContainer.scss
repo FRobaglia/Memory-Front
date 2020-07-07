@@ -1,0 +1,57 @@
+@import '../../../styles/config/variables';
+@import '../../../styles/layout/forms';
+
+.end-container {
+  text-align: center;
+  section {
+    margin-top: 45px;
+  }
+  .space-error-message {
+    font-family: $roboto-light;
+    font-size: 12px;
+    text-align: justify;
+    line-height: 17px;
+    margin-bottom: 20px;
+  }
+  form {
+    text-align: left;
+    .input__label {
+      margin-bottom: 30px;
+    }
+    .subscriber-buttons {
+      width: 100%;
+      text-align: center;
+      .button {
+        margin-top: 15px;
+      }
+    }
+    .button {
+      margin-top: 75px;
+    }
+  }
+  .wrapper--flex {
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+    justify-content: center;
+    &--join-space {
+      justify-content: flex-start;
+    }
+  }
+  .end-container--text {
+    font-family: $roboto-medium;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: $color--strong;
+    max-width: 280px;
+  }
+  .end-container--image {
+    background-image: url('../../../assets/svg/plane-sent-lady.svg');
+    width: 100%;
+    height: 80px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 30px 0 45px;
+  }
+}

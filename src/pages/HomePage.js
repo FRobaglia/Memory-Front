@@ -84,10 +84,10 @@ function Home() {
                 <img className="services--icon" src={lockIcon} alt="" />
                 <p>Vos espaces sont strictemtent personels</p>
               </li>
-              <li className="services--item">
+              {/* <li className="services--item">
                 <img className="services--icon" src={tree} alt="" />
                 <p>Le support du hors ligne vous permet d'y accedez partout</p>
-              </li>
+              </li> */}
               <li className="services--item">
                 <img className="services--icon" src={noSound} alt="" />
                 <p>Pas déranger par des notifications</p>

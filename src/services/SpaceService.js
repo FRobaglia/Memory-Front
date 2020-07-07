@@ -185,6 +185,11 @@ class SpaceService {
   }
 
   static errorMessageSpace(status) {
+    const spaceDataArray = window.location.pathname
+      .substring(window.location.pathname.lastIndexOf('/') + 1)
+      .split('-');
+    const spaceName = `${spaceDataArray[0]} ${spaceDataArray[1]}`;
+    console.log(spaceName);
     let message = '';
     switch (status) {
       case 'SPACE_NOT_VALIDATED':
@@ -199,8 +204,7 @@ class SpaceService {
           "Votre demande d'accès est en cours de traitement par le manager de l'espace";
         break;
       case 'SPACE_INVITATION_WAITING':
-        message =
-          "Vous avez été invité a rejoindre cet espace de recueillement. Merci d'indiquer la relation  avec le/la défunt(e)";
+        message = `Vous avez été invité a rejoindre l'espace de recueillement dédié a ${spaceName}. Merci d'indiquer la relation  avec le/la défunt(e)`;
         break;
       default:
         message =

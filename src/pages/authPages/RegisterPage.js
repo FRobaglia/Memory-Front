@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import RegisterForm from '../../components/auth/registerForm/RegisterForm';
+import EndPartContainer from '../../components/utilsTemplates/endPartContainer/EndPartContainer';
 import '../../styles/pages/_registerPage.scss';
 
 function RegisterPage() {
@@ -8,16 +8,11 @@ function RegisterPage() {
   return (
     <div className="register">
       {registered ? (
-        <div className="registered">
-          <div className="header header--puzzle" />
-          <div className="wrapper--flex">
-            <h1 className="registered--text">Ton compte a bien été crée</h1>
-            <div className="registered--image" />
-            <Link to="/login" className="button button--full">
-              Me connecter
-            </Link>
-          </div>
-        </div>
+        <EndPartContainer
+          endMessage="Votre compte a bien été crée"
+          endButtonLink="/login"
+          endButtonText="Me connecter"
+        />
       ) : (
         <div>
           <div className="header header--sitting" />

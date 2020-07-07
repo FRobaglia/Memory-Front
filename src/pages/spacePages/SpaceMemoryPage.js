@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
@@ -11,9 +11,11 @@ import '../../styles/pages/_space.scss';
 import IconSettings from '../../assets/svg/icons/icon-settings.svg';
 import IconMembers from '../../assets/svg/icons/icon-members.svg';
 import IconBack from '../../assets/svg/icons/icon-arrow-left.svg';
+import EndPartContainer from '../../components/utilsTemplates/endPartContainer/EndPartContainer';
+import ErrorImage from '../../assets/svg/door-guy.svg';
+import JoinSpace from '../../components/space/joinSpace/JoinSpace';
 
 function SpaceMemoryPage() {
-  const [requestAccessValues, handlerequestAccessChange] = useForm();
   const [spaceData, setSpaceData] = useState({});
   const [space, setSpace] = useState({});
   const [showInvitedUserButton, setInvitedUserButton] = useState();
@@ -22,10 +24,6 @@ function SpaceMemoryPage() {
   const [messageButton, setMessageButton] = useState(
     "Demander l'accès a cet espace"
   );
-  const [isUserAlreadyRequestAccess, setUserAlreadyRequestAccess] = useState(
-    false
-  );
-  const [subscribeMessage, setSubscribeMessage] = useState('');
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const [showPostForm, setShowPostForm] = useState({
@@ -85,75 +83,29 @@ function SpaceMemoryPage() {
     getSpaceMemoryData();
   }
 
-  async function sendRequestAccess(event) {
-    event.preventDefault();
-    const data = toFormData(requestAccessValues);
-    const result = await SpaceService.subcribeToSpace(spaceId, data);
-    console.log('rt', result);
-    if (result === 'USER_ALREADY_REQUEST_SUBSCRIPTION') {
-      setUserAlreadyRequestAccess(true);
-      setSubscribeMessage('');
-    } else {
-      setSubscribeMessage('Votre demande a bien été envoyé');
-    }
-  }
-
   // Unenable space memory
   if (spaceErrorMessage && !showInvitedUserButton && !showSubscriberButton) {
     return (
-      <div>
-        <p>Pas cool</p>
-        <p>{spaceErrorMessage}</p>
-        <Link to="/account">Mon compte personnel</Link>
-      </div>
+      <EndPartContainer
+        endMessage={spaceErrorMessage}
+        endImage={ErrorImage}
+        endButtonLink="/account"
+        endButtonText="Revenir a mes espaces"
+      />
     );
   }
   if ((spaceErrorMessage && showInvitedUserButton) || showSubscriberButton) {
     // SUBSCRIBERS
     return (
-      <div>
-        <p>{spaceErrorMessage}</p>
-        <form method="post" onSubmit={sendRequestAccess}>
-          <label htmlFor="requestAccess">
-            Relation avec le/la défunt
-            <input
-              type="text"
-              name="relationDefunctText"
-              id="relationDefunctText"
-              value={requestAccessValues.relationDefunctText || ''}
-              onChange={handlerequestAccessChange}
-            />
-          </label>
-          {showSubscriberButton && ( // BUTTON
-            <>
-              <button type="submit">{messageButton}</button>
-              {subscribeMessage && <p>{subscribeMessage}</p>}
-              <Link to="/account">Mon compte personnel</Link>
-            </>
-          )}
-          {showInvitedUserButton && ( // INVITED BUTTON
-            <button
-              type="submit"
-              onClick={() =>
-                setTimeout(() => {
-                  window.location.reload(false);
-                }, 2000)
-              }
-            >
-              {messageButton}
-            </button>
-          )}
-        </form>
-        {isUserAlreadyRequestAccess && (
-          <p>
-            Vous avez déjà fait la demande pour accéder à cet espace. L'espace
-            sera accessible une fois votre demande acceptée.
-          </p>
-        )}
-      </div>
+      <JoinSpace
+        spaceId={spaceId}
+        spaceErrorMessage={spaceErrorMessage}
+        showSubscriberButton={showSubscriberButton}
+        showInvitedUserButton={showInvitedUserButton}
+        messageButton={messageButton}
+      />
     );
   }
-
   return (
     <div className="body--espace">
       <button
