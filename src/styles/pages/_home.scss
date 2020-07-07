@@ -1,33 +1,47 @@
 @import '../config/variables';
 @import '../layout/button';
 
-.login {
-  height: 100vh;
+.home {
   .wrapper--flex {
+    flex-direction: column;
     section {
-      padding: 0 15px;
+      padding: 0;
+    }
+  }
+  .button {
+    text-decoration: none;
+    text-align: center;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 15px 15px 0;
+    // position: fixed;
+    .header--logo {
+      color: $color--strong;
+      font-family: $roboto-bold;
+    }
+    .button--connexion {
+      padding: 10px;
+      width: 90px;
+      background-color: transparent;
+      &:hover {
+        color: $color--strong;
+      }
     }
   }
 }
 
-.button {
-  text-decoration: none;
-  text-align: center;
-}
-.wrapper--flex {
-  flex-direction: column;
-  section {
-    padding: 0;
-  }
-}
 .identity {
   background-color: $color--light;
-  background-image: url('../../assets/svg/sitting-lady-puzzle.svg');
+  background-image: url('../../assets/svg/sitting-lady.svg');
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center top 60%;
-  height: 530px;
-  margin: auto;
+  background-size: 40%;
+  background-position: right bottom -40px;
+  height: 60vh;
   .identity--text {
     font-family: $roboto-light;
     color: $color--strong;

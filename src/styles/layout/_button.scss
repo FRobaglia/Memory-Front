@@ -73,13 +73,10 @@
 .button--strong {
   background-color: $color--strong;
   color: #fff;
-  a {
-    color: #fff;
+  &:hover {
+    background-color: #fff;
+    color: $color--strong;
   }
-  // &:hover{
-  //   background-color: #fff;
-  //   border:solid 1px $color--strong;
-  // }
 }
 
 .button--add {
