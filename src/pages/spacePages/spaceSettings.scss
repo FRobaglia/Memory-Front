@@ -63,3 +63,9 @@
 .spaceSettings__container {
   flex-direction: row;
 }
+
+@media (min-width: 751px) {
+  .spaceSettings__main {
+    margin: 0 auto;
+  }
+}
