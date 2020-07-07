@@ -3,6 +3,11 @@
 a {
   text-decoration: none;
 }
+.userAccount__body {
+  .wrapper--flex {
+    width: 700vw;
+  }
+}
 
 .userAccount__main {
   margin: 0 auto;
