@@ -232,18 +232,21 @@ function CreateSpace() {
                   restrictedFileTypes="application/pdf"
                   handleChange={handleChange}
                 />
+                {/* {isLastStep && (
+                  <button
+                    type="submit"
+                    className="button button--strong button--end"
+                  >
+                    Creer un espace
+                  </button>
+                )} */}
+                <button className="button button--strong" type="submit">
+                  Creer un espace
+                </button>
               </div>
             </section>
-            {/* {isLastStep && (
-              <button
-                type="submit"
-                className="button button--strong button--full button--end button--next"
-              >
-                Creer un espace
-              </button>
-            )} */}
 
-            <button type="submit">Creer un espace</button>
+            {/* <button type="submit">Creer un espace</button> */}
           </form>
         </div>
       </main>

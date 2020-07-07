@@ -82,7 +82,7 @@ function UserAccountPage() {
   }, [listener]);
 
   return (
-    <div className="body--espace userAccount__body">
+    <div className="userAccount__body">
       <nav
         className="userAccount__navContainer header__main"
         style={{
