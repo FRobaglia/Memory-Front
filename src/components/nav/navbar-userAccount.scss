@@ -7,6 +7,9 @@
   margin: 0 auto;
   text-align: center;
   z-index: 100;
+  @media (min-width: 992px) {
+    height: 70px;
+  }
 }
 .userAccount__nav {
   display: flex;
@@ -18,7 +21,7 @@
   padding: 0.5em 1em;
 
   @media (min-width: 992px) {
-    padding: 0 10%;
+    padding: 10px 10%;
   }
 }
 
@@ -28,10 +31,14 @@
   border-radius: 50%;
 }
 
-.userAccount__nav--logo {
-  width: 30px;
-  height: 23px;
-  margin-top: 0.2em;
+// .userAccount__nav--logo {
+//   width: 30px;
+//   height: 23px;
+//   margin-top: 0.2em;
+// }
+
+.userAccount__nav--logoName {
+  font-weight: bold;
 }
 
 .userAccount__navSlider {
