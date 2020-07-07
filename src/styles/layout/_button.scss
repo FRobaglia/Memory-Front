@@ -43,6 +43,11 @@
   }
 }
 
+.button--delte {
+  background-image: url('../../assets/icons/icon--delete.svg');
+  background-repeat: no-repeat;
+}
+
 .delete-button {
   border: none;
   background-color: transparent;
@@ -51,10 +56,6 @@
     top: 25px;
     right: 5px;
   }
-}
-.button--delte {
-  background-image: url('../../assets/icons/icon--delete.svg');
-  background-repeat: no-repeat;
 }
 
 .button--full {
