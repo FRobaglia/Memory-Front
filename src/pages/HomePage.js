@@ -1,31 +1,30 @@
-import React, { useContext } from 'react';
-// import UserContext from '../context/UserContext';
-// import SessionService from '../services/SessionService';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginPage from './authPages/LoginPage';
 import '../styles/pages/_home.scss';
 import StepHome from '../components/utilsTemplates/stepHome/StepHome';
 import firstStepLogo from '../assets/svg/number-1.svg';
 import secondStepLogo from '../assets/svg/number-2.svg';
 import thirdStepLogo from '../assets/svg/number-3.svg';
 import memoryLogo from '../assets/svg/puzzle-logo.svg';
-import lockIcon from '../assets/svg/lock.svg';
-import tree from '../assets/svg/tree.svg';
-import noSound from '../assets/svg/no-sound.svg';
+import lockIcon from '../assets/svg/icons/icon-lock.svg';
+import tree from '../assets/svg/icons/icon-tree.svg';
+import noSound from '../assets/svg/icons/icon-no-sound.svg';
 
-function Home({ location }) {
-  // const { user, setUser } = useContext(UserContext);
-
+function Home() {
   return (
-    <div>
-      <div className="login">
-        <LoginPage location={location} />
+    <div className="home">
+      <div className="header">
+        <Link to="/account" className="header--logo">
+          Memory
+        </Link>
+        <Link to="/login" className="button button--connexion">
+          Connexion
+        </Link>
       </div>
       <div className="wrapper--flex">
         <section>
           <div className="identity section__content">
             <div className="identity--text">
-              <h1 className="identity--title">Memory</h1>
               <p>Rassembler les souvenir de vos proches</p>
             </div>
           </div>
@@ -42,7 +41,7 @@ function Home({ location }) {
                 souvenirs.
               </p>
             </div>
-            <Link to="/account" className="button button--full">
+            <Link to="/account" className="button button--full button--strong">
               + Crée un Espace
             </Link>
           </div>

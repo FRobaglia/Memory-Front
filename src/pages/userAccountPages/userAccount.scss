@@ -3,32 +3,16 @@
 a {
   text-decoration: none;
 }
+.userAccount__body {
+  .wrapper--flex {
+    width: 700vw;
+  }
+}
 
 .userAccount__main {
   margin: 0 auto;
   padding: 0;
   position: relative;
-}
-
-.wrapper--flex {
-  display: flex;
-  width: 700vw;
-  align-items: flex-start;
-  transition: all 0.3s;
-  section {
-    width: 100vw;
-    @include min-sm {
-      max-width: 750px;
-    }
-    padding-left: 15px;
-    padding-right: 15px;
-    //height: 70vh;
-    .section__content {
-      display: flex;
-      // flex-direction: column;
-      align-items: center;
-    }
-  }
 }
 
 .button-link {

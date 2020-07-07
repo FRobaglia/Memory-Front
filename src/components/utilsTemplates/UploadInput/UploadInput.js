@@ -1,5 +1,5 @@
 import React from 'react';
-import ModifyIcon from '../../../assets/svg/icons/icon-settings.svg';
+import ModifyIcon from '../../../assets/svg/icons/icon-modify-image.svg';
 
 function UploadInput({
   labelText,
@@ -7,8 +7,8 @@ function UploadInput({
   isMultiple,
   handleChange,
   restrictedFileTypes,
-  img,
-  imgSelected,
+  labelImg,
+  labelImgSelected,
 }) {
   const fieldName = specificFieldName || 'images';
 
@@ -16,10 +16,20 @@ function UploadInput({
     <div className="upload">
       <label htmlFor={fieldName}>
         {labelText}
-        {img && (
-          <img src={img} alt="pic" className={imgSelected ? 'selected' : ''} />
+        {labelImg && (
+          <img
+            src={labelImg}
+            alt="upload pic"
+            style={{ display: labelImgSelected && 'none' }}
+          />
         )}
-        {imgSelected && <img src={ModifyIcon} alt="pic" />}
+        {labelImgSelected && (
+          <img
+            src={ModifyIcon}
+            className="label-img-selected"
+            alt="modify pic"
+          />
+        )}
       </label>
       <input
         type="file"

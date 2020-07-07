@@ -1,19 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, toFormData } from '../../../utils/forms';
 import validateAuth from '../../../utils/validateAuth';
 import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
 import './_registerForm.scss';
-// import labelImage from '../../../assets/img/add-image.png';
+import LabelImage from '../../../assets/svg/add-image.svg';
 
-function RegisterForm() {
+function RegisterForm({ setIsRegistered }) {
   // Custom hook useForm
   const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState({});
   const { user } = useContext(UserContext);
-  const history = useHistory();
   const [selected, setSelected] = useState(false);
 
   if (user) return <Redirect to="/" />; // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter)
@@ -25,7 +24,7 @@ function RegisterForm() {
       setErrorMessage({});
       const data = toFormData(values);
       await SessionService.createAccount(data, errorMessage, setErrorMessage);
-      history.push('/account');
+      setIsRegistered(true);
     } else {
       setErrorMessage(validateAuth(values));
     }
@@ -36,7 +35,7 @@ function RegisterForm() {
   }
 
   return (
-    <div className="register wrapper--flex slideContainer">
+    <div className="wrapper--flex slideContainer">
       <section className="section">
         <form
           action="/register"
@@ -48,24 +47,28 @@ function RegisterForm() {
             Déja un compte ?
           </Link>
           <h2>Créer un compte</h2>
-
-          {values.userImage && (
-            <div>
-              <img
-                src={URL.createObjectURL(values.userImage)}
-                alt="profilepic"
-                width="100"
-                height="100"
-                className="espace__hero__image"
+          <div className="upload-image-preview">
+            <UploadInput
+              labelImg={LabelImage}
+              specificFieldName="userImage"
+              handleChange={(e) => {
+                handleChange(e);
+                hideLabel();
+              }}
+              labelImgSelected={selected}
+            />
+            {values.userImage && (
+              <div
+                className="image-preview"
+                style={{
+                  backgroundImage: `url(${URL.createObjectURL(
+                    values.userImage
+                  )})`,
+                }}
               />
-            </div>
-          )}
-          <UploadInput
-            img={values.userImage}
-            specificFieldName="userImage"
-            handleChange={handleChange}
-            // imgSelected={}
-          />
+            )}
+          </div>
+
           <div className="input">
             <label htmlFor="lastName" className="input__label">
               Nom
@@ -141,7 +144,6 @@ function RegisterForm() {
           </button>
         </form>
       </section>
-      {/* <Link to="/">Go back Home</Link> */}
     </div>
   );
 }
