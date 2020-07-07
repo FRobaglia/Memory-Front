@@ -1,29 +1,41 @@
 import React, { useContext } from 'react';
 import SpaceContext from '../../../context/SpaceContext';
+import '../../../styles/layout/line.scss';
 
 function SpaceSettingsMembers() {
   const { value } = useContext(SpaceContext);
 
   return (
-    <div>
-      <h1>Hello les membres</h1>
-      {value.subscribers && value.subscribers.map((el) => console.log(el.user))}
-      {value.subscribers &&
-        value.subscribers.map((subscriber) => (
-          <div key={subscriber.user.id}>
-            <h3>
-              <img
-                src={subscriber.user.image.url}
-                alt={subscriber.user.firstName}
-                width="100"
-                height="100"
+    <section className="section section--invitation members">
+      <div className="section__content">
+        <h2>Membres</h2>
+        {/* {value.subscribers && value.subscribers.map((el) => console.log(el.user))} */}
+
+        {value.subscribers &&
+          value.subscribers.map((subscriber) => (
+            <div className="line--member" key={subscriber.user.id}>
+              <div className="line--member__image">
+                <img
+                  src={subscriber.user.image.url}
+                  alt={subscriber.user.firstName}
+                />
+              </div>
+              <div className="line--member__text">
+                <p className="line--member__text__text">
+                  {subscriber.user.firstName} {subscriber.user.lastName}
+                </p>
+                <p className="line--member__text__role">
+                  {subscriber.relationDefunct || 'Non renseigné'}
+                </p>
+              </div>
+              <button
+                className="button button--delte line--member__delte"
+                type="submit"
               />
-              {subscriber.user.firstName} {subscriber.user.lastName}
-            </h3>
-            <p>Relation: {subscriber.relationDefunct || 'a venir'}</p>
-          </div>
-        ))}
-    </div>
+            </div>
+          ))}
+      </div>
+    </section>
   );
 }
 

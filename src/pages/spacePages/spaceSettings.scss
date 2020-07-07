@@ -1,0 +1,65 @@
+@import '../../styles/config/variables';
+
+.spaceSettings__header {
+  height: 50px !important;
+}
+
+.info__intro {
+  display: flex;
+  margin-bottom: 35px;
+  width: 100%;
+  .info__intro__image {
+    width: 68px;
+    height: 69px;
+    border: 2px solid $color--strong;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .info__intro__textBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .info__intro__textBox__headline {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 23px;
+      text-transform: uppercase;
+      color: #423977;
+    }
+    .info__intro__textBox__subheadline {
+      font-weight: bold;
+      font-size: 10.29px;
+      line-height: 12px;
+      color: #423977;
+    }
+  }
+}
+
+.textGroup {
+  margin-bottom: 35px;
+  width: 100%;
+  h3 {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    color: #423977;
+    @include min-sm {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+  .input {
+    margin-top: 30px;
+  }
+  .button--full {
+    width: 100%;
+  }
+}
+
+.switchGroup {
+  max-width: 400px;
+}
+
+.spaceSettings__container {
+  flex-direction: row;
+}

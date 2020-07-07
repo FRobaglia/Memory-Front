@@ -52,6 +52,10 @@
     right: 5px;
   }
 }
+.button--delte {
+  background-image: url('../../assets/icons/icon--delete.svg');
+  background-repeat: no-repeat;
+}
 
 .button--full {
   width: calc(100% - 30px);

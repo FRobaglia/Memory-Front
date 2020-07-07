@@ -6,7 +6,7 @@ import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
 import './_registerForm.scss';
-import labelImage from '../../../assets/img/add-image.png';
+// import labelImage from '../../../assets/img/add-image.png';
 
 function RegisterForm() {
   // Custom hook useForm
@@ -56,18 +56,15 @@ function RegisterForm() {
                 alt="profilepic"
                 width="100"
                 height="100"
-                className=""
+                className="espace__hero__image"
               />
             </div>
           )}
           <UploadInput
-            img={labelImage}
+            img={values.userImage}
             specificFieldName="userImage"
-            handleChange={(e) => {
-              handleChange(e);
-              hideLabel();
-            }}
-            imgSelected={selected}
+            handleChange={handleChange}
+            // imgSelected={}
           />
           <div className="input">
             <label htmlFor="lastName" className="input__label">

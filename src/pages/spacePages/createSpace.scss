@@ -1,0 +1,43 @@
+@import '../../styles/config/variables';
+.header--30vh {
+  .espace__hero {
+    transform: scale(0.7);
+  }
+}
+
+.main__createSpace {
+  margin-top: 0;
+}
+
+.createSpace__button--img {
+  padding: 10px 20px;
+  padding: 14px 25px;
+  display: block;
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  border: solid 1px $color--strong;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  line-height: 12px;
+  color: $color--strong;
+  cursor: pointer;
+  // &:hover{
+  //   background-color: $color--strong;
+  //   color: #fff;
+  // }
+  &:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent; // i.e. Nexus5/Chrome and Kindle Fire HD 7''
+  }
+  &:active {
+    outline: none;
+  }
+}
+
+.createSpace__wrapper {
+  flex-direction: row;
+}

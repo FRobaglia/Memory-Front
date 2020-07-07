@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 import UserContext from '../context/UserContext';
-import SpacesContainer from '../components/space/SpacesContainer';
-import UserInvitationContainer from '../components/space/UserInvitationsContainer';
+import SpacesContainer from '../components/userAccount/SpacesContainer';
+import UserInvitationContainer from '../components/userAccount/UserInvitationsContainer';
 import RequestAccessContainer from '../components/utilsTemplates/requestAccessContainer/RequestAccessContainer';
 import SessionService from '../services/SessionService';
 
