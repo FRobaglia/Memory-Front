@@ -102,12 +102,6 @@ main {
   }
 }
 
-.body--espace {
-  main {
-    padding: 0;
-  }
-}
-
 .body--simple {
   main {
     padding: 0;
@@ -158,69 +152,6 @@ h2 {
   &--alert {
     color: $color--strong;
     font-style: italic;
-  }
-}
-
-.box--profilimage {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  position: relative;
-  // position: absolute;
-  // top:-60px;
-  // left:50%;
-  //transform: translateX(-50%) scale(1.1);
-  //z-index: 3;
-  border: solid 4px #423977;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 90%;
-  }
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    // background-image: url('../images/icons/puzzelGroup.svg');
-    right: -20px;
-    bottom: -20px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  &:after {
-    transform-origin: left top;
-    @keyframes rotatePuzzel {
-      0% {
-        transform: rotate(0deg);
-      }
-      80% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    //animation: rotatePuzzel 3s infinite -1.5s;
-  }
-  &:before {
-    bottom: -20px;
-    right: -20px;
-    transform-origin: left top;
-    @keyframes rotatePuzzel {
-      0% {
-        transform: rotate(0deg);
-      }
-      80% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    //animation: rotatePuzzel 3s infinite 0s;
   }
 }
 
@@ -290,16 +221,6 @@ h2 {
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
-    }
-    &.headline--parameters {
-      &:after {
-        background-image: url('../assets/icons/settings.svg');
-      }
-    }
-    &.headline--membres {
-      &:after {
-        background-image: url('../assets/icons/members.svg');
-      }
     }
     &.headline--compte {
       &:after {
