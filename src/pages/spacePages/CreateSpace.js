@@ -1,4 +1,4 @@
-import React, { useState, useRef, createRef } from 'react';
+import React, { useState, useRef, useEffect, createRef } from 'react';
 import moment from 'moment';
 import { useForm, toFormData } from '../../utils/forms';
 import SpaceService from '../../services/SpaceService';
@@ -15,6 +15,7 @@ function CreateSpace() {
   const [selected, setSelected] = useState(false);
   // const [nextBtnText, setNextBtnText] = useState('Étape suivante');
   const [count, setCount] = useState(0);
+  const [wrapper, setWrapper] = useState(null);
   const [isLastStep, setIsLastStep] = useState(false);
   const [changeNavBar, setChangeNavBar] = useState(false);
   const [prevStep, setPrevStep] = useState(false);
@@ -26,44 +27,14 @@ function CreateSpace() {
   //   setSelected(true);
   // }
 
-  function handleNextStep() {
-    // const wrapper = document.querySelector('.wrapper--flex');
-    const wrapper = wrapperScroll.current;
-    console.log('clicko');
-    const calcul = count + 1;
-    setCount(calcul);
-    setChangeNavBar(true);
-    console.log('next', count);
-    wrapper.style.transform = `translateX(${count * -100}vw)`;
-
-    // if (prevStep) {
-    //   console.log('gri');
-    //   wrapper.style.transform = `translateX(-${count * -100}vw)`;
-    //   setPrevStep(false);
-    // }
-
-    if (count === 4) {
-      // nextButton.innerHTML =
-      //   '<a href="back.html">Revenir au Dashboard ( Proto -> Back)</a>';
-      // setNextBtnText('Créer un espace');
-      setIsLastStep(true);
+  useEffect(() => {
+    setWrapper(wrapperScroll.current);
+    if (wrapper) {
+      setChangeNavBar(count !== 0);
+      setIsLastStep(count === 4);
+      wrapper.style.transform = `translateX(${count * -100}vw)`;
     }
-  }
-
-  function handlePrevStep() {
-    console.log('tok');
-    // const wrapper = wrapperScroll.current;
-    // if (count < 5) {
-    // wrapperScroll.current.style.transform = `translateX(-${1 * -100}vw)`;
-    console.log(count);
-    const test = (1 - count) * 100;
-    console.log('test', test);
-    wrapperScroll.current.style.transform = `translateX(${test}vw)`;
-    // wrapperScroll.current.style.transform = `translateX(${count}*100vw)`;
-    // console.log('pup');
-    // }
-    // setCount(0);
-  }
+  }, [count]);
 
   async function createSpace(event) {
     event.preventDefault();
@@ -89,7 +60,7 @@ function CreateSpace() {
                 src={iconReturn}
                 alt="return"
                 className="userAccount__nav--logo"
-                onClick={handlePrevStep}
+                onClick={() => setCount(count - 1)}
               />
             </li>
           </ul>
@@ -102,7 +73,7 @@ function CreateSpace() {
           // ref={nextStepBtn}
           type="button"
           className="button button--strong button--full button--end button--next"
-          onClick={handleNextStep}
+          onClick={() => setCount(count + 1)}
         >
           Étape suivante
         </button>
