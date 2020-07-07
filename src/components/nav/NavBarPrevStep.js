@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import iconReturn from '../../assets/icons/icon--return.svg';
+import iconReturn from '../../assets/svg/icons/icon-arrow-left.svg';
 
 const NavBarPrevStep = forwardRef((props, ref) => {
   // function handlePrevStep() {

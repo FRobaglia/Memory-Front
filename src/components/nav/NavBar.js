@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import UserContext from '../../context/UserContext';
-import logoPuzzle from '../../assets/icons/logo-puzzle.svg';
+import logoPuzzle from '../../assets/svg/puzzle-logo.svg';
 
 function NavBar() {
   // const { user } = useContext(UserContext);

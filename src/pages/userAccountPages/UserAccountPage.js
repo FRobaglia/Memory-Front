@@ -5,7 +5,7 @@ import SpacesContainer from '../../components/userAccount/SpacesContainer';
 import UserInvitationContainer from '../../components/userAccount/UserInvitationsContainer';
 import RequestAccessContainer from '../../components/userAccount/RequestAccessContainer';
 import UserAccountHeaederBg from '../../components/userAccount/UserAccountHeaederBg';
-import logoPuzzle from '../../assets/icons/logo-puzzle.svg';
+import logoPuzzle from '../../assets/svg/puzzle-logo.svg';
 import '../../components/nav/navbar-userAccount.scss';
 import './userAccount.scss';
 import '../../styles/layout/nav.scss';

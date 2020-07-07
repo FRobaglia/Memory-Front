@@ -7,7 +7,7 @@ import './createSpace.scss';
 import '../../styles/layout/container.scss';
 import NavBar from '../../components/nav/NavBar';
 // import NavBarPrevStep from '../../components/nav/NavBarPrevStep';
-import iconReturn from '../../assets/icons/icon--return.svg';
+import iconReturn from '../../assets/svg/icons/icon-arrow-left.svg';
 
 function CreateSpace() {
   const [values, handleChange] = useForm();
