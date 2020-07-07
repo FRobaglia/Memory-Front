@@ -12,20 +12,12 @@ import iconReturn from '../../assets/icons/icon--return.svg';
 function CreateSpace() {
   const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState();
-  const [selected, setSelected] = useState(false);
   // const [nextBtnText, setNextBtnText] = useState('Étape suivante');
   const [count, setCount] = useState(0);
   const [wrapper, setWrapper] = useState(null);
   const [isLastStep, setIsLastStep] = useState(false);
   const [changeNavBar, setChangeNavBar] = useState(false);
-  const [prevStep, setPrevStep] = useState(false);
   const wrapperScroll = useRef(null);
-  // const ref = createRef();
-  // const nextStepBtn = useRef(null);
-
-  // function hideLabel() {
-  //   setSelected(true);
-  // }
 
   useEffect(() => {
     setWrapper(wrapperScroll.current);
