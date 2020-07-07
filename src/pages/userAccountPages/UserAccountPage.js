@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import SpacesContainer from '../../components/userAccount/SpacesContainer';
 import UserInvitationContainer from '../../components/userAccount/UserInvitationsContainer';
-// import RequestAccessContainer from '../../components/userAccount/RequestAccessContainer';
 import RequestAccessContainer from '../../components/utilsTemplates/requestAccessContainer/RequestAccessContainer';
 import UserAccountHeaederBg from '../../components/userAccount/UserAccountHeaederBg';
 // import logoPuzzle from '../../assets/svg/puzzle-logo.svg';
 import '../../components/nav/navbar-userAccount.scss';
 import './userAccount.scss';
 import '../../styles/layout/nav.scss';
+import useWindowSize from '../../utils/useWindowSize';
 
 function UserAccountPage() {
   const { user } = useContext(UserContext);
@@ -17,18 +17,14 @@ function UserAccountPage() {
   const [isTab1Active, setIsTab1Active] = useState(true);
   const [isTab2Active, setIsTab2Active] = useState(false);
   const [isTab3Active, setIsTab3Active] = useState(false);
-  // const [navSliderElement, setNavSliderElement] = useState();
+  const [width, height] = useWindowSize();
+  const [translateValue, seTranslateValue] = useState();
   const tabRef = useRef(null);
-  // const navSliderElementRef = useRef(document.querySelector('.nav--slider'));
   const navSliderElementRef = useRef();
-  // let listener = null;
 
   // Changing backgroundcolor navbar
   const listener = document.addEventListener('scroll', () => {
-    // window.addEventListener('DOMContentLoaded', () => {
-    // const navSlider = document.querySelector('.nav--slider');
     const navSlider = navSliderElementRef.current;
-    // setNavSliderElement(navSlider)
     if (!navSlider) return false;
     const scrolled = document.scrollingElement.scrollTop;
     if (scrolled > 120) {
@@ -42,8 +38,18 @@ function UserAccountPage() {
       navSlider.style.position = 'relative';
       navSlider.style.top = 'auto';
     }
-    // });
   });
+
+  function setTranslateValue() {
+    if (width > 750) {
+      seTranslateValue(750);
+    } else {
+      seTranslateValue(100);
+    }
+    // width > 750 ? seTranslateValue(750) : seTranslateValue(100);
+  }
+
+  // console.log('hez', translateValue);
 
   function handleClickNav(id) {
     const wrapper = document.querySelector('.wrapper--flex');
@@ -52,24 +58,35 @@ function UserAccountPage() {
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
-        wrapper.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapper.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapper.style.transform = `translateX(${id * -750}px)`);
         break;
       case 1:
         setIsTab1Active(false);
         setIsTab2Active(true);
         setIsTab3Active(false);
-        wrapper.style.transform = `translateX(${id * -100}vw)`;
+        // wrapper.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapper.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapper.style.transform = `translateX(${id * -750}px)`);
         break;
       case 2:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(true);
-        wrapper.style.transform = `translateX(${id * -100}vw)`;
+        // wrapper.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapper.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapper.style.transform = `translateX(${id * -750}px)`);
         break;
       default:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
+        width < 750
+          ? (wrapper.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapper.style.transform = `translateX(${id * -750}px)`);
         break;
     }
   }
@@ -77,10 +94,8 @@ function UserAccountPage() {
   useEffect(() => {
     tabRef.current.className =
       'nav--slider__element nav--slider__element--active';
-
-    // navSliderElementRef.current = document.querySelector('.nav--slider');
-    console.log(navSliderElementRef.current);
-  }, [listener]);
+    setTranslateValue();
+  }, [listener, width]);
 
   return (
     <div className="userAccount__body">
@@ -94,11 +109,6 @@ function UserAccountPage() {
         <ul className="userAccount__nav">
           <li>
             <Link to="/" className="userAccount__nav--logoName">
-              {/* <img
-                src={logoPuzzle}
-                alt="memory-logo"
-                className="userAccount__nav--logo"
-              /> */}
               MEMORY
             </Link>
           </li>
