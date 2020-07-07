@@ -14,7 +14,9 @@ function UserInvitationContainer() {
   }
   return (
     <section className="section section--invitationEspace invitationEspace">
-      <h2>Invitations</h2>
+      <h2 className="userAccount__tabTitle">
+        Invitations à rejoindre l'espace de :
+      </h2>
       {userInvitation &&
         userInvitation.map((space) => (
           <SpaceCard key={space.id} space={space.space} />

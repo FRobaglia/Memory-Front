@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import SpacesContainer from '../../components/userAccount/SpacesContainer';
 import UserInvitationContainer from '../../components/userAccount/UserInvitationsContainer';
-import RequestAccessContainer from '../../components/userAccount/RequestAccessContainer';
+// import RequestAccessContainer from '../../components/userAccount/RequestAccessContainer';
+import RequestAccessContainer from '../../components/utilsTemplates/requestAccessContainer/RequestAccessContainer';
 import UserAccountHeaederBg from '../../components/userAccount/UserAccountHeaederBg';
-import logoPuzzle from '../../assets/svg/puzzle-logo.svg';
+// import logoPuzzle from '../../assets/svg/puzzle-logo.svg';
 import '../../components/nav/navbar-userAccount.scss';
 import './userAccount.scss';
 import '../../styles/layout/nav.scss';
@@ -92,12 +93,13 @@ function UserAccountPage() {
       >
         <ul className="userAccount__nav">
           <li>
-            <Link to="/">
-              <img
+            <Link to="/" className="userAccount__nav--logoName">
+              {/* <img
                 src={logoPuzzle}
                 alt="memory-logo"
                 className="userAccount__nav--logo"
-              />
+              /> */}
+              MEMORY
             </Link>
           </li>
           <li>
@@ -158,7 +160,7 @@ function UserAccountPage() {
         <div className="wrapper--flex userAccount__wrapper">
           <SpacesContainer />
           <UserInvitationContainer />
-          <RequestAccessContainer />
+          <RequestAccessContainer account />
         </div>
       </main>
     </div>
