@@ -55,13 +55,13 @@ function SpaceSettingsGenerales() {
                 données liées à celui-ci.
               </p>
             </div>
-            {/* <button
+            <button
               type="button"
-              className="button button--strong button--full button--end button--next"
+              className="button button--strong button--full"
               onClick={() => deleteSpace(value.space.id)}
             >
               Supprimer l'espace
-            </button> */}
+            </button>
           </>
         )}
       </div>

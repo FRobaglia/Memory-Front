@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext, useHistory } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  browserHistory,
+} from 'react';
 import { useLocation, Redirect, withRouter, Link } from 'react-router-dom';
 import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
@@ -12,6 +18,7 @@ import './spaceSettings.scss';
 
 function SpaceSettingsPage() {
   const { value, setValue } = useContext(SpaceContext);
+  const wrapper = useRef(null);
   // TABS NAV
   const [isTab1Active, setIsTab1Active] = useState(true);
   const [isTab2Active, setIsTab2Active] = useState(false);
@@ -25,34 +32,35 @@ function SpaceSettingsPage() {
 
   function handleClickNav(id) {
     // const wrapper = document.querySelector('.wrapper--flex');
+    const wrapperSlider = wrapper.current;
     switch (id) {
-      case 1:
+      case 0:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        // wrapper.style.transform = `translateX(${id * -100}vw)`;
+        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
         break;
-      case 2:
+      case 1:
         setIsTab1Active(false);
         setIsTab2Active(true);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        // wrapper.style.transform = `translateX(${id * -100}vw)`;
+        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
         break;
-      case 3:
+      case 2:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(true);
         setIsTab4Active(false);
-        // wrapper.style.transform = `translateX(${id * -100}vw)`;
+        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
         break;
-      case 4:
+      case 3:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(true);
-        // wrapper.style.transform = `translateX(${id * -100}vw)`;
+        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
         break;
       default:
         setIsTab1Active(true);
@@ -75,7 +83,11 @@ function SpaceSettingsPage() {
   return (
     <div className="body--parameter body--slider body--simple">
       <header className="header header--simple spaceSettings__header">
-        <Link className="button button--return" />
+        <button
+          type="button"
+          aria-label="Goback"
+          className="button button--return"
+        />
         <h1 className="headline--parameters">Paramètres</h1>
       </header>
       <nav className="nav--slider">
@@ -87,7 +99,7 @@ function SpaceSettingsPage() {
                 ? 'nav--slider__element nav--slider__element--active'
                 : 'nav--slider__element'
             }
-            onClick={() => handleClickNav(1)}
+            onClick={() => handleClickNav(0)}
           >
             Informations
           </Link>
@@ -98,7 +110,7 @@ function SpaceSettingsPage() {
                 ? 'nav--slider__element nav--slider__element--active'
                 : 'nav--slider__element'
             }
-            onClick={() => handleClickNav(2)}
+            onClick={() => handleClickNav(1)}
           >
             Invitations
           </Link>
@@ -109,7 +121,7 @@ function SpaceSettingsPage() {
                 ? 'nav--slider__element nav--slider__element--active'
                 : 'nav--slider__element'
             }
-            onClick={() => handleClickNav(3)}
+            onClick={() => handleClickNav(2)}
           >
             Demandes d'accès
           </Link>
@@ -120,7 +132,7 @@ function SpaceSettingsPage() {
                 ? 'nav--slider__element nav--slider__element--active'
                 : 'nav--slider__element'
             }
-            onClick={() => handleClickNav(4)}
+            onClick={() => handleClickNav(3)}
           >
             Membres
           </Link>
@@ -128,11 +140,11 @@ function SpaceSettingsPage() {
       </nav>
       {value && (
         <main>
-          <div className="wrapper--flex">
+          <div ref={wrapper} className="wrapper--flex spaceSettings__container">
             <SpaceSettingsGeneral />
             <SpaceSettingsInvitations />
-            <SpaceSettingsMembers />
             <RequestAccessContainer spaceSettings spaceId={spaceId} />
+            <SpaceSettingsMembers />
           </div>
         </main>
       )}
