@@ -7,6 +7,15 @@ a {
 .userAccount__main {
   margin: 0 auto;
   position: relative;
+  // opacity: 1;
+  // flex-direction: row !important;
+}
+
+.body--espace {
+  main {
+    padding: 0;
+    flex-direction: row !important;
+  }
 }
 
 .wrapper--flex {

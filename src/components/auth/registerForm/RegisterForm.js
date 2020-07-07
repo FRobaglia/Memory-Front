@@ -10,7 +10,7 @@ import './_registerForm.scss';
 
 function RegisterForm() {
   // Custom hook useForm
-  const [values, handleChange, deleteFiles] = useForm();
+  const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState({});
   const { user } = useContext(UserContext);
   const history = useHistory();

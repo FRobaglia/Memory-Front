@@ -48,6 +48,16 @@
   background-repeat: no-repeat;
 }
 
+.delete-button {
+  border: none;
+  background-color: transparent;
+  &--souvenir {
+    position: absolute;
+    top: 25px;
+    right: 5px;
+  }
+}
+
 .button--full {
   width: calc(100% - 30px);
   @include min-sm {
@@ -92,6 +102,10 @@
   font-size: 20px;
   padding-left: 7px;
   padding-right: 0;
+  position: fixed;
+  top: 50vh;
+  z-index: 4;
+  right: 0;
   svg {
     margin-left: 5px;
   }
@@ -171,7 +185,7 @@
 
 .button--return {
   padding: 0;
-  background-image: url('../../assets/icons/icon--return.svg');
+  background-image: url('../../assets/svg/icons/icon-arrow-left.svg');
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
@@ -200,7 +214,7 @@
 
 .button--down {
   padding: 0;
-  background-image: url('../../assets/icons/arrow-left.svg');
+  background-image: url('../../assets/svg/icons/icon-arrow-left.svg');
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
