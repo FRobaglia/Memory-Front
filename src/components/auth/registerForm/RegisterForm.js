@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, toFormData } from '../../../utils/forms';
 import validateAuth from '../../../utils/validateAuth';
 import SessionService from '../../../services/SessionService';
@@ -13,7 +13,6 @@ function RegisterForm({ setIsRegistered }) {
   const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState({});
   const { user } = useContext(UserContext);
-  // const history = useHistory();
   const [selected, setSelected] = useState(false);
 
   if (user) return <Redirect to="/" />; // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter)
@@ -25,7 +24,6 @@ function RegisterForm({ setIsRegistered }) {
       setErrorMessage({});
       const data = toFormData(values);
       await SessionService.createAccount(data, errorMessage, setErrorMessage);
-      // history.push('/account');
       setIsRegistered(true);
     } else {
       setErrorMessage(validateAuth(values));
