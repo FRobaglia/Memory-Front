@@ -39,56 +39,69 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
   return (
     <section className="section section--invitation demandAcess">
       <div className="section__content">
-        <h2>
+        <h2 className="userAccount__tabTitle">
           {account
             ? "Demandes d'accès aux espaces"
             : "Demandes d'accès a l'espace"}
         </h2>
+        {/* <div className="userAccount--demand__group__Headline">
+          <h3 className="userAccount--demand__group__Headline__text ">
+            Espace de SSS
+          </h3>
+        </div> */}
         {account &&
           requestAccess &&
           requestAccess.map((space) => (
-            <div className="line--member line--member--demand" key={space.id}>
-              <div className="line--member__image">
-                <img src={space.image.url} alt={space.firstName} />
-              </div>
-              <h2>
-                Espace de {space.firstName}
-                {space.lastName}
-              </h2>
+            <>
+              <h3 className="userAccount--demand__group__Headline__text demandContainer__group__Headline__text">
+                Espace de {space.firstName} {space.lastName}
+              </h3>
               <div>
                 {space.users.map((user) => (
-                  <div key={user.id}>
-                    <p>
-                      {user.firstName}
-                      {user.lastName}
-                    </p>
-                    <span>{user.relation.text}</span>
-                    <button
-                      onClick={() =>
-                        validateSubscriber(
-                          space.id,
-                          user.relation.id_subscriber
-                        )
-                      }
-                      type="button"
-                    >
-                      Accepter la demande
-                    </button>
-                    <button
-                      onClick={() =>
-                        unvalidateSubscriber(
-                          space.id,
-                          user.relation.id_subscriber
-                        )
-                      }
-                      type="button"
-                    >
-                      Refuser la demande
-                    </button>
+                  <div
+                    className="line--member line--member--demand"
+                    key={user.id}
+                  >
+                    <div className="line--member__image">
+                      <img src={user.image.url} alt={user.firstName} />
+                    </div>
+                    <div className="line--member__text">
+                      <p className="line--member__text__text">
+                        {user.firstName}
+                        {user.lastName}
+                      </p>
+                      <p className="line--member__text__role">
+                        {user.relation.text}
+                      </p>
+                      <div className="line--member--demand__buttonGroup">
+                        <button
+                          className="button button--strong button--full  button--inForm line--member__button--accept"
+                          onClick={() =>
+                            validateSubscriber(
+                              space.id,
+                              user.relation.id_subscriber
+                            )
+                          }
+                          type="button"
+                        >
+                          Accepter la demande
+                        </button>
+                        <button
+                          className="button button--delte line--member__delte"
+                          onClick={() =>
+                            unvalidateSubscriber(
+                              space.id,
+                              user.relation.id_subscriber
+                            )
+                          }
+                          type="button"
+                        />
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </>
           ))}
         {spaceSettings &&
           waitingSubscribers instanceof Array &&

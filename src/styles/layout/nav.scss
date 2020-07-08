@@ -6,6 +6,9 @@
   overflow: scroll;
   @media (min-width: 992px) {
     overflow: visible;
+    margin: 0% auto;
+    left: 0;
+    right: 0;
   }
   width: 100%;
   z-index: 1;

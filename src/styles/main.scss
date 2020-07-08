@@ -65,14 +65,16 @@ img {
     background-image: url('../assets/svg/sitting-lady.svg');
     background-position: right bottom 60%;
     background-size: 60%;
+    height: 30vh;
     // @include min-sm {
     //   background-size: auto;
     // }
   }
   &--puzzle {
     background-image: url('../assets/svg/puzzle-lady.svg');
-    background-size: 100%;
-    background-position: right top 50%;
+    background-size: 123%;
+    background-position: right 30% top 25%;
+    height: 50vh;
   }
 }
 

@@ -15,9 +15,12 @@ import RequestAccessContainer from '../../components/utilsTemplates/requestAcces
 import '../../styles/layout/container.scss';
 import '../../styles/layout/_button.scss';
 import './spaceSettings.scss';
+import useWindowSize from '../../utils/useWindowSize';
 
 function SpaceSettingsPage() {
   const { value, setValue } = useContext(SpaceContext);
+  const [width] = useWindowSize();
+  const [translateValue, seTranslateValue] = useState();
   const wrapper = useRef(null);
   // TABS NAV
   const [isTab1Active, setIsTab1Active] = useState(true);
@@ -30,6 +33,14 @@ function SpaceSettingsPage() {
     .split('/')[4]
     .substring(window.location.href.split('/')[4].lastIndexOf('-') + 1);
 
+  function setTranslateValue() {
+    if (width > 750) {
+      seTranslateValue(750);
+    } else {
+      seTranslateValue(100);
+    }
+  }
+
   function handleClickNav(id) {
     // const wrapper = document.querySelector('.wrapper--flex');
     const wrapperSlider = wrapper.current;
@@ -39,41 +50,53 @@ function SpaceSettingsPage() {
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 1:
         setIsTab1Active(false);
         setIsTab2Active(true);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 2:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(true);
         setIsTab4Active(false);
-        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 3:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(true);
-        wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
+        width < 750
+          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       default:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(false);
+        width < 750
+          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
+          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
     }
   }
 
   useEffect(() => {
     getFocusedSpace();
-  }, []);
+    setTranslateValue();
+  }, [width]);
 
   async function getFocusedSpace() {
     const result = await SpaceService.focusSpace(spaceId);
@@ -139,7 +162,7 @@ function SpaceSettingsPage() {
         </div>
       </nav>
       {value && (
-        <main>
+        <main className="spaceSettings__main">
           <div ref={wrapper} className="wrapper--flex spaceSettings__container">
             <SpaceSettingsGeneral />
             <SpaceSettingsInvitations />

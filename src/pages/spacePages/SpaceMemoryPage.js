@@ -170,7 +170,7 @@ function SpaceMemoryPage() {
           {space.createdBy && space.createdBy.id === user.id ? (
             <Link
               to={{
-                pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/general`,
+                pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/settings/`,
                 state: { id: `${spaceId}` },
               }}
             >
