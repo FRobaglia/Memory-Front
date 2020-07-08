@@ -36,7 +36,7 @@ function RegisterForm({ setIsRegistered }) {
 
   return (
     <div className="wrapper--flex slideContainer">
-      <section className="section">
+      <section>
         <form
           action="/register"
           method="post"
