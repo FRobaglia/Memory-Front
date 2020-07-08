@@ -1,11 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-  browserHistory,
-} from 'react';
-import { useLocation, Redirect, withRouter, Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
 import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
@@ -41,54 +35,46 @@ function SpaceSettingsPage() {
     }
   }
 
+  function wrapperTranslate(id) {
+    const wrapperSlider = wrapper.current;
+    if (width < 750) {
+      wrapperSlider.style.transform = `translateX(${id * -100}vw)`;
+    } else wrapperSlider.style.transform = `translateX(${id * -750}px)`;
+  }
+
   function handleClickNav(id) {
     // const wrapper = document.querySelector('.wrapper--flex');
-    const wrapperSlider = wrapper.current;
+    wrapperTranslate(id);
     switch (id) {
       case 0:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 1:
         setIsTab1Active(false);
         setIsTab2Active(true);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 2:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(true);
         setIsTab4Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 3:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(true);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       default:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
         setIsTab4Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
     }
   }
@@ -106,11 +92,12 @@ function SpaceSettingsPage() {
   return (
     <div className="body--parameter body--slider body--simple">
       <header className="header header--simple spaceSettings__header">
-        <button
-          type="button"
-          aria-label="Goback"
-          className="button button--return"
-        />
+        {value.space && (
+          <Link
+            to={`/space/${value.space.firstName}-${value.space.lastName}-${value.space.id}`}
+            className="button button--return"
+          />
+        )}
         <h1 className="headline--parameters">Paramètres</h1>
       </header>
       <nav className="nav--slider">

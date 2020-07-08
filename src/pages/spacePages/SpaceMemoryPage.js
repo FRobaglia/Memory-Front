@@ -10,7 +10,6 @@ import PostCard from '../../components/space/posts/postCard/PostCard';
 import '../../styles/pages/_space.scss';
 import IconSettings from '../../assets/svg/icons/icon-settings.svg';
 import IconMembers from '../../assets/svg/icons/icon-members.svg';
-import IconBack from '../../assets/svg/icons/icon-arrow-left.svg';
 import EndPartContainer from '../../components/utilsTemplates/endPartContainer/EndPartContainer';
 import ErrorImage from '../../assets/svg/door-guy.svg';
 import JoinSpace from '../../components/space/joinSpace/JoinSpace';
@@ -139,9 +138,7 @@ function SpaceMemoryPage() {
       </button>
       <div className="header header--espace header--centered">
         <div className="nav nav--espace">
-          <Link to="/account">
-            <img className="icon-left-corner" src={IconBack} alt="icon back" />
-          </Link>
+          <Link to="/account" className="button button--return" />
           {space.createdBy && space.createdBy.id === user.id ? (
             <Link
               to={{

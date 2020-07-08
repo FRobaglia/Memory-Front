@@ -240,3 +240,12 @@ h2 {
     margin-top: 100px;
   }
 }
+.upload-image-preview {
+  .image-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-position: center top;
+    background-size: cover;
+  }
+}
