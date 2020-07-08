@@ -34,7 +34,7 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: #fff;
   font-family: 'Roboto', sans-serif;
@@ -96,7 +96,7 @@ img {
 
 main {
   padding: 15px;
-  width: 100vw;
+  width: 100%;
   margin-top: 30vh;
   overflow-x: hidden;
   @include min-sm {
@@ -148,7 +148,7 @@ h2 {
 }
 
 .text {
-  font-weight: 300;
+  font-family: 'Roboto Light';
   font-size: 12px;
   line-height: 17px;
   &--alert {
@@ -175,11 +175,11 @@ h2 {
 
 .wrapper--flex {
   display: flex;
-  width: 100vw;
+  width: 100%;
   align-items: flex-start;
   transition: all 0.3s;
   section {
-    width: 100vw;
+    width: 100%;
     @include min-sm {
       max-width: 750px;
     }

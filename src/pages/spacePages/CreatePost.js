@@ -22,7 +22,7 @@ function CreatePost() {
     .split('/')[4]
     .substring(window.location.href.split('/')[4].lastIndexOf('-') + 1);
 
-  useEffect(() => {}, []);
+  const [toggleBtn, setToggleBtn] = useState(false);
 
   async function createPost(event) {
     event.preventDefault();
@@ -35,9 +35,10 @@ function CreatePost() {
     <div className="body--creePost">
       <UserAccountHeaederBg />
       <main className="main__createPost">
+        <h2>Ajouter un souvenir</h2>
         <form action="/" method="post" onSubmit={createPost}>
           {showPostForm.title && (
-            <div className="input">
+            <div className="input input--title">
               <label className="input__label" htmlFor="title">
                 Titre du souvenir
               </label>
@@ -46,15 +47,15 @@ function CreatePost() {
                 type="text"
                 name="title"
                 id="title"
-                placeholder="titre du souvenir"
+                placeholder="Donnez un titre à votre souvenir"
                 value={postValues.title || ''}
                 onChange={handlePostChange}
               />
             </div>
           )}
-          <div className="input">
+          <div className="input input--souvenir">
             <label className="input__label" htmlFor="content">
-              Ton souvenir
+              Votre souvenir
             </label>
             <textarea
               className="input__field"
@@ -62,111 +63,134 @@ function CreatePost() {
               id="content"
               cols="30"
               rows="5"
-              placeholder="Quel souvenir veux-tu partager ?"
+              placeholder="Quel souvenir voulez-vous partager ?"
               value={postValues.text || ''}
               onChange={handlePostChange}
               required
             />
           </div>
-          <div>
-            {postValues.imagesFiles.map((image, index) => (
-              <div key={image.name}>
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt="postsimag"
-                  width="100"
-                  height="100"
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    deleteFiles(index);
-                  }}
-                >
-                  supprimer photo
-                </button>
-              </div>
-            ))}
-          </div>
 
           {showPostForm.link && (
             <div className="input">
-              <label className="input__label" htmlFor="link"></label>
+              <label className="input__label" htmlFor="link">
+                Lien vers une page externe
+              </label>
               <input
                 className="input__field"
                 type="text"
                 id="link"
                 name="link"
-                placeholder="lien"
+                placeholder="Ajouter un lien..."
                 value={postValues.link || ''}
                 onChange={handlePostChange}
               />
             </div>
           )}
           {showPostForm.image && (
-            <UploadInput
-              labelText="Photo souvenir"
-              handleChange={(e) => {
-                handlePostChange(e);
-              }}
-              isMultiple
-            />
+            <div className="input">
+              <div className="input__field">
+                <UploadInput
+                  labelText="Vos images"
+                  handleChange={(e) => {
+                    handlePostChange(e);
+                  }}
+                  isMultiple
+                  images={postValues.imagesFiles}
+                />
+                <div className="previews">
+                  {postValues.imagesFiles.map((image, index) => (
+                    <div className="previews__preview" key={image.name}>
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt="importées depuis l'ordinateur"
+                      />
+                      <button
+                        type="button"
+                        className="preview__button"
+                        onClick={() => {
+                          deleteFiles(index);
+                        }}
+                      ></button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
           {showPostForm.video && (
-            <UploadInput
-              labelText="Video souvenir"
-              specificFieldName="postVideo"
-              handleChange={handlePostChange}
-            />
+            <div className="input">
+              <div className="input__field">
+                <UploadInput
+                  labelText="Votre vidéo"
+                  specificFieldName="postVideo"
+                  handleChange={handlePostChange}
+                />
+              </div>
+            </div>
           )}
-          <button
-            type="button"
-            className="button button--add"
-            style={{ display: showPostForm.title ? 'none' : 'inline-block' }}
-            onClick={() => {
-              setShowPostForm(() => {
-                return { ...showPostForm, title: true };
-              });
-            }}
-          >
-            Ajouter un titre
-          </button>
-          <button
-            type="button"
-            className="button button--add"
-            style={{ display: showPostForm.link ? 'none' : 'inline-block' }}
-            onClick={() =>
-              setShowPostForm(() => {
-                return { ...showPostForm, link: true };
-              })
-            }
-          >
-            Ajouter un lien
-          </button>
-          <button
-            type="button"
-            className="button button--add"
-            style={{ display: showPostForm.image ? 'none' : 'inline-block' }}
-            onClick={() =>
-              setShowPostForm(() => {
-                return { ...showPostForm, image: true };
-              })
-            }
-          >
-            Ajouter une image
-          </button>
-          <button
-            type="button"
-            className="button button--add"
-            style={{ display: showPostForm.video ? 'none' : 'inline-block' }}
-            onClick={() =>
-              setShowPostForm(() => {
-                return { ...showPostForm, video: true };
-              })
-            }
-          >
-            Ajouter une video
-          </button>
+          <div className="buttons">
+            <button
+              type="button"
+              className="button button--add"
+              style={{ display: showPostForm.title ? 'none' : 'inline-block' }}
+              onClick={() => {
+                setShowPostForm(() => {
+                  return { ...showPostForm, title: true };
+                });
+              }}
+            >
+              Ajouter un titre
+            </button>
+            <button
+              type="button"
+              className="button button--add"
+              style={{ display: showPostForm.link ? 'none' : 'inline-block' }}
+              onClick={() =>
+                setShowPostForm(() => {
+                  return { ...showPostForm, link: true };
+                })
+              }
+            >
+              Ajouter un lien externe
+            </button>
+            <button
+              type="button"
+              className="button button--add"
+              style={{ display: showPostForm.image ? 'none' : 'inline-block' }}
+              onClick={() =>
+                setShowPostForm(() => {
+                  return { ...showPostForm, image: true };
+                })
+              }
+            >
+              Ajouter des images
+            </button>
+            <button
+              type="button"
+              className="button button--add"
+              style={{ display: showPostForm.video ? 'none' : 'inline-block' }}
+              onClick={() =>
+                setShowPostForm(() => {
+                  return { ...showPostForm, video: true };
+                })
+              }
+            >
+              Ajouter une video
+            </button>
+          </div>
+          <div className="switchGroup">
+            <div
+              onClick={() => setToggleBtn(!toggleBtn)}
+              className={`toggle-btn ${toggleBtn ? 'active' : ''}`}
+            >
+              <input type="checkbox" checked className="cb-value" />
+              <span className="round-btn"></span>
+            </div>
+            <p className="text">
+              Je suis sur que le défunt serait d'accord pour que je publie cela.
+              Aussi, je suis sur que personne ne serait offensé par ce contenu.
+            </p>
+          </div>
           <button type="submit">poster un souvenir</button>
         </form>
       </main>
