@@ -3,6 +3,7 @@
 .main__createPost {
   margin: 0 auto;
   padding: 15px;
+  padding-bottom: 30vh;
 
   form {
     margin-top: 40px;
@@ -77,6 +78,36 @@ h2 {
 
 .button--add {
   width: 100%;
+}
+
+.footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  height: 35vh;
+  background-color: #ede7f2;
+  width: 100%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  transform: translateY(200%);
+  transition: all 0.5s;
+
+  &.is-visible {
+    transform: translateY(0%);
+  }
+  .footer--border {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 100%;
+    transform: translateY(-85%);
+    svg {
+      width: 100%;
+    }
+  }
 }
 
 @media (min-width: 500px) {

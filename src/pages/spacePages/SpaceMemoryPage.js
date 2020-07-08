@@ -143,7 +143,7 @@ function SpaceMemoryPage() {
       <Link
         to={{
           pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/createPost`,
-          state: { id: `${spaceId}` },
+          state: { space },
         }}
         type="button"
         className="button button--addSouvenir"
