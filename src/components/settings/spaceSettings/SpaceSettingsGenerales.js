@@ -7,7 +7,7 @@ import '../../../styles/layout/_button.scss';
 
 function SpaceSettingsGenerales() {
   const { value } = useContext(SpaceContext);
-  // console.log('fromGeneral', space);
+  const [toggleBtn, setToggleBtn] = useState(false);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   async function deleteSpace(id) {
@@ -46,22 +46,30 @@ function SpaceSettingsGenerales() {
               </p>
             </div>
             <div className="switchGroup">
-              <div className="toggle-btn">
+              <div
+                crole="switch"
+                aria-checked="false"
+                aria-hidden="true"
+                onClick={() => setToggleBtn(!toggleBtn)}
+                className={`toggle-btn ${toggleBtn ? 'active' : ''}`}
+              >
                 <input type="checkbox" checked className="cb-value" />
-                <span className="round-btn"></span>
+                <span className="round-btn" />
               </div>
               <p className="text">
                 Je suis sûr(e) de vouloir supprimer cet espace et toutes les
                 données liées à celui-ci.
               </p>
             </div>
-            <button
-              type="button"
-              className="button button--strong button--full"
-              onClick={() => deleteSpace(value.space.id)}
-            >
-              Supprimer l'espace
-            </button>
+            {toggleBtn && (
+              <button
+                type="button"
+                className="button button--full spaceSettings__info--btn"
+                onClick={() => deleteSpace(value.space.id)}
+              >
+                Supprimer l'espace
+              </button>
+            )}
           </>
         )}
       </div>

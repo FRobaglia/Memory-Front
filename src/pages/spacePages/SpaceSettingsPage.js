@@ -43,7 +43,6 @@ function SpaceSettingsPage() {
   }
 
   function handleClickNav(id) {
-    // const wrapper = document.querySelector('.wrapper--flex');
     wrapperTranslate(id);
     switch (id) {
       case 0:

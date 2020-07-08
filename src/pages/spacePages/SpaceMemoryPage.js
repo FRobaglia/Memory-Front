@@ -25,14 +25,6 @@ function SpaceMemoryPage() {
   );
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
-  const [showPostForm, setShowPostForm] = useState({
-    allForm: false,
-    title: false,
-    image: false,
-    video: false,
-    link: false,
-  });
-  const [postValues, handlePostChange, deleteFiles] = useForm();
   const spaceId = window.location.href.substring(
     window.location.href.lastIndexOf('-') + 1
   );
@@ -69,14 +61,6 @@ function SpaceMemoryPage() {
     }
   }
 
-  async function createPost(event) {
-    event.preventDefault();
-    // setPostValues({ imagesFiles: [] });
-    const data = toFormData(postValues);
-    await PostService.createPost(spaceId, data);
-    getSpaceMemoryData();
-  }
-
   async function deletePost(id) {
     await PostService.deletePost(id);
     getSpaceMemoryData();
@@ -107,20 +91,13 @@ function SpaceMemoryPage() {
   }
   return (
     <div className="body--espace">
-      <button
+      <Link
+        to={{
+          pathname: `/space/${space.firstName}-${space.lastName}-${space.id}/createPost`,
+          state: { space },
+        }}
         type="button"
         className="button button--addSouvenir"
-        onClick={() => {
-          setShowPostForm(
-            showPostForm.allForm
-              ? () => {
-                  return { ...showPostForm, allForm: false };
-                }
-              : () => {
-                  return { ...showPostForm, allForm: true };
-                }
-          );
-        }}
       >
         +{' '}
         <svg
@@ -135,7 +112,7 @@ function SpaceMemoryPage() {
             fill="white"
           />
         </svg>
-      </button>
+      </Link>
       <div className="header header--espace header--centered">
         <div className="nav nav--espace">
           <Link to="/account" className="button button--return" />
@@ -178,131 +155,7 @@ function SpaceMemoryPage() {
           </div>
         </div>
       </div>
-      <form
-        action="/"
-        method="post"
-        onSubmit={createPost}
-        style={{ display: showPostForm.allForm ? 'block' : 'none' }}
-      >
-        {showPostForm.title && (
-          <label htmlFor="title">
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="titre du souvenir"
-              value={postValues.title || ''}
-              onChange={handlePostChange}
-            />
-          </label>
-        )}
-        <label htmlFor="content">
-          <textarea
-            name="text"
-            id="content"
-            cols="30"
-            rows="5"
-            placeholder="ecrit un souvenir"
-            value={postValues.text || ''}
-            onChange={handlePostChange}
-            required
-          />
-        </label>
-        <div>
-          {postValues.imagesFiles.map((image, index) => (
-            <div key={image.name}>
-              <img
-                src={URL.createObjectURL(image)}
-                alt="postsimag"
-                width="100"
-                height="100"
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  deleteFiles(index);
-                }}
-              >
-                supprimer photo
-              </button>
-            </div>
-          ))}
-        </div>
 
-        {showPostForm.link && (
-          <label htmlFor="link">
-            <input
-              type="text"
-              id="link"
-              name="link"
-              placeholder="lien"
-              value={postValues.link || ''}
-              onChange={handlePostChange}
-            />
-          </label>
-        )}
-        {showPostForm.image && (
-          <UploadInput
-            labelText="Photo souvenir"
-            handleChange={(e) => {
-              handlePostChange(e);
-            }}
-            isMultiple
-          />
-        )}
-        {showPostForm.video && (
-          <UploadInput
-            labelText="Video souvenir"
-            specificFieldName="postVideo"
-            handleChange={handlePostChange}
-          />
-        )}
-        <button
-          type="button"
-          style={{ display: showPostForm.title ? 'none' : 'inline-block' }}
-          onClick={() => {
-            setShowPostForm(() => {
-              return { ...showPostForm, title: true };
-            });
-          }}
-        >
-          Ajouter un titre
-        </button>
-        <button
-          type="button"
-          style={{ display: showPostForm.link ? 'none' : 'inline-block' }}
-          onClick={() =>
-            setShowPostForm(() => {
-              return { ...showPostForm, link: true };
-            })
-          }
-        >
-          Ajouter un lien
-        </button>
-        <button
-          type="button"
-          style={{ display: showPostForm.image ? 'none' : 'inline-block' }}
-          onClick={() =>
-            setShowPostForm(() => {
-              return { ...showPostForm, image: true };
-            })
-          }
-        >
-          Ajouter une image
-        </button>
-        <button
-          type="button"
-          style={{ display: showPostForm.video ? 'none' : 'inline-block' }}
-          onClick={() =>
-            setShowPostForm(() => {
-              return { ...showPostForm, video: true };
-            })
-          }
-        >
-          Ajouter une video
-        </button>
-        <button type="submit">poster un souvenir</button>
-      </form>
       <main>
         {spaceData.posts &&
           spaceData.posts.map((post, index) => (

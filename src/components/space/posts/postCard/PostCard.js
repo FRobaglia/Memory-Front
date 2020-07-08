@@ -64,7 +64,7 @@ function PostCard({ post, index, deletePost, subscribers }) {
           <img src={TrashIcon} alt="" />
         </button>
       )}
-      {post.images.length > 1 && (
+      {post.images.length >= 1 && (
         <AwesomeSlider
           bullets={false}
           organicArrows={post.images.length === 1 && false}

@@ -153,6 +153,8 @@
 .switchGroup {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
   p {
     width: calc(100% - 50px);
     font-size: 12px;
