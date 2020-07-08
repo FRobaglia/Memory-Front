@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RegisterForm from '../../components/auth/registerForm/RegisterForm';
+import RegisterForm from '../../components/forms/registerForm/RegisterForm';
 import EndPartContainer from '../../components/utilsTemplates/endPartContainer/EndPartContainer';
 import '../../styles/pages/_registerPage.scss';
 
