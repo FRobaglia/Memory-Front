@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef } from 'react';
 import SpaceContext from '../../../context/SpaceContext';
+import '../../../styles/layout/_forms.scss';
 
 function SpaceAddMembers() {
   const { value } = useContext(SpaceContext);
@@ -14,23 +15,39 @@ function SpaceAddMembers() {
   }
 
   return (
-    <div>
-      <h1>Invite un membre</h1>
-      <p>
-        Tu connais un proche qui aimerait bien partager un souvenir ? Envoie le
-        lien qu'il puisse demander l'acces
-      </p>
-      <input
-        ref={input}
-        type="text"
-        value={spaceUrl}
-        data-clipboard={spaceUrl}
-      />
-      <button type="button" onClick={() => copyToClipboard()}>
-        Copier
-      </button>
-      {copySuccess ? <p style={{ color: 'green' }}>Lien copié</p> : null}
-    </div>
+    <section className="section section--invitation invitation">
+      <div className="section__content">
+        <h2>Inviter une nouvelle personne</h2>
+        <div className="textGroup">
+          <p className="text">
+            Vous connaissez un proche qui aimerait bien partager un souvenir ?
+            Envoyez lui le lien qu'il puisse demander l'accès
+          </p>
+          <div className="shareLink__group">
+            <div className="input">
+              <label htmlFor="text" className="input__label">
+                Lien de partage
+              </label>
+              <input
+                className="input__field"
+                ref={input}
+                type="text"
+                value={spaceUrl}
+                data-clipboard={spaceUrl}
+              />
+            </div>
+            <button
+              aria-label="share"
+              className="button-shareLink"
+              type="button"
+              onClick={() => copyToClipboard()}
+            />
+          </div>
+
+          {copySuccess ? <p style={{ color: 'green' }}>Lien copié</p> : null}
+        </div>
+      </div>
+    </section>
   );
 }
 
