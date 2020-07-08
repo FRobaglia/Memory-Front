@@ -4,6 +4,7 @@ import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
 import SpaceSettingsMembers from '../../components/settings/spaceSettings/SpaceSettingsMembers';
 import SpaceAddMembers from '../../components/settings/spaceSettings/SpaceAddMembers';
+import SpaceExit from '../../components/settings/spaceSettings/SpaceExit';
 import useWindowSize from '../../utils/useWindowSize';
 import './spaceMembers.scss';
 
@@ -137,6 +138,7 @@ function SpaceMembersPage() {
         <div ref={wrapper} className="wrapper--flex spaceMembers__wrapper">
           <SpaceSettingsMembers />
           {value.space && <SpaceAddMembers />}
+          <SpaceExit />
         </div>
       </main>
     </div>

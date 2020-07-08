@@ -1,5 +1,4 @@
 .spaceMembers__header {
-  border: 1px solid red;
   height: 50px;
   top: 0px;
 }
@@ -11,8 +10,11 @@
 }
 
 .spaceMembers__navSlider {
-  border: 1px solid red;
   top: 0px;
+}
+
+.spaceMembers__listMember--title {
+  margin-bottom: 2em;
 }
 
 .button-shareLink {
@@ -30,6 +32,16 @@
 .shareLink__group {
   display: flex;
   justify-content: space-between;
+}
+
+/** Space Exit page **/
+.spaceExit__switchGroup {
+  margin-top: 1em;
+}
+
+.spaceExit__button {
+  width: 100%;
+  margin-top: 2em;
 }
 
 // .spaceMembers__wrapper {
@@ -50,14 +62,3 @@
 //     right: 0;
 //   }
 // }
-@media (min-width: 751px) {
-  // margin: 0% auto;
-  // left: 0;
-  // right: 0;
-  .spaceMembers__wrapper {
-    // margin: 0% auto;
-    // left: 0;
-    // right: 0;
-    // max-width: 750px;
-  }
-}

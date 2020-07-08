@@ -10,12 +10,15 @@ function SpaceSettingsMembers() {
   return (
     <section className="section section--invitation members">
       <div className="section__content">
-        <h2>Liste des membres</h2>
+        <h2 className="spaceMembers__listMember--title">Liste des membres</h2>
         {/* {value.subscribers && value.subscribers.map((el) => console.log(el.user))} */}
 
         {value.subscribers &&
           value.subscribers.map((subscriber) => (
-            <div className="line--member" key={subscriber.user.id}>
+            <div
+              className="line--member spaceMembers__listMembers"
+              key={subscriber.user.id}
+            >
               <div className="line--member__image">
                 <img
                   src={subscriber.user.image.url}
