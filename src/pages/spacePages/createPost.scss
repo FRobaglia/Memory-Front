@@ -1,0 +1,121 @@
+@import '../../styles/config/variables';
+
+.main__createPost {
+  margin: 0 auto;
+  padding: 15px;
+  padding-bottom: 30vh;
+
+  form {
+    margin-top: 40px;
+  }
+}
+
+.input.input--title input {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.previews {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.previews__preview {
+  position: relative;
+}
+
+.preview__button {
+  border: none;
+  outline: none;
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+  width: 11px * 1.7;
+  height: 13px * 1.7;
+  background-color: transparent;
+  background-image: url('../../assets/svg/icons/icon-trash-white.svg');
+  background-size: cover;
+  background-position: center center;
+  transition: 0.2s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.previews__preview {
+  width: calc(25% - 10px);
+  margin: 5px;
+}
+
+.previews__preview:nth-child(1) {
+  width: 100%;
+  .preview__button {
+    top: 20px;
+    right: 20px;
+    width: 22px;
+    height: 26px;
+  }
+}
+
+.upload {
+  margin-top: 3px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.switchGroup {
+  max-width: 400px;
+}
+
+.buttons {
+  margin: 30px auto;
+}
+
+.button--add {
+  width: 100%;
+}
+
+.footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  height: 35vh;
+  background-color: #ede7f2;
+  width: 100%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  transform: translateY(200%);
+  transition: all 0.5s;
+
+  &.is-visible {
+    transform: translateY(0%);
+  }
+  .footer--border {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 100%;
+    transform: translateY(-85%);
+    svg {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .button--add {
+    width: auto;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+  }
+}

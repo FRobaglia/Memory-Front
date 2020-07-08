@@ -64,7 +64,7 @@ function PostCard({ post, index, deletePost, subscribers }) {
           <img src={TrashIcon} alt="" />
         </button>
       )}
-      {post.images.length > 1 && (
+      {post.images.length >= 1 && (
         <AwesomeSlider bullets={false} className="souvenir__image">
           {post.images.map((image) => (
             <div key={image.id}>
