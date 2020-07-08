@@ -9,6 +9,7 @@ function UploadInput({
   restrictedFileTypes,
   labelImg,
   labelImgSelected,
+  className,
 }) {
   const fieldName = specificFieldName || 'images';
 
@@ -37,6 +38,7 @@ function UploadInput({
         name={fieldName}
         multiple={isMultiple}
         accept={restrictedFileTypes}
+        className={className}
         onChange={(e) => {
           handleChange(e);
         }}

@@ -10,9 +10,6 @@
   z-index: 4;
   width: 100%;
   background-color: $color--light;
-  .icon-left-corner {
-    width: 15px;
-  }
   .icon-right-corner {
     width: 25px;
   }
@@ -94,38 +91,6 @@
       bottom: -20px;
       background-repeat: no-repeat;
       background-size: contain;
-    }
-    &:after {
-      transform-origin: left top;
-      @keyframes rotatePuzzel {
-        0% {
-          transform: rotate(0deg);
-        }
-        80% {
-          transform: rotate(360deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      // animation: rotatePuzzel 3s infinite -1.5s;
-    }
-    &:before {
-      bottom: -20px;
-      right: -20px;
-      transform-origin: left top;
-      @keyframes rotatePuzzel {
-        0% {
-          transform: rotate(0deg);
-        }
-        80% {
-          transform: rotate(360deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      // animation: rotatePuzzel 3s infinite 0s;
     }
   }
   .espace__hero__text {

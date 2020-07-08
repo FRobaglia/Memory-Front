@@ -65,7 +65,11 @@ function PostCard({ post, index, deletePost, subscribers }) {
         </button>
       )}
       {post.images.length >= 1 && (
-        <AwesomeSlider bullets={false} className="souvenir__image">
+        <AwesomeSlider
+          bullets={false}
+          organicArrows={post.images.length === 1 && false}
+          className="souvenir__image"
+        >
           {post.images.map((image) => (
             <div key={image.id}>
               <img src={image.url} alt="post img" />
@@ -163,7 +167,7 @@ function PostCard({ post, index, deletePost, subscribers }) {
             onSubmit={addComment}
           >
             <UploadInput
-              img={UploadCommentImage}
+              labelImg={UploadCommentImage}
               specificFieldName="commentImage"
               handleChange={(e) => {
                 handleChange(e);
