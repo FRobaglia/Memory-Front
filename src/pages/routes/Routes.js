@@ -14,6 +14,7 @@ import BackOfficePage from '../BackOfficePage';
 import SpaceSettingsPage from '../spacePages/SpaceSettingsPage';
 import SpaceMembersPage from '../spacePages/SpaceMembersPage';
 import CreateSpace from '../spacePages/CreateSpace';
+import CreatePost from '../spacePages/CreatePost';
 
 function Routes() {
   const [value, setValue] = useState({});
@@ -26,6 +27,11 @@ function Routes() {
       <Route path="/register" exact component={RegisterPage} />
       <RestrictedRoute path="/account" exact component={UserAccountPage} />
       <RestrictedRoute path="/create" exact component={CreateSpace} />
+      <RestrictedRoute
+        path="/space/:slug/createPost"
+        exact
+        component={CreatePost}
+      />
       <RestrictedRoute
         path="/account/modify"
         exact

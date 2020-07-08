@@ -14,7 +14,7 @@ function UploadInput({
 
   return (
     <div className="upload">
-      <label htmlFor={fieldName}>
+      <label className="input__label" htmlFor={fieldName}>
         {labelText}
         {labelImg && (
           <img
