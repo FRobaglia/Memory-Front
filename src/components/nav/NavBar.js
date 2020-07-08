@@ -10,12 +10,13 @@ function NavBar() {
     <nav className="userAccount__navContainer header__main">
       <ul className="userAccount__nav">
         <li>
-          <Link to="/">
-            <img
+          <Link to="/account" className="userAccount__nav--logoName">
+            {/* <img
               src={logoPuzzle}
               alt="memory-logo"
               className="userAccount__nav--logo"
-            />
+            /> */}
+            MEMORY
           </Link>
         </li>
       </ul>
