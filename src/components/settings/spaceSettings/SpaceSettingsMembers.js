@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
+import UserContext from '../../../context/UserContext';
 import SpaceContext from '../../../context/SpaceContext';
 import '../../../styles/layout/line.scss';
 
 function SpaceSettingsMembers() {
   const { value } = useContext(SpaceContext);
+  const { user } = useContext(UserContext);
 
   return (
     <section className="section section--invitation members">
       <div className="section__content">
-        <h2>Membres</h2>
+        <h2>Liste des membres</h2>
         {/* {value.subscribers && value.subscribers.map((el) => console.log(el.user))} */}
 
         {value.subscribers &&
@@ -28,10 +30,15 @@ function SpaceSettingsMembers() {
                   {subscriber.relationDefunct || 'Non renseigné'}
                 </p>
               </div>
-              <button
-                className="button button--delte line--member__delte"
-                type="submit"
-              />
+              {value.space.createdBy && value.space.createdBy.id === user.id ? (
+                <button
+                  aria-label="delete"
+                  className="button button--delte line--member__delte"
+                  type="submit"
+                />
+              ) : (
+                ''
+              )}
             </div>
           ))}
       </div>
