@@ -175,11 +175,11 @@ h2 {
 
 .wrapper--flex {
   display: flex;
-  width: 100vw;
+  width: 100%;
   align-items: flex-start;
   transition: all 0.3s;
   section {
-    width: 100%;
+    width: 100vw;
     @include min-sm {
       max-width: 750px;
     }
