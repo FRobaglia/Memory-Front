@@ -1,0 +1,28 @@
+@import '../../../styles/layout/_forms';
+@import '../../../styles/layout/_button';
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.register {
+  .upload-image-preview {
+    margin-bottom: 20px;
+    .upload {
+      input[type='file'] {
+        display: none;
+      }
+      .label-img-selected {
+        width: 30px;
+        height: 30px;
+        float: right;
+      }
+    }
+  }
+  form {
+    margin-bottom: 60px;
+    .button {
+      margin-top: 30px;
+    }
+  }
+}

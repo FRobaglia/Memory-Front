@@ -1,0 +1,45 @@
+.spaceMembers__header {
+  height: 50px;
+  top: 0px;
+}
+
+.headline--membres {
+  &:after {
+    background-image: url('../../assets/svg/icons/icon-members.svg');
+  }
+}
+
+.spaceMembers__navSlider {
+  top: 0px;
+}
+
+.spaceMembers__listMember--title {
+  margin-bottom: 2em;
+}
+
+.button-shareLink {
+  background-image: url('../../assets/svg/icons/icon-shareLink.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  border: none;
+  position: relative;
+  top: 30px;
+}
+
+.shareLink__group {
+  display: flex;
+  justify-content: space-between;
+}
+
+/** Space Exit page **/
+.spaceExit__switchGroup {
+  margin-top: 1em;
+}
+
+.spaceExit__button {
+  width: 100%;
+  margin-top: 2em;
+}

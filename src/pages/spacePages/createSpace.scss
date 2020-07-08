@@ -1,0 +1,54 @@
+@import '../../styles/config/variables';
+
+.header--30vh {
+  .espace__hero {
+    transform: scale(0.7);
+  }
+}
+
+.main__createSpace {
+  margin-top: 0;
+  .createSpace__button--img {
+    &:hover {
+      background-color: transparent;
+      color: $color--strong;
+    }
+  }
+
+  .createSpace__wrapper {
+    flex-direction: row;
+  }
+  form {
+    section {
+      height: auto !important;
+    }
+    .upload-proof {
+      height: 60vh !important;
+      justify-content: space-between;
+    }
+  }
+  .upload-image-preview {
+    margin-top: 30px;
+    .image-preview {
+      margin: 0 auto 30px;
+    }
+  }
+}
+
+.step-indicator {
+  width: 155px;
+  padding: 20px;
+  &--list {
+    display: flex;
+    justify-content: space-between;
+    width: 155px;
+  }
+  li {
+    background-color: $color--light;
+    height: 5px;
+    width: 25px;
+  }
+  .active {
+    background-color: $color--strong;
+  }
+}

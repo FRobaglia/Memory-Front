@@ -2,10 +2,31 @@
 @import './config/variables';
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Roboto Light';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/Roboto/Roboto-Light.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Medium';
   font-style: normal;
   font-weight: 500;
-  src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('woff');
+  src: url('../assets/fonts/Roboto/Roboto-Medium.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Bold';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/Roboto/Roboto-Bold.ttf') format('woff');
 }
 
 * {
@@ -13,7 +34,7 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: #fff;
   font-family: 'Roboto', sans-serif;
@@ -26,6 +47,13 @@ img {
   width: 100%;
 }
 
+.link {
+  font-size: 10px;
+  margin: 20px 0;
+  align-self: flex-end;
+  color: $color--strong;
+}
+
 .header {
   background-color: $color--light;
   background-repeat: no-repeat;
@@ -34,15 +62,19 @@ img {
     height: 30vh;
   }
   &--sitting {
-    // background-image: url('../images/icons/fille--sitting.svg');
+    background-image: url('../assets/svg/sitting-lady.svg');
     background-position: right bottom 60%;
-    background-size: 45%;
+    background-size: 60%;
+    height: 30vh;
     // @include min-sm {
     //   background-size: auto;
     // }
   }
   &--puzzle {
     background-image: url('../assets/svg/puzzle-lady.svg');
+    background-size: 123%;
+    background-position: right 30% top 25%;
+    height: 50vh;
   }
 }
 
@@ -56,7 +88,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 30vh;
   overflow: hidden;
   svg {
     height: 90%;
@@ -65,17 +96,11 @@ img {
 
 main {
   padding: 15px;
-  width: 100vw;
+  width: 100%;
   margin-top: 30vh;
   overflow-x: hidden;
   @include min-sm {
     max-width: 750px;
-  }
-}
-
-.body--espace {
-  main {
-    padding: 0;
   }
 }
 
@@ -123,75 +148,12 @@ h2 {
 }
 
 .text {
-  font-weight: 300;
+  font-family: 'Roboto Light';
   font-size: 12px;
   line-height: 17px;
   &--alert {
     color: $color--strong;
     font-style: italic;
-  }
-}
-
-.box--profilimage {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  position: relative;
-  // position: absolute;
-  // top:-60px;
-  // left:50%;
-  //transform: translateX(-50%) scale(1.1);
-  //z-index: 3;
-  border: solid 4px #423977;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 90%;
-  }
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    // background-image: url('../images/icons/puzzelGroup.svg');
-    right: -20px;
-    bottom: -20px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  &:after {
-    transform-origin: left top;
-    @keyframes rotatePuzzel {
-      0% {
-        transform: rotate(0deg);
-      }
-      80% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    //animation: rotatePuzzel 3s infinite -1.5s;
-  }
-  &:before {
-    bottom: -20px;
-    right: -20px;
-    transform-origin: left top;
-    @keyframes rotatePuzzel {
-      0% {
-        transform: rotate(0deg);
-      }
-      80% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    //animation: rotatePuzzel 3s infinite 0s;
   }
 }
 
@@ -213,7 +175,7 @@ h2 {
 
 .wrapper--flex {
   display: flex;
-  width: 700vw;
+  width: 100%;
   align-items: flex-start;
   transition: all 0.3s;
   section {
@@ -228,6 +190,7 @@ h2 {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -261,16 +224,6 @@ h2 {
       background-repeat: no-repeat;
       background-position: center;
     }
-    &.headline--parameters {
-      &:after {
-        background-image: url('../assets//icons/settings.svg');
-      }
-    }
-    &.headline--membres {
-      &:after {
-        background-image: url('../assets/icons/members.svg');
-      }
-    }
     &.headline--compte {
       &:after {
         // background-image: url('../images/pixelImages/profil@2x.jpg');
@@ -285,5 +238,14 @@ h2 {
   }
   .wrapper--flex {
     margin-top: 100px;
+  }
+}
+.upload-image-preview {
+  .image-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-position: center top;
+    background-size: cover;
   }
 }

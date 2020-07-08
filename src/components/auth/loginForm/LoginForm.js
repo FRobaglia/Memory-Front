@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import SessionService from '../../../services/SessionService';
@@ -11,18 +10,29 @@ function LoginForm({ location }) {
   const [values, handleChange] = useForm();
   const { user, setUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (isLoading) return <Loading />;
 
   const redirectAfterLogin = location.state
     ? location.state.from.pathname
-    : '/account'; // si l'utilisateur a été redirigé vers login en essaynt d'accéder à une RestrictedRoute, on la garde en mémoire pour le rediriger après le login. Sinon, on le redirgie vers la home après le login.
+    : '/account'; // si l'utilisateur a été redirigé vers login en essaynt d'accéder à une RestrictedRoute, on la garde en mémoire pour le rediriger après le login. Sinon, on le redirgie vers son compte après le login.
 
-  if (user) return <Redirect to={redirectAfterLogin} />; // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter), on le redirige donc vers la page depuis laquelle il a essayé d'accéder à Login
+  if (user && user !== undefined) return <Redirect to={redirectAfterLogin} />; // Si l'utilisateur est connecté, il ne peut pas voir la route /login (sans se déconnecter), on le redirige donc vers la page depuis laquelle il a essayé d'accéder à Login
 
   async function persistSession() {
-    await SessionService.requestTokens(values.email, values.password);
-    setUser(await SessionService.fetchUserData());
+    const result = await SessionService.requestTokens(
+      values.email,
+      values.password
+    );
+    if (result === 'INVALID_CREDENTIALS') {
+      setUser(null);
+      setErrorMessage("L'email ou le mot de passe sont incorrects");
+    } else if (result === 'NO_VALUES_FIELDS') {
+      setErrorMessage('Merci de renseigner les champs');
+    } else {
+      setUser(await SessionService.fetchUserData());
+    }
     setIsLoading(false); // fin du loading
   }
 
@@ -33,13 +43,14 @@ function LoginForm({ location }) {
   };
 
   return (
-    <div className="wrapper--flex slideContainer">
-      <section className="section">
+    <div className="wrapper--flex">
+      <section>
         <form onSubmit={handleLogin} className="section__content">
           <Link to="/register" className="link">
             Pas encore de compte ?
           </Link>
           <h2>Se Connecter:</h2>
+          {errorMessage && <p>{errorMessage}</p>}
           <div className="input">
             <label htmlFor="email" className="input__label">
               Adresse e-mail
@@ -67,9 +78,11 @@ function LoginForm({ location }) {
               onChange={handleChange}
             />
           </div>
-
-          <input type="submit" value="Se connecter" />
-          {/* <Link to="/">Home</Link> */}
+          <input
+            type="submit"
+            className="button button--full--noPadding"
+            value="Se connecter"
+          />
         </form>
       </section>
     </div>

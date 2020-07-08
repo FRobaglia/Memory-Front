@@ -1,0 +1,117 @@
+@import '../../../styles/config/variables';
+
+.espace {
+  width: 100%;
+  border-radius: 10px;
+  border: solid 1px $color--strong;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.espace__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  .espace__hero__image {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    position: relative;
+    border: solid 4px #423977;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background-image: url('../../../assets/svg/puzzleGroup.svg');
+      right: -20px;
+      bottom: -20px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    &:after {
+      transform-origin: left top;
+      @keyframes rotatePuzzel {
+        0% {
+          transform: rotate(0deg);
+        }
+        80% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      //animation: rotatePuzzel 3s infinite -1.5s;
+    }
+    &:before {
+      bottom: -20px;
+      right: -20px;
+      transform-origin: left top;
+      @keyframes rotatePuzzel {
+        0% {
+          transform: rotate(0deg);
+        }
+        80% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      //animation: rotatePuzzel 3s infinite 0s;
+    }
+  }
+  .espace__hero__text {
+    color: #423977;
+    font-weight: 300;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  .espace__hero__name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: $color--strong;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &.espace__hero--noDeco {
+    ::after,
+    ::before {
+      display: none;
+    }
+  }
+}
+
+.spaceCard__image {
+  border-radius: 50%;
+}
+
+.spaceCard__settings--link {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1em;
+  font-style: italic;
+  font-weight: 100;
+  .spaceCard__settings--status {
+    font-size: 14px;
+  }
+  .spaceCard__settings--icon {
+    width: 30px;
+    height: 30px;
+  }
+}

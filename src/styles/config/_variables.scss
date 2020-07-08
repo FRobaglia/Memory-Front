@@ -1,6 +1,13 @@
 $color--strong: #423977;
 $color--light: #ede7f2;
 $color--grey: #9c9c9c;
+$color-secondary: #418e89;
+$color-text: #414143;
+
+$roboto-light: 'Roboto Light';
+$roboto-regular: 'Roboto Regular';
+$roboto-medium: 'Roboto Medium';
+$roboto-bold: 'Roboto Bold';
 
 @mixin max-sx {
   @media (max-width: 750px) {

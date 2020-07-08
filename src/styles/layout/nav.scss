@@ -1,0 +1,43 @@
+@import '../config/variables';
+
+.nav--slider {
+  padding: 15px;
+  background-color: #fff;
+  overflow: scroll;
+  @media (min-width: 992px) {
+    overflow: visible;
+    margin: 0% auto;
+    left: 0;
+    right: 0;
+  }
+  width: 100%;
+  z-index: 1;
+
+  .nav--slider__elementGroup {
+    display: flex;
+    width: 130%;
+    @include min-sm {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .nav--slider__element {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 10.04px;
+    line-height: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid $color--light;
+    background-color: #fff;
+    color: $color--strong;
+    &:last-child {
+      margin-right: 0;
+    }
+    &--active {
+      background-color: $color--strong;
+      color: #fff;
+    }
+  }
+}

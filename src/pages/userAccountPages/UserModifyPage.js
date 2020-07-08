@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import UserContext from '../context/UserContext';
-import { useForm, toFormData, toURLSearchParams } from '../utils/forms';
-import UploadInput from '../components/utilsTemplates/UploadInput/UploadInput';
-import SessionService from '../services/SessionService';
+import UserContext from '../../context/UserContext';
+import { useForm, toFormData, toURLSearchParams } from '../../utils/forms';
+import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
+import SessionService from '../../services/SessionService';
 
 function UserModifyPage() {
   const { user, setUser } = useContext(UserContext);

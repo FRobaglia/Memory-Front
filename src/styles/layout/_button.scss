@@ -1,0 +1,221 @@
+@import '../config/variables';
+
+.button a {
+  text-decoration: none;
+}
+
+.button {
+  padding: 14px 25px;
+  display: block;
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  border: solid 1px $color--strong;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 12px;
+  color: $color--strong;
+  cursor: pointer;
+  &:hover {
+    background-color: $color--strong;
+    color: #fff;
+  }
+  &:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent; // i.e. Nexus5/Chrome and Kindle Fire HD 7''
+  }
+  &:active {
+    outline: none;
+  }
+}
+
+.button--end {
+  position: fixed;
+  bottom: 20px;
+  left: 15px;
+  @include min-sm {
+    max-width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.button--delte {
+  background-image: url('../../assets/svg/icons/icon-trash.svg');
+  background-repeat: no-repeat;
+}
+
+.delete-button {
+  border: none;
+  background-color: transparent;
+  &--souvenir {
+    position: absolute;
+    top: 25px;
+    right: 5px;
+  }
+}
+
+.button--full {
+  width: calc(100% - 30px);
+  @include min-sm {
+    max-width: 300px;
+    // left:50%;
+    // transform: translateX(-50%)
+  }
+  &--noPadding {
+    width: 100%;
+  }
+}
+
+.button--strong {
+  background-color: $color--strong;
+  color: #fff;
+  &:hover {
+    background-color: #fff;
+    color: $color--strong;
+  }
+}
+
+.button--add {
+  margin: 7px 7px 7px 0px;
+  padding-left: 30px;
+  position: relative;
+  &:after {
+    content: '+';
+    position: absolute;
+    left: 15px;
+  }
+}
+
+.button--addSouvenir {
+  width: 70px;
+  color: #fff;
+  background-color: $color--strong;
+  padding: 10px 25px;
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 7px;
+  padding-right: 0;
+  position: fixed;
+  top: 50vh;
+  z-index: 4;
+  right: 0;
+  svg {
+    margin-left: 5px;
+  }
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.toggle-btn {
+  width: 40px;
+  height: 20px;
+  border-radius: 50px;
+  display: inline-block;
+  position: relative;
+  background-color: #ede7f2;
+  cursor: pointer;
+  transition: background-color 0.4s ease-in-out;
+  cursor: pointer;
+  &.active {
+    background-color: $color--strong;
+    .round-btn {
+      left: 20px;
+    }
+  }
+  .round-btn {
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    margin-top: -7px;
+    transition: all 0.3s ease-in-out;
+  }
+  .cb-value {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  }
+}
+
+.switchGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
+  p {
+    width: calc(100% - 50px);
+    font-size: 12px;
+    @include min-sm {
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+}
+
+.button--inForm {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  @include min-sm {
+    left: auto;
+    transform: translateX(0%);
+  }
+}
+
+.button--return {
+  padding: 0;
+  background-image: url('../../assets/svg/icons/icon-arrow-left.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  width: 12px;
+  height: 20px;
+  background-color: transparent;
+  fill: #423977;
+  &:hover {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+
+.button--logout {
+  width: 100px !important;
+  margin-bottom: 20px;
+  align-self: flex-end;
+  z-index: 0;
+}
+
+.button--inline {
+  padding: 0;
+  border: none;
+  text-align: right;
+  font-style: italic;
+  width: 100%;
+  font-weight: 300;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+
+.button--down {
+  padding: 0;
+  background-image: url('../../assets/svg/icons/icon-arrow-left.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  width: 7px;
+  height: 12px;
+  fill: #423977;
+  transform: rotate(270deg);
+}

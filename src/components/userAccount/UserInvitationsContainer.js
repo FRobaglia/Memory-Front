@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SpaceService from '../../services/SpaceService';
-import SpaceCard from './spaceCard/SpaceCard';
+import SpaceCard from '../space/spaceCard/SpaceCard';
 
 function UserInvitationContainer() {
   const [userInvitation, setUserInvitations] = useState([]);
@@ -13,14 +13,15 @@ function UserInvitationContainer() {
     setUserInvitations(data.invitations);
   }
   return (
-    <div>
-      <h1>Invitations</h1>
+    <section className="section section--invitationEspace invitationEspace">
+      <h2 className="userAccount__tabTitle">
+        Invitations à rejoindre l'espace de :
+      </h2>
       {userInvitation &&
-        userInvitation.map(
-          (space) => <SpaceCard key={space.id} space={space.space} />
-          /* console.log(space) */
-        )}
-    </div>
+        userInvitation.map((space) => (
+          <SpaceCard key={space.id} space={space.space} />
+        ))}
+    </section>
   );
 }
 

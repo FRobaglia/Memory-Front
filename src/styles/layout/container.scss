@@ -1,20 +1,30 @@
-.wrapper--flex {
-  display: flex;
-  width: 700vw;
-  align-items: flex-start;
-  transition: all 0.3s;
-  section {
-    width: 100vw;
-    @include min-sm {
-      max-width: 750px;
-    }
-    padding-left: 15px;
-    padding-right: 15px;
-    //height: 70vh;
-    .section__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+@import '../config/variables';
+.body--slider {
+  main {
+    padding: 0;
+  }
+  .wrapper--flex {
+    display: flex;
+    width: 700vw;
+    height: 100%;
+    align-items: flex-start;
+    transition: all 0.3s;
+    section {
+      width: 100vw;
+      height: 100%;
+      @include min-sm {
+        max-width: 750px;
+      }
+      padding-left: 15px;
+      padding-right: 15px;
+      //height: 70vh;
+      .section__content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
     }
   }
 }

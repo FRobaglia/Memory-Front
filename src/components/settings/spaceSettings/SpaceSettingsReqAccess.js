@@ -10,40 +10,42 @@ function SpaceSettingsReqAccess() {
     .substring(window.location.href.split('/')[4].lastIndexOf('-') + 1);
 
   useEffect(() => {
-    getWaitingSubscribersList();
+    console.log('pi', waitingSubscribers);
+    getWaitingSubscribers();
   }, []);
 
-  async function getWaitingSubscribersList() {
+  async function getWaitingSubscribers() {
     const subscribers = await SpaceService.getWaitingSubscribers(spaceId);
     setWaitingSubscribers(subscribers);
   }
-  getWaitingSubscribersList();
 
   async function validateSubscriber(subscriberId) {
     await SpaceService.validateSubscriber(spaceId, subscriberId);
+    getWaitingSubscribers();
   }
 
   async function unvalidateSubscriber(subscriberId) {
     await SpaceService.unvalidateSubscriber(spaceId, subscriberId);
+    getWaitingSubscribers();
   }
 
   return (
-    <div>
+    <section className="section section--invitation members">
       <div>
         <h2>Utilisateurs ayant fait une demande d'accès</h2>
         <ul>
           {waitingSubscribers instanceof Array
-            ? waitingSubscribers.map((user) => (
-                <li key={user.id}>
-                  Nom: {user.firstName}
+            ? waitingSubscribers.map((subscriber) => (
+                <li key={subscriber.user.id}>
+                  Nom: {subscriber.user.firstName}
                   <button
-                    onClick={() => validateSubscriber(user.id)}
+                    onClick={() => validateSubscriber(subscriber.id)}
                     type="button"
                   >
                     Accepter la demande
                   </button>
                   <button
-                    onClick={() => unvalidateSubscriber(user.id)}
+                    onClick={() => unvalidateSubscriber(subscriber.id)}
                     type="button"
                   >
                     Refuser la demande
@@ -53,7 +55,7 @@ function SpaceSettingsReqAccess() {
             : waitingSubscribers}
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 

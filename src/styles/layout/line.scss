@@ -1,0 +1,69 @@
+@import '../config/variables';
+.list {
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.line--member {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  border-bottom: solid 1px $color--light;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  .line--member__image {
+    width: 34px;
+    height: 34px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      height: 34px;
+      width: 34px;
+    }
+  }
+  .line--member__text {
+    color: #423977;
+    width: 100%;
+    font-size: 12px;
+    line-height: 14px;
+    @include min-sm {
+      font-size: 14px;
+      line-height: 16px;
+    }
+    .line--member__text__text {
+      font-weight: bold;
+    }
+    .line--member__text__role {
+      font-weight: 300;
+    }
+  }
+  .line--member__delte {
+    position: absolute;
+    right: 0;
+    width: 35px;
+    height: 30px;
+    padding: 0;
+    background-position: center;
+  }
+}
+
+.line--member--demand {
+  align-items: flex-start;
+  .line--member--demand__buttonGroup {
+    display: flex;
+    margin-top: 5px;
+    @include min-sm {
+      justify-content: flex-end;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .line--member__delte {
+      position: relative;
+      margin-left: 10px;
+    }
+  }
+}
