@@ -110,6 +110,12 @@ h2 {
   }
 }
 
+.icon--cancel {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 @media (min-width: 500px) {
   .button--add {
     width: auto;
