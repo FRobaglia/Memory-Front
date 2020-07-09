@@ -7,7 +7,6 @@ import secondStepLogo from '../assets/svg/number-2.svg';
 import thirdStepLogo from '../assets/svg/number-3.svg';
 import memoryLogo from '../assets/svg/puzzle-logo.svg';
 import lockIcon from '../assets/svg/icons/icon-lock.svg';
-import tree from '../assets/svg/icons/icon-tree.svg';
 import noSound from '../assets/svg/icons/icon-no-sound.svg';
 
 function Home() {
@@ -84,10 +83,6 @@ function Home() {
                 <img className="services--icon" src={lockIcon} alt="" />
                 <p>Vos espaces sont strictemtent personels</p>
               </li>
-              {/* <li className="services--item">
-                <img className="services--icon" src={tree} alt="" />
-                <p>Le support du hors ligne vous permet d'y accedez partout</p>
-              </li> */}
               <li className="services--item">
                 <img className="services--icon" src={noSound} alt="" />
                 <p>Pas déranger par des notifications</p>

@@ -249,3 +249,11 @@ h2 {
     background-size: cover;
   }
 }
+
+@include min-sm {
+  .header {
+    &--puzzle {
+      background-size: unset;
+    }
+  }
+}

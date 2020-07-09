@@ -6,6 +6,9 @@
     flex-direction: column;
     section {
       padding: 0;
+      .services {
+        background-color: #fff;
+      }
     }
   }
   .button {
@@ -148,6 +151,15 @@
       font-family: $roboto-regular;
       font-size: 12px;
       line-height: 16px;
+    }
+  }
+}
+
+@include min-sm {
+  .home {
+    background-color: $color--light;
+    .wrapper--flex {
+      align-items: center;
     }
   }
 }

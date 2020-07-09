@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
-import SpaceSettingsGeneral from '../../components/settings/spaceSettings/SpaceSettingsGenerales';
-import SpaceSettingsInvitations from '../../components/settings/spaceSettings/SpaceSettingsInvitations';
-import SpaceSettingsMembers from '../../components/settings/spaceSettings/SpaceSettingsMembers';
-import RequestAccessContainer from '../../components/utilsTemplates/requestAccessContainer/RequestAccessContainer';
+import SpaceSettingsGeneral from '../../components/space/spaceSettings/SpaceSettingsGenerales';
+import SpaceSettingsInvitations from '../../components/space/spaceSettings/SpaceSettingsInvitations';
+import SpaceSettingsMembers from '../../components/space/spaceSettings/SpaceSettingsMembers';
+import RequestAccessContainer from '../../components/userAccount/RequestAccessContainer';
 import '../../styles/layout/container.scss';
 import '../../styles/layout/_button.scss';
-import './spaceSettings.scss';
+import '../../styles/pages/spaceSettings.scss';
 import useWindowSize from '../../utils/useWindowSize';
 
 function SpaceSettingsPage() {
