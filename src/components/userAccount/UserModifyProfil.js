@@ -8,7 +8,6 @@ import UploadInput from '../utilsTemplates/UploadInput/UploadInput';
 function UserModifyProfil() {
   const { user, setUser } = useContext(UserContext);
   const [values, handleChange] = useForm();
-  const [selected, setSelected] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
 
   if (isLogout) return <Redirect to="/login" />;
@@ -29,10 +28,6 @@ function UserModifyProfil() {
     setUser(newUserData);
   }
 
-  function hideLabel() {
-    setSelected(true);
-  }
-
   async function logout() {
     await SessionService.clearTokens();
     setIsLogout(true);
@@ -42,9 +37,6 @@ function UserModifyProfil() {
   return (
     <section className="section section--invitation members">
       <div className="section__content">
-        {/* <p>Modif Profil</p>
-        <h2>{user.firstName}</h2>
-        <h2>{user.roles}</h2> */}
         <h2>Informations</h2>
         <form method="post" onSubmit={handleSubmit}>
           <div className="userModify__groupImage">
@@ -61,7 +53,7 @@ function UserModifyProfil() {
               handleChange={handleChange}
             />
           </div>
-          <div className="input userModify__form">
+          <div className="input userModify__form--profil">
             <label htmlFor="firstName" className="input__label">
               Prénom
             </label>

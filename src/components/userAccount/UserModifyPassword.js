@@ -18,39 +18,61 @@ function UserModifyPassword() {
   return (
     <section className="section section--invitation members">
       <div className="section__content">
-        <p>Modif password</p>
-        <form method="post" onSubmit={handlePasswordSubmit}>
-          <label htmlFor="passwordOldest">
-            Mot de passe actuel
+        <h2>Modifier votre mot de passe</h2>
+        <div className="userModify__group__Headline">
+          <h3 className="userModify__group__Headline__text">
+            Changement de mot de passe
+          </h3>
+        </div>
+        <form
+          method="post"
+          onSubmit={handlePasswordSubmit}
+          className="userModify__form--password"
+        >
+          <div className="input">
+            <label htmlFor="passwordOldest" className="input__label">
+              Mot de passe actuel
+            </label>
             <input
+              className="input__field"
               type="password"
               name="passwordOldest"
               id="passwordOldest"
               onChange={handlePasswordChange}
               value={values.passwordOldest || user.passwordOldest}
             />
-          </label>
-          <label htmlFor="passwordInitial">
-            Nouveau mot de passe
+          </div>
+          <div className="input">
+            <label htmlFor="passwordInitial" className="input__label">
+              Nouveau mot de passe
+            </label>
             <input
+              className="input__field"
               type="password"
               name="passwordInitial"
               id="passwordInitial"
               onChange={handlePasswordChange}
               value={values.passwordInitial || user.passwordInitial}
             />
-          </label>
-          <label htmlFor="passwordFinal">
-            Confirmation du nouveau mot de passe
+          </div>
+          <div className="input">
+            <label htmlFor="passwordFinal" className="input__label">
+              Confirmation du nouveau mot de passe
+            </label>
             <input
+              className="input__field"
               type="password"
               name="passwordFinal"
               id="passwordFinal"
               onChange={handlePasswordChange}
               value={values.passwordFinal || user.passwordFinal}
             />
-          </label>
-          <input type="submit" value="Changer le mot de passe" />
+          </div>
+          <input
+            type="submit"
+            value="Changer le mot de passe"
+            className="button button--strong userModify__button--save"
+          />
         </form>
       </div>
     </section>
