@@ -114,7 +114,7 @@ function SpaceMemoryPage() {
         </svg>
       </Link>
       <div className="header header--espace header--centered">
-        <div className="nav nav--espace">
+        <div className="nav nav--espace nav--espace--position">
           <Link to="/account" className="button button--return" />
           {space.createdBy && space.createdBy.id === user.id ? (
             <Link

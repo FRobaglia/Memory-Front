@@ -155,6 +155,15 @@
   }
 }
 
+@media (min-width: 751px) {
+  .homepage__header--container {
+    max-width: 850px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
 @include min-sm {
   .home {
     background-color: $color--light;

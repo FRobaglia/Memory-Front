@@ -45,11 +45,6 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
             ? "Demandes d'accès aux espaces"
             : "Demandes d'accès a l'espace"}
         </h2>
-        {/* <div className="userAccount--demand__group__Headline">
-          <h3 className="userAccount--demand__group__Headline__text ">
-            Espace de SSS
-          </h3>
-        </div> */}
         {account &&
           requestAccess &&
           requestAccess.map((space) => (
@@ -89,7 +84,7 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                           }
                           type="button"
                         >
-                          Accepter la demande
+                          Acceptér la demande
                         </button>
                         <button
                           className="button button--delte line--member__delte"

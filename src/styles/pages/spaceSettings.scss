@@ -67,6 +67,10 @@ h1 {
 .spaceSettings__info--btn {
   margin-top: 2em;
   width: 100%;
+
+  @media (min-width: 751px) {
+    max-width: 100%;
+  }
 }
 
 .switchGroup {
@@ -80,5 +84,10 @@ h1 {
 @media (min-width: 751px) {
   .spaceSettings__main {
     margin: 0 auto;
+  }
+
+  .spaceSettings__invitation--messageFeedback {
+    position: relative;
+    top: -10px;
   }
 }

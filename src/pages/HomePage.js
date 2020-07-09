@@ -12,19 +12,19 @@ import noSound from '../assets/svg/icons/icon-no-sound.svg';
 function Home() {
   return (
     <div className="home">
-      <div className="header">
+      <header className="header homepage__header--container">
         <Link to="/account" className="header--logo">
-          Memory
+          MEMORY
         </Link>
         <Link to="/login" className="button button--connexion">
           Connexion
         </Link>
-      </div>
+      </header>
       <div className="wrapper--flex">
         <section>
           <div className="identity section__content">
             <div className="identity--text">
-              <p>Rassembler les souvenir de vos proches</p>
+              <p>Rassembler les souvenirs de vos proches</p>
             </div>
           </div>
         </section>
@@ -40,7 +40,7 @@ function Home() {
                 souvenirs.
               </p>
             </div>
-            <Link to="/account" className="button button--full button--strong">
+            <Link to="/create" className="button button--full button--strong">
               + Crée un Espace
             </Link>
           </div>
