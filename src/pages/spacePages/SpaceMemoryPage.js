@@ -161,17 +161,21 @@ function SpaceMemoryPage() {
       </div>
 
       <main>
-        {spaceData.posts && spaceData.posts.length > 1
-          ? spaceData.posts.map((post, index) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                index={index}
-                subscribers={spaceData.subscribers}
-                deletePost={deletePost}
-              />
-            ))
-          : "Aucun souvenir n'a été publier dans cette espace"}
+        {spaceData.posts && spaceData.posts.length !== 0
+          ? spaceData.posts
+              .sort((a, b) => {
+                return new Date(b.dateCreation) - new Date(a.dateCreation);
+              })
+              .map((post, index) => (
+                <PostCard
+                  key={post.id}
+                  post={post}
+                  index={index}
+                  subscribers={spaceData.subscribers}
+                  deletePost={deletePost}
+                />
+              ))
+          : "Aucun souvenir n'a été publié dans cet espace."}
       </main>
     </div>
   );
