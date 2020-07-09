@@ -6,11 +6,14 @@ import SpaceService from '../../../services/SpaceService';
 function SpaceExit() {
   const { value } = useContext(SpaceContext);
   const [toggleBtn, setToggleBtn] = useState(false);
+  const [unsubscribeSuccess, setUnsubscribeSuccess] = useState(false);
 
   async function unsubscribe() {
     await SpaceService.unSubcribeSpace(value.space.id);
-    return <Redirect to="/account" />;
+    setUnsubscribeSuccess(true);
   }
+
+  if (unsubscribeSuccess) return <Redirect to="/account" />;
 
   return (
     <section className="section">
