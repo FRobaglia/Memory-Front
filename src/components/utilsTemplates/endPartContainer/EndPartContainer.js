@@ -16,6 +16,8 @@ function EndPartContainer({
   messageButton,
   subscribeMessage,
   showInvitedUserButton,
+  notConnected,
+  location,
 }) {
   return (
     <div className="end-container">
@@ -87,7 +89,26 @@ function EndPartContainer({
                 style={{ backgroundImage: endImage && `url(${endImage})` }}
               />
             </div>
-            <Link to={endButtonLink} className="button button--full">
+            {notConnected && (
+              <>
+                <p className="space-error-message">
+                  Pour des questions de sécurité, il faut être connecté pour
+                  accéder à cette page.
+                </p>
+                <Link
+                  to="/login"
+                  location={location}
+                  className="button button--full"
+                  style={{ marginBottom: '30px' }}
+                >
+                  Déja un compte
+                </Link>
+              </>
+            )}
+            <Link
+              to={endButtonLink}
+              className="button button--full button--strong"
+            >
               {endButtonText}
             </Link>
           </>

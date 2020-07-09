@@ -26,14 +26,15 @@ function SpacesContainer() {
         + Créer un espace
       </Link>
 
-      {userSpaces &&
-        userSpaces.map((space) => (
-          <SpaceCard
-            key={space.space.id}
-            space={space.space}
-            role={space.role.role}
-          />
-        ))}
+      {userSpaces && userSpaces.length !== 0
+        ? userSpaces.map((space) => (
+            <SpaceCard
+              key={space.space.id}
+              space={space.space}
+              role={space.role.role}
+            />
+          ))
+        : "Vous ne faites parti d'aucun espace."}
     </section>
   );
 }

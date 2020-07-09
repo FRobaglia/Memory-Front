@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 const validateAuth = (values) => {
   // Email must have "@"" and "."
   const emailTest = /\S+@\S+\.\S+/;
@@ -40,27 +38,6 @@ const validateAuth = (values) => {
   } else if (values.passwordInitial !== values.passwordFinal) {
     errors.passwordFinal =
       'Les mots de passe que vous avez entrés ne sont pas identiques';
-  }
-
-  // Create Space
-
-  // verify spaceImage
-  if (!values.spaceImage) {
-    errors.spaceImage = 'Veuillez sélectionner une image';
-  }
-  // verify date
-  if (moment(values.dateDeath).isAfter(values.dateBirth)) {
-    errors.dates = 'La date de naissance ne peut pas etre avant la date décès';
-  } else if (!values.dateBirth && !values.dateDeath) {
-    errors.dates = 'Veuillez entrer des dates';
-  }
-  // relationDefunct error
-  if (!values.relationDefunctText) {
-    errors.relationDefunctText = 'Veuillez entrer une relation';
-  }
-  // verify proof
-  if (!values.spaceProof) {
-    errors.spaceProof = 'Veuillez sélectionner un certificat de décès';
   }
   return errors;
 };

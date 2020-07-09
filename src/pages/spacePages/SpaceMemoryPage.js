@@ -3,9 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
 import SpaceContext from '../../context/SpaceContext';
-import { useForm, toFormData } from '../../utils/forms';
 import PostService from '../../services/PostService';
-import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
 import PostCard from '../../components/space/postCard/PostCard';
 import '../../styles/pages/_space.scss';
 import IconSettings from '../../assets/svg/icons/icon-settings.svg';
@@ -161,17 +159,21 @@ function SpaceMemoryPage() {
       </div>
 
       <main>
-        {spaceData.posts && spaceData.posts.sort((a,b) => {
-          return new Date(b.dateCreation) - new Date(a.dateCreation);
-        }).map((post, index) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              index={index}
-              subscribers={spaceData.subscribers}
-              deletePost={deletePost}
-            />
-          ))}
+        {spaceData.posts && spaceData.posts.length !== 0
+          ? spaceData.posts
+              .sort((a, b) => {
+                return new Date(b.dateCreation) - new Date(a.dateCreation);
+              })
+              .map((post, index) => (
+                <PostCard
+                  key={post.id}
+                  post={post}
+                  index={index}
+                  subscribers={spaceData.subscribers}
+                  deletePost={deletePost}
+                />
+              ))
+          : "Aucun souvenir n'a été publié dans cet espace."}
       </main>
     </div>
   );
