@@ -11,7 +11,7 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
 
   async function createSpace(event) {
     event.preventDefault();
-    if (Object.keys(validateSpace(values)).length === 2) {
+    if (Object.entries(validateSpace(values)[0]).length === 0) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       await SpaceService.createNewSpace(data);
