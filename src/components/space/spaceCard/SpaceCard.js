@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import './spaceCard.scss';
 import iconSettings from '../../../assets/svg/icons/icon-settings.svg';
 
@@ -15,8 +14,10 @@ function SpaceCard({ space, backOffice, validateSpace, index, role }) {
     );
   }, []);
 
+  console.log(space);
+
   return (
-    <div className="espace">
+    <div className={space.validated ? 'espace' : 'espace espace-non-validated'}>
       {role === 'ACCESS_USER_MANAGER' && (
         <Link
           to={{
