@@ -4,9 +4,9 @@ import './spacesContainer.scss';
 import SpaceCategoryList from '../../space/spaceCategoryList/SpaceCategoryList';
 
 function SpacesContainer() {
-  const [showManagerSpaces, setShowManagerSpaces] = useState(false);
-  const [showSubscriberSpaces, setShowSubscriberSpaces] = useState(false);
-  const [showNotValidatedSpaces, setShowNotValidatedSpaces] = useState(false);
+  const [showManagerSpaces, setShowManagerSpaces] = useState(true);
+  const [showSubscriberSpaces, setShowSubscriberSpaces] = useState(true);
+  const [showNotValidatedSpaces, setShowNotValidatedSpaces] = useState(true);
 
   return (
     <section className="section section--espaces">

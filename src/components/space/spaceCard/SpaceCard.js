@@ -14,8 +14,10 @@ function SpaceCard({ space, backOffice, validateSpace, index, role }) {
     );
   }, []);
 
+  console.log(space);
+
   return (
-    <div className="espace">
+    <div className={space.validated ? 'espace' : 'espace espace-non-validated'}>
       {role === 'ACCESS_USER_MANAGER' && (
         <Link
           to={{

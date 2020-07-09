@@ -56,7 +56,7 @@ function SpaceCategoryList({
         <img
           src={ArrowIcon}
           alt="arrow icon to show category"
-          style={{ transform: showSpaces && 'rotate(270deg)' }}
+          style={{ transform: showSpaces && 'rotate(-90deg)' }}
         />
       </div>
       {noSpaceMessage}
