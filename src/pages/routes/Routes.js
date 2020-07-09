@@ -7,7 +7,6 @@ import LoginPage from '../authPages/LoginPage';
 import UserAccountPage from '../userAccountPages/UserAccountPage';
 import UserModifyPage from '../userAccountPages/UserModifyPage';
 import RegisterPage from '../authPages/RegisterPage';
-// import SpacesListPage from '../SpacesListPage';
 import SpaceMemoryPage from '../spacePages/SpaceMemoryPage';
 import NotFoundPage from '../NotFoundPage';
 import BackOfficePage from '../BackOfficePage';
@@ -38,7 +37,6 @@ function Routes() {
         component={UserModifyPage}
       />
       <SpaceContext.Provider value={spaceID}>
-        {/* <RestrictedRoute path="/spaces" exact component={SpacesListPage} /> */}
         <RestrictedRoute
           path="/space/:slug"
           exact

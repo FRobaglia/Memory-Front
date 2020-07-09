@@ -2,11 +2,11 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import SpaceContext from '../../context/SpaceContext';
 import SpaceService from '../../services/SpaceService';
-import SpaceSettingsMembers from '../../components/settings/spaceSettings/SpaceSettingsMembers';
-import SpaceAddMembers from '../../components/settings/spaceSettings/SpaceAddMembers';
-import SpaceExit from '../../components/settings/spaceSettings/SpaceExit';
+import SpaceSettingsMembers from '../../components/space/spaceSettings/SpaceSettingsMembers';
+import SpaceAddMembers from '../../components/space/spaceSettings/SpaceAddMembers';
+import SpaceExit from '../../components/space/spaceSettings/SpaceExit';
 import useWindowSize from '../../utils/useWindowSize';
-import './spaceMembers.scss';
+import '../../styles/pages/spaceMembers.scss';
 
 function SpaceMembersPage() {
   const { value, setValue } = useContext(SpaceContext);
@@ -35,46 +35,34 @@ function SpaceMembersPage() {
 
   function handleClickNav(id) {
     const wrapperSlider = wrapper.current;
+    width < 750
+      ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
+      : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
     switch (id) {
       case 0:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 1:
         setIsTab1Active(false);
         setIsTab2Active(true);
         setIsTab3Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 2:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(true);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       case 3:
         setIsTab1Active(false);
         setIsTab2Active(false);
         setIsTab3Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
       default:
         setIsTab1Active(true);
         setIsTab2Active(false);
         setIsTab3Active(false);
-        width < 750
-          ? (wrapperSlider.style.transform = `translateX(${id * -100}vw)`)
-          : (wrapperSlider.style.transform = `translateX(${id * -750}px)`);
         break;
     }
   }
@@ -90,11 +78,12 @@ function SpaceMembersPage() {
   return (
     <div className="body--parameter body--slider body--simple">
       <header className="header header--simple spaceMembers__header">
-        <button
-          type="button"
-          aria-label="Goback"
-          className="button button--return"
-        />
+        {value.space && (
+          <Link
+            to={`/space/${value.space.firstName}-${value.space.lastName}-${value.space.id}`}
+            className="button button--return"
+          />
+        )}
         <h1 className="headline--membres">Membres</h1>
       </header>
       <nav className="nav--slider spaceMembers__navSlider">

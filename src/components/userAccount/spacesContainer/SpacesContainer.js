@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import SpaceService from '../../services/SpaceService';
-import SpaceCard from '../space/spaceCard/SpaceCard';
+import SpaceService from '../../../services/SpaceService';
+import SpaceCard from '../../space/spaceCard/SpaceCard';
 import './spacesContainer.scss';
 
 function SpacesContainer() {

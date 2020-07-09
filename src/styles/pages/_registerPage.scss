@@ -24,3 +24,11 @@
     margin: 30px 0 45px;
   }
 }
+
+@include min-sm {
+  .register {
+    .wrapper--flex {
+      justify-content: center;
+    }
+  }
+}

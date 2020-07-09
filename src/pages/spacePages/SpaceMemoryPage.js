@@ -6,7 +6,7 @@ import SpaceContext from '../../context/SpaceContext';
 import { useForm, toFormData } from '../../utils/forms';
 import PostService from '../../services/PostService';
 import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
-import PostCard from '../../components/space/posts/postCard/PostCard';
+import PostCard from '../../components/space/postCard/PostCard';
 import '../../styles/pages/_space.scss';
 import IconSettings from '../../assets/svg/icons/icon-settings.svg';
 import IconMembers from '../../assets/svg/icons/icon-members.svg';
