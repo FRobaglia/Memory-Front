@@ -322,3 +322,12 @@
     }
   }
 }
+
+@media (min-width: 751px) {
+  .nav--espace--position {
+    max-width: 750px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}

@@ -1,6 +1,12 @@
+@import '../../styles/config/variables';
+
 .spaceMembers__header {
   height: 50px;
   top: 0px;
+}
+
+.spaceMembers__main {
+  margin: 0 auto;
 }
 
 .headline--membres {
@@ -17,11 +23,14 @@
   margin-bottom: 2em;
 }
 
+/** Space invitations **/
+
 .button-shareLink {
   background-image: url('../../assets/svg/icons/icon-shareLink.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: white;
   width: 40px;
   height: 40px;
   border: none;
@@ -32,6 +41,15 @@
 .shareLink__group {
   display: flex;
   justify-content: space-between;
+}
+
+.spaceMembers__add--input {
+  width: 98% !important;
+}
+
+.spaceMembers__add--aware {
+  font-style: italic;
+  color: $color--strong;
 }
 
 /** Space Exit page **/

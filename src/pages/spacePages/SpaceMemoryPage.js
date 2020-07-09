@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
 import SpaceContext from '../../context/SpaceContext';
@@ -23,6 +23,7 @@ function SpaceMemoryPage() {
   const [messageButton, setMessageButton] = useState(
     "Demander l'accès a cet espace"
   );
+  const [redirect, setRedirect] = useState(null);
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const spaceId = window.location.href.substring(
@@ -35,6 +36,7 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
+    if (!resultat) return setRedirect(true);
     if (resultat.status === 'SPACE_NOT_VALIDATED') {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
     }
@@ -65,6 +67,8 @@ function SpaceMemoryPage() {
     await PostService.deletePost(id);
     getSpaceMemoryData();
   }
+
+  if (redirect) return <Redirect to="/account" />;
 
   // Unenable space memory
   if (spaceErrorMessage && !showInvitedUserButton && !showSubscriberButton) {
@@ -114,7 +118,7 @@ function SpaceMemoryPage() {
         </svg>
       </Link>
       <div className="header header--espace header--centered">
-        <div className="nav nav--espace">
+        <div className="nav nav--espace nav--espace--position">
           <Link to="/account" className="button button--return" />
           {space.createdBy && space.createdBy.id === user.id ? (
             <Link

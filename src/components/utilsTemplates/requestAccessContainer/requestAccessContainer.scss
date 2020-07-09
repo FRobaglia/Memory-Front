@@ -1,0 +1,18 @@
+@import '../../../styles/config/variables';
+
+.demandAccess__headline {
+  width: 100% !important;
+}
+
+.line--member--content {
+  width: 100% !important;
+}
+
+@include min-sm {
+  .line--member__text--container {
+    display: flex;
+  }
+  .line--member__text--group {
+    display: block;
+  }
+}

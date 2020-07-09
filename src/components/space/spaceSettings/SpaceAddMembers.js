@@ -29,7 +29,7 @@ function SpaceAddMembers() {
                 Lien de partage
               </label>
               <input
-                className="input__field"
+                className="input__field spaceMembers__add--input"
                 ref={input}
                 type="text"
                 value={spaceUrl}
@@ -43,7 +43,10 @@ function SpaceAddMembers() {
               onClick={() => copyToClipboard()}
             />
           </div>
-
+          <p className="text spaceMembers__add--aware">
+            Attention : la personne que vous souhaitez inviter pourra accéder à
+            l'espace après validation du manager.
+          </p>
           {copySuccess ? <p style={{ color: 'green' }}>Lien copié</p> : null}
         </div>
       </div>
