@@ -14,6 +14,7 @@ import SpaceSettingsPage from '../spacePages/SpaceSettingsPage';
 import SpaceMembersPage from '../spacePages/SpaceMembersPage';
 import CreateSpace from '../spacePages/CreateSpace';
 import CreatePost from '../spacePages/CreatePost';
+import NotConnectedPage from '../authPages/NotConnectedPage';
 
 function Routes() {
   const [value, setValue] = useState({});
@@ -25,6 +26,7 @@ function Routes() {
       <Route path="/login" exact component={LoginPage} />
       <Route path="/register" exact component={RegisterPage} />
       <RestrictedRoute path="/account" exact component={UserAccountPage} />
+      <Route path="/notconnected" exact component={NotConnectedPage} />
       <RestrictedRoute path="/create" exact component={CreateSpace} />
       <RestrictedRoute
         path="/space/:slug/createPost"

@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SpaceService from '../../../services/SpaceService';
-import SpaceCard from '../../space/spaceCard/SpaceCard';
 import './spacesContainer.scss';
+import SpaceCategoryList from '../../space/spaceCategoryList/SpaceCategoryList';
 
 function SpacesContainer() {
-  const [userSpaces, setUserSpaces] = useState([]);
-
-  useEffect(() => {
-    getSpaces();
-  }, []);
-
-  async function getSpaces() {
-    const data = await SpaceService.getUserSpaces();
-    setUserSpaces(data.spaces);
-  }
+  const [showManagerSpaces, setShowManagerSpaces] = useState(true);
+  const [showSubscriberSpaces, setShowSubscriberSpaces] = useState(true);
+  const [showNotValidatedSpaces, setShowNotValidatedSpaces] = useState(true);
 
   return (
     <section className="section section--espaces">
@@ -25,15 +17,24 @@ function SpacesContainer() {
       >
         + Créer un espace
       </Link>
-
-      {userSpaces &&
-        userSpaces.map((space) => (
-          <SpaceCard
-            key={space.space.id}
-            space={space.space}
-            role={space.role.role}
-          />
-        ))}
+      <SpaceCategoryList
+        showSpaces={showManagerSpaces}
+        setShowSpaces={setShowManagerSpaces}
+        spaceCategoryTitle="Vous êtes manager de ces espaces."
+        spaceCategoryName="manager"
+      />
+      <SpaceCategoryList
+        showSpaces={showSubscriberSpaces}
+        setShowSpaces={setShowSubscriberSpaces}
+        spaceCategoryTitle="Vous êtes membre de ces espaces."
+        spaceCategoryName="subscriber"
+      />
+      <SpaceCategoryList
+        showSpaces={showNotValidatedSpaces}
+        setShowSpaces={setShowNotValidatedSpaces}
+        spaceCategoryTitle="Espaces en attente de validation."
+        spaceCategoryName="waiting"
+      />
     </section>
   );
 }

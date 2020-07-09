@@ -2,33 +2,27 @@ import React, { useState } from 'react';
 import { useForm, toFormData } from '../../../utils/forms';
 import SpaceService from '../../../services/SpaceService';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
-import validateAuth from '../../../utils/validateAuth';
 import validateSpace from '../../../utils/validateSpace';
 import ErrorMessageContainer from '../../utilsTemplates/errorMessage/ErrorMessageContainer';
 
 function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
   const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState();
-  let errorValuesArray;
 
   async function createSpace(event) {
     event.preventDefault();
-    if (Object.keys(validateAuth(values)).length === 0) {
+    if (Object.entries(validateSpace(values)[0]).length === 0) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       await SpaceService.createNewSpace(data);
       setSpaceIsCreated(true);
     } else {
-      errorValuesArray = Object.values(validateAuth(values));
-      setErrorMessage(validateAuth(values));
-      setCount(validateSpace(errorValuesArray));
-      console.log('errorEntries', errorValuesArray);
+      setErrorMessage(validateSpace(values)[0]);
+      setCount(validateSpace(values)[1]);
       showStepForm();
     }
   }
 
-  console.log('count', count);
-  console.log('errmess', errorMessage);
   function showStepForm() {
     let content = '';
     switch (count) {
@@ -95,10 +89,11 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                   className="button button--ajoute--link createSpace__button--img"
                   specificFieldName="spaceImage"
                   handleChange={handleChange}
+                  // required
                 />
               </div>
               {errorMessage && (
-                <ErrorMessageContainer errorText={errorMessage.userImage} />
+                <ErrorMessageContainer errorText={errorMessage.spaceImage} />
               )}
             </div>
           </section>
