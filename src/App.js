@@ -5,6 +5,7 @@ import UserContext from './context/UserContext';
 import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
 import Loading from './components/utilsTemplates/loading/Loading';
+import Disclaimer from './components/utilsTemplates/disclaimer/Disclaimer';
 import 'moment/locale/fr';
 
 AxiosService.setInterceptors();
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <Disclaimer />
       <UserContext.Provider value={value}>
         <Routes />
       </UserContext.Provider>

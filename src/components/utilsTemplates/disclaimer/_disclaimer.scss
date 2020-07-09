@@ -1,0 +1,62 @@
+@import '../../../styles/config/variables';
+
+@keyframes moveIn {
+  from {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.disclaimer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.disclaimer.is-visible .disclaimer__wrapper {
+  transform: none;
+  opacity: 1;
+  animation: moveIn 0.5s linear;
+}
+
+.disclaimer__wrapper {
+  margin-top: 20px;
+  position: fixed;
+  z-index: 150;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  background: $color--strong;
+  color: $color--light;
+  transform: translateY(-200%);
+  transition: 1s;
+  opacity: 0;
+  margin: 20px auto;
+  left: 0;
+  right: 0;
+}
+
+.disclaimer__text {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.disclaimer__button {
+  margin: 0 auto;
+}
+
+.disclaimer__button:hover {
+  background: $color--light;
+  color: $color-text;
+}
+
+@media (min-width: 750px) {
+  .disclaimer__wrapper {
+    max-width: 540px;
+  }
+}
