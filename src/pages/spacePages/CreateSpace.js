@@ -13,13 +13,12 @@ function CreateSpace() {
     <>
       {spaceIsCreated ? (
         <EndPartContainer
-          endMessage="Votre espace a bien été créer"
+          endMessage="Votre espace a bien été créer et est maintenant en attente de validation par un administrateur"
           endButtonLink="/account"
           endButtonText="Revenir a mes espaces"
         />
       ) : (
         <div className="body--slider scroll--no body--creeEspace">
-          {/* {changeNavBar && ( */}
           {count > 0 && (
             <nav className="userAccount__navContainer header__main">
               <ul className="userAccount__nav">
@@ -34,7 +33,6 @@ function CreateSpace() {
               </ul>
             </nav>
           )}
-          {/* {!changeNavBar && <NavBar />} */}
           {count === 0 && <NavBar />}
           <header className="header header--30vh header--sitting" />
           {count < 4 && !spaceIsCreated && (
