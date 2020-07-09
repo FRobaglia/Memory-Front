@@ -44,7 +44,7 @@ function SpaceSettingsInvitations() {
               </label>
               <textarea
                 className="input__field"
-                placeholder="Vous avez récemment appris la disparition de Janine..."
+                placeholder="Vous avez récemment appris la disparition de..."
                 required
                 name="textInvitation"
                 id="textInvitation"

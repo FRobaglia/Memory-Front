@@ -1,0 +1,61 @@
+@import '../config/variables';
+
+.userModify__nav--title {
+  padding-left: 0 !important;
+}
+.userModify__nav--photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 1em;
+}
+
+// .userModify__nav--content {
+//   // margin-top: 2.8em;
+// }
+.userModify__main {
+  margin: 0 auto;
+}
+
+.userModify__form--profil {
+  margin-top: 2em;
+}
+
+.userModify__groupImage {
+  margin-top: 1em;
+}
+
+.userModify__image {
+  border-radius: 50%;
+  height: 85px;
+  width: 85px;
+  object-fit: cover;
+}
+
+.userModify__button--save {
+  margin: 8em auto 1.5em;
+  width: 100%;
+}
+
+/** Modify password **/
+
+.userModify__group__Headline {
+  border-bottom: solid 1px $color--strong;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: $color--strong;
+  margin-bottom: 20px;
+  //margin-top: 30px;
+  .userModify__group__Headline__text {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+  }
+}
+
+.userModify__form--password {
+  width: 100%;
+}

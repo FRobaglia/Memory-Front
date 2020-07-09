@@ -95,8 +95,7 @@ function EndPartContainer({
             {notConnected && (
               <>
                 <p className="space-error-message">
-                  Pour des questions de sécurité, il faut être connecté pour
-                  accéder à cette page.
+                  Connectez vous pour accéder à cette page.
                 </p>
                 <Link
                   to="/login"
