@@ -4,6 +4,8 @@ import UserContext from '../../context/UserContext';
 import { useForm, toFormData, toURLSearchParams } from '../../utils/forms';
 import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
 import SessionService from '../../services/SessionService';
+import UserModifyProfil from '../../components/userAccount/UserModifyProfil';
+import UserModifyPassword from '../../components/userAccount/UserModifyPassword';
 import useWindowSize from '../../utils/useWindowSize';
 import '../../styles/pages/userModify.scss';
 import '../../styles/layout/_button.scss';
@@ -12,12 +14,12 @@ function UserModifyPage() {
   const { user, setUser } = useContext(UserContext);
   const [values, handleChange] = useForm();
   const [passwordValues, handlePasswordChange] = useForm();
+  const wrapper = useRef(null);
   // TABS NAV
   const [isTab1Active, setIsTab1Active] = useState(true);
   const [isTab2Active, setIsTab2Active] = useState(false);
   const [width] = useWindowSize();
   const [translateValue, setTranslateValue] = useState();
-  const wrapper = useRef(null);
 
   function wrapperTranslate(id) {
     const wrapperSlider = wrapper.current;
@@ -44,35 +46,35 @@ function UserModifyPage() {
     }
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
 
-    // Le endpoint API pour modifier l'image est différent, on le fait donc d'abord si l'user à modifié l'image puis on supprime values.userImage pour ne pas l'envoyer quand on changera les autres
-    if (values.userImage) {
-      const imageValue = { userImage: values.userImage };
-      const data = toFormData(imageValue);
-      await SessionService.editUserImage(data);
-      delete values.userImage;
-    }
+  //   // Le endpoint API pour modifier l'image est différent, on le fait donc d'abord si l'user à modifié l'image puis on supprime values.userImage pour ne pas l'envoyer quand on changera les autres
+  //   if (values.userImage) {
+  //     const imageValue = { userImage: values.userImage };
+  //     const data = toFormData(imageValue);
+  //     await SessionService.editUserImage(data);
+  //     delete values.userImage;
+  //   }
 
-    const data = toURLSearchParams(values); // on utilise toURLSearchParams car toFormData() ne marche pas coté API
-    const newUserData = await SessionService.editUser(data);
-    setUser(newUserData);
-  }
+  //   const data = toURLSearchParams(values); // on utilise toURLSearchParams car toFormData() ne marche pas coté API
+  //   const newUserData = await SessionService.editUser(data);
+  //   setUser(newUserData);
+  // }
 
-  async function handlePasswordSubmit(e) {
-    e.preventDefault();
+  // async function handlePasswordSubmit(e) {
+  //   e.preventDefault();
 
-    const data = toURLSearchParams(passwordValues);
-    SessionService.editPassword(data);
-  }
+  //   const data = toURLSearchParams(passwordValues);
+  //   SessionService.editPassword(data);
+  // }
 
   useEffect(() => {
     setTranslateValue();
   }, [width]);
 
   return (
-    <div>
+    <div className="body--parameter body--simple body--slider">
       <header className="header header--simple spaceSettings__header">
         <Link to="/account" className="button button--return" />
         <img
@@ -104,13 +106,13 @@ function UserModifyPage() {
             }
             onClick={() => handleClickNav(1)}
           >
-            Invitations
+            Changer le mot de passe
           </Link>
         </div>
       </nav>
       <main className="userModify__main">
         <div ref={wrapper} className="wrapper--flex">
-          <h2>{user.firstName}</h2>
+          {/* <h2>{user.firstName}</h2>
           <h2>{user.roles}</h2>
           <form method="post" onSubmit={handleSubmit}>
             Mon image de profil actuelle :
@@ -139,9 +141,10 @@ function UserModifyPage() {
               />
             </label>
             <input type="submit" value="Sauvegarder les modifications" />
-          </form>
+          </form> */}
+          <UserModifyProfil />
 
-          <form method="post" onSubmit={handlePasswordSubmit}>
+          {/* <form method="post" onSubmit={handlePasswordSubmit}>
             <label htmlFor="passwordOldest">
               Mot de passe actuel
               <input
@@ -173,7 +176,8 @@ function UserModifyPage() {
               />
             </label>
             <input type="submit" value="Changer le mot de passe" />
-          </form>
+          </form> */}
+          <UserModifyPassword />
         </div>
       </main>
     </div>
