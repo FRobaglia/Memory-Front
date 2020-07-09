@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import { useForm, toFormData } from '../../../utils/forms';
 import SpaceService from '../../../services/SpaceService';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
+import validateAuth from '../../../utils/validateAuth';
+import validateSpace from '../../../utils/validateSpace';
+import ErrorMessageContainer from '../../utilsTemplates/errorMessage/ErrorMessageContainer';
 
 function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
   const [values, handleChange] = useForm();
   const [errorMessage, setErrorMessage] = useState();
+  let errorValuesArray;
 
   async function createSpace(event) {
     event.preventDefault();
-    if (moment(values.dateBirth).isBefore(values.dateDeath)) {
+    if (Object.keys(validateAuth(values)).length === 0) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       await SpaceService.createNewSpace(data);
       setSpaceIsCreated(true);
     } else {
-      setErrorMessage(
-        'La date de naissance ne peut pas etre avant la date décès'
-      );
-      setCount(2);
+      errorValuesArray = Object.values(validateAuth(values));
+      setErrorMessage(validateAuth(values));
+      setCount(validateSpace(errorValuesArray));
+      console.log('errorEntries', errorValuesArray);
       showStepForm();
     }
   }
 
+  console.log('count', count);
+  console.log('errmess', errorMessage);
   function showStepForm() {
     let content = '';
     switch (count) {
@@ -45,6 +50,9 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                   onChange={handleChange}
                   required
                 />
+                {errorMessage && (
+                  <ErrorMessageContainer errorText={errorMessage.lastName} />
+                )}
               </div>
               <div className="input">
                 <label htmlFor="firstName" className="input__label">
@@ -59,6 +67,9 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                   onChange={handleChange}
                   required
                 />
+                {errorMessage && (
+                  <ErrorMessageContainer errorText={errorMessage.firstName} />
+                )}
               </div>
             </div>
           </section>
@@ -86,6 +97,9 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                   handleChange={handleChange}
                 />
               </div>
+              {errorMessage && (
+                <ErrorMessageContainer errorText={errorMessage.userImage} />
+              )}
             </div>
           </section>
         );
@@ -121,7 +135,9 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                   onChange={handleChange}
                 />
               </div>
-              {errorMessage && <p>{errorMessage}</p>}
+              {errorMessage && (
+                <ErrorMessageContainer errorText={errorMessage.dates} />
+              )}
             </div>
           </section>
         );
@@ -143,6 +159,11 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                   value={values.relationDefunctText || ''}
                   onChange={handleChange}
                 />
+                {errorMessage && (
+                  <ErrorMessageContainer
+                    errorText={errorMessage.relationDefunctText}
+                  />
+                )}
               </div>
               <div className="input">
                 <label htmlFor="description" className="input__label">
@@ -183,13 +204,16 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                 restrictedFileTypes="application/pdf"
                 handleChange={handleChange}
               />
-              <button
-                className="button button--strong button--full--noPadding"
-                type="submit"
-              >
-                Creer un espace
-              </button>
+              {errorMessage && (
+                <ErrorMessageContainer errorText={errorMessage.spaceProof} />
+              )}
             </div>
+            <button
+              className="button button--strong button--full--noPadding"
+              type="submit"
+            >
+              Creer un espace
+            </button>
           </section>
         );
         break;

@@ -11,14 +11,13 @@ function CreateSpace() {
 
   return (
     <>
-      {spaceIsCreated && (
+      {spaceIsCreated ? (
         <EndPartContainer
           endMessage="Votre espace a bien été créer"
           endButtonLink="/account"
           endButtonText="Revenir a mes espaces"
         />
-      )}
-      {!spaceIsCreated && (
+      ) : (
         <div className="body--slider scroll--no body--creeEspace">
           {/* {changeNavBar && ( */}
           {count > 0 && (
