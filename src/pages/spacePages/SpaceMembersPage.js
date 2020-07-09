@@ -100,7 +100,7 @@ function SpaceMembersPage() {
       <nav className="nav--slider spaceMembers__navSlider">
         <div className="nav--slider__elementGroup">
           <Link
-            to={{ hash: '#informations' }}
+            to={{ hash: '/#liste' }}
             className={
               isTab1Active
                 ? 'nav--slider__element nav--slider__element--active'
@@ -111,7 +111,7 @@ function SpaceMembersPage() {
             Liste des membres
           </Link>
           <Link
-            to={{ hash: '#invitations' }}
+            to={{ hash: '/#invitation' }}
             className={
               isTab2Active
                 ? 'nav--slider__element nav--slider__element--active'
@@ -122,7 +122,7 @@ function SpaceMembersPage() {
             + Invitation
           </Link>
           <Link
-            to={{ hash: '#demandes-acces' }}
+            to={{ hash: '/#exit' }}
             className={
               isTab3Active
                 ? 'nav--slider__element nav--slider__element--active'
@@ -134,7 +134,7 @@ function SpaceMembersPage() {
           </Link>
         </div>
       </nav>
-      <main>
+      <main className="spaceMembers__main">
         <div ref={wrapper} className="wrapper--flex spaceMembers__wrapper">
           <SpaceSettingsMembers />
           {value.space && <SpaceAddMembers />}

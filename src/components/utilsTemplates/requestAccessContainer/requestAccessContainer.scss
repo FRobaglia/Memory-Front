@@ -1,0 +1,16 @@
+.demandAccess__headline {
+  width: 100%;
+}
+
+.line--member--content {
+  width: 100%;
+}
+
+@media (min-width: 751px) {
+  .line--member__text--container {
+    display: flex;
+  }
+  .line--member__text--group {
+    display: block;
+  }
+}
