@@ -11,6 +11,10 @@
   padding: 20px;
   margin-bottom: 30px;
 }
+.espace-non-validated {
+  opacity: 30%;
+  pointer-events: none;
+}
 
 .espace__hero {
   display: flex;

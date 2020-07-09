@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm, toFormData } from '../../../utils/forms';
 import SpaceService from '../../../services/SpaceService';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
-import validateAuth from '../../../utils/validateAuth';
 import validateSpace from '../../../utils/validateSpace';
 import ErrorMessageContainer from '../../utilsTemplates/errorMessage/ErrorMessageContainer';
 
@@ -12,7 +11,7 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
 
   async function createSpace(event) {
     event.preventDefault();
-    if (Object.keys(validateSpace(values)).length === 0) {
+    if (Object.keys(validateSpace(values)).length === 2) {
       setErrorMessage();
       const data = toFormData(values); // Nécessaire de créer une instance de FormData quand on a un formulaire avec des images
       await SpaceService.createNewSpace(data);

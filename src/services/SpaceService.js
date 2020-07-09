@@ -28,6 +28,26 @@ class SpaceService {
             spacesRequestSort[index].users.push(request.user);
           });
           response = spacesRequestSort;
+        } else if (parameter === 'spaces') {
+          const { spaces } = response.data;
+          const spacesSort = {
+            manager: [],
+            subscriber: [],
+            waiting: [],
+          };
+
+          spaces.forEach((select) => {
+            if (select.space.validated) {
+              if (select.role.role === 'ACCESS_USER_SUBSCRIBER') {
+                spacesSort.subscriber.push(select);
+              } else if (select.role.role === 'ACCESS_USER_MANAGER') {
+                spacesSort.manager.push(select);
+              }
+            } else if (!select.space.validated) {
+              spacesSort.waiting.push(select);
+            }
+          });
+          response = spacesSort;
         } else {
           response = response.data;
         }
