@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import SpaceContext from '../../../context/SpaceContext';
+import SpaceService from '../../../services/SpaceService';
 
 function SpaceExit() {
+  const { value } = useContext(SpaceContext);
   const [toggleBtn, setToggleBtn] = useState(false);
+
+  async function unsubscribe() {
+    await SpaceService.unSubcribeSpace(value.space.id);
+    return <Redirect to="/account" />;
+  }
+
   return (
     <section className="section">
       <div className="section__content">
@@ -23,7 +33,11 @@ function SpaceExit() {
           </p>
         </div>
         {toggleBtn && (
-          <button type="submit" className="button spaceExit__button">
+          <button
+            type="submit"
+            onClick={unsubscribe}
+            className="button spaceExit__button"
+          >
             Quitter l'espace
           </button>
         )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import SpaceService from '../../services/SpaceService';
-import '../utilsTemplates/requestAccessContainer/requestAccessContainer.scss';
+import SpaceService from '../../../services/SpaceService';
+import './requestAccessContainer.scss';
 
 function RequestAccessContainer({ account, spaceSettings, spaceId }) {
   const [requestAccess, setRequestAccess] = useState([]);
@@ -63,7 +63,7 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                     <div className="line--member__image">
                       <img src={user.image.url} alt={user.firstName} />
                     </div>
-                    <div className="line--member__text">
+                    <div className="line--member__text line--member__text--container">
                       <div className="line--member__text--group">
                         <p className="line--member__text__text">
                           {user.firstName}
@@ -84,11 +84,9 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                           }
                           type="button"
                         >
-                          Accepter la demande
+                          Acceptér la demande
                         </button>
                         <button
-                          aria-label="unvalidate-button"
-                          type="button"
                           className="button button--delte line--member__delte"
                           onClick={() =>
                             unvalidateSubscriber(
@@ -96,6 +94,7 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                               user.relation.id_subscriber
                             )
                           }
+                          type="button"
                         />
                       </div>
                     </div>
@@ -133,7 +132,6 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                     Accepter la demande
                   </button>
                   <button
-                    aria-label="delete-button"
                     className="button button--delte line--member__delte"
                     onClick={() => unvalidateSubscriber(spaceId, subscriber.id)}
                     type="submit"

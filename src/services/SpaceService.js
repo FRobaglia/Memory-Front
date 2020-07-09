@@ -228,6 +228,23 @@ class SpaceService {
       }
     }
   }
+
+  static async unSubcribeSpace(id, data) {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/unsubscribe`,
+        data
+      );
+      if (response && response.data) {
+        console.log(response.data);
+        return response.data;
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        return 'PROBLEM_TO_UNSUBSCRIBE';
+      }
+    }
+  }
 }
 
 export default SpaceService;

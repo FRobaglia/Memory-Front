@@ -21,8 +21,10 @@ function SpaceSettingsInvitations() {
     console.log(result);
     if (result === 'ALREADY_INVITED') {
       setIsAlreadyInvited(true);
+      setSuccessfulInvitation(false);
     } else {
       setSuccessfulInvitation(true);
+      setIsAlreadyInvited(false);
     }
   }
 
@@ -69,8 +71,16 @@ function SpaceSettingsInvitations() {
             </button>
           </form>
         </div>
-        {isAlreadyInvited && <p>Ce destinataire a déjà été invité</p>}
-        {successfulInvitation && <p>Invitation envoyé!</p>}
+        {isAlreadyInvited && (
+          <p className="spaceSettings__invitation--messageFeedback">
+            Ce destinataire a déjà été invité
+          </p>
+        )}
+        {successfulInvitation && (
+          <p className="spaceSettings__invitation--messageFeedback">
+            Invitation envoyé!
+          </p>
+        )}
       </div>
     </section>
   );
