@@ -161,8 +161,9 @@ function SpaceMemoryPage() {
       </div>
 
       <main>
-        {spaceData.posts &&
-          spaceData.posts.map((post, index) => (
+        {spaceData.posts && spaceData.posts.sort((a,b) => {
+          return new Date(b.dateCreation) - new Date(a.dateCreation);
+        }).map((post, index) => (
             <PostCard
               key={post.id}
               post={post}
