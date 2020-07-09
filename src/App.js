@@ -5,7 +5,9 @@ import Routes from './pages/routes/Routes';
 import UserContext from './context/UserContext';
 import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
+import StorageService from './services/StorageService';
 import Loading from './components/utilsTemplates/loading/Loading';
+import Disclaimer from './components/utilsTemplates/disclaimer/Disclaimer';
 import NotFoundPage from './pages/NotFoundPage';
 import 'moment/locale/fr';
 
@@ -35,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <Disclaimer />
       <UserContext.Provider value={value}>
         <Routes />
       </UserContext.Provider>
