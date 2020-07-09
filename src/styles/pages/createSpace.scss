@@ -23,8 +23,15 @@
       height: auto !important;
     }
     .upload-proof {
-      height: 60vh !important;
-      justify-content: space-between;
+      h2 {
+        margin-bottom: 30px;
+      }
+      p {
+        margin-bottom: 50px;
+      }
+      input {
+        margin-bottom: 90px;
+      }
     }
   }
   .upload-image-preview {
