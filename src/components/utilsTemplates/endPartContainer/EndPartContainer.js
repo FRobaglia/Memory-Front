@@ -86,7 +86,10 @@ function EndPartContainer({
               <h1 className="end-container--text">{endMessage}</h1>
               <div
                 className="end-container--image"
-                style={{ backgroundImage: endImage && `url(${endImage})` }}
+                style={{
+                  backgroundImage: endImage && `url(${endImage})`,
+                  width: endImage && '150px',
+                }}
               />
             </div>
             {notConnected && (
