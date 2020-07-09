@@ -14,3 +14,22 @@
 .userModify__main {
   margin: 0 auto;
 }
+
+.userModify__form {
+  margin-top: 2em;
+}
+
+.userModify__groupImage {
+  margin-top: 1em;
+}
+
+.userModify__image {
+  border-radius: 50%;
+  height: 85px;
+  width: 85px;
+  object-fit: cover;
+}
+
+.userModify__button--save {
+  margin: 17em auto 1.5em;
+}

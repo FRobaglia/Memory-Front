@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import SessionService from '../../services/SessionService';
 import { useForm, toFormData, toURLSearchParams } from '../../utils/forms';
@@ -8,6 +9,9 @@ function UserModifyProfil() {
   const { user, setUser } = useContext(UserContext);
   const [values, handleChange] = useForm();
   const [selected, setSelected] = useState(false);
+  const [isLogout, setIsLogout] = useState(false);
+
+  if (isLogout) return <Redirect to="/login" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,6 +33,12 @@ function UserModifyProfil() {
     setSelected(true);
   }
 
+  async function logout() {
+    await SessionService.clearTokens();
+    setIsLogout(true);
+    window.location.reload(false);
+  }
+
   return (
     <section className="section section--invitation members">
       <div className="section__content">
@@ -37,35 +47,21 @@ function UserModifyProfil() {
         <h2>{user.roles}</h2> */}
         <h2>Informations</h2>
         <form method="post" onSubmit={handleSubmit}>
-          Mon image de profil actuelle :
-          <img width="150" height="150" src={user.image.url} alt="" />
-          {/* <UploadInput
-            labelText="Changer mon image de profil"
-            specificFieldName="userImage"
-            handleChange={handleChange}
-          /> */}
-          <div className="upload-image-preview">
+          <div className="userModify__groupImage">
+            <img
+              width="150"
+              height="150"
+              src={user.image.url}
+              alt=""
+              className="userModify__image"
+            />
             <UploadInput
               labelText="Changer mon image de profil"
               specificFieldName="userImage"
-              handleChange={(e) => {
-                handleChange(e);
-                hideLabel();
-              }}
-              labelImgSelected={selected}
+              handleChange={handleChange}
             />
-            {values.userImage && (
-              <div
-                className="image-preview"
-                style={{
-                  backgroundImage: `url(${URL.createObjectURL(
-                    values.userImage
-                  )})`,
-                }}
-              />
-            )}
           </div>
-          <div className="input">
+          <div className="input userModify__form">
             <label htmlFor="firstName" className="input__label">
               Prénom
             </label>
@@ -76,6 +72,8 @@ function UserModifyProfil() {
               onChange={handleChange}
               value={values.firstName || user.firstName}
             />
+          </div>
+          <div className="input">
             <label htmlFor="lastName" className="input__label">
               Nom
             </label>
@@ -88,7 +86,7 @@ function UserModifyProfil() {
             />
           </div>
           <input
-            className="button button--strong button--full button--full--noPadding"
+            className="button button--strong button--full button--full--noPadding userModify__button--save"
             type="submit"
             value="Sauvegarder les modifications"
           />
@@ -97,6 +95,7 @@ function UserModifyProfil() {
           className="button button--full button--full--noPadding"
           type="submit"
           value="Se déconnecter"
+          onClick={logout}
         />
       </div>
     </section>

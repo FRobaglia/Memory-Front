@@ -23,10 +23,10 @@ function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={HomePage} />
-      <Route path="/notconnected" exact component={NotConnectedPage} />
       <Route path="/login" exact component={LoginPage} />
       <Route path="/register" exact component={RegisterPage} />
       <RestrictedRoute path="/account" exact component={UserAccountPage} />
+      <Route path="/notconnected" exact component={NotConnectedPage} />
       <RestrictedRoute path="/create" exact component={CreateSpace} />
       <RestrictedRoute
         path="/space/:slug/createPost"
