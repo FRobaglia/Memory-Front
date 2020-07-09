@@ -7,11 +7,12 @@ import UserContext from '../../../context/UserContext';
 import UploadInput from '../../utilsTemplates/UploadInput/UploadInput';
 import './_registerForm.scss';
 import LabelImage from '../../../assets/svg/add-image.svg';
+import ErrorMessageContainer from '../../utilsTemplates/errorMessage/ErrorMessageContainer';
 
 function RegisterForm({ setIsRegistered }) {
   // Custom hook useForm
   const [values, handleChange] = useForm();
-  const [errorMessage, setErrorMessage] = useState({});
+  const [errorMessage, setErrorMessage] = useState();
   const { user } = useContext(UserContext);
   const [selected, setSelected] = useState(false);
 
@@ -68,6 +69,9 @@ function RegisterForm({ setIsRegistered }) {
               />
             )}
           </div>
+          {errorMessage && (
+            <ErrorMessageContainer errorText={errorMessage.userImage} />
+          )}
 
           <div className="input">
             <label htmlFor="lastName" className="input__label">
@@ -81,6 +85,9 @@ function RegisterForm({ setIsRegistered }) {
               value={values.lastName || ''}
               onChange={handleChange}
             />
+            {errorMessage && (
+              <ErrorMessageContainer errorText={errorMessage.lastName} />
+            )}
           </div>
           <div className="input">
             <label htmlFor="firstName" className="input__label">
@@ -94,6 +101,9 @@ function RegisterForm({ setIsRegistered }) {
               value={values.firstName || ''}
               onChange={handleChange}
             />
+            {errorMessage && (
+              <ErrorMessageContainer errorText={errorMessage.firstName} />
+            )}
           </div>
           <div className="input">
             <label htmlFor="email" className="input__label">
@@ -108,8 +118,12 @@ function RegisterForm({ setIsRegistered }) {
               onChange={handleChange}
               placeholder="test@example.com"
             />
-            {errorMessage && <p>{errorMessage.err401}</p>}
-            {errorMessage && <p>{errorMessage.email}</p>}
+            {errorMessage && (
+              <ErrorMessageContainer errorText={errorMessage.err401} />
+            )}
+            {errorMessage && (
+              <ErrorMessageContainer errorText={errorMessage.email} />
+            )}
           </div>
           <div className="input">
             <label htmlFor="passwordInitial" className="input__label">
@@ -123,7 +137,9 @@ function RegisterForm({ setIsRegistered }) {
               value={values.passwordInitial || ''}
               onChange={handleChange}
             />
-            {errorMessage && <p>{errorMessage.passwordInitial}</p>}
+            {errorMessage && (
+              <ErrorMessageContainer errorText={errorMessage.passwordInitial} />
+            )}
           </div>
           <div className="input">
             <label htmlFor="passwordFinal" className="input__label">
@@ -137,7 +153,9 @@ function RegisterForm({ setIsRegistered }) {
               value={values.passwordFinal || ''}
               onChange={handleChange}
             />
-            {errorMessage && <p>{errorMessage.passwordFinal}</p>}
+            {errorMessage && (
+              <ErrorMessageContainer errorText={errorMessage.passwordFinal} />
+            )}
           </div>
           <button type="submit" className="button button--full--noPadding">
             S'inscrire

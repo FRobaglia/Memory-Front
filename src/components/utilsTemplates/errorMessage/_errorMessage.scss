@@ -1,0 +1,14 @@
+@import '../../../styles/config/variables';
+
+.error-message {
+  font-family: $roboto-regular;
+  font-size: 12px;
+  // background-color: $color--light;
+  color: $color--strong;
+  border-radius: 15px;
+  // margin: 5px 0;
+  font-style: italic;
+  &.active {
+    padding: 5px 5px 10px;
+  }
+}
