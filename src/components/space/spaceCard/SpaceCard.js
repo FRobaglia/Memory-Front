@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import './spaceCard.scss';
 import iconSettings from '../../../assets/svg/icons/icon-settings.svg';
 
