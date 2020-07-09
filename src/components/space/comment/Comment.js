@@ -12,6 +12,8 @@ function Comment({ user, post, comments, setComments }) {
   async function addComment(e) {
     e.preventDefault();
     const data = toFormData(values);
+    delete values.text;
+    delete values.commentImage;
     await CommentService.createComment(post.id, data);
     refreshComments();
   }
