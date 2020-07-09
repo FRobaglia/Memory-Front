@@ -46,7 +46,6 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
             : "Demandes d'accès a l'espace"}
         </h2>
         {account &&
-          requestAccess &&
           requestAccess.map((space) => (
             <>
               <div className="group__Headline demandAccess__headline">

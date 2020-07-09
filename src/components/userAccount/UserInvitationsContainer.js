@@ -17,10 +17,11 @@ function UserInvitationContainer() {
       <h2 className="userAccount__tabTitle">
         Invitations à rejoindre l'espace de :
       </h2>
-      {userInvitation &&
-        userInvitation.map((space) => (
-          <SpaceCard key={space.id} space={space.space} />
-        ))}
+      {userInvitation && userInvitation.length !== 0
+        ? userInvitation.map((space) => (
+            <SpaceCard key={space.id} space={space.space} />
+          ))
+        : "Vous n'êtes invité à aucun espace."}
     </section>
   );
 }

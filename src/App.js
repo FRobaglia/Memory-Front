@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Route } from 'react-router-dom';
 import './styles/main.scss';
 import Routes from './pages/routes/Routes';
 import UserContext from './context/UserContext';
 import SessionService from './services/SessionService';
 import AxiosService from './services/AxiosService';
 import Loading from './components/utilsTemplates/loading/Loading';
+import NotFoundPage from './pages/NotFoundPage';
 import 'moment/locale/fr';
 
 AxiosService.setInterceptors();

@@ -1,11 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserContext from '../../context/UserContext';
 import SpaceContext from '../../context/SpaceContext';
-import { useForm, toFormData } from '../../utils/forms';
 import PostService from '../../services/PostService';
-import UploadInput from '../../components/utilsTemplates/UploadInput/UploadInput';
 import PostCard from '../../components/space/postCard/PostCard';
 import '../../styles/pages/_space.scss';
 import IconSettings from '../../assets/svg/icons/icon-settings.svg';
@@ -23,6 +21,7 @@ function SpaceMemoryPage() {
   const [messageButton, setMessageButton] = useState(
     "Demander l'accès a cet espace"
   );
+  const [redirect, setRedirect] = useState(null);
   const { user } = useContext(UserContext);
   const { setValue } = useContext(SpaceContext);
   const spaceId = window.location.href.substring(
@@ -35,6 +34,7 @@ function SpaceMemoryPage() {
 
   async function getSpaceMemoryData() {
     const resultat = await SpaceService.focusSpace(spaceId);
+    if (!resultat) return setRedirect(true);
     if (resultat.status === 'SPACE_NOT_VALIDATED') {
       setSpaceErrorMessage(SpaceService.errorMessageSpace(resultat.status));
     }
@@ -65,6 +65,8 @@ function SpaceMemoryPage() {
     await PostService.deletePost(id);
     getSpaceMemoryData();
   }
+
+  if (redirect) return <Redirect to="/account" />;
 
   // Unenable space memory
   if (spaceErrorMessage && !showInvitedUserButton && !showSubscriberButton) {
@@ -157,16 +159,21 @@ function SpaceMemoryPage() {
       </div>
 
       <main>
-        {spaceData.posts &&
-          spaceData.posts.map((post, index) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              index={index}
-              subscribers={spaceData.subscribers}
-              deletePost={deletePost}
-            />
-          ))}
+        {spaceData.posts && spaceData.posts.length !== 0
+          ? spaceData.posts
+              .sort((a, b) => {
+                return new Date(b.dateCreation) - new Date(a.dateCreation);
+              })
+              .map((post, index) => (
+                <PostCard
+                  key={post.id}
+                  post={post}
+                  index={index}
+                  subscribers={spaceData.subscribers}
+                  deletePost={deletePost}
+                />
+              ))
+          : "Aucun souvenir n'a été publié dans cet espace."}
       </main>
     </div>
   );

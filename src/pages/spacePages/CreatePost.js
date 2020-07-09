@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import SpaceService from '../../services/SpaceService';
 import UserAccountHeaederBg from '../../components/userAccount/UserAccountHeaederBg';
 import '../../styles/layout/container.scss';
 import '../../styles/pages/createPost.scss';
 import CreatePostForm from '../../components/forms/createPostForm/CreatePostForm';
+import CancelIcon from '../../assets/svg/icons/icon-cancel.svg';
 
 function CreatePost() {
   const [space, setSpace] = useState(null);
@@ -32,6 +33,24 @@ function CreatePost() {
 
   return (
     <div className="body--creePost">
+      <nav className="userAccount__navContainer header__main">
+        <ul className="userAccount__nav">
+          <li>
+            <Link to="/" className="userAccount__nav--logoName">
+              MEMORY
+            </Link>
+          </li>
+          {space && (
+            <li>
+              <Link
+                to={`/space/${space.space.firstName}-${space.space.lastName}-${space.space.id}`}
+              >
+                <img alt="return" src={CancelIcon} />
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
       <UserAccountHeaederBg />
       <main className="main__createPost">
         <h2>Ajouter un souvenir</h2>
