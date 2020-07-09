@@ -155,7 +155,7 @@
   }
 }
 
-@media (min-width: 751px) {
+@include min-sm {
   .homepage__header--container {
     max-width: 850px;
     left: 0;
