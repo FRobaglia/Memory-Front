@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/pages/_home.scss';
+import UserContext from '../context/UserContext';
 import StepHome from '../components/utilsTemplates/stepHome/StepHome';
 import firstStepLogo from '../assets/svg/number-1.svg';
 import secondStepLogo from '../assets/svg/number-2.svg';
 import thirdStepLogo from '../assets/svg/number-3.svg';
 import memoryLogo from '../assets/svg/puzzle-logo.svg';
 import lockIcon from '../assets/svg/icons/icon-lock.svg';
-import tree from '../assets/svg/icons/icon-tree.svg';
 import noSound from '../assets/svg/icons/icon-no-sound.svg';
 
 function Home() {
+  const { user } = useContext(UserContext);
   return (
     <div className="home">
-      <div className="header">
+      <header className="header homepage__header--container">
         <Link to="/account" className="header--logo">
-          Memory
+          MEMORY
         </Link>
         <Link to="/login" className="button button--connexion">
-          Connexion
+          {user ? 'Mon compte' : 'Connexion'}
         </Link>
-      </div>
+      </header>
       <div className="wrapper--flex">
         <section>
           <div className="identity section__content">
             <div className="identity--text">
-              <p>Rassembler les souvenir de vos proches</p>
+              <p>Rassembler les souvenirs de vos proches</p>
             </div>
           </div>
         </section>
@@ -41,7 +42,7 @@ function Home() {
                 souvenirs.
               </p>
             </div>
-            <Link to="/account" className="button button--full button--strong">
+            <Link to="/create" className="button button--full button--strong">
               + Crée un Espace
             </Link>
           </div>
@@ -84,10 +85,6 @@ function Home() {
                 <img className="services--icon" src={lockIcon} alt="" />
                 <p>Vos espaces sont strictemtent personels</p>
               </li>
-              {/* <li className="services--item">
-                <img className="services--icon" src={tree} alt="" />
-                <p>Le support du hors ligne vous permet d'y accedez partout</p>
-              </li> */}
               <li className="services--item">
                 <img className="services--icon" src={noSound} alt="" />
                 <p>Pas déranger par des notifications</p>

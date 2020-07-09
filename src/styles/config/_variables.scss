@@ -3,6 +3,7 @@ $color--light: #ede7f2;
 $color--grey: #9c9c9c;
 $color-secondary: #418e89;
 $color-text: #414143;
+$color-fail: #e2f8ff;
 
 $roboto-light: 'Roboto Light';
 $roboto-regular: 'Roboto Regular';
@@ -17,6 +18,11 @@ $roboto-bold: 'Roboto Bold';
 
 @mixin min-sm {
   @media (min-width: 751px) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: 1024px) {
     @content;
   }
 }

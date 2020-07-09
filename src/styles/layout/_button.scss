@@ -50,10 +50,12 @@
 .delete-button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
   &--souvenir {
     position: absolute;
     top: 25px;
     right: 5px;
+    z-index: 2;
   }
 }
 

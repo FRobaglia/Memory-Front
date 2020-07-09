@@ -52,3 +52,15 @@
     background-color: $color--strong;
   }
 }
+
+@include desktop {
+  .main__createSpace {
+    margin: 30vh auto;
+    .wrapper--flex {
+      // width: 452vw;
+      // justify-content: space-between;
+      width: 100%;
+      height: auto;
+    }
+  }
+}

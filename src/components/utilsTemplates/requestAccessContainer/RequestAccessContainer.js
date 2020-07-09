@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SpaceService from '../../../services/SpaceService';
+import './requestAccessContainer.scss';
 
 function RequestAccessContainer({ account, spaceSettings, spaceId }) {
   const [requestAccess, setRequestAccess] = useState([]);
@@ -44,19 +45,16 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
             ? "Demandes d'accès aux espaces"
             : "Demandes d'accès a l'espace"}
         </h2>
-        {/* <div className="userAccount--demand__group__Headline">
-          <h3 className="userAccount--demand__group__Headline__text ">
-            Espace de SSS
-          </h3>
-        </div> */}
         {account &&
           requestAccess &&
           requestAccess.map((space) => (
             <>
-              <h3 className="userAccount--demand__group__Headline__text demandContainer__group__Headline__text">
-                Espace de {space.firstName} {space.lastName}
-              </h3>
-              <div>
+              <div className="group__Headline demandAccess__headline">
+                <h3 className="userAccount--demand__group__Headline__text demandContainer__group__Headline__text">
+                  Espace de {space.firstName} {space.lastName}
+                </h3>
+              </div>
+              <div className="line--member--content">
                 {space.users.map((user) => (
                   <div
                     className="line--member line--member--demand"
@@ -65,14 +63,16 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                     <div className="line--member__image">
                       <img src={user.image.url} alt={user.firstName} />
                     </div>
-                    <div className="line--member__text">
-                      <p className="line--member__text__text">
-                        {user.firstName}
-                        {user.lastName}
-                      </p>
-                      <p className="line--member__text__role">
-                        {user.relation.text}
-                      </p>
+                    <div className="line--member__text line--member__text--container">
+                      <div className="line--member__text--group">
+                        <p className="line--member__text__text">
+                          {user.firstName}
+                          {user.lastName}
+                        </p>
+                        <p className="line--member__text__role">
+                          {user.relation.text}
+                        </p>
+                      </div>
                       <div className="line--member--demand__buttonGroup">
                         <button
                           className="button button--strong button--full  button--inForm line--member__button--accept"
@@ -84,7 +84,7 @@ function RequestAccessContainer({ account, spaceSettings, spaceId }) {
                           }
                           type="button"
                         >
-                          Accepter la demande
+                          Acceptér la demande
                         </button>
                         <button
                           className="button button--delte line--member__delte"

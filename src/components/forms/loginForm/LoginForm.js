@@ -4,6 +4,7 @@ import SessionService from '../../../services/SessionService';
 import UserContext from '../../../context/UserContext';
 import { useForm } from '../../../utils/forms';
 import Loading from '../../utilsTemplates/loading/Loading';
+import ErrorMessageContainer from '../../utilsTemplates/errorMessage/ErrorMessageContainer';
 import './_loginForm.scss';
 
 function LoginForm({ location }) {
@@ -31,6 +32,7 @@ function LoginForm({ location }) {
     } else if (result === 'NO_VALUES_FIELDS') {
       setErrorMessage('Merci de renseigner les champs');
     } else {
+      setIsLoading(true); // début du loading
       setUser(await SessionService.fetchUserData());
     }
     setIsLoading(false); // fin du loading
@@ -38,7 +40,6 @@ function LoginForm({ location }) {
 
   const handleLogin = (event) => {
     event.preventDefault(); // Empêcher le refresh de la page lors de l'envoi du formulaire
-    setIsLoading(true); // début du loading
     persistSession();
   };
 
@@ -50,7 +51,6 @@ function LoginForm({ location }) {
             Pas encore de compte ?
           </Link>
           <h2>Se Connecter:</h2>
-          {errorMessage && <p>{errorMessage}</p>}
           <div className="input">
             <label htmlFor="email" className="input__label">
               Adresse e-mail
@@ -78,6 +78,7 @@ function LoginForm({ location }) {
               onChange={handleChange}
             />
           </div>
+          {errorMessage && <ErrorMessageContainer errorText={errorMessage} />}
           <input
             type="submit"
             className="button button--full--noPadding"
