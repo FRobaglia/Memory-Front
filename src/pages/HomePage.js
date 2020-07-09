@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/pages/_home.scss';
+import UserContext from '../context/UserContext';
 import StepHome from '../components/utilsTemplates/stepHome/StepHome';
 import firstStepLogo from '../assets/svg/number-1.svg';
 import secondStepLogo from '../assets/svg/number-2.svg';
@@ -10,6 +11,7 @@ import lockIcon from '../assets/svg/icons/icon-lock.svg';
 import noSound from '../assets/svg/icons/icon-no-sound.svg';
 
 function Home() {
+  const { user } = useContext(UserContext);
   return (
     <div className="home">
       <header className="header homepage__header--container">
@@ -17,7 +19,7 @@ function Home() {
           MEMORY
         </Link>
         <Link to="/login" className="button button--connexion">
-          Connexion
+          {user ? 'Mon compte' : 'Connexion'}
         </Link>
       </header>
       <div className="wrapper--flex">

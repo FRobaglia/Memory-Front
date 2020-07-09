@@ -49,7 +49,7 @@ function LoginForm({ location }) {
           <Link to="/register" className="link">
             Pas encore de compte ?
           </Link>
-          <h2>Se Connecter:</h2>
+          <h2 className="login__title">Se Connecter:</h2>
           {errorMessage && <p>{errorMessage}</p>}
           <div className="input">
             <label htmlFor="email" className="input__label">
