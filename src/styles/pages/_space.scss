@@ -307,7 +307,10 @@
       }
     }
     textarea {
-      width: 250px;
+      width: 270px;
+      @include min-sm {
+        width: 400px;
+      }
     }
     input[type='file'] {
       display: none;
@@ -332,5 +335,12 @@
     left: 0;
     right: 0;
     margin: 0 auto;
+  }
+}
+
+@include min-sm {
+  .comment__text--textarea {
+    // max-width: 400px;
+    width: 400px;
   }
 }

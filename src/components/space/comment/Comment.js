@@ -87,7 +87,8 @@ function Comment({ user, post, comments, setComments }) {
           )}
           <label htmlFor="text">
             <textarea
-              placeholder="Super photo... !"
+              className="comment__text--textarea"
+              placeholder="Écrire un commentaire... !"
               required
               name="text"
               id="text"
