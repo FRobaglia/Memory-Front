@@ -13,9 +13,9 @@ function CreateSpace() {
     <>
       {spaceIsCreated ? (
         <EndPartContainer
-          endMessage="Votre espace a bien été créer et est maintenant en attente de validation par un administrateur"
+          endMessage="Votre espace a bien été créé et est maintenant en attente de validation par un administrateur de Memory"
           endButtonLink="/account"
-          endButtonText="Revenir a mes espaces"
+          endButtonText="Revenir à mes espaces"
         />
       ) : (
         <div className="body--slider scroll--no body--creeEspace">

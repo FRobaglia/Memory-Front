@@ -99,7 +99,7 @@ export default class SessionService {
           delete errorMessage[key];
         }
         errorMessage.err401 =
-          'Un compte a déjà été créer avec cette adresse email';
+          'Un compte a déjà été créé avec cette adresse email';
         setErrorMessage(errorMessage);
       }
     }

@@ -103,7 +103,7 @@ function EndPartContainer({
                   className="button button--full"
                   style={{ marginBottom: '30px' }}
                 >
-                  Déja un compte
+                  Déjà un compte
                 </Link>
               </>
             )}
