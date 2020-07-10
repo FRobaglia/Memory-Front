@@ -1,11 +1,20 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import UserContext from '../../../context/UserContext';
 import SpaceContext from '../../../context/SpaceContext';
+import SpaceService from '../../../services/SpaceService';
 import '../../../styles/layout/line.scss';
 
 function SpaceSettingsMembers() {
   const { value } = useContext(SpaceContext);
   const { user } = useContext(UserContext);
+
+  async function unsubscribe() {
+    await SpaceService.unSubcribeSpace(value.space.id);
+    return <Redirect to="/account" />;
+    // await SpaceService.unSubcribeSpace(id);
+    // return <Redirect to="/account" />;
+  }
 
   return (
     <section className="section section--invitation members">
@@ -38,6 +47,7 @@ function SpaceSettingsMembers() {
                   aria-label="delete"
                   className="button button--delte line--member__delte"
                   type="submit"
+                  onClick={unsubscribe}
                 />
               ) : (
                 ''

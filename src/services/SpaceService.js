@@ -249,18 +249,34 @@ class SpaceService {
     }
   }
 
-  static async unSubcribeSpace(id, data) {
+  // static async unSubcribeSpace(id, data) {
+  //   try {
+  //     const response = await axios.delete(
+  //       `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/unsubscribe`,
+  //       data
+  //     );
+  //     if (response && response.data) {
+  //       console.log(response.data);
+  //       return response.data;
+  //     }
+  //   } catch (err) {
+  //     if (err.response.status === 401) {
+  //       return 'PROBLEM_TO_UNSUBSCRIBE';
+  //     }
+  //   }
+  // }
+  static async unSubcribeSpace(id) {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/unsubscribe`,
-        data
+        `${process.env.REACT_APP_API_BASE_URL}api/space/${id}/unsubscribe`
       );
       if (response && response.data) {
         console.log(response.data);
         return response.data;
       }
     } catch (err) {
-      if (err.response.status === 401) {
+      if (err.response.status === 401 || err.response.status === 404) {
+        console.log('err unsubscribe');
         return 'PROBLEM_TO_UNSUBSCRIBE';
       }
     }

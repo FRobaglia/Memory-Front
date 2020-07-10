@@ -14,7 +14,7 @@ function SpaceCard({ space, backOffice, validateSpace, index, role }) {
     );
   }, []);
 
-  console.log(space);
+  // console.log(space);
 
   return (
     <div className={space.validated ? 'espace' : 'espace espace-non-validated'}>
@@ -42,11 +42,13 @@ function SpaceCard({ space, backOffice, validateSpace, index, role }) {
       >
         <div className="espace__hero  espace__hero--noDeco">
           <div className="espace__hero__image">
-            <img
-              src={space.image.url}
-              alt={space.firstName}
-              className="spaceCard__image"
-            />
+            {space.image && (
+              <img
+                src={space.image.url}
+                alt={space.firstName}
+                className="spaceCard__image"
+              />
+            )}
           </div>
           <p className="espace__hero__name">
             {space.firstName} {space.lastName}
