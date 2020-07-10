@@ -9,9 +9,9 @@ function RegisterPage() {
     <div className="register">
       {registered ? (
         <EndPartContainer
-          endMessage="Votre compte a bien été crée"
+          endMessage="Votre compte a bien été créé"
           endButtonLink="/login"
-          endButtonText="Me connecter"
+          endButtonText="Se connecter"
         />
       ) : (
         <div>

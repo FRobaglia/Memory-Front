@@ -45,7 +45,7 @@ function RegisterForm({ setIsRegistered }) {
           className="section__content"
         >
           <Link to="/login" className="link">
-            Déja un compte ?
+            Déjà un compte ?
           </Link>
           <h2>Créer un compte</h2>
           <div className="upload-image-preview">

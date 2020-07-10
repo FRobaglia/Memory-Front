@@ -52,7 +52,7 @@ function JoinSpace({
         <EndPartContainer
           endMessage={subscribeMessage}
           endButtonLink="/account"
-          endButtonText="Revenir a mes espaces"
+          endButtonText="Revenir à mes espaces"
         />
       )}
     </div>

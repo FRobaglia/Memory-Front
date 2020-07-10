@@ -38,12 +38,12 @@ function Home() {
               </h1>
               <p className="presentation--text--desc">
                 MEMORY est un espace de recueillement pour les proches d'une
-                personne décédée, dédié a sa mémoire grâce à un rassemblement de
+                personne décédée, dédié à sa mémoire grâce à un rassemblement de
                 souvenirs.
               </p>
             </div>
             <Link to="/create" className="button button--full button--strong">
-              + Crée un Espace
+              + Créer un espace
             </Link>
           </div>
         </section>
@@ -52,7 +52,7 @@ function Home() {
         </section>
         <StepHome
           stepLogo={firstStepLogo}
-          stepText="Partages des souvenirs"
+          stepText="Partager des souvenirs"
           stepClass="first-step"
         />
         <section>
@@ -60,14 +60,14 @@ function Home() {
         </section>
         <StepHome
           stepLogo={secondStepLogo}
-          stepText="Creer une collection de souvenirs"
+          stepText="Créer une collection de souvenirs"
         />
         <section>
           <div className="step-image step-image--third" />
         </section>
         <StepHome
           stepLogo={thirdStepLogo}
-          stepText="Un espace de recueillement pour des moment difficiles"
+          stepText="Un espace de recueillement pour des moments difficiles"
           stepClass="third-step"
         />
         <section>
@@ -83,11 +83,11 @@ function Home() {
             <ul>
               <li className="services--item">
                 <img className="services--icon" src={lockIcon} alt="" />
-                <p>Vos espaces sont strictemtent personels</p>
+                <p>Vos espaces sont strictement personnels</p>
               </li>
               <li className="services--item">
                 <img className="services--icon" src={noSound} alt="" />
-                <p>Pas déranger par des notifications</p>
+                <p>Pas des notifications incessantes</p>
               </li>
             </ul>
           </div>

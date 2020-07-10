@@ -9,7 +9,7 @@ function NotConnectedPage({ location }) {
         notConnected
         endImage={DoorGuyImage}
         endButtonLink="/register"
-        endButtonText="Crée un compte"
+        endButtonText="Créer un compte"
         location={location}
       />
     </div>
