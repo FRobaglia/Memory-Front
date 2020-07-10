@@ -162,8 +162,9 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
               </div>
               <div className="input">
                 <label htmlFor="description" className="input__label">
-                  Qui etait ce ? (facultatif, pourra être renseigné
-                  ultérieurement)
+                  Description de la personne à qui vous dédiez cet espace ?
+                  <br />
+                  (facultatif, pourra être renseigné ultérieurement)
                 </label>
                 <textarea
                   className="input__field"
@@ -188,8 +189,8 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
                 :
               </h2>
               <p className="text text--center">
-                Pour créer un espace, une attestation rédigé par les pompes
-                funèbres déclarant le décès et la prise en charge par le
+                Pour créer un espace, une attestation rédigée par les pompes
+                funèbres déclarant le décès et/ou la prise en charge par le
                 créateur/manager de l'espace est requise. Dans le cas contraire,
                 nous vous invitons à vous rapprocher de la famille du défunt ou
                 de toute personne faisant autorité pour créer cet espace.
@@ -207,7 +208,7 @@ function CreateSpaceForm({ count, setCount, setSpaceIsCreated }) {
               className="button button--strong button--full--noPadding"
               type="submit"
             >
-              Creer un espace
+              Créer un espace
             </button>
           </section>
         );
