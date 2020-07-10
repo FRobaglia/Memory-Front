@@ -3,6 +3,17 @@ _(educational purpose)_
 ### URL du site
 https://memory-hetic.netlify.app/
 
+### Comptes utilisateurs
+
+| Role    | Username                    | Password  |
+| ------- | --------------------------- | --------- |
+| User    | john.doe@hetic.net          | john      |
+| User    | jane.doe@hetic.net          | jane      |
+| Manager | felix.robaglia@hetic.net    | felix     |
+| Manager | thomas.evano@hetic.net      | thomas    |
+| Manager | amanda.tan@hetic.net        | amanda    |
+| Manager | christina.stephan@hetic.net | christina |
+
 ## **Pitch**
 Memory offre un espace de recueillement pour les proches d’une personne décédée, dédiée à sa mémoire grâce à un regroupement de souvenirs. L'application a pour but de rassembler des pièces de souvenir d’une personne pour créer une image avec toutes les facettes de celle-ci.   
 Un utilisateur peut créer plusieurs espaces dédiés à des proches, où une communauté composée de sa famille, de son entourage et  de ses amis, viennent commémorer ensemble des souvenirs passés avec celle-ci venant compléter le puzzle de sa vie
@@ -50,3 +61,17 @@ Si **client side-rendering** n’est pas le meilleur choix en terme de performan
 - [react-awesome-slider](https://github.com/rcaferati/react-awesome-slider) : faciliter le développement d'un slider pour la visualisation des photos souvenirs 
 - esLint + Prettier : Conventions et normes de code afin de garder un code propre et commun à tous les développeurs du projet
 
+## **Installation**
+
+```console
+npm install
+```
+Créer un ficher .env suivant
+
+```
+REACT_APP_API_BASE_URL=https://memory-school-api.herokuapp.com/
+```
+Lancer le projet
+```console
+npm run start
+```
